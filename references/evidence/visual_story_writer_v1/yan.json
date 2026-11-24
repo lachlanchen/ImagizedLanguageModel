@@ -1,0 +1,233 @@
+{
+  "catalogue": {
+    "oracle": {
+      "label": "J04903",
+      "svg_sha": "768d8f8023a9e845b5800230f4bec028d50d30fac54b1f07f43000dac465b913",
+      "split": "train"
+    },
+    "bronze": {
+      "label": "B02975",
+      "svg_sha": "1ea9f7d0e1d947001ec099cab0f45b718ebccfff670a6a48551ea4647ca0f8a5",
+      "split": "train"
+    },
+    "seal": {
+      "label": "S01648",
+      "svg_sha": "019ed0c04c060fd17d2a3fc1874c2b9c501d9951eb8d8d134831545359143626",
+      "split": "train"
+    },
+    "liushutong": {
+      "label": "L06958",
+      "svg_sha": "9a8b3f10d06fe462bea3fb899579ef99b8d2342c21e4cdb1b58b14f7aa991a33",
+      "split": "train"
+    }
+  },
+  "outputs": {
+    "oracle-zh": {
+      "question": "请写出言的甲骨文字形。",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-oracle-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "0f51424217dd9e0a0814612a1cbbbaa22c03ef992c9e58cc368835e2204a3f20",
+          "exact": false
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-oracle-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "40a791e75366fa89bb4a3dc752e94146d4f6d1e0afc7de46f711af7c18f19185",
+          "exact": true
+        }
+      }
+    },
+    "oracle-en": {
+      "question": "Show the oracle bone form of 言.",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-oracle-en.png",
+            "cells": 14
+          },
+          "stop": true,
+          "sha256": "a6534c65934ebe5927448ca07ce35c7a3765c4914a0b53ab0564c862070f4c23",
+          "exact": false
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-oracle-en.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "40a791e75366fa89bb4a3dc752e94146d4f6d1e0afc7de46f711af7c18f19185",
+          "exact": true
+        }
+      }
+    },
+    "bronze-zh": {
+      "question": "请写出言的金文字形。",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-bronze-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "0f51424217dd9e0a0814612a1cbbbaa22c03ef992c9e58cc368835e2204a3f20",
+          "exact": false
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-bronze-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "115ebf6a4bfc2524979fb500f839dffa3f6d6e309b79846030aff86f33e6624f",
+          "exact": true
+        }
+      }
+    },
+    "bronze-en": {
+      "question": "Show the bronze form of 言.",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-bronze-en.png",
+            "cells": 16
+          },
+          "stop": true,
+          "sha256": "44d7d681b497e835827c90e23c6b21f5aa84b58c094ebb14266245bae7c31716",
+          "exact": false
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-bronze-en.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "115ebf6a4bfc2524979fb500f839dffa3f6d6e309b79846030aff86f33e6624f",
+          "exact": true
+        }
+      }
+    },
+    "seal-zh": {
+      "question": "请写出言的篆書字形。",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-seal-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "0f51424217dd9e0a0814612a1cbbbaa22c03ef992c9e58cc368835e2204a3f20",
+          "exact": true
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-seal-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "0f51424217dd9e0a0814612a1cbbbaa22c03ef992c9e58cc368835e2204a3f20",
+          "exact": true
+        }
+      }
+    },
+    "seal-en": {
+      "question": "Show the seal form of 言.",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-seal-en.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "626fd9def15351c78b0f3ea72f98ae833964d797e8f376784b83afd7950ac438",
+          "exact": false
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-seal-en.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "0f51424217dd9e0a0814612a1cbbbaa22c03ef992c9e58cc368835e2204a3f20",
+          "exact": true
+        }
+      }
+    },
+    "liushutong-zh": {
+      "question": "请写出言的六書通字形。",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-liushutong-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "0f51424217dd9e0a0814612a1cbbbaa22c03ef992c9e58cc368835e2204a3f20",
+          "exact": false
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-liushutong-zh.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "626fd9def15351c78b0f3ea72f98ae833964d797e8f376784b83afd7950ac438",
+          "exact": true
+        }
+      }
+    },
+    "liushutong-en": {
+      "question": "Show the Liushutong form of 言.",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-liushutong-en.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "626fd9def15351c78b0f3ea72f98ae833964d797e8f376784b83afd7950ac438",
+          "exact": true
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-liushutong-en.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "626fd9def15351c78b0f3ea72f98ae833964d797e8f376784b83afd7950ac438",
+          "exact": true
+        }
+      }
+    },
+    "explain-en": {
+      "question": "Explain the evolution of the Chinese character 言 using the evidence on this page.",
+      "models": {
+        "page": {
+          "image": {
+            "png": "page-explain-en.png",
+            "cells": 256
+          },
+          "stop": false,
+          "sha256": "1c0442b2bbcf925b1dd96def30757529d303cd8b3256c450f6c8af3756e9362c",
+          "exact": null
+        },
+        "balanced": {
+          "image": {
+            "png": "balanced-explain-en.png",
+            "cells": 1
+          },
+          "stop": true,
+          "sha256": "626fd9def15351c78b0f3ea72f98ae833964d797e8f376784b83afd7950ac438",
+          "exact": null
+        }
+      }
+    }
+  }
+}

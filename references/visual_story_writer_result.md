@@ -1,0 +1,43 @@
+# When a pictured question changes the answer
+
+A 1,179,882-parameter visual reader and writer learned to select two different attested forms from the same pictured page when asked for two different periods. On 64 sealed historical families, the balanced writer drew the correct image and stopped on 1,020/1,024 requests. It passed every request in 63 families. On modern reading passages its answers often repeat part of the question or name the wrong relation. [Sealed scores](evidence/visual_form_balance_v1/forms.json) · [Original output images](../models/visual_story_writer/examples) · [Reading paper, pp. 36–38](../publication/ilm-nature/visual_language_paper.pdf#page=36)
+
+## How the training changed
+
+The first comparison added residual causal attention over the writer's own visual history, initialized from a previously trained writer. Both fitted models learned from 17,781 distinct response presentations per pass, including 8,455 narrative wordings, 2,048 Chinese exam wordings, 2,048 English statements and 5,230 historical requests. Four passes gave each arm 3,840 optimizer updates. The strip writer could never copy the 5,230 unfamiliar targets under its fixed source selection. Full-page access made every target representable. Modern answers can be spelled using the learned bitmap palette or copied from visible positions. An unfamiliar source outline retains its original 32×32 bits when copied. Independently generating novel stroke outlines remains an open requirement. [Protocol](visual_story_writer_protocol.md) · [Page weights and training receipt](../models/visual_story_writer/page/fit.json) · [Support theorem](../formal/span_list/VisibleWriterSupport.lean)
+
+The initial historical pages associated the question language with a particular row. On legacy-contrast development pages the parent and strip writers matched 0/1,024 each. The page writer scored 512/1,024. No family passed all 16 conditions. Four source SVGs also disclosed a foreground convention mismatch. The two continuation fits received the same corrected print contrast. One preserved the old association. The other varied language and row order independently for each requested period across four passes. Each arm received 27,904 response presentations, 1,264 updates, the same modern replay and identical batch identities. The only difference between these two fits was the presentation condition and its resulting selected evidence. [Matched continuation protocol](visual_form_balance_protocol.md) · [Fixed training](../models/visual_story_writer/fixed/fit.json) · [Balanced training](../models/visual_story_writer/balanced/fit.json)
+
+| Sealed print-contrast test | Page weights | Fixed continuation | Balanced continuation |
+|---|---:|---:|---:|
+| Exactly correct stopped images / 1,024 | 281 | 512 | 1,020 |
+| Same-page request pairs, both correct / 512 | 0 | 0 | 508 |
+| Output changes when requested period changes / 512 | 240 | 0 | 512 |
+| Families passing all 16 conditions / 64 | 0 | 0 | 63 |
+
+With two distinct target images, a predictor giving the same answer to both questions earns at most one credit. If there are 512 pairs and 1,020 successes, at least 508 pairs must have two correct answers. This lower bound is attained in the actual output hashes. A family accounts for 16 related requests crossing period, language, row order and picture assignment. The swapped-image trials test fidelity to the supplied page. Authenticated unmodified trials test the original pairing. The test involves four known period labels and fixed question templates. Linguistic paraphrases, unknown period names and uncued dating are further tests. [Lean proof](../formal/span_list/PairedFormSelection.lean) · [Independent hash and stop recount](evidence/visual_form_balance_v1/pairs.json)
+
+## How much survives a paraphrase?
+
+On the next 64 sealed families, familiar Chinese and English prompts gave 256/256 each under both row orders. New Chinese and English wording using the same period names gave 134/256 and 127/256. Asking for one period while explicitly rejecting another gave 130/256 and 203/256 when the requested name came first, and 146/256 and 102/256 when it came last. These were diagnostic prompts authored after the initial sealed test. No writer was fitted on them. An untrained control took the two isolated printed labels, chose the longest consecutive glyph match with the question and abstained on ties. It solved all 512 simple paraphrases; for English prompts containing both periods it gave 128/256 in either order. This control receives the label boundaries and the position of the associated specimen. The model's strong result under familiar prompts therefore has an inexpensive lexical explanation. [Measured paraphrases](evidence/visual_form_balance_v1/paraphrases.json) · [Printed-label control](evidence/visual_form_balance_v1/visible_label_overlap.json)
+
+## Free reading
+
+Every model received the same passage and question without choices. Optical systems received aligned glyph cells. MiniMind received the transcript and an instruction to answer briefly. Each column is a complete stopped response matching a human wording after normalization of case, punctuation and whitespace.
+
+| Model | MCTest /64 | C³ /64 | FairytaleQA /96 | Chinese exam /192 |
+|---|---:|---:|---:|---:|
+| Frozen visual parent | 0 | 1 | 0 | 59 |
+| Strip writer | 1 | 1 | 4 | 54 |
+| Page writer | 1 | 1 | 5 | 47 |
+| Fixed continuation | 2 | 1 | 2 | 21 |
+| Balanced continuation | 1 | 1 | 2 | 24 |
+| MiniMind-3 full-SFT | 0 | 0 | 0 | 0 |
+
+MiniMind often used a full sentence or added details. For example, on the first MCTest item it named the requested nation, Lab, inside a longer answer. A zero exact-match count therefore understates what it understood. On a fixed sample of 16 from each group, a quantized Qwen3 8B judge evaluated anonymized answers in forward and reverse order. The original parent, strip, page and MiniMind earned respectively 17, 14, 13 and 5 of 64 semantic credits. In English MCTest, MiniMind led the page writer 3 to 1. The judge credited 61/64 human references in both orders and rejected 63/64 same-page foils twice. In a second panel containing the page, fixed, balanced and MiniMind models, their scores were 11, 5, 6 and 6. Position, comparator set and model-based grading affect these small counts. The photos include each language's exact match and its failed same-page companion. [Modern scores](evidence/visual_story_writer_v1/scores.json) · [First panel](evidence/visual_story_writer_v1/semantic.json) · [Continuation scores](evidence/visual_form_balance_v1/scores.json) · [Second panel](evidence/visual_form_balance_v1/semantic.json)
+
+## Cost and release decision
+
+The 416 warmed, batch-one replies took 29.7 seconds and 2.56 kJ for the page writer, 365.1 seconds and 36.77 kJ for the native MiniMind baseline. The former produced 7,723 cells; the latter produced 67,819 decoded characters. The visual writer stopped on 414 requests. MiniMind emitted EOS on 285 and met the common 256-character answer condition on 269. Removing the stopping and length condition changes neither model's first-panel semantic total. Timing excludes model load, visual input preparation and human/teacher evaluation. It includes tokenization within the MiniMind request loop. Differing output lengths and quality prevent a matched-quality speed or training-efficiency claim. The two original writer fits took 59.8 and 66.2 seconds of epoch runtime. The continuations took 28.9 and 25.2 seconds. Earlier reader and writer training, gathering the data and building the source library have additional costs. [Timing and output lengths](evidence/visual_story_writer_v1/termination.json)
+
+The balanced weights are released for conditional historical selection. The strongest modern reader remains a separate comparison. In an additional four-specimen page for 言, eight English and Chinese category requests yielded the exact requested shapes; an open request to explain their development yielded one mark. 言 is a training-family headword. Across new reading pages, paired language success and source-grounded historical prose still require new evidence. The next comparison should train on paired, differently worded questions and complete answers grounded in the same source, with a held paraphrase style and modern replay. It should preserve a correct historical image inside a complete explanation and retain modern factual accuracy before investment in longer training. [All nine 言 inputs and outputs](evidence/visual_story_writer_v1/yan.json) · [Public PNG-entry replay](evidence/visual_story_writer_v1/cpu_replay.json)

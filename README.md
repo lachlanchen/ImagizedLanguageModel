@@ -1,3 +1,11 @@
+# Imagized Language Model
+
+[English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
+
+Asked for the oracle-bone form of **言**, a visual model on one RTX 4090 D drew the attested specimen. Changing the pictured question to ask for the bronze, seal or Liushutong form changed its answer to the corresponding source image. On **63 of 64 held families**, the model answered every tested combination of period, language, page order and image assignment correctly. On another 64 families it matched only **261/512** after the questions were rephrased. Asked to explain the history of 言, it returned a single mark. [Run the pictured example](models/visual_story_writer/README.md) · [Paper, pp. 36–38](publication/ilm-nature/visual_language_paper.pdf#page=36) · [Measured limits and controls](references/visual_story_writer_result.md) · [MiniMind study in Chinese](references/minimind_visual_language_study_zh.md) · [Historical corpus and book pages](references/chinese_origin_library.md) · [Project recap](references/ilm_project_recap.md)
+
+[![Four attested forms of 言 with the original and balanced writers’ actual output pixels](publication/ilm-nature/figures/Figure_184_visual_form_answers.png)](publication/ilm-nature/visual_language_paper.pdf#page=36)
+
 A compact visual reader learned from **complete human answers** on one RTX 4090 D. Across 96 questions on new stories, the loss of the human answer fell by **0.400 nats** against the parent. Generating its own answer was harder. It earned **2/16** story credits and a quantized Qwen3-VL 8B earned **10/16**. In the paired example below the new reader recovers “her only daughter” inside a broken sentence, then omits both actions when asked how the widow prepared to bake. The figure shows original output pixels. [Reading paper, pp. 33–34](publication/ilm-nature/visual_language_paper.pdf#page=33) · [Run the example](models/story_answer_fit/README.md) · [Data, Lean proofs and costs](references/story_answer_fit_result.md)
 
 ![Pictured story questions, human references and the three trained systems’ original replies](publication/ilm-nature/figures/Figure_182_learning_from_whole_replies.png)
@@ -19,8 +27,6 @@ Asked when Chopin composed his first work, a visual reader selected **1817** fro
 A compact visual writer answered a pictured question with **“Napoleon offered public support to secondary education.”** On another page it gave the right year but dropped *online*, changing the historical claim. Across 192 new English questions it generated ten complete human answer images. On a second test of the same pages, supplying a pictured short fact yielded five exact sentences for this writer and 34 for an earlier writer trained specifically to formulate sentences from facts. [Read the paper, pp. 18–20](publication/ilm-nature/visual_language_paper.pdf#page=18) · [Run the PNG examples](models/phrase_marginal/README.md) · [Experiments and data](references/optical_phrase_learning_result.md)
 
 [![Two complete pictured questions, human answers and original model outputs about secondary education and online publishing](publication/ilm-nature/figures/Figure_166_learning_complete_answers.png)](publication/ilm-nature/visual_language_paper.pdf#page=19)
-
-[English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
 [![LazyingArt banner — apps and four buddies](https://lazying.art/media/brand/lazyingart-intro.gif)](https://lazying.art)
 
@@ -52,7 +58,6 @@ On a pictured Chinese page about a damselfish, a 2.44-million-parameter reader w
 
 [![Figure 145](publication/ilm-nature/figures/Figure_145_paired_evidence.png)](https://github.com/lachlanchen/ImagizedLanguageModel/blob/203f40812f03afbdfa55cf957a56ee8cfe0f944c/publication/ilm-nature/visual_language_paper.pdf#page=2)
 
-# Imagized Language Model (ILM)
 
 Can a model answer a question when both the prompt and reply are glyph images? A 2.12-million-parameter writer trained on one RTX 4090 D learned to predict unseen English and Chinese prose. Its first free English reply repeated the question about saving energy. An additional visual reader wrote 11 of 384 human reference answers and answered both questions on 0 of 192 passages. Figure 144 shows the original emitted pixels. [Read the paper](publication/ilm-nature/visual_language_paper.pdf) · [Run the image writer](models/visual_cursor/README.md)
 
