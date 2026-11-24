@@ -31,7 +31,7 @@ class VisualAnswer:
         self.chars = read(root / "readback.json")
 
     @torch.inference_mode()
-    def answer(self, tiles, qs, pages, supplied=None, limit=256):
+    def answer(self, tiles, qs, pages, supplied=None, limit=256, evidence="both"):
         if (
             len(qs) != len(pages)
             or any(not len(q) for q in qs)
@@ -53,7 +53,9 @@ class VisualAnswer:
                 if supplied is None
                 else [s[2] for s in supplied]
             )
-        elif self.arm == "human":
+        elif evidence == "region":
+            source = [rs[s[0]] for rs, s in zip(pages, spans, strict=True)]
+        elif self.arm == "human" or evidence == "fact":
             source = [s[2] for s in spans]
         else:
             source = [

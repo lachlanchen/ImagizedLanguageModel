@@ -1,0 +1,3 @@
+# Withholding or exchanging the pictured evidence
+
+Before inspecting confirmation outputs, specify a frozen-weight comparison on the same 384 new questions. Exchange the intermediate fact and region between the two genuine questions on the same page while holding the question fixed. Record both the requested and the other question's fact and the exact original answer. Also remove the surrounding region or remove the short fact at inference for the predicted-evidence writer. Supply exactly the remaining stream and retain its trained weights. These are out-of-distribution interventions. Count identical records and report crossings on the subset with different intermediate images. The direct task and its final qualification remain unchanged.
