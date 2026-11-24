@@ -12,7 +12,8 @@ import torch
 
 from ilm.visual_lm.book_prefix import observations
 from scripts.measure_writer_energy import snapshot, consumed
-from scripts.prepare_evidence_views import WORK, PUB, ROOT, read, dump, sha
+from scripts.prepare_evidence_views import WORK, PUB, ROOT, read, sha
+from scripts.prepare_open_exam import dump
 from scripts.prepare_recurrent_evidence import MODEL as INIT
 from scripts.train_open_exam import likelihood
 from scripts.train_paired_evidence import gpu_owner
