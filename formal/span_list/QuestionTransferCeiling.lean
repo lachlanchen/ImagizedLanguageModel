@@ -11,7 +11,9 @@ structure Trial where
 
 def complete (w f : Bool) : Nat := if w && f then 1 else 0
 
-def counts (xs : List Trial) (f : Trial → Nat) : Nat := (xs.map f).sum
+def counts (xs : List Trial) (f : Trial → Nat) : Nat := match xs with
+  | [] => 0
+  | x :: tail => f x + counts tail f
 
 /-- With the writer fixed, complete gains come precisely from focus repairs
 on writable pages, less new focus losses on that same subset. -/
@@ -25,7 +27,7 @@ theorem paired_balance (xs : List Trial) :
   | cons r rs ih =>
     rcases r with ⟨w, a, b⟩
     cases w <;> cases a <;> cases b <;>
-      simp [counts, complete, List.sum_cons] at * <;> omega
+      simp [counts, complete] at * <;> omega
 
 theorem writer_ceiling (xs : List Trial) :
     counts xs (fun x => complete x.writable x.newFocus) ≤
@@ -34,7 +36,7 @@ theorem writer_ceiling (xs : List Trial) :
   | nil => simp [counts]
   | cons r rs ih =>
     rcases r with ⟨w, a, b⟩
-    cases w <;> cases b <;> simp [counts, complete, List.sum_cons] at * <;> omega
+    cases w <;> cases b <;> simp [counts, complete] at * <;> omega
 
 #print axioms paired_balance
 #print axioms writer_ceiling
