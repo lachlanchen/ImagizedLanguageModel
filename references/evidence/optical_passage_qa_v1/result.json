@@ -1,0 +1,122 @@
+{
+  "groups": {
+    "reserved": {
+      "queries": 1957,
+      "exact": 872,
+      "mean_f1": 0.5977761973541661,
+      "exact_pixels": 747,
+      "paired_total": 484,
+      "both_exact": 108,
+      "both_exchanged": 0,
+      "changed_image": 463
+    },
+    "dev": {
+      "queries": 6389,
+      "exact": 3114,
+      "mean_f1": 0.6060822571541981,
+      "exact_pixels": 2894,
+      "paired_total": 1285,
+      "both_exact": 351,
+      "both_exchanged": 2,
+      "changed_image": 1230
+    }
+  },
+  "png_replays": [
+    {
+      "id": "573325c6d058e614000b573a",
+      "prefix": "reserved-correct-1",
+      "title": "Portugal",
+      "question": "In Portugal, which city was destroyed in the 1755 earthquake?",
+      "predicted": "Lisbon",
+      "accepted": [
+        "Lisbon"
+      ],
+      "exact": true
+    },
+    {
+      "id": "573325c6d058e614000b573b",
+      "prefix": "reserved-correct-2",
+      "title": "Portugal",
+      "question": "In which year did Brazel become independent?",
+      "predicted": "1822",
+      "accepted": [
+        "1822"
+      ],
+      "exact": true
+    },
+    {
+      "id": "57333879d058e614000b578d",
+      "prefix": "reserved-miss-1",
+      "title": "Portugal",
+      "question": "What are three international organizations that Portugal belongs to?",
+      "predicted": "the United Nations",
+      "accepted": [
+        "United Nations, the European Union, the Eurozone, OECD, NATO and the Community of Portuguese Language Countries"
+      ],
+      "exact": false
+    },
+    {
+      "id": "57333879d058e614000b578a",
+      "prefix": "reserved-miss-2",
+      "title": "Portugal",
+      "question": "What form of government does Portugal maintain?",
+      "predicted": "unitary semi-presidential republican",
+      "accepted": [
+        "unitary semi-presidential republican"
+      ],
+      "exact": true
+    },
+    {
+      "id": "56be54bdacb8001400a50322",
+      "prefix": "dev-correct-1",
+      "title": "Super_Bowl_50",
+      "question": "When were the two finalists for hosting Super Bowl 50 announced?",
+      "predicted": "October 16, 2012",
+      "accepted": [
+        "October 16, 2012",
+        "October 16, 2012,",
+        "October 16, 2012"
+      ],
+      "exact": true
+    },
+    {
+      "id": "56be54bdacb8001400a50323",
+      "prefix": "dev-correct-2",
+      "title": "Super_Bowl_50",
+      "question": "How many times has the South Florida/Miami area hosted the Super Bowl?",
+      "predicted": "10",
+      "accepted": [
+        "10",
+        "10",
+        "10"
+      ],
+      "exact": true
+    },
+    {
+      "id": "56be53b8acb8001400a50314",
+      "prefix": "dev-miss-1",
+      "title": "Super_Bowl_50",
+      "question": "Who was the NFL Commissioner in early 2012?",
+      "predicted": "Roger Goodell",
+      "accepted": [
+        "Roger Goodell",
+        "Roger Goodell",
+        "Goodell"
+      ],
+      "exact": true
+    },
+    {
+      "id": "56be53b8acb8001400a50315",
+      "prefix": "dev-miss-2",
+      "title": "Super_Bowl_50",
+      "question": "Which Super Bowl did Roger Goodell speak about?",
+      "predicted": "spectacular",
+      "accepted": [
+        "the 50th Super Bowl",
+        "the 50th",
+        "50th"
+      ],
+      "exact": false
+    }
+  ]
+}

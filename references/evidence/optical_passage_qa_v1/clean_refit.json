@@ -1,0 +1,72 @@
+{
+  "verified": {
+    "models/optical_passage_qa/reader.safetensors": "3f09feb3f682d532e78f25f819803c2aba3475b6a8ff93b2b942c5fc6520ccd1",
+    "references/evidence/optical_passage_qa_v1/decisions.json.gz": "53ad6a9ca17803aaaed2065228798eb4e6af175febfd49bccd3c24314798943a",
+    "references/evidence/optical_passage_qa_v1/result.json": "f6c37eb28d8d60f4322ae4d896776610f6bedf50857f4cafae0bccf183e123be",
+    "references/evidence/optical_passage_qa_v1/examples/dev-correct-1-answer.png": "66fe670f352b460a0b6ed18e11c0b245bb943c4f3ce423fa4e0f53f0d0d98706",
+    "references/evidence/optical_passage_qa_v1/examples/dev-correct-1-question.png": "31e85cef60ad6220e059159e7966e706feec93dbb21f1fa8ccde4070a2b724c3",
+    "references/evidence/optical_passage_qa_v1/examples/dev-correct-2-answer.png": "6485c6809c0fa0c042d84918d108080adf0e68672eae8e3274709c95b4e595af",
+    "references/evidence/optical_passage_qa_v1/examples/dev-correct-2-question.png": "6634b56826fce27c6491fb1096655448d2ceccaea8f09c475ad6daa30ce1687b",
+    "references/evidence/optical_passage_qa_v1/examples/dev-correct-page.png": "c61188f2a098e96683230a0985581acb8850eb6b6d19466188ddbbde095680a4",
+    "references/evidence/optical_passage_qa_v1/examples/dev-miss-1-answer.png": "f19491f53dd905e8ad2c6ffd951f704a22949d5a78ac87ea17c70c7927595ac5",
+    "references/evidence/optical_passage_qa_v1/examples/dev-miss-1-question.png": "f175feb74de901e21c806f90da559db9fecc0d8e1f6e015e9efa9249b79630cc",
+    "references/evidence/optical_passage_qa_v1/examples/dev-miss-2-answer.png": "7a8aae3ed4a660a354e42ee9816fb288654abeb18034428e48b44fbd1a33e2a9",
+    "references/evidence/optical_passage_qa_v1/examples/dev-miss-2-question.png": "30c667a1b52c951dc62b0f9c10dca51f3cacf99ba049e60766204ff08bea506a",
+    "references/evidence/optical_passage_qa_v1/examples/dev-miss-page.png": "5209d6644a1a73201a652d656289f639af683bc43d094023c5eb0c203f9f1336",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-correct-1-answer.png": "9bbc468a53f95f5ecfba8084bfe03111d424b083d6b92c78a3f4eca776d22d40",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-correct-1-question.png": "3832d02074d83172ae4db780c45020e65c9647207e543f7a72b7113cc46123c6",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-correct-2-answer.png": "28c9596cbe07f20e7b78316e27cbbc031e606d906c3ca65b89045c9f3da835b6",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-correct-2-question.png": "c2288b147b7a3a4c3848746a17af9511bdb20f2c5f138d0474e859b6310bc5d0",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-correct-page.png": "7740af4f1d9b71b2f166e1ad65e2d1efddbb43bdbeb7ba7be1ef4742de619422",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-miss-1-answer.png": "48e28079b64114e517190d93b73e8194e27fb3584a5d03e5427cad731c23c269",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-miss-1-question.png": "15d88f43d3ab14b8a201eb92837ce49925c23627966117997e1673e0e2aba399",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-miss-2-answer.png": "1f5b1d10f490db4b93fe1785b6d643c6c626dde428cedd29e829bc6b19e0b02f",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-miss-2-question.png": "f4e5f5e1128c85bd2dd79c315fa43b30e62f931dcc5296bd18e741cf88017e59",
+    "references/evidence/optical_passage_qa_v1/examples/reserved-miss-page.png": "487ee72c997dc88177788f513c726771887045a57c4fe918b983c692748a9735"
+  },
+  "refit": {
+    "architecture": "optical_passage_qa_v1",
+    "sha256": "3f09feb3f682d532e78f25f819803c2aba3475b6a8ff93b2b942c5fc6520ccd1",
+    "optical_parent": "4988a8a015a2da5409fee786140c7d5973cc60e3c79741b02ea476bbff63b33d",
+    "training_corpus": "4bb30ff3c7a2d65364b91d831427a31516b10948aac3f704ab81ecf2f84585c4",
+    "seed": 710043,
+    "updates": 4000,
+    "presentations": 192000,
+    "distinct_sampled": 52361,
+    "trainable": 235587,
+    "frozen_optical": 1900594,
+    "loss_trace": [
+      5.182342052459717,
+      5.48289155960083,
+      5.749192714691162,
+      5.165236949920654,
+      3.9057774543762207,
+      4.394907474517822,
+      3.0636978149414062,
+      4.3474578857421875,
+      4.839346408843994,
+      3.170905590057373,
+      3.7958171367645264,
+      4.399112701416016,
+      3.3844025135040283,
+      2.9038777351379395,
+      2.943103075027466,
+      2.938778877258301
+    ],
+    "preprocessing": {
+      "seconds": 6.016691992990673,
+      "energy": {
+        "joules": 519.864,
+        "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+      }
+    },
+    "fit": {
+      "seconds": 35.767582901753485,
+      "energy": {
+        "joules": 4219.078,
+        "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+      },
+      "peak_bytes": 240363008
+    }
+  }
+}

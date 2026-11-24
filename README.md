@@ -5,6 +5,10 @@
 
 # Imagized Language Model (ILM)
 
+On one pictured paragraph about Portugal, the reader returns **Lisbon** when asked for a city and **1822** when asked for a year. It learned to select answer pixels on one RTX 4090 D. Across 20 reserved English articles it returned 872 exact answers to 1,957 human questions. It completed both questions on 108 of 484 passages, versus zero after exchanging the questions. The source supplies the answer wording. [Run the released reader](models/optical_passage_qa/README.md) · [Results and limits](references/optical_passage_qa_result.md)
+
+[![Question-dependent answers from pictured passages](publication/ilm-nature/figures/Figure_127_optical_passage_qa.png)](publication/ilm-nature/manuscript.pdf#page=168)
+
 The visual reader now answers two questions about the same line. For 舉杯邀明月 it writes **cup** when asked what is raised and **moon** when asked who is invited. This verse appeared in earlier training. On 971 held clauses the reader located every verb and object and wrote every registered meaning on 247, compared with 11 under exchanged object supervision. It completed none of 21 clauses whose natural questions were all previously unseen. [Run the reader](models/questioned_events/README.md) · [Results](references/questioned_events_result.md)
 
 [![126 · ILM](publication/ilm-nature/figures/Figure_126_questioned_events.png)](publication/ilm-nature/manuscript.pdf#page=167)
