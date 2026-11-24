@@ -1,6 +1,6 @@
 """Audit the joint mass of the reference ink, question contrasts and alternate readings."""
 
-from collections import defaultdict
+from collections import Counter, defaultdict
 import gzip
 import json
 import math
@@ -65,6 +65,9 @@ def comparisons():
         g = [r for r in details(arm) if r["kind"] == "coqa" and r["test"] == "human"]
         ok = defaultdict(list)
         absent = answered = 0
+        credited_replies = Counter()
+        constant_no = constant_yes = 0
+        credited_polarity_disagreements = 0
         pages = {r["doc"]: r["source"] for r in read(WORK / "held.json")}
         for r in g:
             refs = truth[r["doc"], r["question"]]
@@ -73,11 +76,20 @@ def comparisons():
             if all(t not in normalize(pages[r["doc"]]) for t in refs):
                 absent += 1
                 answered += correct
+                constant_no += "no" in refs
+                constant_yes += "yes" in refs
+                if correct:
+                    credited_replies[normalize(r["output"])] += 1
+                    credited_polarity_disagreements += {"yes", "no"} <= refs
         result[arm] = dict(
             any_reference=sum(sum(v) for v in ok.values()),
             both=sum(all(v) for v in ok.values()),
             absent_all=absent,
             absent_any_correct=answered,
+            absent_credited_replies=dict(credited_replies),
+            absent_always_no=constant_no,
+            absent_always_yes=constant_yes,
+            absent_credited_with_opposing_references=credited_polarity_disagreements,
         )
     a = {}
     b = {}
