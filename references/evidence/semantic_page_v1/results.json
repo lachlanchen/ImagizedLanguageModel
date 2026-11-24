@@ -1,0 +1,234 @@
+{
+  "scores": {
+    "ink-en": {
+      "n": 1847,
+      "exact": 489,
+      "stopped": 1845,
+      "novel": 1847,
+      "faithful_novel": 489,
+      "missing": 443,
+      "added": 1834,
+      "facts": 11574,
+      "counterfactual": {
+        "n": 1291,
+        "exact": 322,
+        "stopped": 1290,
+        "novel": 1291,
+        "faithful_novel": 322,
+        "missing": 350,
+        "added": 1295,
+        "facts": 8734
+      },
+      "both_counterfactual": 242,
+      "polarity_both": 1237,
+      "source_exchange": 2
+    },
+    "ink-zh": {
+      "n": 1847,
+      "exact": 506,
+      "stopped": 1846,
+      "novel": 1847,
+      "faithful_novel": 506,
+      "missing": 419,
+      "added": 1867,
+      "facts": 11574,
+      "counterfactual": {
+        "n": 1291,
+        "exact": 343,
+        "stopped": 1290,
+        "novel": 1291,
+        "faithful_novel": 343,
+        "missing": 322,
+        "added": 1301,
+        "facts": 8734
+      },
+      "both_counterfactual": 267,
+      "polarity_both": 1241,
+      "source_exchange": 2
+    },
+    "byte-en": {
+      "n": 1847,
+      "exact": 573,
+      "stopped": 1844,
+      "novel": 1847,
+      "faithful_novel": 573,
+      "missing": 347,
+      "added": 1777,
+      "facts": 11574,
+      "counterfactual": {
+        "n": 1291,
+        "exact": 383,
+        "stopped": 1290,
+        "novel": 1291,
+        "faithful_novel": 383,
+        "missing": 269,
+        "added": 1250,
+        "facts": 8734
+      },
+      "both_counterfactual": 339,
+      "polarity_both": 1262,
+      "source_exchange": 4
+    },
+    "byte-zh": {
+      "n": 1847,
+      "exact": 554,
+      "stopped": 1846,
+      "novel": 1847,
+      "faithful_novel": 554,
+      "missing": 344,
+      "added": 1780,
+      "facts": 11574,
+      "counterfactual": {
+        "n": 1291,
+        "exact": 376,
+        "stopped": 1291,
+        "novel": 1291,
+        "faithful_novel": 376,
+        "missing": 260,
+        "added": 1277,
+        "facts": 8734
+      },
+      "both_counterfactual": 322,
+      "polarity_both": 1257,
+      "source_exchange": 2
+    },
+    "nearest": {
+      "n": 1847,
+      "exact": 0,
+      "stopped": 1847,
+      "novel": 0,
+      "faithful_novel": 0,
+      "missing": 3637,
+      "added": 3234,
+      "facts": 11574
+    },
+    "human": {
+      "n": 4693,
+      "exact": 1729,
+      "stopped": 4693,
+      "novel": 4693,
+      "faithful_novel": 1729,
+      "missing": 0,
+      "added": 4113,
+      "facts": 29444
+    }
+  },
+  "cost": {
+    "ink": {
+      "seconds": 12.932993385009468,
+      "energy": {
+        "joules": 1853.202,
+        "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+      }
+    },
+    "byte": {
+      "seconds": 23.17981286533177,
+      "energy": {
+        "joules": 2665.632,
+        "device": "GPU-077122e0-45dd-912d-2a45-28db58a3245b"
+      }
+    }
+  },
+  "examples": {
+    "first": {
+      "index": 0,
+      "facts": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "coffee shop"
+        ],
+        [
+          "name",
+          "Blue Spice"
+        ]
+      ],
+      "written": "Blue Spice is a coffee shop in the city centre. It has a price range of less than £20."
+    },
+    "first_counterfactual": {
+      "index": 11,
+      "facts": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "no"
+        ],
+        [
+          "food",
+          "Chinese"
+        ],
+        [
+          "name",
+          "Blue Spice"
+        ],
+        [
+          "near",
+          "Rainbow Vegetarian Café"
+        ]
+      ],
+      "written": "Blue Spice is a pub that provides Chinese food in the city centre near Rainbow Vegetarian Café is not family friendly.",
+      "edited": "Blue Spice is a family friendly pub located near the Rainbow Vegetarian Café in the city centre. It offers Chinese food at a price range of £30 and are welcome."
+    },
+    "first_miss": {
+      "index": 0,
+      "facts": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "coffee shop"
+        ],
+        [
+          "name",
+          "Blue Spice"
+        ]
+      ],
+      "written": "Blue Spice is a coffee shop in the city centre. It has a price range of less than £20."
+    },
+    "first_faithful_pair": {
+      "index": 11,
+      "facts": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "no"
+        ],
+        [
+          "food",
+          "Chinese"
+        ],
+        [
+          "name",
+          "Blue Spice"
+        ],
+        [
+          "near",
+          "Rainbow Vegetarian Café"
+        ]
+      ],
+      "written": "Blue Spice is a pub that provides Chinese food in the city centre near Rainbow Vegetarian Café is not family friendly.",
+      "edited": "Blue Spice is a family friendly pub located near the Rainbow Vegetarian Café in the city centre. It offers Chinese food at a price range of £30 and are welcome."
+    }
+  },
+  "outputs": "0d22fc2a4cd21703825ed1795cadba53926fd9ef4aaf0fbb6d273b79e1c2026a",
+  "corpus": "1cbbbc05a2dbd67b40492eded0a9c41444f13f08de8cd02de167f01af7ec9a8f"
+}

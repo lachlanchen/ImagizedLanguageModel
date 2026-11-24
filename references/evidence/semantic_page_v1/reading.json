@@ -1,0 +1,681 @@
+{
+  "selection": "20 evenly spaced indices, floor(linspace(0,n-1,20)); Chinese input; English output",
+  "reviewer": "Model-assisted close reading with the source fields visible; a single non-blind assessment without independent human readers.",
+  "criterion": "Conveys each supplied fact without adding another domain fact. Inflection and awkward phrasing are recorded separately; numerical strength is retained when stated explicitly.",
+  "greedy_semantically_complete": 13,
+  "readback_semantically_complete": 17,
+  "records": [
+    {
+      "index": 0,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "coffee shop"
+        ],
+        [
+          "name",
+          "Blue Spice"
+        ]
+      ],
+      "greedy": "Blue Spice is a coffee shop in the city centre. It has a price range of less than £20.",
+      "readback": "Blue Spice is a highly priced coffee shop located in the city centre.",
+      "greedy_semantic_error": "Invents a price.",
+      "readback_semantic_error": "Adds a price level absent from the card.",
+      "readback_style_note": null
+    },
+    {
+      "index": 97,
+      "fields": [
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "yes"
+        ],
+        [
+          "food",
+          "French"
+        ],
+        [
+          "name",
+          "Giraffe"
+        ],
+        [
+          "near",
+          "Raja Indian Cuisine"
+        ]
+      ],
+      "greedy": "Giraffe is a French pub near Raja Indian Cuisine and is child friendly.",
+      "readback": "Giraffe is a French pub near Raja Indian Cuisine and is child friendly.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 194,
+      "fields": [
+        [
+          "customer rating",
+          "average"
+        ],
+        [
+          "eatType",
+          "coffee shop"
+        ],
+        [
+          "familyFriendly",
+          "no"
+        ],
+        [
+          "name",
+          "The Cricketers"
+        ],
+        [
+          "near",
+          "Café Sicilia"
+        ]
+      ],
+      "greedy": "The Cricketers is a coffee shop near Café Sicilia. It is not family-friendly and has an average customer rating.",
+      "readback": "The Cricketers is a coffee shop near Café Sicilia. It is not family-friendly and has an average customer rating.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 291,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "customer rating",
+          "average"
+        ],
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "familyFriendly",
+          "no"
+        ],
+        [
+          "food",
+          "Chinese"
+        ],
+        [
+          "name",
+          "The Cricketers"
+        ],
+        [
+          "near",
+          "All Bar One"
+        ],
+        [
+          "priceRange",
+          "high"
+        ]
+      ],
+      "greedy": "The Cricketers is a high priced Chinese restaurant in the city centre near All Bar One. It has average customer rating and is not children friendly.",
+      "readback": "The Cricketers is a high priced Chinese restaurant in the city centre near All Bar One. It is not children friendly and has an average customer rating.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": "Non-idiomatic 'not children friendly'."
+    },
+    {
+      "index": 388,
+      "fields": [
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "name",
+          "The Cricketers"
+        ],
+        [
+          "near",
+          "Café Rouge"
+        ],
+        [
+          "priceRange",
+          "cheap"
+        ]
+      ],
+      "greedy": "The Cricketers is a restaurant near Café Rouge. It is a cheap place to eat a low price.",
+      "readback": "The Cricketers is a restaurant near Café Rouge. It has a cheap price range.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 485,
+      "fields": [
+        [
+          "area",
+          "riverside"
+        ],
+        [
+          "customer rating",
+          "5 out of 5"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "food",
+          "Fast food"
+        ],
+        [
+          "name",
+          "The Mill"
+        ],
+        [
+          "near",
+          "Café Sicilia"
+        ],
+        [
+          "priceRange",
+          "cheap"
+        ]
+      ],
+      "greedy": "The Mill is a cheap fast food restaurant located near Café Sicilia in the riverside area with a high customer rating.",
+      "readback": "The Mill is a cheap fast food restaurant located near Café Sicilia in the riverside area. It has a customer rating of 5 out of 5.",
+      "greedy_semantic_error": "Omits pub and weakens numeric rating.",
+      "readback_semantic_error": "Mentions the restaurant but omits the second venue type (pub).",
+      "readback_style_note": null
+    },
+    {
+      "index": 582,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "customer rating",
+          "3 out of 5"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "food",
+          "Fast food"
+        ],
+        [
+          "name",
+          "The Mill"
+        ],
+        [
+          "near",
+          "Café Sicilia"
+        ]
+      ],
+      "greedy": "The Mill is a pub that serves fast food and is located in the city centre near Café Sicilia. It has a customer rating of 3 out of 5.",
+      "readback": "The Mill is a fast food pub with a customer rating of 3 out of 5. It is located in the city centre near Café Sicilia.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 680,
+      "fields": [
+        [
+          "area",
+          "riverside"
+        ],
+        [
+          "customer rating",
+          "high"
+        ],
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "familyFriendly",
+          "no"
+        ],
+        [
+          "food",
+          "English"
+        ],
+        [
+          "name",
+          "The Mill"
+        ],
+        [
+          "near",
+          "Café Rouge"
+        ],
+        [
+          "priceRange",
+          "more than £30"
+        ]
+      ],
+      "greedy": "The Mill is a high rated restaurant located in the riverside area near Café Rouge. It is not children friendly and has a price range of more than £30.",
+      "readback": "The Mill is an English restaurant near Café Rouge in the riverside area. It has a high customer rating and a price range of more than £30 and is not children friendly.",
+      "greedy_semantic_error": "Omits English food.",
+      "readback_semantic_error": null,
+      "readback_style_note": "Awkward final coordination."
+    },
+    {
+      "index": 777,
+      "fields": [
+        [
+          "area",
+          "riverside"
+        ],
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "familyFriendly",
+          "yes"
+        ],
+        [
+          "name",
+          "The Phoenix"
+        ],
+        [
+          "near",
+          "Crowne Plaza Hotel"
+        ]
+      ],
+      "greedy": "The Phoenix is a family friendly restaurant located in riverside near Crowne Plaza Hotel.",
+      "readback": "The Phoenix is a family friendly restaurant located in riverside near the Crowne Plaza Hotel.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": "Awkward 'in riverside'."
+    },
+    {
+      "index": 874,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "customer rating",
+          "1 out of 5"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "no"
+        ],
+        [
+          "food",
+          "French"
+        ],
+        [
+          "name",
+          "The Phoenix"
+        ],
+        [
+          "near",
+          "Crowne Plaza Hotel"
+        ],
+        [
+          "priceRange",
+          "moderate"
+        ]
+      ],
+      "greedy": "The Phoenix is a pub located in the city centre near Crowne Plaza Hotel that serves French food and is not kid friendly and has a customer rating of 1 out of 5.",
+      "readback": "The Phoenix is a French pub located in the city centre near the Crowne Plaza Hotel. It is not kid friendly and has a moderate price range and a customer rating of 1 out of 5.",
+      "greedy_semantic_error": "Omits moderate price.",
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 971,
+      "fields": [
+        [
+          "area",
+          "riverside"
+        ],
+        [
+          "eatType",
+          "coffee shop"
+        ],
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "food",
+          "Indian"
+        ],
+        [
+          "name",
+          "The Phoenix"
+        ],
+        [
+          "near",
+          "Crowne Plaza Hotel"
+        ]
+      ],
+      "greedy": "The Phoenix is a coffee shop that serves Indian food and is a coffee shop in the riverside area near Crowne Plaza Hotel.",
+      "readback": "The Phoenix is a coffee shop and Indian restaurant in the riverside area near Crowne Plaza Hotel.",
+      "greedy_semantic_error": "Repeats coffee shop and omits restaurant.",
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 1068,
+      "fields": [
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "food",
+          "English"
+        ],
+        [
+          "name",
+          "The Punter"
+        ],
+        [
+          "near",
+          "Raja Indian Cuisine"
+        ],
+        [
+          "priceRange",
+          "high"
+        ]
+      ],
+      "greedy": "The Punter is a pub that serves English food at a high price range near Raja Indian Cuisine.",
+      "readback": "The Punter is a high priced English pub located near Raja Indian Cuisine.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 1165,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "customer rating",
+          "3 out of 5"
+        ],
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "food",
+          "Indian"
+        ],
+        [
+          "name",
+          "The Punter"
+        ],
+        [
+          "near",
+          "Express by Holiday Inn"
+        ],
+        [
+          "priceRange",
+          "moderate"
+        ]
+      ],
+      "greedy": "The Punter is an Indian restaurant in the moderate price range. It is located in the city centre near Express by Holiday Inn. It has a customer rating of 3 out of 5.",
+      "readback": "The Punter is a restaurant that provides Indian food in the moderate price range. It is located in the city centre. It is near Express by Holiday Inn. Its customer rating is 3 out of 5.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": "Choppy but legible."
+    },
+    {
+      "index": 1263,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "yes"
+        ],
+        [
+          "name",
+          "The Vaults"
+        ],
+        [
+          "near",
+          "Raja Indian Cuisine"
+        ],
+        [
+          "priceRange",
+          "less than £20"
+        ]
+      ],
+      "greedy": "The Vaults is a family friendly pub located in the city centre near Raja Indian Cuisine. The price range is less than £20.",
+      "readback": "The Vaults is a family friendly pub located in the city centre near Raja Indian Cuisine. The price range is less than £20.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 1360,
+      "fields": [
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "name",
+          "The Vaults"
+        ],
+        [
+          "near",
+          "Rainbow Vegetarian Café"
+        ]
+      ],
+      "greedy": "The Vaults is a pub located near the Rainbow Vegetarian Café. The price range is £20.",
+      "readback": "The Vaults is a pub located near the Rainbow Vegetarian Café.",
+      "greedy_semantic_error": "Invents a price.",
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 1457,
+      "fields": [
+        [
+          "customer rating",
+          "average"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "yes"
+        ],
+        [
+          "food",
+          "Japanese"
+        ],
+        [
+          "name",
+          "The Vaults"
+        ],
+        [
+          "near",
+          "Raja Indian Cuisine"
+        ],
+        [
+          "priceRange",
+          "less than £20"
+        ]
+      ],
+      "greedy": "The Vaults is a family friendly Japanese pub with an average customer rating and less than £20 located near Raja Indian Cuisine.",
+      "readback": "The Vaults is a family friendly Japanese pub located near Raja Indian Cuisine with a price range of less than £20 and has an average customer rating.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": "Awkward sentence ending."
+    },
+    {
+      "index": 1554,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "yes"
+        ],
+        [
+          "food",
+          "Indian"
+        ],
+        [
+          "name",
+          "The Waterman"
+        ],
+        [
+          "near",
+          "Raja Indian Cuisine"
+        ],
+        [
+          "priceRange",
+          "moderate"
+        ]
+      ],
+      "greedy": "The Waterman is a pub that serves Indian food in the moderate price range. It is kid friendly and is located in the city centre near Raja Indian Cuisine.",
+      "readback": "The Waterman is an Indian pub near Raja Indian Cuisine in the city centre. It is kid friendly and has a moderate price range.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": null
+    },
+    {
+      "index": 1651,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "familyFriendly",
+          "yes"
+        ],
+        [
+          "food",
+          "Italian"
+        ],
+        [
+          "name",
+          "The Wrestlers"
+        ],
+        [
+          "near",
+          "Raja Indian Cuisine"
+        ],
+        [
+          "priceRange",
+          "moderate"
+        ]
+      ],
+      "greedy": "The Wrestlers is a moderately priced pub serving Italian food. It is located in the city centre near Raja Indian Cuisine and is family-friendly.",
+      "readback": "The Wrestlers is a moderate priced pub serving Italian food near Raja Indian Cuisine in the city centre. It is kid friendly.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": "Non-idiomatic 'moderate priced'."
+    },
+    {
+      "index": 1748,
+      "fields": [
+        [
+          "area",
+          "city centre"
+        ],
+        [
+          "eatType",
+          "restaurant"
+        ],
+        [
+          "familyFriendly",
+          "yes"
+        ],
+        [
+          "food",
+          "Italian"
+        ],
+        [
+          "name",
+          "The Wrestlers"
+        ],
+        [
+          "near",
+          "Raja Indian Cuisine"
+        ],
+        [
+          "priceRange",
+          "moderate"
+        ]
+      ],
+      "greedy": "The Wrestlers is a moderately priced Italian restaurant located in the city centre near Raja Indian Cuisine. It is kid friendly.",
+      "readback": "The Wrestlers is a moderate priced Italian restaurant located in the city centre near Raja Indian Cuisine. It is kids friendly.",
+      "greedy_semantic_error": null,
+      "readback_semantic_error": null,
+      "readback_style_note": "Non-idiomatic 'kids friendly'."
+    },
+    {
+      "index": 1846,
+      "fields": [
+        [
+          "eatType",
+          "pub"
+        ],
+        [
+          "name",
+          "Zizzi"
+        ],
+        [
+          "near",
+          "The Sorrento"
+        ]
+      ],
+      "greedy": "Zizzi is a pub that is near offers family friendly and has a found nwhure goo to to The Sorrento.",
+      "readback": "Zizzi is a pub which is located near The Portel.",
+      "greedy_semantic_error": "Damaged English and invented family claim.",
+      "readback_semantic_error": "Names The Portel in place of The Sorrento.",
+      "readback_style_note": null
+    }
+  ]
+}
