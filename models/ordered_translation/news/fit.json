@@ -1,0 +1,65 @@
+{
+  "weights": "e2535e9bbfdde541ac5680367d6120a903e81fad4aaffcc3934ab89bd81ae354",
+  "binding": {
+    "references/news_visual_translation_protocol.md": "14e1cc2678b13d4502288170f0ee06f3b4be5380a113d910b37b90285fc4f9a4",
+    "scripts/train_news_translation.py": "1fb93d2e5438753d9b6681db7090198dc8ba9ec144e4a33315fdf4d8ffbcda2f",
+    "models/ordered_translation/1/weights.safetensors": "3193f0576124621cd4fc2320c2ef367f05471123d8e29f98fba55b01b7853c4a",
+    "references/evidence/ordered_translation_v1/news-corpus.json": "7dd711627a555c63536f1b2529774d9468c2f8e4b9bcf360a5cdd98deb21ab69",
+    "scripts/train_ordered_translation.py": "8ab8badaedd677c0c5fd73dc360f68a6842e4be22898bbaf2fd0e7baeb59f91f"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "train": {
+        "nll": 6390377.522033691,
+        "targets": 3134888,
+        "pairs": 100000,
+        "attention_sites": 615485324,
+        "mean_nll": 2.038470759412678
+      },
+      "seconds": 12.005907027982175,
+      "joules": 1516.593,
+      "peak": 522837504
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "nll": 5720159.367088318,
+        "targets": 3140485,
+        "pairs": 100000,
+        "attention_sites": 618137405,
+        "mean_nll": 1.8214254699794197
+      },
+      "seconds": 12.862095746211708,
+      "joules": 1596.964,
+      "peak": 522837504
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "nll": 5393124.462186813,
+        "targets": 3135184,
+        "pairs": 100000,
+        "attention_sites": 616253722,
+        "mean_nll": 1.720193922330177
+      },
+      "seconds": 14.005768432281911,
+      "joules": 1666.935,
+      "peak": 522033664
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "nll": 5178456.17906189,
+        "targets": 3132908,
+        "pairs": 100000,
+        "attention_sites": 614944528,
+        "mean_nll": 1.65292315607796
+      },
+      "seconds": 13.186665170826018,
+      "joules": 1632.41,
+      "peak": 522837504
+    }
+  ],
+  "parameters": 1688480
+}

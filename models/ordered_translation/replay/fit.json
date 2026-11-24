@@ -1,0 +1,65 @@
+{
+  "weights": "aa74ae69814a37f94b048aa2af8c091d98f45758857dde29a50a3663cd6d3ba3",
+  "binding": {
+    "references/news_visual_translation_protocol.md": "14e1cc2678b13d4502288170f0ee06f3b4be5380a113d910b37b90285fc4f9a4",
+    "scripts/train_news_translation.py": "1fb93d2e5438753d9b6681db7090198dc8ba9ec144e4a33315fdf4d8ffbcda2f",
+    "models/ordered_translation/1/weights.safetensors": "3193f0576124621cd4fc2320c2ef367f05471123d8e29f98fba55b01b7853c4a",
+    "references/evidence/ordered_translation_v1/news-corpus.json": "7dd711627a555c63536f1b2529774d9468c2f8e4b9bcf360a5cdd98deb21ab69",
+    "scripts/train_ordered_translation.py": "8ab8badaedd677c0c5fd73dc360f68a6842e4be22898bbaf2fd0e7baeb59f91f"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "train": {
+        "nll": 2237687.599281311,
+        "targets": 2120813,
+        "pairs": 100000,
+        "attention_sites": 246647725,
+        "mean_nll": 1.0551083944135156
+      },
+      "seconds": 13.506461774930358,
+      "joules": 1506.118,
+      "peak": 372721152
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "nll": 1995001.7812232971,
+        "targets": 2122387,
+        "pairs": 100000,
+        "attention_sites": 247135353,
+        "mean_nll": 0.9399802115369615
+      },
+      "seconds": 13.565195175819099,
+      "joules": 1503.835,
+      "peak": 348514304
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "nll": 1771178.0990905762,
+        "targets": 2117431,
+        "pairs": 100000,
+        "attention_sites": 245789139,
+        "mean_nll": 0.836475001589462
+      },
+      "seconds": 11.538968889974058,
+      "joules": 1323.182,
+      "peak": 356161536
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "nll": 1603461.4671993256,
+        "targets": 2120775,
+        "pairs": 100000,
+        "attention_sites": 246650411,
+        "mean_nll": 0.7560733539386901
+      },
+      "seconds": 14.260941003449261,
+      "joules": 1572.358,
+      "peak": 348553216
+    }
+  ],
+  "parameters": 1688480
+}

@@ -1,0 +1,255 @@
+{
+  "stride": 1,
+  "weights": "3193f0576124621cd4fc2320c2ef367f05471123d8e29f98fba55b01b7853c4a",
+  "binding": {
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "scripts/train_ordered_translation.py": "8ab8badaedd677c0c5fd73dc360f68a6842e4be22898bbaf2fd0e7baeb59f91f",
+    "scripts/prepare_ordered_translation.py": "112874ef58907d6c2464041bdaa9d18e75c50d9c420d22d0907c469e349ac70b",
+    "references/ordered_visual_translation_protocol.md": "247eed2a187de6f42636d16f781233efe58fe5122dfd294a5dae1c9572f57c79",
+    "references/evidence/ordered_translation_v1/corpus.json": "6f39955b4f884cbfdbd0e0b2b0b4ab2a5b658ac8bfebeea5843be4fe15c8f9ba"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "train": {
+        "nll": 4484073.743408203,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 3.3705742159884684
+      },
+      "dev": {
+        "nll": 36911.16326904297,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 2.741878121307604
+      },
+      "seconds": 7.0793290277943015,
+      "joules": 850.521,
+      "peak": 350309888
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "nll": 3259950.9459991455,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 2.450429505117901
+      },
+      "dev": {
+        "nll": 29701.855499267578,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 2.2063479051602717
+      },
+      "seconds": 7.797718716785312,
+      "joules": 885.186,
+      "peak": 350264320
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "nll": 2700519.8160324097,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 2.0299181018299643
+      },
+      "dev": {
+        "nll": 25068.101135253906,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.862137953889014
+      },
+      "seconds": 7.5676074009388685,
+      "joules": 873.101,
+      "peak": 349813248
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "nll": 2354596.075576782,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 1.7698952505126677
+      },
+      "dev": {
+        "nll": 23041.890434265137,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.7116246051303772
+      },
+      "seconds": 9.19249787274748,
+      "joules": 1012.826,
+      "peak": 349813248
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "nll": 2094240.2536354065,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 1.5741918186259547
+      },
+      "dev": {
+        "nll": 21435.228340148926,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.5922766557828647
+      },
+      "seconds": 9.063813949003816,
+      "joules": 999.476,
+      "peak": 350264320
+    },
+    {
+      "epoch": 6,
+      "train": {
+        "nll": 1886522.1645355225,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 1.4180549494801948
+      },
+      "dev": {
+        "nll": 20197.005973815918,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.5002975764237052
+      },
+      "seconds": 9.279044810682535,
+      "joules": 1016.084,
+      "peak": 349813248
+    },
+    {
+      "epoch": 7,
+      "train": {
+        "nll": 1704658.9031715393,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 1.2813525545898057
+      },
+      "dev": {
+        "nll": 19638.111755371094,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.4587811436169287
+      },
+      "seconds": 8.982815396972,
+      "joules": 989.074,
+      "peak": 349813248
+    },
+    {
+      "epoch": 8,
+      "train": {
+        "nll": 1545391.657207489,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 1.1616350603164176
+      },
+      "dev": {
+        "nll": 19144.465476989746,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.422111534466628
+      },
+      "seconds": 7.757898552343249,
+      "joules": 883.062,
+      "peak": 350264320
+    },
+    {
+      "epoch": 9,
+      "train": {
+        "nll": 1407271.1061210632,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 1.0578130460432584
+      },
+      "dev": {
+        "nll": 19232.8563079834,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.4286774853649828
+      },
+      "seconds": 8.639045935124159,
+      "joules": 957.984,
+      "peak": 350264320
+    },
+    {
+      "epoch": 10,
+      "train": {
+        "nll": 1287365.7171878815,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 0.9676829466240928
+      },
+      "dev": {
+        "nll": 19431.39853668213,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.4434258309821817
+      },
+      "seconds": 9.249613733030856,
+      "joules": 1022.426,
+      "peak": 350264320
+    },
+    {
+      "epoch": 11,
+      "train": {
+        "nll": 1191587.3108158112,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 0.8956885403231843
+      },
+      "dev": {
+        "nll": 19929.280067443848,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.4804100480941798
+      },
+      "seconds": 8.695696182549,
+      "joules": 964.942,
+      "peak": 350264320
+    },
+    {
+      "epoch": 12,
+      "train": {
+        "nll": 1121419.8768177032,
+        "targets": 1330359,
+        "pairs": 62774,
+        "attention_sites": 154587931,
+        "mean_nll": 0.8429453078587834
+      },
+      "dev": {
+        "nll": 20496.991149902344,
+        "targets": 13462,
+        "pairs": 646,
+        "attention_sites": 1529402,
+        "mean_nll": 1.522581425486729
+      },
+      "seconds": 7.7510116854682565,
+      "joules": 874.962,
+      "peak": 350264320
+    }
+  ],
+  "selected_epoch": 8,
+  "parameters": 1688480
+}
