@@ -134,4 +134,6 @@ def main():
 
 
 if __name__ == "__main__":
+    from scripts.verse_gpu_runtime import configure_cuda_cli
+    configure_cuda_cli()
     main()

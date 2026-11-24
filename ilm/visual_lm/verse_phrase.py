@@ -9,18 +9,24 @@ def logits_at(model, source, target, visible, index):
     return model.ink(state[rows,index]).float()
 
 
-def phrase_score(model, source, target_ids, bank, start, vocab):
+def phrase_score(model, source, target_ids, bank, start, vocab, *, return_ranks=False):
     """Two successive predictions. IDs outside the training bank have zero probability."""
     positions = torch.arange(target_ids.shape[1],device=source.device)
     hidden = positions[None] == start[:,None]
     second = positions[None] == start[:,None]+1
     scores = []
+    ranks = []
     for gap, cell in ((hidden | second,start),(second,start+1)):
         logits = logits_at(model,source,bank[target_ids.masked_fill(gap,0)],~gap,cell)
         truth = target_ids.gather(1,cell[:,None]).squeeze(1)
         score = -F.cross_entropy(logits,(truth-1).clamp(0,vocab-1),reduction="none")
         scores.append(score.masked_fill((truth < 1) | (truth > vocab),-torch.inf))
-    return scores[0]+scores[1]
+        if return_ranks:
+            value = logits.gather(1,(truth-1).clamp(0,vocab-1)[:,None])
+            rank = 1+(logits > value).sum(1)
+            ranks.append(rank.masked_fill((truth < 1) | (truth > vocab),vocab+1))
+    joint = scores[0]+scores[1]
+    return (joint,torch.stack(ranks,dim=1)) if return_ranks else joint
 
 
 @torch.inference_mode()

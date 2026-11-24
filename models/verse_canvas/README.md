@@ -38,3 +38,26 @@ scripts/with_ilm_gpu python -m scripts.evaluate_verse_binding
 ```
 
 The fresh directory contains its own model, evidence and artifacts. Each training command fits the image and byte versions in sequence on GPU 0. The primary and confirmation cohorts use different author partitions. All evaluation PNGs and saved arrays derive from actual final weights.
+
+## Restoring an ordered pair
+
+The phrase-trained writers can expand eight candidate first glyphs and score the second glyph conditional on each. Use an aligned page with exactly two adjacent missing lower cells. This command starts CUDA through the project's driver launcher when run directly.
+
+```bash
+python -m scripts.write_verse_canvas --device cuda --phrase contrast --order pair \
+  --page models/verse_canvas/examples/li-liu-damaged.png --output song-restored.png
+```
+
+| Damaged Song page | Output from the image writer |
+|---|---|
+| ![Missing middle pair in Li Liu's line](examples/li-liu-damaged.png) | ![The writer restores 清風](examples/li-liu-restored.png) |
+
+On 3,854 held Song pages the contrastive writer supplied both recorded glyphs eight times. The paired control supplied both 12 times. Use `--phrase paired` to run that control. Both accept raw page images. All four continuation checkpoints and their parent identifiers are released. [Comparison and training costs](../../references/verse_contrast_result.md)
+
+To reproduce the comparison, first prepare the original Tang corpus as above. Then run these commands in order. The first reserves the Song cases before any new fitting. Training reuses completed fit receipts when their checkpoint and reservation hashes match.
+
+```bash
+python -m scripts.prepare_verse_contrast
+python -m scripts.train_verse_contrast
+python -m scripts.evaluate_verse_contrast
+```
