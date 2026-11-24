@@ -7,8 +7,9 @@ const {finalizePresentation,applyPresentationChartFont}=await import(pathToFileU
 const competing=mode==='competing';
 const runs=mode==='runs';
 const sets=mode==='sets';
-const folder=path.join(root,'references/evidence',sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,(sets||runs||competing)?'plates.json':'reading-plates.json')));
+const exam=mode==='exam';
+const folder=path.join(root,'references/evidence',exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -34,7 +35,26 @@ for(const plate of plates){
   slide.speakerNotes.textFrame.setText(plate.name+'. Each question, evidenced mark and generated response is a measured bitmap embedded at the indicated crop.');
 }
 const slide=deck.slides.add();slide.background.fill='#FFFFFF';
-if(sets){
+if(exam){
+  const data=JSON.parse(await fs.readFile(path.join(folder,'results.json')));
+  const arms=['parent','exchanged','matched'];
+  label(slide,'Writing answers to pictured Chinese questions',24,20,1040,46,30,true,ink);
+  label(slide,'Exact free replies on 384 questions',24,85,520,42,20,true,ink);
+  const chart=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},
+    position:{left:24,top:146,width:511,height:280},categories:['Original','Other question','Other page'],
+    series:arms.map((a,i)=>({name:['Before fitting','Exchanged fit','Matched fit'][i],
+      values:['intact','other_question','other_page'].map(k=>data[a][k].free),fill:['#94A7A2','#B46C49',teal][i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:13}},yAxis:{min:0,max:25,majorUnit:5,textStyle:{fontSize:14}},xAxis:{textStyle:{fontSize:14}}});
+  applyPresentationChartFont(chart,{fontFamily:'Arial'});
+  label(slide,'Two distinct answers on the same page',554,85,520,44,20,true,ink);
+  const vals=[['Writer','Both written','Both ranked'],...arms.map((a,i)=>[['Before fitting','Exchanged fit','Matched fit'][i],
+    data[a].intact.both_free+' / 128',data[a].intact.both_ranked+' / 128'])];
+  const t=slide.tables.add({rows:4,columns:3,left:552,top:147,width:508,height:210,columnWidths:[176,166,166],values:vals});
+  t.styleOptions={headerRow:true,bandedRows:false};t.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<4;i++)for(let j=0;j<3;j++){const c=t.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:17,bold:i===0,color:ink};}
+  label(slide,'Ranking supplies the possible answers. Free generation supplies only the rendered glyph grids of the passage and question.',25,470,1035,61,17,false,ink);
+  slide.speakerNotes.textFrame.setText('The inputs are digitally rendered aligned glyph grids. The original exam has one labelled option. Free writing requires a stopped match to that wording.');
+}else if(sets){
   const data=JSON.parse(await fs.readFile(path.join(root,'references/evidence/fact_binding_v1/scores.json')));
   const arms=['parent','linear','mixture'], names=['Frozen reader','Additive head','Two readings'];
   label(slide,'Pairing a supplied list and writing an answer',23,20,1040,44,30,true,ink);
@@ -111,7 +131,7 @@ slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen t
 }
 const total=plates.length+1;
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
   materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
