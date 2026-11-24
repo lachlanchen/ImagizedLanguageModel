@@ -14,15 +14,12 @@ from scripts.benchmark_competing_qwen import STORE, MODELS
 from scripts.train_paired_evidence import gpu_owner
 
 
-def main():
-    rows = read(WORK / "confirmation.json")
+def review(work=WORK, public=PUB, prefix="confirmation", arms=("single", "phrase")):
+    rows = read(work / "confirmation.json")
     edited = changed(rows)
-    answers = {
-        k: unpack(WORK / ("confirmation-" + k + ".json.gz"))
-        for k in ("single", "phrase")
-    }
-    names = ["single", "phrase", "human", "foil"]
-    keys = list("ABCD")
+    answers = {k: unpack(work / (prefix + "-" + k + ".json.gz")) for k in arms}
+    names = [*arms, "human", "foil"]
+    keys = list("ABCDE"[: len(names)])
     schema = dict(
         type="object", properties={k: dict(type="boolean") for k in keys}, required=keys
     )
@@ -101,7 +98,7 @@ def main():
         res = {
             side: {
                 k: sum(s[side][k] for s in group)
-                for k in ("single", "phrase", "human", "foil_rejected")
+                for k in (*arms, "human", "foil_rejected")
             }
             for side in ("original", "edited")
         }
@@ -114,14 +111,15 @@ def main():
                 for k in ("human", "foil_rejected")
             ),
             both_versions={
-                k: sum(s["original"][k] and s["edited"][k] for s in group)
-                for k in ("single", "phrase")
+                k: sum(s["original"][k] and s["edited"][k] for s in group) for k in arms
             },
         )
         report[t] = res
-    dump(PUB / "semantic.json", dict(scores=report, judge=MODELS[JUDGE], votes=votes))
+    dump(
+        public / "semantic.json", dict(scores=report, judge=MODELS[JUDGE], votes=votes)
+    )
     print(report, flush=True)
 
 
 if __name__ == "__main__":
-    main()
+    review()
