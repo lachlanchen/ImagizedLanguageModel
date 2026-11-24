@@ -15,8 +15,9 @@ const phrase=mode==='phrase';
 const marginal=mode==='marginal';
 const fact=mode==='fact';
 const ranking=mode==='ranking';
-const folder=path.join(root,'references/evidence',ranking?'fact_span_ranking_v1':fact?'fact_channel_v1':marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
-const plates=JSON.parse(await fs.readFile(path.join(folder,(ranking||fact||marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
+const context=mode==='sentence-context';
+const folder=path.join(root,'references/evidence',context?'sentence_context_v1':ranking?'fact_span_ranking_v1':fact?'fact_channel_v1':marginal?'phrase_marginal_v1':phrase?'phrase_region_v1':region?'region_writer_v1':views?'evidence_views_v1':branch?'branch_ink_v1':exam?'open_exam_v1':sets?'complete_fact_sets_v1':runs?'multiple_ink_runs_v1':competing?'competing_facts_v1':'recurrent_evidence_v1');
+const plates=JSON.parse(await fs.readFile(path.join(folder,(context||ranking||fact||marginal||phrase||region||views||branch||exam||sets||runs||competing)?'plates.json':'reading-plates.json')));
 const deck=Presentation.create({slideSize:{width:1088,height:538}});
 const ink='#182526',teal='#006B66';
 function label(slide,txt,x,y,w,h,size,bold,color){
@@ -76,6 +77,26 @@ if(fact){
   table.styleOptions={headerRow:true,bandedRows:false};table.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
   for(let i=0;i<4;i++)for(let j=0;j<3;j++){const c=table.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:17,bold:i===0,color:ink};}
   label(slide,'Only the pictured question and source page are supplied at inference.',25,457,1030,54,18,false,ink);
+ }else if(context){
+  const data=JSON.parse(await fs.readFile(path.join(folder,'scores.json')));
+  const trace=JSON.parse(await fs.readFile(path.join(folder,'trajectory.json')));
+  const modes=['original','direct','surround'], names=['Earlier','Direct','Context'], colors=['#88786A','#557DA1',teal];
+  label(slide,'Writing complete answers from a pictured passage',22,15,1040,45,29,true,ink);
+  label(slide,'a   New questions (192 per language)',22,73,520,30,19,true,ink);
+  const bars=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:22,top:111,width:488,height:246},
+    categories:['English','Chinese'],series:modes.map((m,i)=>({name:names[i],values:['statements','exam'].map(t=>data[m][t].bitmap_exact),fill:colors[i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:14}},yAxis:{min:0,textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:13}}});
+  applyPresentationChartFont(bars,{fontFamily:'Arial'});
+  label(slide,'b   Development questions (48 per language)',530,73,545,30,19,true,ink);
+  const steps=Object.keys(trace).sort((a,b)=>Number(a)-Number(b));
+  const lines=slide.charts.add('bar',{barOptions:{direction:'column',grouping:'clustered'},position:{left:530,top:111,width:525,height:246},categories:steps,
+    series:['statements','exam'].map((t,i)=>({name:['English','Chinese'][i],values:steps.map(k=>trace[k][t].bitmap_exact),fill:[colors[1],teal][i]})),
+    hasLegend:true,legend:{position:'bottom',textStyle:{fontSize:14}},yAxis:{min:0,textStyle:{fontSize:13}},xAxis:{textStyle:{fontSize:13}}});
+  applyPresentationChartFont(lines,{fontFamily:'Arial'});
+  const vals=[['Exact with both natural questions','Earlier','Direct','Context'],...['statements','exam'].map((t,i)=>[[ 'English (96 pages)','Chinese (96 pages)'][i],...modes.map(m=>String(data[m][t].both_exact))])];
+  const tb=slide.tables.add({rows:3,columns:4,left:40,top:373,width:997,height:124,columnWidths:[400,190,190,217],values:vals});
+  tb.styleOptions={headerRow:true,bandedRows:false};tb.borders.assign({style:'solid',fill:'#D4DFD9',width:1});
+  for(let i=0;i<3;i++)for(let j=0;j<4;j++){const c=tb.getCell(i,j);c.fill=i?'#FFFFFF':'#E9F1ED';c.text.style={typeface:'Arial',fontSize:16,bold:i===0,color:ink};}
  }else if(ranking){
   const data=JSON.parse(await fs.readFile(path.join(folder,'scores.json'),'utf8'));
   const chosen=JSON.parse(await fs.readFile(path.join(folder,'reader.json'),'utf8'));
@@ -275,7 +296,7 @@ slide.speakerNotes.textFrame.setText('The frozen interval reader may have seen t
 }
 const total=plates.length+1+Number(fact);
 for(const d of ['draft','output'])await fs.mkdir(path.join(stage,d),{recursive:true});
-const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',ranking?'Choosing_the_answer_span.pptx':fact?'Reading_the_fact_then_writing.pptx':marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
+const candidatePath=path.join(stage,'draft/plates.pptx'),finalPath=path.join(stage,'output',context?'Writing_the_sentence_in_context.pptx':ranking?'Choosing_the_answer_span.pptx':fact?'Reading_the_fact_then_writing.pptx':marginal?'Learning_to_write_complete_answers.pptx':phrase?'Writing_with_visible_phrases.pptx':region?'Writing_the_requested_fact.pptx':views?'Whole_stories_and_evidence.pptx':branch?'Distinguishing_the_requested_fact.pptx':exam?'Visual_question_conditioning.pptx':sets?'Binding_visual_answers.pptx':runs?'Visual_lists_from_pictured_pages.pptx':competing?'Competing_facts_and_quantized_readers.pptx':'Visual_evidence_and_statements.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:total,
   materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:fact?[total-1,total]:[total],requiredNativeTableOwnerSlides:[total],verifyArtifactToolImport:true,
