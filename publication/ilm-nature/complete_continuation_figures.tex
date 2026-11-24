@@ -1,4 +1,4 @@
-% Literal captions copied from their source inputs by build_optical_passage_qa_article.py.
+% Literal captions copied from their source inputs by build_dialogue_ink_article.py.
 % Native PowerPoint sources and reviewed PNG pixels remain unchanged.
 \begin{figure*}[p]
 \centering
@@ -1017,4 +1017,13 @@ The selected names are correct under both English requests. The first generated 
 \includegraphics[width=.84\textwidth]{figures/Figure_127_optical_passage_qa.png}
 \caption{\textbf{Extracting answers from pictured passages.} \textbf{a,} Percentage of eligible two-question passages with both normalized answers exact, under the original questions and with their assignments exchanged. The complete-pair counts are 108 versus zero of 484 reserved passages and 351 versus two of 1,285 development passages. \textbf{b,} Original answer images from the first complete reserved pair and a failed question from the first incomplete development pair. The questions are transcribed with their original spelling. \textbf{c,} Answer-level accuracy on the registered article subsets. Exact ink compares the answer bitmap with the rendered accepted references.}
 \label{fig:optical-passage-qa}
+\end{figure*}
+\begin{figure*}[p]
+\centering
+\includegraphics[width=.84\textwidth]{figures/Figure_128_dialogue_ink.png}
+\caption{\textbf{Conversational answers from pictured text.}
+\textbf{a,} Exact normalized first-reference matches on 4,413 reserved and 5,588 development turns. The two exchange controls use the word-code writer and retain the original scoring reference.
+\textbf{b,} Direct-writer outputs on consecutive turns from the same reserved passage. Both are actual answer pixels independently reproduced from image inputs. The first answer is correct. The second borrows words associated with the preceding question and misses the requested explanation.
+\textbf{c,} Counts of complete normalized first-reference matches among multiword answers absent as a case-insensitive substring of each input and unseen as complete normalized training answers. Case, punctuation and article normalization can yield a wording match despite a difference in ink.}
+\label{fig:dialogue-ink}
 \end{figure*}
