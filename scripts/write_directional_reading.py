@@ -32,8 +32,8 @@ class DirectionalAnswer(RankedAnswer):
         ]
 
 
-def write(args):
-    net = DirectionalAnswer(args.mode, args.device)
+def write(args, make_model=DirectionalAnswer):
+    net = make_model(args.mode, args.device)
     ink = Ink(net.palette)
     if args.input:
         spec = read(args.input)
