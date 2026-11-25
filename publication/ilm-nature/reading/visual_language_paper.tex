@@ -5,8 +5,9 @@
 \setlength{\columnsep}{5mm}
 \newcommand{\platehere}[3]{\par\vspace{9pt}{\centering\includegraphics[width=\linewidth]{../figures/#1.pdf}\par}\vspace{4pt}\begingroup\captionsetup{hypcap=false}\captionof{figure}{\textbf{#2.} #3}\endgroup}
 \newcommand{\spread}[1]{\noindent{\sffamily\bfseries\fontsize{19}{22}\selectfont #1\par}\vspace{4pt}}
+\input{paper_title.tex}
 \begin{document}
-\noindent{\sffamily\bfseries\fontsize{25}{28}\selectfont Learning to write answers from pictured pages\par}
+\noindent{\sffamily\bfseries\fontsize{22}{26}\selectfont \ILMPaperTitle\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\vspace{8pt}
 \noindent{\bfseries\fontsize{10.5}{12.6}\selectfont
 Historical specimens preserve visual distinctions that a transcription can lose. Can a compact model read a pictured question and answer in the same medium? We trained a reader and writer on one RTX 4090 D using human questions, complete responses and attested Chinese forms. Balancing question language and page order enabled the 1.18-million-parameter system to draw the requested specimen under all 16 interventions in 63 of 64 held families. Two controls passed none. On 64 additional families, familiar prompts gave 512 of 512 exact forms, whereas new paraphrases gave 261 of 512. An untrained printed-label matcher solved all 512 paraphrases. Free reading exposed a larger gap. On new English and Chinese passages the whole-page writer matched one human answer of 64 per language, and it supplied a single mark when asked to explain the history of a character. A 1.69-million-parameter translator trained on source paraphrases drew 422 of 472 unseen passive translations exactly, compared with zero under canonical training. Cross-script alignment retrieved 109 of 128 Chinese translations, yet free writing preserved only two of 64 OPUS meanings. Assigning unseen specimens reusable visual slots preserved both their pixels and the surrounding output on 56 of 70 swaps, up from five using identical weights.\par}
