@@ -1,0 +1,130 @@
+{
+  "Figure_191_recognition_and_writing": [
+    {
+      "title": "a   Translation retrieved (of 128)",
+      "labels": [
+        "EN to ZH",
+        "ZH to EN"
+      ],
+      "top": 138,
+      "ticks": [
+        0,
+        32,
+        64,
+        96,
+        128
+      ],
+      "series": {
+        "Likelihood": [
+          8,
+          9
+        ],
+        "Aligned": [
+          74,
+          98
+        ],
+        "Projected": [
+          109,
+          112
+        ]
+      }
+    },
+    {
+      "title": "b   Complete meaning preserved",
+      "labels": [
+        "Dialogue\n(/32)",
+        "News\n(/32)",
+        "OPUS\n(/64)"
+      ],
+      "top": 47,
+      "ticks": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "series": {
+        "Aligned": [
+          1,
+          0,
+          2
+        ],
+        "Round trip": [
+          3,
+          0,
+          4
+        ],
+        "Qwen Q4": [
+          18,
+          24,
+          40
+        ]
+      }
+    }
+  ],
+  "Figure_192_paraphrase_transfer": [
+    {
+      "title": "a   Exact Chinese outputs (of 472)",
+      "labels": [
+        "English active",
+        "English passive"
+      ],
+      "top": 535,
+      "ticks": [
+        0,
+        118,
+        236,
+        354,
+        472
+      ],
+      "series": {
+        "Canonical": [
+          471,
+          0
+        ],
+        "Varied": [
+          471,
+          422
+        ]
+      }
+    },
+    {
+      "title": "b   Natural sentences",
+      "labels": [
+        "Dialogue\n(/32)",
+        "News\n(/32)",
+        "OPUS\n(/64)",
+        "PAWS-X\n(/64)"
+      ],
+      "top": 74,
+      "ticks": [
+        0,
+        16,
+        32,
+        48,
+        64
+      ],
+      "series": {
+        "Canonical": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "Varied": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "Qwen Q4": [
+          20,
+          21,
+          35,
+          46
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "binding": {
+    "scripts/train_bilingual_ink.py": "00b5488bb6641fb2113a3daaae63fb256f98079ff5c9710aba4216537b71f430",
+    "scripts/prepare_bilingual_ink.py": "0d17636aea0135c0c2a389f06c4a2679c0a712c2313e1f381d0923d453cbfa78",
+    "ilm/visual_lm/bilingual_alignment.py": "2db602888736d05e50699732de327c1af9fecfcb50d2e5a24a9dcaec18e68386",
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "references/bilingual_ink_alignment_protocol.md": "11189d9bd129ea7e29b9d13865f0c067a7fbbc2155c8beaa95f90a644ad12167",
+    "references/evidence/bilingual_ink_v1/corpus.json": "5b4a3488cf498b2a5e6b2ab467e5c8f9c3c13c8f0e4a2b2db6b165c821870100",
+    "models/proposition_translation/likelihood/weights.safetensors": "3f82d37fd05445636946d0bf98b0c4569dcbabe6bca6a99a3c7726b9e46cb4fa",
+    "references/evidence/proposition_translation_v1/design.json": "a37542ec1463f0a49b677fb425a0d6ce4b797a8a0981755db1c03ddc497e21ec"
+  },
+  "weights": "165a02e9ceff18a853682ec80d5e46c59b1134ab094cf5de497b6c1fed4ea1a9",
+  "epochs": [
+    {
+      "epoch": 1,
+      "pairs": 276000,
+      "positions": 15001153,
+      "nll": 1.9562096017309147,
+      "alignment": 1.8275655699432372,
+      "seconds": 52.464994356036186,
+      "joules": 6973.528,
+      "peak": 1149462016
+    },
+    {
+      "epoch": 2,
+      "pairs": 276000,
+      "positions": 15003762,
+      "nll": 1.7974193414606576,
+      "alignment": 1.1988758818217404,
+      "seconds": 55.54674889612943,
+      "joules": 7276.57,
+      "peak": 1148158464
+    },
+    {
+      "epoch": 3,
+      "pairs": 276000,
+      "positions": 15006267,
+      "nll": 1.7196743304980182,
+      "alignment": 1.011754028138312,
+      "seconds": 52.93222162593156,
+      "joules": 7043.015,
+      "peak": 1149462016
+    },
+    {
+      "epoch": 4,
+      "pairs": 276000,
+      "positions": 15007287,
+      "nll": 1.6652023827168676,
+      "alignment": 0.8936453455842263,
+      "seconds": 51.74867630377412,
+      "joules": 6935.572,
+      "peak": 1148158464
+    }
+  ],
+  "parameters": 1688480,
+  "training_projection": "4ba65d6cc1288be916832172cb60573f218bf983bab95a0753ad4345114dcda2"
+}

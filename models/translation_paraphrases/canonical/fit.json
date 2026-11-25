@@ -1,0 +1,68 @@
+{
+  "binding": {
+    "scripts/train_translation_paraphrases.py": "c9e6958514b4e01dcf3f5868108d944dc9f6e287f60716abd5812f7512899e28",
+    "scripts/prepare_translation_paraphrases.py": "7c80b95d00fb61a7a53600d735185cbb813678275e0ca76ae39fbc8b4fb4b9a1",
+    "references/translation_paraphrase_protocol.md": "a607b69ec32c99a0d3a0cf883763037f706844f572b106863e8ee25cf2c47dfe",
+    "references/evidence/translation_paraphrases_v1/corpus.json": "254867450ceca91f0710fa6a7fa61f2c42074ab88965766d0b77d86d3f6135b6",
+    "models/bilingual_ink/likelihood/weights.safetensors": "df7e604f1f029e6a0632f00a9695848677b3627711d530e5fe574f9a320c609c",
+    "scripts/train_ordered_translation.py": "8ab8badaedd677c0c5fd73dc360f68a6842e4be22898bbaf2fd0e7baeb59f91f",
+    "references/evidence/proposition_translation_v1/design.json": "a37542ec1463f0a49b677fb425a0d6ce4b797a8a0981755db1c03ddc497e21ec",
+    "references/evidence/bilingual_ink_v1/corpus.json": "5b4a3488cf498b2a5e6b2ab467e5c8f9c3c13c8f0e4a2b2db6b165c821870100"
+  },
+  "weights": "235a54a914f0e09a6d73e0707f24c7f3e85287e911c6a1df78fbff9f1ec7aeb5",
+  "parameters": 1688480,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train": {
+        "nll": 4588009.468418121,
+        "targets": 2851418,
+        "pairs": 83362,
+        "attention_sites": 617563172,
+        "mean_nll": 1.6090273219914166
+      },
+      "seconds": 13.223398456349969,
+      "joules": 1574.921,
+      "peak": 588720640
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "nll": 4101148.5339603424,
+        "targets": 2845576,
+        "pairs": 83362,
+        "attention_sites": 614336096,
+        "mean_nll": 1.4412366894998911
+      },
+      "seconds": 12.152102365158498,
+      "joules": 1450.832,
+      "peak": 588368384
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "nll": 3836556.783679962,
+        "targets": 2854436,
+        "pairs": 83362,
+        "attention_sites": 618660386,
+        "mean_nll": 1.3440682445428667
+      },
+      "seconds": 12.24617902841419,
+      "joules": 1486.315,
+      "peak": 588620800
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "nll": 3613781.5558948517,
+        "targets": 2844468,
+        "pairs": 83362,
+        "attention_sites": 614018840,
+        "mean_nll": 1.2704595572510753
+      },
+      "seconds": 11.814140429720283,
+      "joules": 1447.225,
+      "peak": 589052928
+    }
+  ]
+}

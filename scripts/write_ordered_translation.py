@@ -15,7 +15,27 @@ from scripts.verse_gpu_runtime import configure_cuda_cli
 
 
 def restore(stride, device):
-    path = MODEL / str(stride)
+    if stride in (
+        "proposition-likelihood",
+        "proposition-contrast",
+        "bilingual-likelihood",
+        "bilingual-aligned",
+        "paraphrase-canonical",
+        "paraphrase-varied",
+    ):
+        family, objective = stride.split("-")
+        base = (
+            MODEL.parent
+            / {
+                "proposition": "proposition_translation",
+                "bilingual": "bilingual_ink",
+                "paraphrase": "translation_paraphrases",
+            }[family]
+        )
+        path = base / objective
+        stride = 1
+    else:
+        path = MODEL / str(stride)
     receipt = read(path / "fit.json")
     if sha(path / "weights.safetensors") != receipt["weights"]:
         raise ValueError("Weights differ")
@@ -38,7 +58,7 @@ def stopped(sequence, limit=128):
     return values[: min(n, limit)], n <= limit and 1 in values
 
 
-def infer(model, raw, direction, device):
+def infer(model, raw, direction, device, decode="greedy"):
     palette = np.load(MODEL / "palette.npy")
     # Every handle below names a physical bitmap local to this request.
     tiles = list(map(bytes, palette))
@@ -63,6 +83,23 @@ def infer(model, raw, direction, device):
         direction,
     )[0]
     out, stop = stopped(sequence)
+    if decode in ("forward", "roundtrip"):
+        from ilm.visual_lm.reverse_translation import rerank
+
+        inventories = [
+            torch.tensor(v, device=device) for v in read(MODEL / "inventories.json")
+        ]
+        alternatives = rerank(
+            model,
+            torch.tensor(features, device=device),
+            [ids],
+            inventories,
+            direction,
+            [(out, stop)],
+        )
+        out, stop = alternatives[0][decode], True
+    elif decode != "greedy":
+        raise ValueError("Unknown decoder")
     return b"".join(tiles[i] for i in out), stop
 
 
@@ -76,16 +113,38 @@ if __name__ == "__main__":
     )
     ap.add_argument("--to", choices=("en", "zh"), required=True)
     ap.add_argument(
-        "--stride", choices=("1", "4", "specimen", "replay", "news"), default="1"
+        "--stride",
+        "--model",
+        choices=(
+            "1",
+            "4",
+            "specimen",
+            "replay",
+            "news",
+            "proposition-likelihood",
+            "proposition-contrast",
+            "bilingual-likelihood",
+            "bilingual-aligned",
+            "paraphrase-canonical",
+            "paraphrase-varied",
+        ),
+        default="1",
     )
     ap.add_argument(
         "--preserve-specimens",
         action="store_true",
         help="Carry unfamiliar image cells as opaque named specimens, using the pointer writer",
     )
+    ap.add_argument(
+        "--decode", choices=("greedy", "forward", "roundtrip"), default="greedy"
+    )
     ap.add_argument("--output", type=Path, required=True)
     ap.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     a = ap.parse_args()
+    if a.decode != "greedy" and (a.preserve_specimens or a.stride == "specimen"):
+        ap.error(
+            "The bidirectional beam scorer requires an ordinary translation writer"
+        )
     if a.device == "cuda":
         configure_cuda_cli()
     torch.set_num_threads(2)
@@ -117,7 +176,7 @@ if __name__ == "__main__":
         out = b"".join(cells)
     else:
         net = restore(int(a.stride) if a.stride.isdigit() else a.stride, a.device)
-        out, done = infer(net, raw, direction, a.device)
+        out, done = infer(net, raw, direction, a.device, a.decode)
     a.output.mkdir(parents=True, exist_ok=False)
     save_grid(out, a.output / "answer.png")
     dump(
