@@ -1,0 +1,58 @@
+{
+  "panels": [
+    {
+      "title": "a    Complete translations",
+      "labels": [
+        "Books",
+        "Talks",
+        "FLORES"
+      ],
+      "unit": "Credited requests out of 48",
+      "series": {
+        "Reference-prefix fit": [
+          0,
+          0,
+          0
+        ],
+        "Draft-prefix fit": [
+          0,
+          0,
+          0
+        ],
+        "Qwen3-8B Q4": [
+          22,
+          29,
+          45
+        ]
+      }
+    },
+    {
+      "title": "b    Errors after the same draft",
+      "labels": [
+        "Starting writer",
+        "Reference-prefix fit",
+        "Draft-prefix fit"
+      ],
+      "unit": "Mean edits per completed request",
+      "series": {
+        "Committed minimum": [
+          5.43,
+          5.43,
+          5.43
+        ],
+        "Above minimum": [
+          29.73,
+          28.08,
+          27.2
+        ]
+      }
+    }
+  ],
+  "colors": {
+    "Reference-prefix fit": "#52778C",
+    "Draft-prefix fit": "#0A6D61",
+    "Qwen3-8B Q4": "#9A632D",
+    "Committed minimum": "#909F9D",
+    "Above minimum": "#31556A"
+  }
+}

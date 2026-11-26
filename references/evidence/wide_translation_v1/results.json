@@ -1,0 +1,4442 @@
+{
+  "bindings": {
+    "fresh": "c65a802a2ade79c88e8528e64b5e3e62c64f1ba644a408963d934ac5bff4d566",
+    "wide": "7bee60fcbeb1dbc979dba068d10dad84ee8ce7fe2de0090872b1c0e5a4a72184",
+    "small": "5b71a6f401fda7ea6206986b93deef3417c7eaca3973c1473888736f6c826ab3",
+    "program": "f1a87ba11b72bef720e6c5be982ed93c358d549bffdae695e8db4f32a2d564dc"
+  },
+  "generated": "7b210911bf3914f3c6b99fec503005c80ef789e3ee777e74f42e714e0ff7dd32",
+  "judged": "e916a034df6c92e3c35240f88a8f45b99d782964028cf2296534bebb80274b36",
+  "groups": {
+    "unseen-articles": {
+      "n": 64,
+      "foil_rejected_twice": 64,
+      "small": 0,
+      "wide": 0,
+      "qwen": 49,
+      "reference": 63,
+      "foil": 0
+    },
+    "book": {
+      "n": 48,
+      "foil_rejected_twice": 48,
+      "small": 0,
+      "wide": 0,
+      "qwen": 23,
+      "reference": 48,
+      "foil": 0
+    },
+    "talk": {
+      "n": 48,
+      "foil_rejected_twice": 48,
+      "small": 0,
+      "wide": 0,
+      "qwen": 27,
+      "reference": 46,
+      "foil": 0
+    },
+    "flores": {
+      "n": 48,
+      "foil_rejected_twice": 48,
+      "small": 0,
+      "wide": 0,
+      "qwen": 45,
+      "reference": 48,
+      "foil": 0
+    },
+    "fitted-book": {
+      "n": 48,
+      "foil_rejected_twice": 48,
+      "small": 0,
+      "wide": 0,
+      "qwen": 25,
+      "reference": 48,
+      "foil": 0
+    },
+    "fitted-talk": {
+      "n": 48,
+      "foil_rejected_twice": 48,
+      "small": 1,
+      "wide": 1,
+      "qwen": 33,
+      "reference": 46,
+      "foil": 0
+    }
+  },
+  "votes": [
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "qwen": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "foil": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "foil": false,
+      "qwen": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "qwen": false,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "qwen": false,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": false,
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": false
+    },
+    {
+      "reference": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "wide": true,
+      "qwen": true,
+      "small": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": true,
+      "reference": true,
+      "small": true,
+      "qwen": true
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "qwen": false,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": false,
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": true,
+      "small": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": false,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "small": false,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "qwen": false,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "small": true,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "small": false,
+      "qwen": false,
+      "wide": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "qwen": false,
+      "small": false
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "qwen": true,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "qwen": false,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": true,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "qwen": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true,
+      "foil": false
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": false,
+      "wide": false
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "small": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "small": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": false,
+      "foil": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "small": true,
+      "foil": false,
+      "qwen": true,
+      "reference": false,
+      "wide": true
+    },
+    {
+      "wide": true,
+      "reference": false,
+      "qwen": true,
+      "foil": false,
+      "small": true
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "small": false,
+      "qwen": false,
+      "foil": false,
+      "wide": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "wide": false,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "reference": true,
+      "foil": false,
+      "qwen": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true,
+      "wide": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "reference": true,
+      "qwen": true,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "qwen": true,
+      "reference": true,
+      "small": false,
+      "foil": false
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "wide": false,
+      "reference": true,
+      "small": false
+    },
+    {
+      "small": false,
+      "reference": true,
+      "wide": false,
+      "foil": false,
+      "qwen": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "qwen": true,
+      "foil": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "foil": false,
+      "qwen": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "small": false,
+      "reference": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "small": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "foil": false,
+      "qwen": true,
+      "small": false,
+      "reference": true
+    },
+    {
+      "reference": true,
+      "small": false,
+      "qwen": true,
+      "foil": false,
+      "wide": false
+    },
+    {
+      "wide": false,
+      "small": true,
+      "reference": true,
+      "foil": false,
+      "qwen": true
+    },
+    {
+      "qwen": false,
+      "foil": false,
+      "reference": true,
+      "small": false,
+      "wide": false
+    },
+    {
+      "qwen": true,
+      "reference": true,
+      "foil": false,
+      "wide": false,
+      "small": false
+    },
+    {
+      "small": false,
+      "wide": false,
+      "foil": false,
+      "reference": true,
+      "qwen": true
+    },
+    {
+      "qwen": false,
+      "reference": true,
+      "wide": false,
+      "small": false,
+      "foil": false
+    },
+    {
+      "foil": false,
+      "small": false,
+      "wide": false,
+      "reference": true,
+      "qwen": false
+    }
+  ],
+  "judged_pairs": {
+    "unseen-articles": {
+      "n": 32,
+      "small": 0,
+      "wide": 0,
+      "qwen": 19,
+      "reference": 31,
+      "foil": 0
+    },
+    "book": {
+      "n": 24,
+      "small": 0,
+      "wide": 0,
+      "qwen": 4,
+      "reference": 24,
+      "foil": 0
+    },
+    "talk": {
+      "n": 24,
+      "small": 0,
+      "wide": 0,
+      "qwen": 11,
+      "reference": 23,
+      "foil": 0
+    },
+    "flores": {
+      "n": 24,
+      "small": 0,
+      "wide": 0,
+      "qwen": 22,
+      "reference": 24,
+      "foil": 0
+    },
+    "fitted-book": {
+      "n": 24,
+      "small": 0,
+      "wide": 0,
+      "qwen": 8,
+      "reference": 24,
+      "foil": 0
+    },
+    "fitted-talk": {
+      "n": 24,
+      "small": 0,
+      "wide": 0,
+      "qwen": 12,
+      "reference": 23,
+      "foil": 0
+    }
+  },
+  "judge": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+  "qwen": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+  "families": {
+    "small": 103,
+    "wide": 100
+  },
+  "exact": {
+    "unseen-articles": {
+      "n": 64,
+      "small": 0,
+      "small_stop": 64,
+      "wide": 0,
+      "wide_stop": 64
+    },
+    "book": {
+      "n": 48,
+      "small": 0,
+      "small_stop": 48,
+      "wide": 0,
+      "wide_stop": 48
+    },
+    "talk": {
+      "n": 48,
+      "small": 0,
+      "small_stop": 48,
+      "wide": 0,
+      "wide_stop": 48
+    },
+    "flores": {
+      "n": 48,
+      "small": 0,
+      "small_stop": 48,
+      "wide": 0,
+      "wide_stop": 48
+    },
+    "role-active": {
+      "n": 472,
+      "small": 470,
+      "small_stop": 472,
+      "wide": 462,
+      "wide_stop": 472
+    },
+    "role-passive": {
+      "n": 472,
+      "small": 454,
+      "small_stop": 472,
+      "wide": 463,
+      "wide_stop": 472
+    },
+    "fitted-book": {
+      "n": 48,
+      "small": 0,
+      "small_stop": 48,
+      "wide": 0,
+      "wide_stop": 48
+    },
+    "fitted-talk": {
+      "n": 48,
+      "small": 0,
+      "small_stop": 48,
+      "wide": 0,
+      "wide_stop": 47
+    }
+  },
+  "fresh_difference_interval": [
+    0.0,
+    0.0
+  ]
+}

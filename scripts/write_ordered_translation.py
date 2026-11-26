@@ -23,6 +23,8 @@ def restore(stride, device):
         "book-narrow",
         "book-broad",
         "book-rehearsal",
+        "prefix-reference",
+        "prefix-recovery",
         "paired-likelihood",
         "paired-assignment",
         "paraphrase-canonical",
@@ -37,10 +39,13 @@ def restore(stride, device):
                 "paraphrase": "translation_paraphrases",
                 "paired": "paired_ink",
                 "book": "book_breadth",
+                "prefix": "visual_prefix",
             }[family]
         )
         path = base / objective
         stride = 1
+    elif stride == "wide":
+        path = MODEL.parent / "wide_translation"
     else:
         path = MODEL / str(stride)
     receipt = read(path / "fit.json")
@@ -53,6 +58,10 @@ def restore(stride, device):
         from ilm.visual_lm.specimen_translation import SpecimenTranslator
 
         m = SpecimenTranslator()
+    elif stride == "wide":
+        from ilm.visual_lm.wide_translation import WideTranslator
+
+        m = WideTranslator(receipt["replicas"])
     else:
         m = OrderedTranslator(1 if stride in ("replay", "news") else stride)
     m.load_state_dict(load_file(str(path / "weights.safetensors")))
@@ -144,6 +153,9 @@ if __name__ == "__main__":
             "book-narrow",
             "book-broad",
             "book-rehearsal",
+            "prefix-reference",
+            "prefix-recovery",
+            "wide",
             "paired-likelihood",
             "paired-assignment",
             "paraphrase-canonical",

@@ -1,0 +1,36 @@
+\newpage
+\spread{Can the writer recover after a mistaken glyph?}
+\noindent A translator encounters its own errors at inference. We tested whether learning to continue from a mistaken draft would help it finish a sentence. We compared two continuations of the same 1.69-million-parameter writer on one RTX 4090 D.
+\platehere{Figure_201_learning_from_drafts}{Translation after learning from model-written prefixes}{\textbf{a}, Strict semantic credits for 144 independently written translations from 52 reserved documents. Both orderings of an automated bilingual assessment had to accept each stopped answer. Qwen3-8B Q4 received the source text. \textbf{b}, For 143 requests the starting writer produced at least eight glyphs. Each writer continued from the same eight. The lower bound counts edits already inevitable at that point. The second series counts the additional edits in the completed answer.}
+\begin{multicols}{2}
+\section*{Which errors can still be repaired?}
+Let $p$ denote glyphs already emitted, $y$ the target, and $d$ unit edit distance. The best possible distance after writing any suffix is
+\[
+\min_z d(pz,y)=\min_{0\le j\le |y|}d(p,y_{1:j}).
+\]
+Every edit alignment crosses a target position when it finishes consuming $p$. Conversely, after aligning $p$ to the minimizing prefix, copying the remaining target attains the minimum. A Lean proof also bounds the search by $j\le 2|p|$. An independent calculation checked all 231,260 training drafts and their suffixes. This bound applies to a particular spelling of a reference. Many good translations have different spellings.
+\section*{Equal target supervision}
+The starting writer produced up to eight glyphs after a reference prefix on half the training directions. In 204,580 cases the draft differed from its closest reference prefix. One writer saw the draft, the other the aligned reference. Both received the same supervised glyphs and stops across 49,519,224 positions and 5,574 updates each.
+\par Learning on actual drafts removed 125 additional edits across the 143 continuations. The mean reduction was 0.87 edits per request (95\% interval $-0.37$ to $2.44$, resampling documents within domains). On 144 fresh requests all writers stopped, and all three visual writers received zero whole-meaning credits. Reference translations received 140 credits and unrelated foils zero. The text comparator received 96.
+\end{multicols}
+\newpage
+\spread{Legible glyphs can change the event}
+\noindent The first held passage from \textit{Emma} describes the moment when Emma looks at another woman and finds herself unable to speak. The figure reproduces the unassisted input and output PNGs in the two translation directions.
+\platehere{Figure_202_after_the_first_glyphs}{Original pixels of independent translations}{The first two cases are the first reserved literary pair in corpus order. The third is the first held passive construction. The last is the only fitted natural request credited to the recovery writer in both grading orders. All four output images were reproduced from the released checkpoint on CPU.}
+\begin{multicols}{2}
+\section*{A name and a predicate}
+The English output begins with a misspelling and ends by saying that someone could not say the same thing. The source describes an inability to speak. In the other direction the writer draws recognizable Chinese but damages the name and the relation. On the much narrower role task the same model translates the passive sentence correctly. It gives all eight exact, stopped responses in 111/118 role families, compared with 103 for the matched fit. A learned optical adapter gives the same family counts on Noto Serif.
+\section*{Uncertainty in bilingual targets}
+The last output correctly translates the pictured grandfather sentence. Its training target contains an additional statement about his life. In a separate stratified sample of training pairs, a bilingual model judged 91/96 book pairs and 84/96 talk pairs equivalent in both presentation orders. Six pairs were judged discrepant twice and eleven received split judgments. All 24 shuffled pairs were rejected and all eight simple calibration pairs accepted twice. The sample measures automated agreement. Independent bilingual human assessment remains open.
+\end{multicols}
+\newpage
+\spread{What does more capacity buy at the same exposure?}
+\noindent We expanded the visual writer from 1.69 to 14.90 million parameters, retaining the initial function by replicating attention heads and dividing their incoming weights. The two initial writers generated the same stopped sequences in all 64 checks. We then trained the wider model on the reference-prefix condition with identical examples, labels and updates.
+\platehere{Figure_203_wider_visual_writing}{A held prediction after widening the model}{\textbf{a,b}, First reserved article in both translation directions. Both models draw legible glyphs. Neither conveys that a blizzard can deposit enough snow to strand a person in a short time. \textbf{c}, The two widths give the same correct answer to the first held passive construction. Every example retains the complete output at its original aspect ratio.}
+\begin{multicols}{2}
+\section*{A prospective article test}
+We reserved 32 further FLORES article sources before fitting. Both widths earned zero of 64 complete-meaning credits. Text Qwen3-8B Q4 earned 49, supplied references earned 63 and shuffled foils earned zero. On 96 fitted requests each width earned one credit. On the known 144-request panel both scored zero. The wider model completed 100 of 118 controlled role families against 103 for the matched small model. Neither reached the prespecified 110-family criterion.
+\section*{Cost of the comparison}
+The residual width increased from 160 to 480. Each of the twelve attention heads retained 40 coordinates. Both fits processed 49.52 million supervised positions. The wider fit took 144 seconds and peaked at 3.04 GiB allocated on one RTX 4090 D. The reference fit took 111 seconds and peaked at 1.58 GiB. Fitting and decoding these writers on one card is practical. The semantic results leave efficiency at matched translation quality unresolved.
+\par On the 96 fitted requests we also concealed which translation came from the corpus. The bilingual judge accepted 82 teacher translations and 47 corpus translations in both candidate orders. With the corpus reference supplied, it had accepted 58 teacher translations and 94 references. Fifty-six teacher targets passed both assessments, stopped and fit the bitmap repertoire. This discrepancy motivates independent review of training labels before distillation.
+\end{multicols}

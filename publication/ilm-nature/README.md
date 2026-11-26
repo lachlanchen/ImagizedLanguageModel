@@ -2,6 +2,8 @@
 
 [Read the paper](visual_language_paper.pdf) · [Cumulative manuscript](manuscript.pdf) · [Historical PDFs](versions/README.md)
 
+Pages 53–55 compare free English–Chinese writing after a mistaken draft and after increasing the model width. The figures show the original *Emma*, grandfather and blizzard outputs and a correct passive construction. [Editable charts and raw image panels](figures/Learning_from_visual_drafts.pptx) · [Prefix comparison](../../references/visual_prefix_recovery_result.md) · [Capacity comparison](../../references/visual_writer_width_result.md)
+
 Pages 50–52 show actual agent-reversal and literary replies, complete natural-translation scores, a source-likelihood check and the same input in two held typefaces. [Editable charts and raw images](figures/Reading_roles_across_typefaces.pptx) · [Result and weights](../../references/book_rehearsal_result.md)
 
 Pages 47–49 show matched training on bilingual literary and talk passages, all five credited free replies, and three held literary cases selected independently of grading. Original PNGs retain their physical cell spacing. [Editable figures](figures/Reading_bilingual_books.pptx) · [Original input and output images](figures/book_breadth/) · [Complete results](../../references/book_breadth_result.md)

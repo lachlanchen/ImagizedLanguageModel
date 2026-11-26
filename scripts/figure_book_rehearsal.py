@@ -18,7 +18,7 @@ from scripts.train_rehearsal_typeface import MODEL
 ASSETS = FIG / "book_rehearsal"
 
 
-def plate(stem, figure, groups):
+def plate(stem, figure, groups, *, assets=ASSETS, evidence=PUB):
     items = []
     y = 4
     units = 12.5
@@ -26,7 +26,7 @@ def plate(stem, figure, groups):
         items.append(dict(type="text", text=heading, x=4, y=y, size=11, bold=True))
         y += 20
         for label, name, src in files:
-            dst = ASSETS / (name + ".png")
+            dst = assets / (name + ".png")
             copyfile(src, dst)
             w, h = Image.open(dst).size
             items.append(
@@ -57,7 +57,7 @@ def plate(stem, figure, groups):
             canvas.drawString(item["x"], y - item["y"] - item["size"], item["text"])
         else:
             canvas.drawImage(
-                str(ASSETS / item["name"]),
+                str(assets / item["name"]),
                 item["x"],
                 y - item["y"] - item["h"],
                 item["w"],
@@ -69,7 +69,7 @@ def plate(stem, figure, groups):
         pdf[0].get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False).save(
             file.with_suffix(".png")
         )
-    dump(PUB / (stem + ".json"), dict(width=width, height=y, items=items))
+    dump(evidence / (stem + ".json"), dict(width=width, height=y, items=items))
 
 
 def panels():

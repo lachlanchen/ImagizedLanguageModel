@@ -1,0 +1,65 @@
+{
+  "binding": {
+    "references/evidence/prefix_recovery_v1/reservation.json": "dc713d0ffdb2e33c604e14550ee5b9602c4ba995c27ed666e4fb8d3f96e2fee0",
+    "references/evidence/prefix_recovery_v1/drafts.json": "e5d6197094d0a2cac999212f5ba7f46c3a3803290d23f6b450f3e104ac03855e",
+    "references/visual_prefix_recovery_protocol.md": "83b0b645ac04fa5748fad2ae875eaf0b0dea20d6cddee15bd7f0b46a42615c76",
+    "scripts/prepare_visual_rollins.py": "85f476e8c7ec01c8926c6655ea1ba852ac085efb44857265e05d600e5129c4c9",
+    "scripts/train_visual_prefix.py": "734dfcf0180060c70235bfaa994538a97e27e3f6879b637c1f04dab1fd7c39d4",
+    "scripts/reserve_visual_prefix.py": "ae7c8f4ce5fa4612706859207123bf7cc2268588cae26555c7531c3e18d1ecaf",
+    "models/book_breadth/rehearsal/weights.safetensors": "26f2e5281a4a001f71107ecd1936f8b9ec258a03d708de07910fc832c25fbc03",
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "models/ordered_translation/palette.npy": "46015fdef3372fcd59de12776e62fe9fe75becffc77edc052745c53d313863ab",
+    "models/ordered_translation/inventories.json": "344f774a1982c1ce1ae2a62d148426aa501e1ffb7a303917873ce6d8cc64851a"
+  },
+  "weights": "876bcfd641c8e3e7b5b736dfdaea9e3e4c4edbb3c0ac624565ec14ff62bfbb4c",
+  "initial_development": {
+    "book": 0.2946573531059662,
+    "talk": 0.30429908867937305,
+    "flores": 0.2612677033293163
+  },
+  "selected_pass": 3,
+  "epochs": [
+    {
+      "epoch": 1,
+      "updates": 1858,
+      "target_positions": 16506408,
+      "feedback_positions": 18255420,
+      "nll": 1.455277823302612,
+      "development": {
+        "book": 0.29709744569073604,
+        "talk": 0.31467929756135143,
+        "flores": 0.2612736538987404
+      },
+      "seconds": 34.35473678447306,
+      "peak_bytes": 1768264192
+    },
+    {
+      "epoch": 2,
+      "updates": 1858,
+      "target_positions": 16506408,
+      "feedback_positions": 18255420,
+      "nll": 1.4303012321252466,
+      "development": {
+        "book": 0.3020209401364557,
+        "talk": 0.3119902128378824,
+        "flores": 0.2609501420615488
+      },
+      "seconds": 35.01416345499456,
+      "peak_bytes": 1755888128
+    },
+    {
+      "epoch": 3,
+      "updates": 1858,
+      "target_positions": 16506408,
+      "feedback_positions": 18255420,
+      "nll": 1.4137003963325745,
+      "development": {
+        "book": 0.316062092247745,
+        "talk": 0.30676063287243543,
+        "flores": 0.2655700747990374
+      },
+      "seconds": 35.312279920093715,
+      "peak_bytes": 1765506560
+    }
+  ]
+}

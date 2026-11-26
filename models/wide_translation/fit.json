@@ -1,0 +1,64 @@
+{
+  "binding": {
+    "scripts/train_wide_translation.py": "c40803b3108c540589dfd830d126d0c56d559e2afa9196f0807f650763016b0a",
+    "ilm/visual_lm/wide_translation.py": "66481b7d258797af21817bb44d35b183500d1c1c37114ce45009093668b0c8a0",
+    "references/visual_writer_width_protocol.md": "81fb2bc7d6d68b65bf980c65ac2b95d8513887dda47ddfb503de95c6eabf214e",
+    "references/evidence/wide_translation_v1/reservation.json": "bc3c1d010e422332f204efba9335f4bdb69990328aa899460185d2427de909ae",
+    "models/book_breadth/rehearsal/weights.safetensors": "26f2e5281a4a001f71107ecd1936f8b9ec258a03d708de07910fc832c25fbc03",
+    "models/visual_prefix/reference/fit.json": "5b71a6f401fda7ea6206986b93deef3417c7eaca3973c1473888736f6c826ab3",
+    "scripts/train_visual_prefix.py": "734dfcf0180060c70235bfaa994538a97e27e3f6879b637c1f04dab1fd7c39d4"
+  },
+  "initial_development": {
+    "book": 0.2946573531059662,
+    "talk": 0.30429908867937305,
+    "flores": 0.2612677033293163
+  },
+  "selected_pass": 3,
+  "epochs": [
+    {
+      "epoch": 1,
+      "nll": 1.420372907832535,
+      "development": {
+        "book": 0.3077439988487786,
+        "talk": 0.31710276898835077,
+        "flores": 0.26645234183582384
+      },
+      "updates": 1858,
+      "target_positions": 16506408,
+      "feedback_positions": 18109563,
+      "seconds": 47.73780573066324,
+      "peak_bytes": 3265890304
+    },
+    {
+      "epoch": 2,
+      "nll": 1.3657639636862482,
+      "development": {
+        "book": 0.295135171211818,
+        "talk": 0.2996575614096228,
+        "flores": 0.2703001389480144
+      },
+      "updates": 1858,
+      "target_positions": 16506408,
+      "feedback_positions": 18109563,
+      "seconds": 47.92443145811558,
+      "peak_bytes": 3265728000
+    },
+    {
+      "epoch": 3,
+      "nll": 1.320777390043552,
+      "development": {
+        "book": 0.3208046462935053,
+        "talk": 0.3267679522811808,
+        "flores": 0.26336692977282466
+      },
+      "updates": 1858,
+      "target_positions": 16506408,
+      "feedback_positions": 18109563,
+      "seconds": 48.61850555986166,
+      "peak_bytes": 3264531456
+    }
+  ],
+  "parameters": 14895840,
+  "replicas": 3,
+  "weights": "e76f741596bf202bedb3ac07fd337d2e9b11841b85eede35e9ee9122e86c2bfa"
+}
