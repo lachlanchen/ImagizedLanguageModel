@@ -1,13 +1,11 @@
 # Language Is Image: Imagized Language Modeling
 
-This four-page article tests a writer that reads a pictured sentence, chooses its own variable-length spans and draws a translation. Original outputs, including an incorrect answer, appear on page one. Page four shows the response to a request for attested forms of 言. The inherited writer earned 24/192 complete book translations, the independent single-glyph model eight and a quantized 8B text comparator 162. Neither visual writer answered the word-origin probes correctly. [Manuscript](manuscript.pdf) · [Editable figures](figures/Autonomous_span_translation.pptx) · [Full results](../../references/optical_span_rollout_result.md)
+This four-page research article compares pictured source readers for free translation and tests an independent reader on questions about historical forms. The translation writer gained 25 complete meanings net on 192 requests. The historical reader answered 608/608 familiar requests and 359/608 rephrased requests about held dictionary families. Pages one, three and four show the original output pixels, including failures. [Reading edition](manuscript.pdf) · [Editable figures](figures/Pictured_source_paths.pptx) · [Complete translation results](../../references/pictured_path_translation_result.md) · [Independent dictionary reader](../../models/origin_value_reader/README.md)
 
-The book study archived 576 answers and the instruction probes 76. All 652 reproduced on CPU. The figure verifier checks the displayed raw pixels against the archived PNGs, each of 960 plotted decisions against the original case grades, the underlying votes, and the native presentation tables and chart. [Book images](evidence/span_rollout_answers.zip) · [Instruction images](evidence/word_origin_probes.zip) · [Figure index](evidence/visual_output_figure_index.json)
-
-Rebuild the canonical article in the project Python environment using TeX Live, latexmk, PyMuPDF, Pillow, lxml and openpyxl.
+Rebuild with the project Python environment, TeX Live and latexmk. The figure verifier checks the displayed image content and chart values against the source archives and the editable presentation.
 
 ```sh
 python publication/ilm-nature/build_current_article.py
 ```
 
-The figure sources use the frozen records from this study. Superseded articles remain available in the versions directory. [Figure source](../../scripts/figure_optical_span_rollout.py) · [Editable source](optical_span_figures.mjs) · [Previous print-face paper](versions/2026-11-26-c652a269/reading.pdf) · [Earlier editions](versions/README.md)
+[Translation figure source](../../scripts/figure_pictured_path_translation.py) · [Historical figure source](../../scripts/figure_origin_value_reader.py) · [Editable presentation source](pictured_path_figures.mjs) · [Figure audit](evidence/visual_output_figure_index.json) · [Previous edition](versions/2026-11-26-d31f3a36/reading.pdf) · [Version history](versions/README.md)

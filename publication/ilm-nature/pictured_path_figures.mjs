@@ -1,0 +1,55 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {Presentation, PresentationFile} from '@oai/artifact-tool';
+const [root,stage,skill,python]=process.argv.slice(2);
+const {finalizePresentation,applyPresentationChartFont}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')));
+const deck=Presentation.create({slideSize:{width:1280,height:720}});
+const pub=path.join(root,'references/evidence/pictured_path_translation_v1');
+const read=async x=>JSON.parse(await fs.readFile(path.join(pub,x)));
+function label(s,text,x,y,w,size,bold=false,color='#19332f'){
+ const shape=s.shapes.add({geometry:'textbox',position:{left:x,top:y,width:w,height:size*1.48},fill:'none',line:{fill:'none',width:0}});
+ shape.text=text;
+ shape.text.style={typeface:'Arial',fontSize:size,bold,color,autoFit:'none',insets:{left:0,right:0,top:0,bottom:0}};
+}
+function slide(heading){
+ const s=deck.slides.add();s.background.fill='#ffffff';label(s,heading,36,22,1208,32,true);return s;
+}
+async function plate(name,title,notes){
+ const v=await read(name),s=slide(title);
+ const sc=Math.min(1170/v.width,586/v.height);
+ const x0=42,y0=95;
+ for(const i of v.items){
+  const y=y0+i.y*sc;
+  if(i.type==='heading'){
+   label(s,i.text,x0,y,sc*300,11*sc,true);
+   label(s,i.meta,x0+sc*300,y+sc,sc*192,7.8*sc,false,'#49615b');
+  }else{
+   label(s,i.label,x0+8*sc,y+sc,sc*87,8*sc);
+   s.images.add({blob:await fs.readFile(path.join(root,'publication/ilm-nature/figures/pictured_path',i.name)),contentType:'image/png',alt:i.name,fit:'contain',position:{left:x0+i.x*sc,top:y,width:i.w*sc,height:i.h*sc}});
+  }
+ }
+ s.speakerNotes.textFrame.setText(notes);
+}
+await plate('answers.json','Reading the same source through two visual interfaces','The first newly credited answer in each direction and the first uncredited answer under the frozen selection rule. All images come from the model archive.');
+{
+ const s=slide('How often did each writer preserve the whole meaning?');
+ const data=await read('chart.json');
+ const chart=s.charts.add('bar',{position:{left:55,top:85,width:1170,height:525},categories:data.labels,
+   series:[{name:'To English',values:data.series.en,fill:'#136b62'},{name:'To Chinese',values:data.series.zh,fill:'#966442'}],
+   dataLabels:{showValue:true,position:'outEnd',textStyle:{typeface:'Arial',fontSize:17,fill:'#19332f'}},
+   hasLegend:true,legend:{position:'bottom'},barOptions:{direction:'column',grouping:'clustered'}});
+ applyPresentationChartFont(chart,{fontFamily:'Arial'});
+ label(s,'Complete meanings among 96 requests in each direction. Both masked readings and a natural stop were required.',75,630,1160,18);
+ s.speakerNotes.textFrame.setText('The two optical readers share their target writer. Supplied input paths use native source text addresses. The Qwen comparator receives text.');
+}
+await plate('reading.json','Even an exact source sequence can yield the wrong answer','A translation rejected in both-order scoring despite exact recovery of its source addresses. The two complete visual replies can be compared pixel by pixel.');
+await plate('origins.json','Can a small reader answer from a historical dictionary page?','The first held request and first reworded failure in fixed order. The writer selects and copies original source pixels. Both the gloss and the form were supplied on the page.');
+for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output/Pictured_source_paths.pptx');
+await(await PresentationFile.exportPptx(deck)).save(candidatePath);
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:4,
+ materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[2],verifyArtifactToolImport:true,
+ integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
+ layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
+ layoutArgs:['--expected-slide-size-emu','12192000,6858000'],receiptPath:path.join(stage,'presentation_validation.json')});

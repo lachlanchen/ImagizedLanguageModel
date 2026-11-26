@@ -1,0 +1,3 @@
+# Changed wording after the original origin evaluation
+
+Keep both fitted weights and all 608 original held pages. Preserve the target headword, requested stage, order, language and output pixels. In English ask either “What was the original meaning of H? Quote the gloss, followed by its S form.” or “Start with the S form of H. Follow it with the dictionary's original meaning.” In Chinese use “H原來是什麼意思？請抄釋義，最後附上〈script〉字形。” or “我要看H的〈script〉字形，之後請抄錄它的原始釋義。” The angle brackets indicate slots. Report exact stopped answers in both languages and orders. These templates were chosen after original testing and before new inference. Use CPU for the unchanged archive replay and the reworded requests. This test cannot establish performance on unrestricted human instructions.

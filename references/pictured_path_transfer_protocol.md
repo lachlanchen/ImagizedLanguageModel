@@ -1,0 +1,5 @@
+# Stability across typeface and inference cost
+
+Use the frozen 192 pictured-path book requests and compare the raw writer under two presentations of the same words. Render the previously held Noto Serif CJK face using its recorded face index. Test both the directly supplied serif strips and the same strips passed through the existing learned print normalizer. Preserve every serif input and both sets of answers. Count exact source tiles, identical original answer images, boundaries and stops. Transfer a primary meaning credit only if all three output components reproduce. Treat remaining changed replies as unassessed. No retraining, page recognition or assertion about other fonts is involved.
+
+On GPU 0, time all 192 requests at batch 96 per direction for the continuous reader and the new source-path reader. Warm each model and run three passes in alternating order. Count time and board joules from host ink input to returned ink, then check each image, boundary and stop. Compare each arm with its own frozen answers. Report individual trials and median results. Exclude host energy, setup, scoring and all prior training.

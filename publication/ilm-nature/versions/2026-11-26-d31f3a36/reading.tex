@@ -1,0 +1,111 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=18mm,right=18mm,top=18mm,bottom=19mm,columnsep=6mm]{geometry}
+\usepackage{nature_reading,multicol}
+\input{paper_title.tex}
+\graphicspath{{figures/}{../figures/}}
+\fancyhead[L]{\sffamily\footnotesize RESEARCH ARTICLE}
+\setlength{\multicolsep}{8pt}\setlength{\columnsep}{6mm}\raggedcolumns
+\newcommand{\displayfigure}[3]{\par\medskip{\centering\includegraphics[width=\linewidth]{#1}\par}\vspace{3pt}\begingroup\captionsetup{hypcap=false}\captionof{figure}{\textbf{#2.} #3}\endgroup\par}
+\newcommand{\pageheading}[1]{\noindent{\sffamily\bfseries\fontsize{17}{20}\selectfont #1\par}\vspace{4pt}}
+\newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
+\begin{document}
+\noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
+\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Translation through self-selected spans of visible glyphs\par}
+\vspace{5pt}\noindent Imagized Language Model Project\par\medskip
+\noindent\textbf{Can a model translate a pictured sentence and decide how many glyphs to draw at each step? We fitted a visual interface to two pretrained translation decoders using 28,342 English--Chinese sentence pairs. The writer attends to source ink, selects a variable-length span, emits its pixels and uses those pixels as the history for its next decision. On 192 requests from four held books, an automatic judge credited 24 complete translations, eight for a single-glyph writer and none when the source images were exchanged. Gains were larger into English. All 576 output images reproduced on CPU. Quantized Qwen3-8B earned 162 credits from text. On a separate instruction probe neither visual writer answered a word-origin question correctly. A visual writing loop can therefore carry some sentence meaning learned by a translation backbone, while grounded explanation and open-ended historical writing remain unsolved.}\par
+\begin{multicols}{2}
+\section*{A translation that can be inspected}
+A clean drawing can say the wrong thing. In our preceding experiment a visual reader recovered every one of 6,432 source glyphs after a typeface change. The writer recovered the same five credited answers and the same 187 translation failures. This left the choice of what to write as the problem. PIXEL learned representations of rendered text through masked patch reconstruction. PIXAR and PixelGPT studied autoregressive visual text.\cite{rust,tai,chai} Here the unit of a language decision can occupy several glyphs, and the target image has to convey the meaning of a different source image.
+
+We used two OPUS-MT contextual decoders,\cite{opus} one per direction. A separately learned reader supplies a contextual vector and an attention weight for each pictured source cell. An inherited lexical projection proposes competing continuations. Training pairs tell us how often each continuation corresponds to a particular ordered span of ink. At inference the writer selects the span with the greatest aggregate probability. The source contains the only supplied words. The model decides the target boundaries and when to stop.
+\end{multicols}
+\displayfigure{Span_translation_output.pdf}{What the writers drew from the same input}{First credited and first rejected span translations in the fixed panel order. The Chinese answer preserves both the obligation and whose feet she should kiss. The failed English answer mentions a topic but loses the lottery and the legal subject, prescription. Every source and answer is its original bitmap, including wrapping and whitespace.}
+
+\begin{multicols}{2}
+\section*{What counts as a span?}
+In the credited example, seven decisions wrote nine Chinese cells. From left to right the decisions covered 1, 2, 1, 1, 2, 1 and 1 cells. They included the two characters for \emph{should} in one decision. In the rejected answer twenty decisions wrote 86 English cells before stopping normally. Its spelling and punctuation survived even as the sentence repeated itself.
+
+The two rows illustrate the study's criterion. In one case the written answer specifies an agent, an obligation and an object. In the other, the writer produced an English sentence with several locally plausible fragments but failed to identify what happened. A transcript or a glyph-similarity score alone would miss that difference.
+\end{multicols}
+\newpage
+\pageheading{Free translation on four held books}
+\begin{multicols}{2}
+\section*{Grounding in the source}
+We reserved 24 sentence pairs per work and tested each in both directions. The single-glyph writer and the span writer received precisely the same pictured sentences. A third condition supplied the span writer with another source of similar length from the same work and direction. All 192 exchanged replies were rejected. The span writer gained 8.33 percentage points over the single-glyph writer (paired four-book bootstrap interval, 3.13--15.63 points) and 12.50 over exchanged input (5.21--20.31). Each book showed a positive gain over both controls. The comparison changes target granularity, backbone and inherited parameters together.
+
+Of the 24 credited translations, 16 ran from Chinese to English and eight from English to Chinese. The single-glyph writer earned two and six respectively. Qwen3-8B Q4 given the source as text earned 86 and 76. The automatic judge accepted 116 corpus references and rejected all 192 unrelated foils. With the reference supplied to the judge, the counts became 13 for span writing, three for single-glyph writing and 103 for Qwen. The choice of assessment materially affects the absolute scores.
+\end{multicols}
+\displayfigure{Span_translation_cases.pdf}{Whole-meaning decisions for every request}{Each column is one source in panel order. Green indicates that the answer stopped and earned credit in both masked, source-only presentation orders. Grey includes incomplete, wrong and length-limited answers. Both directions use the same 24 passage pairs per book.}
+\begin{multicols}{2}
+\section*{Writing rate and stopping}
+Into English, 1,341 span decisions produced 4,879 visible cells across 96 replies, or 3.64 cells per decision. Into Chinese, 3,941 decisions produced 4,286 cells, or 1.09 per decision. One English and 56 Chinese decisions emitted an empty span. Empty spans advance the contextual state. They are distinct from both printed spaces and the final stop. The writer stopped naturally on 93 English and 75 Chinese requests. The single-glyph writer stopped on all 192. The generation limits were 128 decisions and 128 visible cells. These counts describe the number of recurrent decisions. Computational work per decision differs between architectures.
+
+On one RTX 4090 D, increasing the batch from one to 96 requests raised median throughput from 6.51 to 186.76 requests per second and reduced median GPU board energy from 14.81 to 0.72 joules per request. All twelve passes reproduced every bitmap, boundary and stop. Timing includes host-to-device input and the return of answer pixels. Board energy excludes host power, model setup, training and judging.
+
+\section*{Corpus and assessment}
+The fits use 21 works. We excluded the named training books, earlier evaluation books, previously seen normalized sentence sides and recorded bitmap sides from the fresh panel. Each eligible side had at most 96 cells and used glyphs available to both writers. Exposure by the pretrained translators and evaluator is unknown. Each output was transcribed by exact bitmap matching for assessment. The automatic bilingual judge received anonymous candidates in two orders. It assessed complete meaning, including roles, negation and quantity. A separate text comparator and the judge both come from the Qwen family. Independent bilingual human ratings are outstanding.
+\end{multicols}
+
+\begin{center}
+\small\begin{tabular}{@{}lrrr@{}}
+\toprule
+Source and answer & To English / 96 & To Chinese / 96 & Total / 192\\ \midrule
+Image, span writer & 16 & 8 & 24\\
+Image, single-glyph writer & 2 & 6 & 8\\
+Exchanged image, span writer & 0 & 0 & 0\\
+Text, Qwen3-8B Q4 & 86 & 76 & 162\\
+Aligned corpus translation & 52 & 64 & 116\\ \bottomrule
+\end{tabular}
+\end{center}
+\noindent{\small\sffamily\textbf{Table 1 |} Complete, stopped translations in the primary assessment. The two directions use the same passages.}\par
+\newpage
+\pageheading{What the visual interfaces preserve}
+\begin{multicols}{2}
+\section*{One decoder, three interfaces}
+A second evaluation holds the contextual layers fixed within each direction. The first control receives source text and emits standard text pieces. The second reads the same source image as our writer and emits standard pieces. The third reads the image and writes its own spans. We regraded these outputs together, retaining separate results for the primary experiment. The native text pathway earned 81/192 credits. Replacing its source encoder with the optical reader reduced this to 31/192, a difference of 26.04 percentage points (book interval 18.23--33.85). Replacing the text output head and feedback with visible spans reduced the score to 24/192 (3.65 points, 0--7.81). On these books the larger measured loss came from reading the pictured source. The span writer earned 15 English and nine Chinese credits in this separate assessment, compared with 16 and eight in the primary assessment.
+\end{multicols}
+\displayfigure{Span_translation_interfaces.pdf}{Input and output substitutions around the same decoder}{Each bar counts stopped, credited answers among 96 requests in one direction. The text-head controls emit text. The last pair of bars represents the saved image answers, transcribed solely for judging. All three conditions share the directional pretrained contextual layers.}
+\begin{multicols}{2}
+\section*{Learning and choosing an ink span}
+Let $h$ denote the contextual state, $k$ a retained pretrained lexical alternative and $s$ an ink span. Let $b$ distinguish first from subsequent decisions. Counting aligned training occurrences gives $\hat p(s\mid k,b)$. We select the surface maximizing
+\[
+  q(s\mid h,b)=\sum_k p(k\mid h,b)\,\hat p(s\mid k,b).
+\]
+The softmax is restricted to observed alternatives in the relevant phase and a stop. The model assigns each span the occurrence-weighted mean of the inherited feedback embeddings associated with its ink. A shared neural motor produces binary $32\times32$ glyphs. We precompute its drawings and verify their optical identities before compiling the feedback lookup. No target text, external renderer or boundary schedule is supplied during generation. Fitting uses the pretrained tokenizer's offsets, and the deployed scores retain weights learned on text.
+
+For a one-step exact-surface loss the additional risk of choosing $u$ in place of the modal $s$ is $q(s)-q(u)$. A Lean proof gives the finite-mass identity and a decision-stability bound under perturbation. This mathematical distinction had no observed effect on the leading choice at 6,388 supplied-history development positions. Pooling and choosing the most likely lexical alternative's modal surface agreed throughout. The gain in Fig.~2 cannot be attributed to pooling alone.
+
+\section*{Scale and scope}
+The directional fits retained 338,663 English-target and 324,045 Chinese-target span occurrences. Eight unrecognized-piece occurrences were excluded. A direction uses 25.49 million inherited contextual parameters and a 3.22-million-parameter optical reader. Including lexical keys, biases and feedback tables gives 41.63 million floating values into English and 40.23 million into Chinese, before indices and compiled ink. Each original directional model loaded during preparation has 77.94 million parameters. The single-glyph comparator has 10.48 million parameters. This experiment measures transfer on aligned printed cells. Free page segmentation, new historical forms, independent pretraining and energy at matched translation quality remain open.
+
+A source-side development experiment fitted optical spellings and searched for the highest-scoring segmentation of the source ink. It recovered the complete original encoder address sequence on 196/240 Chinese inputs and 198/240 English inputs. Taking the longest available span recovered 167/240 in each direction. These are source reconstructions on development data. The book translations above used the original optical reader.
+\end{multicols}
+\newpage
+\pageheading{Word origins expose a limit of the writing system}
+\begin{multicols}{2}
+\section*{Changing the question}
+We tested 38 additional pictured requests. Sixteen translations contrasted agent and patient, negation, quantity and event order. The span writer earned seven complete meanings and passed both members of two of eight directional contrasts. The single-glyph writer earned zero under this two-order automatic assessment. The judge credited 14 of 16 authored references. An example reveals the value of testing both directions. The span writer translated the Chinese sentences about buying two and three red books into English correctly. In the reverse direction it changed buying to taking. Neither writer passed a complete temporal-order contrast.
+
+Six questions asked about the English origins of \emph{window}, \emph{alphabet} and \emph{school}. Eight asked for the original meaning of the Chinese characters for speech, wood, mountain and sun. The research agent checked both directions against the dictionary entries and credited neither writer on any of the 14 questions. Outputs often translated the question itself. These purposive cases await independent human review.
+\end{multicols}
+\displayfigure{Span_translation_origins.pdf}{Two questions outside translation training}{The first prompt asks for the origin of \emph{window}. A complete answer could identify Old Norse \emph{vindauga} and the words for wind and eye. The second prompt supplies three forms of the Chinese headword for speech in seal, oracle and bronze order. The requested row contains the attested oracle, bronze and seal specimens. The final row is the complete visual answer emitted by the span writer.}
+\begin{multicols}{2}
+\section*{What visual access could add}
+In eight requests the required ancient forms were present in the image, but in a different order. Neither writer reproduced one correct sequence. None of the twelve distinct required specimen bitmaps occurred in the corresponding output repertoires. More updates to language probabilities over those repertoires cannot emit a missing shape. A route that can copy a selected region from the source would make the specimens reachable. Correct selection, ordering and prose explanation would each still require evaluation.
+
+\section*{Toward an independent visual model}
+MiniMind illustrates how a small causal model can be trained on assistant replies with explicit stopping.\cite{mini} PixelGPT supplies a causal visual-sequence baseline.\cite{chai} An independent model could learn two complementary uses of a page. For translation it should preserve an expression across print styles. For palaeography it must retain the particular strokes that distinguish two specimens. Human readers integrate visible information over a limited span.\cite{eye} The unequal English and Chinese decision lengths here motivate a cross-script test of adaptive visual grouping. They do not establish a biological learning mechanism.
+
+A paired test on the same page could alternate requests for meaning and for literal reproduction. The engineering target is a thousandfold reduction in computation at matched answer quality. Establishing it requires measured costs for pretraining, teachers, visual preparation and inference on the same tasks. Here the strongest measured loss was in reading the source.
+\end{multicols}
+\small\noindent\textbf{Data and code.} \repo{publication/ilm-nature/evidence/span_rollout_answers.zip}{Book outputs}, \repo{publication/ilm-nature/evidence/word_origin_probes.zip}{origin outputs}, \repo{references/evidence/optical_span_rollout_v1}{votes and fits}, \repo{formal/span_list/SurfaceDecision.lean}{formal results} and \repo{scripts/write_optical_span.py}{executable writer}.\par
+{\footnotesize
+\begin{thebibliography}{6}\setlength{\itemsep}{0pt}
+\bibitem{rust} Rust, P. et al. \href{https://arxiv.org/abs/2207.06991}{Language modelling with pixels}. \textit{ICLR} (2023).
+\bibitem{tai} Tai, Y. et al. \href{https://aclanthology.org/2024.findings-acl.874/}{PIXAR: Auto-regressive language modeling in pixel space}. \textit{Findings of ACL} (2024).
+\bibitem{chai} Chai, Y. et al. \href{https://aclanthology.org/2024.emnlp-main.182/}{Autoregressive pre-training on pixels and texts}. \textit{EMNLP} (2024).
+\bibitem{opus} Tiedemann, J. \& Thottingal, S. \href{https://aclanthology.org/2020.eamt-1.61/}{OPUS-MT -- Building open translation services for the world}. \textit{EAMT} (2020).
+\bibitem{mini} MiniMind contributors. \href{https://github.com/jingyaogong/minimind/tree/858008eb98da4428f78053a1cc4d3a3bd5973629}{MiniMind, pretrained models and training code}.
+\bibitem{eye} Inhoff, A. W. \& Liu, W. \href{https://pubmed.ncbi.nlm.nih.gov/9483822/}{The perceptual span and oculomotor activity during the reading of Chinese sentences}. \textit{J. Exp. Psychol. Hum. Percept. Perform.} \textbf{24}, 20--34 (1998).
+\end{thebibliography}}
+\end{document}
