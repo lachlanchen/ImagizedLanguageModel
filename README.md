@@ -2,11 +2,11 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
-The ILM reads a pictured English or Chinese sentence and writes a new stream of glyph pixels. Its current test asks whether a sentence translated in one print face keeps its meaning in a second. On 192 held requests the optical reader restored every source cell and every original answer. The visual writer earned five whole-meaning credits. A quantized text model earned 161. [Four-page article](publication/ilm-nature/manuscript.pdf) · [All answers](publication/ilm-nature/evidence/print_translation_answers.zip) · [Run the visual writer](models/target_glyph_teaching/README.md)
+The Imagized Language Model reads a pictured sentence and writes its answer as a stream of glyph images. On 192 held book translations, a span writer using pretrained translation layers earned 24 complete-meaning credits, the independent single-glyph writer eight, and Qwen3-8B Q4 on text 162. Neither visual writer answered the English or Chinese word-origin questions correctly. All 652 outputs from the book and instruction experiments reproduced on CPU. [Current paper](publication/ilm-nature/manuscript.pdf) · [Results and limitations](references/optical_span_rollout_result.md) · [Editable figures](publication/ilm-nature/figures/Autonomous_span_translation.pptx)
 
-![The five canonical answers credited on the held four-book test, as original model images](publication/ilm-nature/figures/Print_translation_credits.png)
+![The first credited and first rejected translations, showing their original inputs and generated pixels](publication/ilm-nature/figures/Span_translation_output.png)
 
-A compiled glyph motor reproduced all 192 canonical answer images and stops with a median 1.18× throughput gain on one RTX 4090 D. The article shows the full spread across five paired measurements. [Results](references/print_translation_result.md) · [Editable figures](publication/ilm-nature/figures/Glyph_stream_experiments.pptx) · [PIXEL and PixelGPT sources](references/pixel_language/README.md)
+The paper also shows exactly what happened when the models were asked to draw the attested forms of 言. [Historical-form figure](publication/ilm-nature/figures/Span_translation_origins.png) · [Original answer files](publication/ilm-nature/evidence/word_origin_probes.zip) · [Previous print-face and motor comparison](references/print_translation_result.md) · [PIXEL and PixelGPT sources](references/pixel_language/README.md)
 
 <details>
 <summary>Earlier visual-language experiments and figures</summary>

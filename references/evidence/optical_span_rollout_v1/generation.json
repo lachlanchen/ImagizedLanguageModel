@@ -1,0 +1,45 @@
+{
+  "binding": {
+    "scripts/evaluate_optical_span_rollout.py": "db4a033ba58105c2baf7b4108e59a71a5547848f34a08cc9403d7751e573c1b7",
+    "ilm/visual_lm/optical_span_rollout.py": "a1a4970072f8d4f3abd916bd47dde90043dad0e5491d43a8b791e348e0094b9f",
+    "references/evidence/optical_span_rollout_v1/en-fit.json": "7879359083d0b6d0ce3bdcc37ec8b0c7475569386fa9b8a72a3903c1c43cf096",
+    "references/evidence/optical_span_rollout_v1/zh-fit.json": "b6bb680588339c4762564b35ee1cc017f35940fcaf37ef2bc2cf208b14b51803",
+    "references/optical_span_rollout_protocol.md": "dd5e013b60e5f61adaba02cb40c5fb31accaf6abf4e39ea6d7178419f77f1be8",
+    "references/evidence/optical_span_rollout_v1/panel.json": "4e547244926135e0b465d575b2b97cd898e3b5059c46db8617cd22311da07f7a",
+    "models/target_glyph_teaching/guided/fit.json": "01e24b17e8912c8ecb2990e8ec613b7914212347ce658d06d463b44f65cd6834"
+  },
+  "archive": "eceab7143fed85655962cb85dfb3ec18b48380ee5b2a7660666eff5b8b70a245",
+  "costs": {
+    "en": {
+      "pretrained_full_at_load": 77943296,
+      "retained_decoder": 25486336,
+      "optical_reader": 3222529,
+      "motor_parameters_before_compilation": 2266112,
+      "directional_keys_and_bias": 6543828,
+      "span_feedback_entries": 6378496,
+      "compiled_ink_bytes": 79872,
+      "surface_types": 12457,
+      "lexical_keys": [
+        1674,
+        11082
+      ]
+    },
+    "zh": {
+      "pretrained_full_at_load": 77943296,
+      "retained_decoder": 25486336,
+      "optical_reader": 3222529,
+      "motor_parameters_before_compilation": 2266112,
+      "directional_keys_and_bias": 5912838,
+      "span_feedback_entries": 5604352,
+      "compiled_ink_bytes": 3788800,
+      "surface_types": 10945,
+      "lexical_keys": [
+        806,
+        10720
+      ]
+    }
+  },
+  "peak_bytes": 252378112,
+  "seconds": 14.17439044918865,
+  "answer_count": 576
+}
