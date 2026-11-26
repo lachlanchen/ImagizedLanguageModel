@@ -1,5 +1,6 @@
 """Continue aligned printed English directly from measured image cells."""
 import argparse
+from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -21,6 +22,9 @@ class BookInkWriter:
         self.device = device
         self.model = GlyphDraftEditor().to(device).eval()
         weights = ROOT/'models/book_order_prior'/arm/stage/'weights.safetensors'
+        receipt = json.loads(weights.with_name('fit.json').read_text())
+        if sha256(weights.read_bytes()).hexdigest() != receipt['weights']:
+            raise ValueError(f'Checkpoint checksum differs from {weights.parent}/fit.json')
         self.model.load_state_dict(load_file(str(weights)))
         base = ROOT/'models/ordered_translation'
         inventory = json.loads((base/'inventories.json').read_text())[0]
@@ -65,12 +69,19 @@ def main():
     cli.add_argument('--limit',default=32,type=int)
     cli.add_argument('--device',default='cpu',choices=('cpu','cuda'))
     cli.add_argument('--arm',default='intact',choices=('intact','scrambled'))
-    cli.add_argument('--stage',default='prior',choices=('prior','adapted'))
+    cli.add_argument('--stage',default='prior',choices=('prior','adapted'),help='Book-completion checkpoint')
+    cli.add_argument('--translate-to',choices=('en','zh'),help='Use the bilingual adapted writer instead of book completion')
     args=cli.parse_args()
     torch.set_num_threads(2)
     stream=read_image(args.image,args.cells) if args.image else read_text(args.text,DEFAULT_FONT)
-    engine=BookInkWriter(args.arm,args.stage,args.device)
-    out,stopped=engine.write(stream,args.limit)
+    if args.translate_to:
+        from ilm.visual_lm.open_source_cells import OpenSourceCells
+        from scripts.train_book_order_prior import restore
+        engine = OpenSourceCells(restore(args.arm,'adapted',args.device),int(args.translate_to=='zh'))
+        out,stopped=engine.translate(stream)
+    else:
+        engine=BookInkWriter(args.arm,args.stage,args.device)
+        out,stopped=engine.write(stream,args.limit)
     save_grid(out.tobytes(),args.output)
     print(json.dumps(dict(cells=len(out),stopped=stopped,output=str(args.output))))
 

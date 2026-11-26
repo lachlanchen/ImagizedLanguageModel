@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+182만 매개변수의 시각 모델을 RTX 4090 D 한 장에서 책 96권으로 학습했다. 단어 순서를 보존하자 처음 보는 책 16권에서 다음 글자꼴 예측 손실이 2.166비트에서 1.973비트로 낮아졌다. 새로운 중국어 뉴스 128문장을 영어로 번역했을 때 원문의 뜻을 온전히 전달했다고 평가된 문장은 두 모델 모두 한 문장이었다. 그림은 모델이 이어 쓴 원본 이미지다. [논문](../publication/ilm-nature/manuscript.pdf) · [모델과 실행 방법](../models/book_order_prior/)
+
+![글자꼴 예측과 실제 출력](../publication/ilm-nature/figures/Book_order_learning.png)
+
 중국어 문장 이미지에서 부르는 상대가 바뀌자 영어 출력도 “Mom”에서 “Harry”로 바뀌었다. 반면 악몽을 “a nice dream”으로 쓴 사례도 있었다. 두 문장의 의미 차이를 양방향 번역에서 모두 보존한 경우는 학습 말뭉치에서 뽑은 77쌍 중 3쌍, 정해진 문형으로 만든 51쌍 중 46쌍이었다.
 
 시각 모델은 기존 목록에 없는 인쇄 글자꼴도 입력받습니다. 전문가가 평가한 번역문 1,368쌍으로 학습한 뒤 중국어 뉴스 문장을 영어로 옮겼을 때, 문장 전체의 뜻을 살린 비율은 낯선 글자꼴을 포함한 문장에서 0/96, 익숙한 글자꼴만 포함한 문장에서 2/96이었습니다. 낯선 글자의 획을 보여 주자 답변 이미지 93개가 달라졌습니다. 아래는 모델의 실제 출력입니다. [실험 및 가중치](../references/reviewed_news_writer_result.md)

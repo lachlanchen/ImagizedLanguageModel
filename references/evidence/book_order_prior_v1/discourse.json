@@ -1,0 +1,30 @@
+{
+  "source": "https://openaipublic.blob.core.windows.net/gpt-2/data/lambada_test.jsonl",
+  "source_hash": "4aa8d02cd17c719165fc8a7887fddd641f43fcafa4b1c806ca8abc31fabdb226",
+  "arrays": "87e97a7597c78660d6a40a19a092d64e9a2a703099fd5f589d8db9be6d7cccaa",
+  "eligible": 5004,
+  "excluded": {
+    "unrepresented ink": 112,
+    "word shape or length": 37
+  },
+  "prefix_median": 306.0,
+  "mention_counts": [
+    25,
+    913,
+    3980
+  ],
+  "exact": {
+    "baseline_32": 0,
+    "baseline_96": 0,
+    "intact_32": 0,
+    "intact_96": 0,
+    "scrambled_32": 0,
+    "scrambled_96": 0
+  },
+  "limits": [
+    32,
+    96
+  ],
+  "max_generated": 24,
+  "rule": "Strict case-sensitive first complete word in greedy ink; original full context is clipped for both conditions."
+}

@@ -12,15 +12,23 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The matched book-order pretraining, adaptation and free-writing trial is complete.
+Read `references/book_order_prior_result.md`. The intact fit saved 0.193 held
+bits per glyph, earned 1/128 news meanings, lost exact role retention and
+recovered zero final words on 5,004 LAMBADA passages with clipped context.
+The given word was present in 3,980 complete histories but only 913 of the
+96-cell inputs. Keep all learned states, original PNGs, 256 source-pixel book
+replays and 60 translation replays. Preserve the 15-page historical edition.
+The new four-page paper links the two current raw-output figures and historical
+specimen evidence. See the decision in the engineering goal and private handoff.
+
 The open-source-ink news qualification, two human-reviewed translation fits,
 192-case external free-writing assessment and supplied-history audit are complete.
 Read `references/reviewed_news_writer_result.md` and the current engineering goal.
 The model can consume new printed shapes and changed 93/96 output bitmaps when
 those strokes were shown, but both fits earned 0/96 complete unfamiliar-source
 meanings and 2/96 familiar-source meanings. The original OPUS bulk certification
-also closed at 88/128. Preserve the weights, scores and raw PNGs. The next
-comparison concerns target-side pretraining on coherent pictured prose and
-matched scrambled words. See the private handoff for runtime ownership.
+also closed at 88/128. Preserve the weights, scores and raw PNGs. The successor target-side comparison is complete. See the private handoff for runtime ownership.
 
 
 The matched corpus-breadth comparison is complete. Read

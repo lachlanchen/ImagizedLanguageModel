@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Mô hình thị giác 1,82 triệu tham số học từ 96 cuốn sách trên một GPU RTX 4090 D. Giữ nguyên thứ tự từ giúp giảm độ mất mát khi dự đoán hình dạng ký tự kế tiếp trên 16 cuốn sách chưa từng thấy, từ 2,166 xuống 1,973 bit. Khi dịch 128 câu tin tức mới từ tiếng Trung sang tiếng Anh, mỗi mô hình chỉ có một bản dịch được chấm là truyền đạt trọn nghĩa. Hình bên dưới dùng ảnh do mô hình thực sự viết tiếp. [Bài báo](../publication/ilm-nature/manuscript.pdf) · [Mô hình và cách chạy](../models/book_order_prior/)
+
+![Dự đoán ký tự và ảnh đầu ra](../publication/ilm-nature/figures/Book_order_learning.png)
+
 Khi người được gọi trong ảnh câu tiếng Trung thay đổi, mô hình đổi “Mom” thành “Harry” trong ảnh trả lời bằng tiếng Anh. Nhưng nó cũng viết “a nice dream” khi gặp từ chỉ cơn ác mộng. Mô hình giữ được sự khác biệt về nghĩa ở cả hai chiều dịch cho 3 trong 77 cặp câu từ ngữ liệu huấn luyện và 46 trong 51 cặp câu tạo theo mẫu.
 
 Mô hình thị giác nay nhận được cả những dạng chữ in ngoài bộ hình chữ ban đầu. Sau khi học từ 1.368 cặp câu dịch đã qua đánh giá chuyên môn, mô hình truyền đạt trọn nghĩa khi dịch tin tiếng Trung sang tiếng Anh ở 0/96 câu có dạng chữ lạ và 2/96 câu chỉ có dạng chữ quen. Hiển thị nét của chữ lạ làm thay đổi 93 ảnh trả lời. Hình dưới giữ nguyên đầu ra của mô hình. [Thí nghiệm và trọng số](../references/reviewed_news_writer_result.md)

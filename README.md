@@ -2,6 +2,10 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
+A 1.82-million-parameter visual writer read the same words from 96 books in intact or shuffled order on one RTX 4090 D. On 16 unseen books, intact order reduced next-glyph loss from 2.166 to 1.973 bits. Both fits earned one complete-meaning credit on 128 new Chinese news translations. The figure pairs these measurements with the first unedited book continuation. [Paper](publication/ilm-nature/manuscript.pdf) · [Trained model and image-input CLI](models/book_order_prior/) · [Evidence](references/book_order_prior_result.md)
+
+![Held-book prediction and original output pixels](publication/ilm-nature/figures/Book_order_learning.png)
+
 The visual writer now accepts unfamiliar printed shapes. After matched training on 1,368 professionally reviewed translations, it earned 0/96 complete-meaning credits on Chinese news sentences containing a previously unsupported shape and 2/96 on sentences with familiar shapes. Showing the unfamiliar strokes changed 93 answer images. The example below shows the unaltered model output. [Experiment and weights](references/reviewed_news_writer_result.md)
 
 ![Free visual writing before and after training](publication/ilm-nature/figures/Reviewed_news_writer.png)

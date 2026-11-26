@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Ein visuelles Modell mit 1,82 Millionen Parametern wurde auf einer RTX 4090 D mit 96 Büchern trainiert. Bei 16 ungesehenen Büchern sank der Vorhersageverlust für die nächste Glyphe von 2,166 auf 1,973 Bit, wenn die Wortreihenfolge erhalten blieb. Bei 128 neuen chinesischen Nachrichtensätzen erhielt jedes Modell für eine einzige englische Übersetzung die volle Bedeutungswertung. Die Abbildung zeigt die tatsächlich erzeugte Fortsetzung. [Artikel](../publication/ilm-nature/manuscript.pdf) · [Modell und Anwendung](../models/book_order_prior/)
+
+![Vorhersage und ursprüngliche Ausgabe](../publication/ilm-nature/figures/Book_order_learning.png)
+
 Wenn sich die angesprochene Person im chinesischen Satzbild änderte, wechselte das Modell in seiner englischen Antwort von „Mom“ zu „Harry“. Einen Albtraum übersetzte es dagegen als „a nice dream“. In beiden Übersetzungsrichtungen gab es den Bedeutungsunterschied bei 3 von 77 Satzpaaren aus dem Trainingskorpus und bei 46 von 51 nach Vorlagen gebildeten Paaren wieder.
 
 Das visuelle Modell verarbeitet nun auch gedruckte Zeichenformen außerhalb seines ursprünglichen Vorrats. Nach dem Training mit 1.368 fachlich geprüften Übersetzungspaaren gab es bei chinesischen Nachrichtensätzen den vollständigen Sinn in 0 von 96 Fällen mit unbekannten Zeichenformen und in 2 von 96 Fällen mit ausschließlich vertrauten Formen auf Englisch wieder. Die sichtbaren Striche unbekannter Zeichen veränderten 93 Antwortbilder. Die Abbildung zeigt die Originalausgaben. [Experiment und Gewichte](../references/reviewed_news_writer_result.md)

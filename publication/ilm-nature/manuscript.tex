@@ -10,154 +10,101 @@
 \newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
 \begin{document}
 \noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
-\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Learning to translate unfamiliar printed shapes\par}
+\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont What a glyph predictor learns from the order of words\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\medskip
-\input{reviewed_news_opening}
-\newpage
-\pageheading{Does the answer follow a change in the source?}
-\input{paired_translation_opening}
-\newpage
-\pageheading{Testing what a translation grade measures}
-\input{expert_news_translation}
-\newpage
-\pageheading{Training on six times as many distinct sentences}
-\input{training_breadth_opening}
-\newpage
-\pageheading{Where the source changes a translation}
-\input{training_breadth_analysis}
-\newpage
-\pageheading{Learning from earlier translation errors}
-\input{visual_sequence_preference_opening}
-\newpage
-\pageheading{Writing with retrieved bilingual passages}
-\input{retrieved_glyph_opening}
-\newpage
-\pageheading{Writing a translation from the source image alone}
-\input{strip_restoration_opening}
-\newpage
-\pageheading{Recognising a translation and composing its content}
-\input{independent_optical_actions_opening}
-\newpage
-\pageheading{What two independent writers learn from the same book}
+\noindent\textbf{A model that reads and writes images can reproduce a printed sentence while losing its meaning. We asked which ability improves when a visual decoder reads English books in their natural order. Two copies of a bilingual writer saw the same words from 96 books. We shuffled the words within each training window for one copy. On 16 unseen books the intact-order model required 1.973 bits to predict the next glyph, compared with 2.166 after shuffling. Across 66,987 English grammatical contrasts the respective models selected the acceptable sentence in 51.0\% and 52.2\% of pairs. After identical bilingual training, each earned one complete-meaning credit on 128 new Chinese news requests. Local predictability of print is learnable on one graphics card. In this experiment its improvement failed to carry over to grammatical choice or reliable translation.}\par
+
 \begin{multicols}{2}
-\section*{Free translation on the same books}
-A source-only model judge assessed each complete answer in two hidden candidate orders. Of 96 requests per direction, the strip writer earned one credit into Chinese and none into English. Both the single-glyph writer and the exchanged-source control earned zero. The difference was 0.52 percentage points (paired four-work interval 0.00--1.56). The reference scored 133/192 and Qwen scored 166/192. The strip writer stopped on 189/192. Case 0051, \emph{She is my wife}, was the only credited translation. Neither complete side occurred in training after case folding and removal of spacing and punctuation. This single short response leaves open transfer to other propositions. CPU replay reproduced 574/576 model PNGs and stops. The two mismatches involve the same source.
-
-\section*{The effect of writing several glyphs at once}
-Each body has 3,196,224 trainable parameters. A shared optical network reads $16\times16$ area averages from each $32\times32$ binary cell. An encoder processes adjacent pairs. Three causal decoder layers attend to the source. Writing actions derive their keys and feedback from the pictured constituent glyphs, including their positions inside a strip. A learned stop ends the answer. The inherited physical motor has 2,266,112 frozen weights and 604,480 fixed code values. We compile its glyph bitmaps before decoding. A separate bitmap readback transcribes outputs for assessment. Both models have a finite output repertoire.
-
-We built strips by merging frequent adjacent training shapes, adapting the pair-merging principle previously studied for subword translation.\cite{sennrich} Every training target reconstructs exactly. Both fits took 11,592 updates on the same ordered batches. Including stops, strips reduced supervised decisions from 59.31 to 25.75 million. The wider choice set raised the actual padded output scores from 79.94 to 164.86 billion. Training took 224 and 256 seconds, respectively, with peak allocated memory of 1.44 and 1.57 GiB. In an unpadded linear cost model, the saving offsets the wider head when shared work exceeds 1,045.10 score-equivalents per decision. Lean verifies the break-even identity and preservation of the singleton writer's sequence support. Neither result predicts semantic accuracy.
+\section*{Holding the ink constant}
+Written language carries information in both the shape of a mark and its neighbours. Pixel-based language models have learned representations from rendered text and predicted subsequent image patches.\cite{rust,tai,chai} Here each $32\times32$ cell supplies 256 measured ink densities. A causal decoder compares its next state with prototypes derived from the pictured output shapes. Chosen glyphs form the answer image. The output repertoire comprises 78 English print shapes and a separate stop decision.
+\columnbreak
+\section*{Learning from a book}
+We drew 48,664 training windows and 1,536 validation windows from different books in PG-19.\cite{rae} Each control window contains the same words and glyph counts and the same paragraph-end label as its intact partner. The punctuation sequence remains fixed. The starting comparator is the inherited bilingual writer before book fitting. Three passes exposed each treatment to 16,448,169 supervised positions on a single RTX 4090 D.
 \end{multicols}
+\displayfigure{Book_order_learning.pdf}{Word order improves next-glyph prediction}{\textbf{a}, Mean log loss in bits over 125,289 held glyphs, with the preceding print supplied. Lower is better. Bilingual adaptation weakens the book predictor. \textbf{b}, The first reserved 32-cell prefix, its published continuation and the two free outputs. All four strips are the original PNGs. The repeated phrase in the intact fit illustrates the gap between predicting one glyph and composing a passage.}
 \begin{multicols}{2}
-\section*{Learning from a complete draft}
-An earlier independent writer was trained to prefer drafts that reconstructed the source in an offline reverse translator.\cite{opus} We compared that objective with likelihood on the same 28,342 pairs and 16,384 sampled or greedy drafts. Both fits updated 802,240 of 10.48 million deployed parameters.
+\section*{How large is the gain?}
+The document-bootstrap interval for the saving from intact order was 0.185--0.201 bits per glyph. Next-glyph accuracy rose from 54.5\% to 58.1\%. An order-five count model fitted on the intact book windows used 2.070 bits. Unigram costs were identical under the two orders. The neural models inherited additional bilingual training.
+\columnbreak
+With bilingual adaptation, the intact and shuffled book losses rose to 2.233 and 2.288 bits. The remaining advantage was 0.049--0.062 bits per glyph across books. Both book-trained priors reached the 32-cell free-generation limit on all 64 sampled continuations. Reading the prefix pixels directly on CPU reproduced every stored output and stop for both conditions before and after adaptation.
 \end{multicols}
-\displayfigure{Sentence_reconstruction.pdf}{What the independent writers actually wrote}{Both fits received identical source images. The accepted Chinese response to the numbered heading writes the number. On the longer Chinese question, both English translations lose the proposition. Every displayed response is the original output bitmap.}
-\begin{multicols}{2}
-\section*{Where the translation failed}
-On a separate four-book panel, draft preference earned one Chinese credit and zero English credits. Likelihood earned one in each direction. The difference was $-0.52$ percentage points (paired interval $-1.56$ to $0.00$). The starting writer earned two credits and source exchange earned zero. The judge credited 101/192 references and 154/192 Qwen translations. Some poetry references were judged incomplete. None of the 768 visual responses reached the length cap.
 
-In 190 cases neither fit produced a credited answer. Selecting between their outputs could recover at most two. All 384 fitted outputs replayed on CPU. One starting-model result differed.
-\end{multicols}
 \newpage
-\pageheading{Reading pictured language with a pretrained translator}
+\pageheading{Does a better book predictor translate a change in meaning?}
 \begin{multicols}{2}
-\section*{A sentence as a row of images}
-Printed words carry both linguistic content and a physical form. A separate four-book experiment measured what a pretrained translator could recover from a visual source. PIXEL learned from rendered text with masked patches, and PIXAR and PixelGPT studied visual autoregression.\cite{rust,tai,chai} We ask whether a change in visual reading can improve a complete sentence written in another language. Human reading involves a limited perceptual span.\cite{eye} Here the source span length follows measured sequences of ink in two scripts. The dictionary experiments then test instructions whose answers require the particular strokes of a source glyph.
+\section*{Writing from the source}
+Both book-trained writers and the control received identical Chinese--English supervision from 1,368 professionally reviewed translations and rehearsal examples. A frozen phrase table supplies proposed target fragments from familiar runs of source ink. The learned writer can use these fragments or emit another pictured shape. Unfamiliar source cells pass through the same optical encoder. No teacher or grader participates in writing the answer.
+\columnbreak
+\section*{External news}
+We reserved 64 sentences with familiar Chinese shapes and 64 containing an unfamiliar shape from WMT 2018.\cite{wmt} The panel spans 38 documents. Each of the three writers stopped on every source. All three received credit on the same familiar-source sentence. The intact writer changed present satisfaction to the past tense in that credited answer. The same automated assessor accepted 107 supplied translations and zero displaced references.
+\end{multicols}
+\displayfigure{Book_order_translation.pdf}{An exact pronoun change and a failed news translation}{\textbf{a}, First source-edit family in fixed order for which the intact-order writer's two stopped answers exactly reproduce their references. These short translations come from an earlier training partition. \textbf{b}, First uncredited news request containing an unfamiliar shape. The writer retains fragments of the temporal and geographical wording but loses the people and events. Every strip is an archived source, reference or free model output.}
+\begin{multicols}{2}
+\section*{Distinguishing two attested readings}
+On 88 previously verified source-edit families, the intact writer earned both meaning credits on ten, the shuffled writer on six and the control on eight. The paired interval for intact minus shuffled was 0.0--10.2 percentage points. A judge accepted \emph{I'm not hurt} for a source saying the speaker cannot or will not be hurt. This error and earlier human error annotations limit interpretation of the counts.\cite{freitagmqm}
+\columnbreak
+\section*{What the source can change}
+At the first divergent reference glyph we supplied the common correct output prefix and held the phrase draft fixed. Changing the source shifted the two glyphs' odds in the appropriate direction under both drafts for 74/88 intact cases, 75 shuffled and 74 control. Both glyph choices were correct on 34, 36 and 34 families, respectively. On 118 English-to-Chinese role groups requiring four exact answers, book fitting reduced the count from 88 to 35 (intact) and 40 (shuffled).
+\end{multicols}
 
-Both readers receive ordered binary $32\times32$ cells. A shared target writer chooses a span of visible glyphs or a stop, draws the span with a compiled neural motor and uses a feedback vector recovered from its own output ink. Its contextual weights descend from OPUS-MT.\cite{opus} The path reader also uses the pretrained source encoder for its direction. Both visual readers receive only the source image at inference.
-\end{multicols}
-\displayfigure{Pictured_path_answers.pdf}{Two readers, the same writer}{First newly credited answer in each direction and first uncredited answer in the fixed order. The first pair of Chinese replies is close in meaning, making the binary automated distinction uncertain. The English gain preserves the negative clause. In the final pair the path reader recovers the mat, which the continuous reader calls a table. Its answer loses the instruction to spread the mat. All nine strips are original bitmaps.}
-\begin{multicols}{2}
-\section*{A change in what the writer says}
-Across the four works the path reader gained 35 previously uncredited answers and lost ten. In one case the continuous reader ends an English answer with \emph{but I'm}. The path reader writes \emph{He came, sat by me, but I didn't wake up.} It preserves both the visitor's action and the speaker's state. The close calls in Fig.~9 coexist with this kind of substantive correction and with newly introduced errors.
-\end{multicols}
 \newpage
-\pageheading{Translation on unseen works}
+\pageheading{Separating spelling, grammatical choice and context}
 \begin{multicols}{2}
-\section*{A paired test of source reading}
-Training used 28,342 aligned sentence pairs from 21 works. We excluded earlier named works, previously used normalized sentences and recorded source or target bitmaps. We reserved 24 pairs each from \emph{Gitanjali}, \emph{Reveries of the Solitary Walker}, selected poems of Byron and \emph{The Little Prince}. Each pair supplied a request in each direction. The study covers vocabulary shared by the visual writers and sources of up to 96 cells. Exposure of the pretrained models to these works is unknown.
-
-Into English, 31 of 96 path-reader answers and 14 continuous-reader answers earned credit. Into Chinese the counts were 14 and six. The net gain was 13.02 percentage points (paired bootstrap interval across four books, 5.21--22.40). Path-reader credits by work were 8, 10, 5 and 22 out of 48. All four exceeded their controls. The writer stopped naturally on 176 of 192 requests with inferred paths and 167 with the continuous reader. The same stop rule, 128-cell limit and 128-decision limit applied in all span conditions.
+\section*{Grammatical minimal pairs}
+We scored the complete printed surface of each member of the BLiMP challenge set using the frozen priors.\cite{blimp} The grammatical member had to receive strictly higher likelihood. Thirteen pairs exceeded the available representation or length bounds. All 67 paradigms contributed. Results varied across phenomena. The intact fit preferred the grammatical member for 4,613/7,000 filler-gap pairs and 461/1,991 ellipsis pairs.
+\columnbreak
+Total sentence likelihood is sensitive to length, spelling and lexical frequency. For 9,070 eligible pairs the two sentences contain exactly the same glyph multiset. On this subset the intact fit preferred the grammatical member in 3,021 pairs and the shuffled fit in 4,069. Across paradigms the paired 95\% interval was $-19.35$ to $-4.64$ percentage points. These exploratory comparisons concern sentence rankings. The model was never trained on the benchmark in this study.
 \end{multicols}
-\displayfigure{Pictured_path_scores.pdf}{Complete meanings by input and model}{Each bar counts naturally stopped answers accepted in both anonymous, source-only assessment orders. The supplied-path diagnostic gives reference source addresses to the same visual writer. The exchange control supplies another source image of similar length in the same direction and work. The independent writer receives images and the Qwen comparator receives text.}
+\begin{center}\small
+\begin{tabular}{@{}lrrrr@{}}\toprule
+Measurement & Cases & Starting writer & Shuffled & Intact\\ \midrule
+Correct next glyph with supplied history (\%) & 125,289 & 40.2 & 54.5 & 58.1\\
+Grammatical sentence preferred (\%) & 66,987 & 52.7 & 52.2 & 51.0\\
+Identical glyph multiset, grammatical preferred (\%) & 9,070 & 36.0 & 44.9 & 33.3\\
+New news meanings after bilingual training & 128 & 1 & 1 & 1\\
+Both source-edit meanings after bilingual training & 88 & 8 & 6 & 10\\
+Exact polarity pairs after bilingual training & 236 & 204 & 128 & 120\\
+\bottomrule\end{tabular}\end{center}
 \begin{multicols}{2}
-\section*{Scoring the actual pixels}
-We froze all five visual outputs per request before scoring. Exact bitmap matching transcribed the emitted ink. A Qwen3-VL judge assessed complete meaning in two candidate orders. It credited 123 of 192 corpus translations and zero unrelated foils. With a reference supplied to the judge, the scores were 36 for the path reader, ten for the continuous reader, 42 for supplied paths and 114 for Qwen. These changes and the first example in Fig.~9 qualify the precision of automated semantic scores. Bilingual human adjudication is outstanding.
+\section*{Access to the earlier page}
+On 5,004 eligible LAMBADA passages,\cite{lambada} all three priors wrote zero exact final words from either the last 32 or last 96 pictured cells. Case-insensitive matching found the answer already present in 3,980 full passages but only 913 of the 96-cell suffixes. The median complete prefix was 306 cells. The intact model began 1,712 of its 96-cell completions with \emph{the}.
 
-The independent 10.48-million-parameter visual writer earned 5/192. Quantized Qwen3-8B earned 167/192. The compact autoregressive training used in MiniMind provides a conventional small-language-model reference.\cite{mini} Our path writer retains text-trained source and target layers and finite lexical alternatives. Its improvement measures transfer of existing translation capability to an image interface.
+\section*{What the control identifies}
+For any additive per-glyph code, $C(s)=\sum_t c(s_t)$ has identical cost on each matched training pair. For a first-order path through two adjacent word blocks, exchanging the blocks leaves their internal transitions intact. Only their incoming, joining and outgoing edges change. We verify these identities for fixed-point scores in Lean. Each word-order perturbation can therefore change context-dependent costs even when its marginal cost is identical.
+\section*{Binding a preference to the source}
+Let $m_x$ and $m_y$ be the log odds of two possible next glyphs after a shared prefix under two different sources. Adding a common prior bias $b$ leaves the interaction $(m_x+b)-(m_y+b)$ unchanged. For integer scores, a common bias can make the first choice strictly positive and the second strictly negative precisely when $m_x-m_y\ge 2$. For continuous scores the corresponding condition is $m_x>m_y$. Improving the unconditional prior alone cannot fix an interaction with the wrong sign. The adapted network is free to change the source interaction during training.
+\columnbreak
+\input{book_context_measurement}
+\section*{Reproducibility}
+We used one inherited initialization, matched data order, three book passes and eight bilingual passes. Training updated 541,120 decoder parameters during the book phase and the full 1,817,441-parameter writer during bilingual adaptation. The latter has an additional frozen 227,843-parameter marker and stored phrase tables. Timings of these fits exclude construction of the inherited model. A matched-quality compute advantage over a text LLM remains unmeasured.
 
-\section*{Inference on one graphics card}
-At batch 96 per direction, three warm passes on a single RTX 4090 D gave medians of 197.64 requests/s and 0.670 board joules per request with source paths. The continuous reader gave 167.19 and 0.756. All six traversals reproduced the archived bitmaps, boundaries and stops. Setup, host electricity, judging and antecedent training are excluded. The path reader adds 52.46 million encoder parameters and replaces a 3.22-million-parameter reader. The directional systems retain 90.87 and 89.46 million floating values including span keys and feedback, plus integer tables and compiled ink.
+The news panel excludes surface matches to the reviewed adaptation data, earlier news panels and a million earlier bilingual training rows. The edit families come from the older OPUS training partition. An independent CPU run reproduced all 60 sampled translation images and stops. The scoring model was Qwen3-8B in 4-bit precision. It rejected only 28 of 103 major-error cases in a prior professional calibration. No independent bilingual human rated this new panel.
 \end{multicols}
+
 \newpage
-\pageheading{What exact visual reading can repair}
+\pageheading{Historical forms and the scope of visual writing}
 \begin{multicols}{2}
-\section*{Learning a path through ink}
-A source edge covers a contiguous span of cells and proposes one or more source addresses. On the training pairs we aligned observed spans with native segmentation offsets. Edge scores combine the inherited segmentation score with the fitted log frequency of the ink spelling given the address tuple and start-position class. With score $w(i,j,k)$ for addresses $k$ spanning $[i,j)$, the reader computes
-\[
- V(n)=0,\quad V(i)=\max_{j,k}\{w(i,j,k)+V(j)\}.
-\]
-An unknown edge consumes one cell. Backtracking provides the encoder input, to which we append the end-of-source address. Counts of ink in each $2\times2$ block identify the fitted glyph shapes. This design assumes aligned print. The target writer retains the preceding study's span scores, recurrent feedback, compiled glyphs and stop rule.
-
-\section*{A bound tested on complete answers}
-If two runs use the same source addresses and deterministic writer, they must emit the same answer. With identical grading that failure will survive repair of source segmentation. More generally, let $U$ count uncredited exact-path cases and $D$ count score disagreements on exact paths. The supplied-path writer must fail on at least $U-D$ requests. A finite-count proof in Lean also shows that the change in total credits equals newly credited cases minus lost credits. We audited these quantities against the original images and votes.
+\section*{When the original pixels matter}
+An image can carry a particular historical inscription without a character code for that specimen. In a separate Hanziyuan experiment each pictured entry supplied its gloss and its historical forms. An English or Chinese question specified two values and their order. A 94,866-parameter reader learned to select complete source regions. A matching signal identified occurrences of a pictured headword in the query.
+\columnbreak
+The match-aware reader returned all four answers for each of 152 held entries in 145 families. Rephrasing the requests reduced the count to 359/608 individual answers. The same source values remained available. This task demonstrates exact recovery of an attested specimen and its associated gloss under controlled instructions. Writing an original account of a character's history requires additional evidence and composition.
 \end{multicols}
-\displayfigure{Pictured_path_reading.pdf}{Correct reading with an incorrect answer}{First further failure in fixed order where the inferred source addresses matched those from the text. The writer misrenders the instruction about the mat and repeats part of the Chinese answer. Providing every correct source address yields identical pixels, boundaries and stopping.}
+\displayfigure{Pictured_path_origins.pdf}{The specimen itself can appear in a reply}{First held dictionary request and first failure after rephrasing. The latter example shows the question, requested answer and actual model response. The earlier selector copied the chosen region of the supplied page. A copied historical form and an English word selected by the book predictor have different origins. Each image here is traced to its original output archive.}
 \begin{multicols}{2}
-The inferred sequence matched the supplied addresses on 143/192 requests. All 143 produced identical answers. Eight of the other 49 also produced identical outputs. In sum, 103 exact-path answers were uncredited. Replacing every inferred path with its native counterpart repaired four answers and lost one, taking the score from 45 to 48.
-
-\section*{Changing type and preserving evidence}
-With Noto Serif CJK input, only 869/6,596 cells matched the original bitmaps and none of the 192 direct replies reproduced its canonical output exactly. A previously trained print normalizer recovered all 6,596 tiles and all 192 complete answers. This tests a second aligned print face. With inscriptions, preserving individual strokes can itself be part of the requested answer. On earlier word-origin questions, neither translator tested there produced a credited explanation in 14 attempts or the requested sequence in eight historical-form cases. The next experiment supplies a visual pointer that can preserve a selected source specimen exactly.
+\section*{Limits of the present system}
+The book writer receives aligned cells. Its optical input can accept a new shape, but its finite print motor cannot invent an unseen target glyph. A separate translation system that retained pretrained textual translation layers earned 45/192 whole meanings on a held four-book panel, compared with 5/192 for an independent visual writer and 167/192 for quantized Qwen. These scores concern different books and models from the new news comparison.
+\columnbreak
+\section*{Data and code availability}
+\raggedright The repository provides the \repo{references/book_order_prior_result.md}{experiment report}, \repo{models/book_order_prior}{weights and inference commands}, \repo{formal/span_list/BookOrderPrior.lean}{formal derivation}, \repo{references/evidence/book_order_prior_v1}{complete scores}, and the \repo{publication/ilm-nature/evidence}{original free outputs}. The \repo{publication/ilm-nature/versions}{archived articles} retain earlier visual experiments. Book and news splits, source checksums and all exclusions are available with the training code.
 \end{multicols}
-\newpage
-\pageheading{Reading a meaning and its historical form}
-\begin{multicols}{2}
-\section*{An independent reader of pictured entries}
-A dictionary query presents two headwords with shuffled, labelled fields. The user asks in English or Chinese for the original gloss and one named historical form in a specified order. The answer must contain the original English gloss and the particular specimen's pixels, then stop. The same page supports four requests about the same headword. Labels, values and queries are supplied as images with cell and row boundaries. Each question requires selecting the headword, fields and order.
-
-We fitted two 94,866-parameter recurrent readers from the same random seed on 5,112 requests covering 1,202 Hanziyuan character families. No pretrained weights enter either reader. Both encode grayscale tiles and the ordered question and labels. One also observes a binary indicator of whether the row's headword image occurs in the query. A recurrent selector scores labelled rows and stop. A selected value is copied exactly from the page. Source pixels at the requested stages were excluded across dataset splits. Each arm took 960 AdamW updates over 12 passes. The final match-aware fit took 7.43 seconds on the 4090 D, excluding preparation, with 134 MiB peak allocated.
-\end{multicols}
-\displayfigure{Pictured_path_origins.pdf}{A supplied specimen can be part of the answer}{The first held request asks for the gloss and seal form of the headword in record E01899. The English gloss and the attested specimen S01257 both come from the page. Below is the first failed rewording in corpus order, for the same headword with an oracle specimen requested. All answer strips show the original pixels. The cited source is displayed in the public example page.}
-\begin{multicols}{2}
-\section*{What transfers to new families?}
-The match-aware reader returned all four complete answers for each of 152 held entries (145 families). The continuous control returned 533/608 individual answers and completed 121 entries. At epochs 1, 3, 6 and 12, exact development answers were 0, 317, 720 and 720 of 720 with matching, compared with 0, 132, 229 and 633 without it. These learning curves concern the structured extraction task.
-
-Changing only the queried headword on the same page gave 513/514 correct answers with matching and 447/514 without. Swapping the two source values under their original field labels gave 608/608 and 533/608. All 3,460 original and counterfactual output images reproduced on CPU. All 960 images in the separate translation comparison also reproduced.
-
-\section*{When the words of the question change}
-After freezing the original results, we rephrased the same 608 requests. Matching gave 359 complete answers (228/304 for English prompts and 131/304 for Chinese). The control gave 147. Exact visual matching helps bind an unfamiliar headword to its entry; unfamiliar syntax can still change the intended order or script. The model has access to the written gloss and copies selected source values. Explaining an absent fact, generating a new outline, learning free translation without inherited text layers and interpreting an unsegmented scan remain open. An efficiency advantage over a language model requires matched answer quality and full training costs.
-\end{multicols}
-\newpage
-\pageheading{Learning which field a question asks for first}
-\begin{multicols}{2}
-\section*{An intervention on the same page}
-A page presents two headwords and their labelled historical forms and glosses. For each request we also asked to see the same two values in the opposite order. Both outputs must contain the exact original pixels and stop. The 608 question pairs cover 152 entries in 145 families held out from fitting. All pages have supplied row and cell boundaries. The held English and Chinese instructions were fixed before training.
-
-Continuing the recurrent selector on eight formulations increased both-correct pairs on a first wording panel from 66 to 120 of 608 relative to repeated training on the original instructions. All 120 came from Chinese requests. On 288 of 304 English pairs the reader had selected both right fields twice. It had placed them in an incorrect order at least once on every pair.
-\end{multicols}
-\displayfigure{Origin_instruction_order.pdf}{Opposite requests about the same specimen}{The first newly completed pair in corpus order concerns entry E01899. Both inputs name the same headword and the same seal form. Each answer strip contains the reader's actual selections. Reordering moves entire fields, including the original image of the historical character.}
-\begin{multicols}{2}
-\section*{What can reordering recover?}
-We froze the recurrent reader and located two nonoverlapping fragments of its selected labels in the question by exact ink matching. A binary classifier reads one- to five-cell sequences before, between and after the matched phrases. It learns whether the earlier mention should appear first in the answer. The 40,896 training requests yield 88 distinct feature--label combinations and 2,694 nonzero linear coefficients. The classifier preserves the field multiset and stop on every case. Missing or ambiguous evidence can limit its reach.
-
-On a further four unseen formulations the unchanged selector completed 138/608 pairs and the order model completed 332 (gain 31.9 percentage points, paired 95\% family-bootstrap interval 29.1--34.7 within these four formulations). English improved from 138 to 146 of 304 and Chinese from zero to 186 of 304. Of the new pairs, 450 contained the needed values on both requests. Choosing the right order on all of them would recover the remaining 118 order failures. The other 158 require different field selections. A Lean proof establishes the exact order-only ceiling for any fixed pair of selections. The revised reader retained 607/608 familiar requests and all 4,256 of its evaluated answer PNGs replayed on CPU. These results measure controlled instructions with named fields. Free etymological explanation and continuous-page reading remain open.
-\end{multicols}
-\small\noindent\textbf{Data and code.} \repo{references/source_supported_writing_result.md}{Source-content experiments}, \repo{publication/ilm-nature/evidence/source_supported_writing.zip}{book outputs}, \repo{scripts/select_visual_translation.py}{single-image candidate reader}, \repo{models/independent_optical_actions}{Independent writers}, \repo{publication/ilm-nature/evidence/independent_optical_actions.zip}{held-book PNGs}, \repo{references/independent_optical_actions_result.md}{matched evidence}, \repo{references/sentence_reconstruction_result.md}{Independent writing}, \repo{publication/ilm-nature/evidence/sentence_reconstruction_answers.zip}{all independent translation images}, \repo{references/visual_order_result.md}{order experiments}, \repo{publication/ilm-nature/evidence/visual_order_answers.zip}{original order-pair images}, \repo{formal/span_list/VisualFieldOrder.lean}{order bound}. \repo{publication/ilm-nature/evidence/pictured_path_answers.zip}{Original book answers}, \repo{publication/ilm-nature/evidence/pictured_path_serif.zip}{changed-face outputs}, \repo{references/evidence/pictured_path_translation_v1}{case decisions}, \repo{formal/span_list/SourcePathRepair.lean}{proof} and \repo{scripts/write_optical_span.py}{translation writer}, \repo{models/origin_value_reader}{independent reader} and \repo{publication/ilm-nature/evidence/grounded_origin_answers.zip}{dictionary outputs}.\par
-{\fontsize{8}{8.6}\selectfont
-\begin{thebibliography}{13}\setlength{\itemsep}{-1pt}
-\bibitem{ma} Ma, S., Sun, X., Wang, Y. \& Lin, J. \href{https://aclanthology.org/P18-2053/}{Bag-of-words as target for neural machine translation}. \textit{ACL}, 332--338 (2018).
-\bibitem{sennrich} Sennrich, R., Haddow, B. \& Birch, A. \href{https://aclanthology.org/P16-1162/}{Neural machine translation of rare words with subword units}. \textit{ACL}, 1715--1725 (2016).
+{\fontsize{8.2}{9.2}\selectfont\begin{thebibliography}{9}\setlength{\itemsep}{0pt}
 \bibitem{rust} Rust, P. et al. \href{https://arxiv.org/abs/2207.06991}{Language modelling with pixels}. \textit{ICLR} (2023).
 \bibitem{tai} Tai, Y. et al. \href{https://aclanthology.org/2024.findings-acl.874/}{PIXAR: Auto-regressive language modeling in pixel space}. \textit{Findings of ACL} (2024).
 \bibitem{chai} Chai, Y. et al. \href{https://aclanthology.org/2024.emnlp-main.182/}{Autoregressive pre-training on pixels and texts}. \textit{EMNLP} (2024).
+\bibitem{rae} Rae, J. et al. \href{https://github.com/google-deepmind/pg19}{Compressive Transformers for long-range sequence modelling and the PG-19 corpus}. \textit{ICLR} (2020).
+\bibitem{wmt} Bojar, O. et al. \href{https://www.statmt.org/wmt18/translation-task.html}{Findings of the 2018 Conference on Machine Translation}. \textit{WMT} (2018).
+\bibitem{blimp} Warstadt, A. et al. \href{https://doi.org/10.1162/tacl_a_00321}{BLiMP: The benchmark of linguistic minimal pairs for English}. \textit{Trans. Assoc. Comput. Linguist.} \textbf{8}, 377--392 (2020).
+\bibitem{lambada} Paperno, D. et al. \href{https://aclanthology.org/P16-1144/}{The LAMBADA dataset: Word prediction requiring a broad discourse context}. \textit{ACL}, 1525--1534 (2016).
 \bibitem{freitagmqm} Freitag, M. et al. \href{https://aclanthology.org/2021.tacl-1.87/}{Experts, errors, and context: A large-scale study of human evaluation for machine translation}. \textit{Trans. Assoc. Comput. Linguist.} \textbf{9}, 1460--1474 (2021).
-\bibitem{opus} Tiedemann, J. \& Thottingal, S. \href{https://aclanthology.org/2020.eamt-1.61/}{OPUS-MT -- Building open translation services for the world}. \textit{EAMT} (2020).
-\bibitem{mini} MiniMind contributors. \href{https://github.com/jingyaogong/minimind/tree/858008eb98da4428f78053a1cc4d3a3bd5973629}{MiniMind, pretrained models and training code}.
-\bibitem{brown} Brown, P. F. et al. \href{https://aclanthology.org/J93-2003/}{The mathematics of statistical machine translation: parameter estimation}. \textit{Computational Linguistics} \textbf{19}, 263--311 (1993).
-\bibitem{vogel} Vogel, S., Ney, H. \& Tillmann, C. \href{https://aclanthology.org/C96-2141/}{HMM-based word alignment in statistical translation}. \textit{COLING}, 836--841 (1996).
-\bibitem{koehn} Koehn, P., Och, F. J. \& Marcu, D. \href{https://aclanthology.org/N03-1017/}{Statistical phrase-based translation}. \textit{NAACL}, 127--133 (2003).
-\bibitem{pointer} See, A., Liu, P. J. \& Manning, C. D. \href{https://aclanthology.org/P17-1099/}{Get to the point: summarization with pointer-generator networks}. \textit{ACL}, 1073--1083 (2017).
-\bibitem{eye} Inhoff, A. W. \& Liu, W. \href{https://pubmed.ncbi.nlm.nih.gov/9483822/}{The perceptual span and oculomotor activity during the reading of Chinese sentences}. \textit{J. Exp. Psychol. Hum. Percept. Perform.} \textbf{24}, 20--34 (1998).
 \end{thebibliography}}
 \end{document}

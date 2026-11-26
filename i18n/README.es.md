@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un modelo visual de 1,82 millones de parámetros se entrenó con 96 libros en una sola RTX 4090 D. Conservar el orden de las palabras redujo de 2,166 a 1,973 bits la pérdida de predicción del siguiente glifo en 16 libros inéditos para el modelo. Al traducir 128 frases nuevas de prensa china al inglés, cada modelo obtuvo crédito por transmitir el sentido completo de una sola frase. La figura muestra la continuación original generada. [Artículo](../publication/ilm-nature/manuscript.pdf) · [Modelo y uso](../models/book_order_prior/)
+
+![Predicción de glifos y salida original](../publication/ilm-nature/figures/Book_order_learning.png)
+
 Al cambiar el destinatario en la imagen de una frase china, el modelo cambió «Mom» por «Harry» en su respuesta en inglés. También tradujo una pesadilla como «a nice dream». Conservó la diferencia de significado en ambos sentidos de traducción en 3 de 77 pares extraídos del corpus de entrenamiento y en 46 de 51 pares construidos con plantillas.
 
 El modelo visual ya admite formas impresas ajenas a su repertorio inicial. Tras entrenarse con 1.368 pares de traducciones evaluadas por profesionales, transmitió el sentido completo al traducir noticias del chino al inglés en 0 de 96 oraciones con algún glifo desconocido y en 2 de 96 con solo glifos conocidos. Mostrar los trazos desconocidos cambió 93 imágenes de respuesta. La figura reproduce las salidas originales. [Experimento y pesos](../references/reviewed_news_writer_result.md)

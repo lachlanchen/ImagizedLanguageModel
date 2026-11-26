@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+一個有 182 萬個參數的視覺模型在單張 RTX 4090 D 上學習了 96 本書。與打亂詞序相比，保留詞序使模型在 16 本未見書籍上的下一字形預測損失從 2.166 降至 1.973 位元。但在 128 個新的新聞中譯英句子中，兩種模型各只有一條譯文獲評為意思完整。圖中呈現模型自行續寫的原始像素。 [論文](../publication/ilm-nature/manuscript.pdf) · [模型與用法](../models/book_order_prior/)
+
+![字形預測與原始續寫](../publication/ilm-nature/figures/Book_order_learning.png)
+
 同一個視覺模型會隨中文原圖中的稱呼，把答案裡的 “Mom” 改為 “Harry”，也曾把「噩夢」寫成 “a nice dream”。每組有兩種原句，兩個翻譯方向都須保留語意的變化。訓練語料中的句子有 3/77 組通過，依樣板構造的句子則有 46/51 組通過。
 
 視覺模型現在可以接收字形庫以外的印刷字形。以 1,368 對經專業譯者評審的譯例訓練後，在含有原字形庫外字形的 96 個中文新聞句子中，完整譯意得分為 0/96，在僅含熟悉字形的句子中為 2/96。顯示陌生字形的筆畫改變了 93 幅回答影像。下圖保留模型的原始輸出。 [實驗與權重](../references/reviewed_news_writer_result.md)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un modèle visuel de 1,82 million de paramètres a été entraîné sur 96 livres avec une seule RTX 4090 D. Sur 16 livres inédits, conserver l’ordre des mots a ramené la perte de prédiction du glyphe suivant de 2,166 à 1,973 bit. Sur 128 nouvelles phrases de presse traduites du chinois vers l’anglais, chaque modèle a obtenu un seul crédit pour le sens complet. La figure montre la suite effectivement écrite par le modèle. [Article](../publication/ilm-nature/manuscript.pdf) · [Modèle et utilisation](../models/book_order_prior/)
+
+![Prédiction et sortie originale](../publication/ilm-nature/figures/Book_order_learning.png)
+
 Lorsque le destinataire a changé dans la phrase chinoise en image, le modèle a remplacé « Mom » par « Harry » dans sa réponse anglaise. Il a aussi traduit un cauchemar par « a nice dream ». Dans les deux sens de traduction, il a restitué la différence de sens pour 3 des 77 paires tirées du corpus d’entraînement et 46 des 51 paires construites à partir de patrons.
 
 Le modèle visuel accepte désormais des glyphes imprimés absents de son répertoire initial. Après un entraînement sur 1 368 paires de traductions évaluées par des professionnels, il a restitué le sens complet de 0 phrase sur 96 contenant un glyphe jusque-là inconnu et de 2 phrases sur 96 composées de glyphes familiers, dans un test de traduction de nouvelles chinoises vers l’anglais. Montrer les traits des glyphes inconnus a modifié 93 images de réponse. La figure reproduit les sorties du modèle. [Expérience et poids](../references/reviewed_news_writer_result.md)
