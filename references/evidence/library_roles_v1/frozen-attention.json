@@ -1,0 +1,148 @@
+{
+  "binding": {
+    "scripts/audit_library_role_attention.py": "316056335b384e6fa217d2426d8cd7dae8232bca23272b7d79dd6b04bac2d413",
+    "ilm/visual_lm/role_attention.py": "b08918f6a9cbac789b2ad45ae1adcf1c2320d4baf159a923fe964f8ddb41baa8",
+    "references/evidence/library_roles_v1/alignment.json": "25469e5a5a99b6191f92a1f8b76ed45e6b5ecabf02786ff64bed92af70522b02",
+    "models/library_diversity/repeat/weights.safetensors": "e0831b22df16921df1b5f6711aacac8e409f833d80b22f3edb4175e277f770c3",
+    "models/library_diversity/broad/weights.safetensors": "eaa4523166ca3b5718869786795b8ecacc41a3dfe877dcfe9ee4ebab0d85ded4",
+    "references/library_role_attention_protocol.md": "53339bfdef903ea80f576085304b5e10b5664f2909843eb263f778217e417051"
+  },
+  "results": {
+    "repeat": {
+      "total": {
+        "positions": 8249,
+        "observed": 0.27395525449174524,
+        "expected": 0.22209651662849497,
+        "excess": 0.051858737863250286
+      },
+      "en": {
+        "positions": 5960,
+        "observed": 0.2542157558564321,
+        "expected": 0.20880448765319853,
+        "excess": 0.045411268203233573
+      },
+      "en/subject": {
+        "positions": 1363,
+        "observed": 0.13015409083228335,
+        "expected": 0.108856189491737,
+        "excess": 0.021297901340546356
+      },
+      "moon-and-sixpence": {
+        "positions": 3948,
+        "observed": 0.27272400680353065,
+        "expected": 0.21509635240606692,
+        "excess": 0.05762765439746371
+      },
+      "en/predicate": {
+        "positions": 1841,
+        "observed": 0.09164730105780063,
+        "expected": 0.07858346050275344,
+        "excess": 0.013063840555047173
+      },
+      "en/object": {
+        "positions": 2756,
+        "observed": 0.42416661750817203,
+        "expected": 0.3452219192127201,
+        "excess": 0.07894469829545193
+      },
+      "don-quixote": {
+        "positions": 4301,
+        "observed": 0.2750854488356353,
+        "expected": 0.2285221498184847,
+        "excess": 0.04656329901715058
+      },
+      "zh": {
+        "positions": 2289,
+        "observed": 0.32535211419749716,
+        "expected": 0.2567057314352956,
+        "excess": 0.06864638276220152
+      },
+      "zh/subject": {
+        "positions": 437,
+        "observed": 0.3231026346306956,
+        "expected": 0.1907681419899862,
+        "excess": 0.1323344926407094
+      },
+      "zh/predicate": {
+        "positions": 337,
+        "observed": 0.2377115319800922,
+        "expected": 0.20635973963401494,
+        "excess": 0.031351792346077274
+      },
+      "zh/object": {
+        "positions": 1515,
+        "observed": 0.34549594177370685,
+        "expected": 0.28692442834924403,
+        "excess": 0.05857151342446285
+      }
+    },
+    "broad": {
+      "total": {
+        "positions": 8249,
+        "observed": 0.2565285058236809,
+        "expected": 0.2065241591102701,
+        "excess": 0.0500043467134108
+      },
+      "en": {
+        "positions": 5960,
+        "observed": 0.23235284764160075,
+        "expected": 0.188954382790987,
+        "excess": 0.04339846485061376
+      },
+      "en/subject": {
+        "positions": 1363,
+        "observed": 0.12681814976192338,
+        "expected": 0.10031731743898492,
+        "excess": 0.02650083232293847
+      },
+      "moon-and-sixpence": {
+        "positions": 3948,
+        "observed": 0.25280948616303645,
+        "expected": 0.19778693154637758,
+        "excess": 0.05502255461665885
+      },
+      "en/predicate": {
+        "positions": 1841,
+        "observed": 0.08526936549822219,
+        "expected": 0.07095218736082437,
+        "excess": 0.014317178137397817
+      },
+      "en/object": {
+        "positions": 2756,
+        "observed": 0.3827971451147358,
+        "expected": 0.31161561713848634,
+        "excess": 0.07118152797624945
+      },
+      "don-quixote": {
+        "positions": 4301,
+        "observed": 0.25994229090162196,
+        "expected": 0.21454428801569855,
+        "excess": 0.045398002885923404
+      },
+      "zh": {
+        "positions": 2289,
+        "observed": 0.31947604744237806,
+        "expected": 0.2522715889324315,
+        "excess": 0.06720445850994658
+      },
+      "zh/subject": {
+        "positions": 437,
+        "observed": 0.3048585150261661,
+        "expected": 0.18335099821245335,
+        "excess": 0.12150751681371275
+      },
+      "zh/predicate": {
+        "positions": 337,
+        "observed": 0.23084089918219614,
+        "expected": 0.20509160403714954,
+        "excess": 0.025749295145046595
+      },
+      "zh/object": {
+        "positions": 1515,
+        "observed": 0.34340865907905527,
+        "expected": 0.28264647543694665,
+        "excess": 0.06076218364210861
+      }
+    }
+  }
+}

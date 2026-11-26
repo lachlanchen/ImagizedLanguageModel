@@ -109,6 +109,14 @@ def verify():
     assert all(digest(memory / name) == value for name,value in cal["files"].items())
     support = json.loads((evidence / "library_memory_v1/phrase-support.json").read_text())
     assert support["calibration"] == digest(evidence / "library_memory_v1/calibration.json")
+    alignment = json.loads((evidence / "library_roles_v1/frozen-attention.json").read_text())
+    assert all(digest(ROOT / name) == value for name, value in alignment["binding"].items())
+    with fitz.open(reading) as doc:
+        paragraph = doc[-1].get_text().split("Which source glyphs received attention?")[1]
+        for group in ("total", "en/predicate"):
+            measure = alignment["results"]["broad"][group]
+            assert format(measure["positions"], ",") in paragraph
+            assert all(format(measure[k], ".2%") in paragraph for k in ("observed", "expected"))
     with fitz.open(run / "office/Bilingual_writing_on_unseen_books.pdf") as export:
         assert len(export) == 4
     return dict(
@@ -132,6 +140,8 @@ def verify():
                 evidence / "library_memory_v1/library-coverage.json",
                 ROOT / "formal/span_list/PairedLibrarySampling.lean",
                 ROOT / "formal/span_list/BoundedGlyphEvidence.lean",
+                ROOT / "formal/span_list/RoleAttentionNull.lean",
+                evidence / "library_roles_v1/frozen-attention.json",
             )
         },
     )
