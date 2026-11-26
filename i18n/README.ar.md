@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+طلبنا من النموذج عرض معنى الحرف وصورته التاريخية بترتيبين متعاكسين من صفحة المعجم نفسها. ارتفع عدد الأزواج التي نجح فيها الطلبان معًا من 138 إلى 332 من أصل 608. وفي اختبار منفصل للترجمة الحرة، نقل نموذج الصور المستقل المعنى كاملًا في حالة واحدة من أصل 192، مقابل 154 حالة لنموذج Qwen3-8B مع مدخل نصي. [البحث في ست صفحات](../publication/ilm-nature/manuscript.pdf) · [تشغيل مثال المعجم](../models/origin_instructions/README.md)
+
+### تجارب سابقة
+
 عندما سُئل النموذج عمّن صمّم قاطرة Salamanca بعد عرض صفحة عن السكك الحديدية، كتب **Matthew Murray designed Salamanca.** وعندما تغيّر الاسم وحده في صورة الصفحة إلى Daniel Harper، تغيّر الفاعل في الجواب أيضاً. قرأ النموذج الإجابة القصيرة الصحيحة في 25 صفحة من أصل 96 صفحة جديدة. وفي مثال آخر قرأ سنة تأسيس مدرسة ثم أسقطها عند كتابة الجملة. تعرض الصفحة الأولى من الورقة صور الإجابات الفعلية. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 اختبرنا النموذج على 256 صفحة جديدة بالإنجليزية والصينية، بسؤالين كتبهما أشخاص لكل صفحة. أجاب ILM بعد التدريب التبايني عن السؤالين إجابة صحيحة في 34 صفحة، مقابل 101 لنموذج Qwen3-8B المكمّم عند قراءة النص. وعند عرض الصور نفسها على النموذجين في عينة من 64 صفحة، نجح ILM في 6 صفحات وQwen3-VL-8B في 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

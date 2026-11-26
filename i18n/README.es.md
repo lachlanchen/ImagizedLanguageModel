@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Dos preguntas sobre la misma página del diccionario piden la glosa y la forma histórica en órdenes opuestos. El lector acertó ambas en 332 de 608 pares, frente a 138 antes del cambio. En una prueba aparte de traducción libre, el modelo visual independiente conservó todo el significado en 1 de 192 casos, frente a 154 de Qwen3-8B con entrada de texto. [Artículo de seis páginas](../publication/ilm-nature/manuscript.pdf) · [Ejemplo etimológico](../models/origin_instructions/README.md)
+
+### Experimentos anteriores
+
 Al preguntarle quién diseñó Salamanca a partir de la imagen de una página sobre ferrocarriles, el modelo escribió **Matthew Murray designed Salamanca.** Al cambiar solo el nombre en la página por Daniel Harper, también cambió el sujeto de la respuesta. En 96 pasajes nuevos recuperó 25 respuestas cortas exactas. En otro ejemplo leyó bien el año de fundación de una escuela y luego lo omitió al escribir. La primera página del artículo muestra las imágenes originales. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 En 256 páginas nuevas en inglés y chino, cada una con dos preguntas redactadas por personas, el ILM con entrenamiento contrastivo acertó ambas en 34 páginas. Qwen3-8B cuantizado, con entrada de texto, lo hizo en 101. En un subconjunto de 64 páginas con imágenes idénticas, el ILM acertó ambas en 6 y Qwen3-VL-8B en 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

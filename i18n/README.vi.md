@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Trên cùng một trang từ điển, hai câu hỏi yêu cầu nghĩa gốc và dạng chữ cổ theo hai thứ tự ngược nhau. Số cặp được trả lời đúng cả hai lần tăng từ 138 lên 332 trong 608 cặp. Trong phép thử dịch tự do riêng biệt, mô hình ảnh độc lập truyền đạt trọn nghĩa 1/192 câu, so với 154/192 khi Qwen3-8B đọc văn bản. [Bài báo sáu trang](../publication/ilm-nature/manuscript.pdf) · [Chạy ví dụ từ nguyên](../models/origin_instructions/README.md)
+
+### Các thí nghiệm trước
+
 Khi được hỏi ai thiết kế Salamanca trên ảnh một trang viết về đường sắt, mô hình viết **Matthew Murray designed Salamanca.** Chỉ đổi tên trên trang thành Daniel Harper cũng làm chủ ngữ trong câu trả lời thay đổi. Trong 96 trang mới, mô hình đọc đúng đáp án ngắn ở 25 trang. Ở một ví dụ khác, nó đọc đúng năm thành lập trường rồi bỏ mất năm khi viết câu. Trang đầu bài báo trình bày ảnh đầu ra thực tế. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 Trên 256 đoạn văn tiếng Anh và tiếng Trung mới, mỗi đoạn có hai câu hỏi do con người đặt, ILM được huấn luyện đối sánh trả lời đúng cả hai ở 34 đoạn. Qwen3-8B lượng tử hóa đọc văn bản đạt 101 đoạn. Khi hai mô hình nhận cùng ảnh trên 64 đoạn, ILM đạt 6 và Qwen3-VL-8B đạt 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

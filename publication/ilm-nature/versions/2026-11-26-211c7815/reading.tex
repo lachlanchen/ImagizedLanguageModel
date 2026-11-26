@@ -1,0 +1,93 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=18mm,right=18mm,top=18mm,bottom=19mm,columnsep=6mm]{geometry}
+\usepackage{nature_reading,multicol}
+\input{paper_title.tex}
+\graphicspath{{figures/}{../figures/}}
+\fancyhead[L]{\sffamily\footnotesize RESEARCH ARTICLE}
+\setlength{\multicolsep}{8pt}\setlength{\columnsep}{6mm}\raggedcolumns
+\newcommand{\displayfigure}[3]{\par\medskip{\centering\includegraphics[width=\linewidth]{#1}\par}\vspace{3pt}\begingroup\captionsetup{hypcap=false}\captionof{figure}{\textbf{#2.} #3}\endgroup\par}
+\newcommand{\pageheading}[1]{\noindent{\sffamily\bfseries\fontsize{17}{20}\selectfont #1\par}\vspace{4pt}}
+\newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
+\begin{document}
+\noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
+\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Reading pictured language for translation and historical reference\par}
+\vspace{5pt}\noindent Imagized Language Model Project\par\medskip
+\noindent\textbf{Can a machine preserve the meaning of a printed line as it writes a translation in pixels? We compared two readers connected to the same autoregressive visual writer. One estimated a continuous state for each pictured cell. The other inferred variable-length source spans and passed their addresses to a pretrained translation encoder. On 192 requests from four held works, the two readers earned 20 and 45 complete-meaning credits, respectively, under masked automated assessment. Exchanging source images yielded none. A separately trained independent visual writer earned five credits and quantized Qwen3-8B given text earned 167. On 103 failures the improved reader had already recovered the exact native source sequence. A separate 94,866-parameter reader trained from scratch copied the correct dictionary gloss and historical form on 608/608 requests about held character families. Rewording the requests reduced this to 359/608. These experiments distinguish improved visual translation from a capability specific to images: reproducing an attested shape while following a pictured question.}\par
+\begin{multicols}{2}
+\section*{A sentence as a row of images}
+Printed words carry both linguistic content and a physical form. PIXEL learned from rendered text with masked patches, and PIXAR and PixelGPT studied visual autoregression.\cite{rust,tai,chai} We ask whether a change in visual reading can improve a complete sentence written in another language. Human reading involves a limited perceptual span.\cite{eye} Here the source span length follows measured sequences of ink in two scripts. A second experiment asks when the particular strokes of a source glyph must survive into the answer.
+
+Both readers receive ordered binary $32\times32$ cells. A shared target writer chooses a span of visible glyphs or a stop, draws the span with a compiled neural motor and uses a feedback vector recovered from its own output ink. Its contextual weights descend from OPUS-MT.\cite{opus} The path reader also uses the pretrained source encoder for its direction. Both visual readers receive only the source image at inference.
+\end{multicols}
+\displayfigure{Pictured_path_answers.pdf}{Two readers, the same writer}{First newly credited answer in each direction and first uncredited answer in the fixed order. The first pair of Chinese replies is close in meaning, making the binary automated distinction uncertain. The English gain preserves the negative clause. In the final pair the path reader recovers the mat, which the continuous reader calls a table. Its answer loses the instruction to spread the mat. All nine strips are original bitmaps.}
+\begin{multicols}{2}
+\section*{A change in what the writer says}
+Across the four works the path reader gained 35 previously uncredited answers and lost ten. In one case the continuous reader ends an English answer with \emph{but I'm}. The path reader writes \emph{He came, sat by me, but I didn't wake up.} It preserves both the visitor's action and the speaker's state. The close calls in Fig.~1 coexist with this kind of substantive correction and with newly introduced errors.
+\end{multicols}
+\newpage
+\pageheading{Translation on unseen works}
+\begin{multicols}{2}
+\section*{A paired test of source reading}
+Training used 28,342 aligned sentence pairs from 21 works. We excluded earlier named works, previously used normalized sentences and recorded source or target bitmaps. We reserved 24 pairs each from \emph{Gitanjali}, \emph{Reveries of the Solitary Walker}, selected poems of Byron and \emph{The Little Prince}. Each pair supplied a request in each direction. The study covers vocabulary shared by the visual writers and sources of up to 96 cells. Exposure of the pretrained models to these works is unknown.
+
+Into English, 31 of 96 path-reader answers and 14 continuous-reader answers earned credit. Into Chinese the counts were 14 and six. The net gain was 13.02 percentage points (paired bootstrap interval across four books, 5.21--22.40). Path-reader credits by work were 8, 10, 5 and 22 out of 48. All four exceeded their controls. The writer stopped naturally on 176 of 192 requests with inferred paths and 167 with the continuous reader. The same stop rule, 128-cell limit and 128-decision limit applied in all span conditions.
+\end{multicols}
+\displayfigure{Pictured_path_scores.pdf}{Complete meanings by input and model}{Each bar counts naturally stopped answers accepted in both anonymous, source-only assessment orders. The supplied-path diagnostic gives reference source addresses to the same visual writer. The exchange control supplies another source image of similar length in the same direction and work. The independent writer receives images and the Qwen comparator receives text.}
+\begin{multicols}{2}
+\section*{Scoring the actual pixels}
+We froze all five visual outputs per request before scoring. Exact bitmap matching transcribed the emitted ink. A Qwen3-VL judge assessed complete meaning in two candidate orders. It credited 123 of 192 corpus translations and zero unrelated foils. With a reference supplied to the judge, the scores were 36 for the path reader, ten for the continuous reader, 42 for supplied paths and 114 for Qwen. These changes and the first example in Fig.~1 qualify the precision of automated semantic scores. Bilingual human adjudication is outstanding.
+
+The independent 10.48-million-parameter visual writer earned 5/192. Quantized Qwen3-8B earned 167/192. The compact autoregressive training used in MiniMind provides a conventional small-language-model reference.\cite{mini} Our path writer retains text-trained source and target layers and finite lexical alternatives. Its improvement measures transfer of existing translation capability to an image interface.
+
+\section*{Inference on one graphics card}
+At batch 96 per direction, three warm passes on a single RTX 4090 D gave medians of 197.64 requests/s and 0.670 board joules per request with source paths. The continuous reader gave 167.19 and 0.756. All six traversals reproduced the archived bitmaps, boundaries and stops. Setup, host electricity, judging and antecedent training are excluded. The path reader adds 52.46 million encoder parameters and replaces a 3.22-million-parameter reader. The directional systems retain 90.87 and 89.46 million floating values including span keys and feedback, plus integer tables and compiled ink.
+\end{multicols}
+\newpage
+\pageheading{What exact visual reading can repair}
+\begin{multicols}{2}
+\section*{Learning a path through ink}
+A source edge covers a contiguous span of cells and proposes one or more source addresses. On the training pairs we aligned observed spans with native segmentation offsets. Edge scores combine the inherited segmentation score with the fitted log frequency of the ink spelling given the address tuple and start-position class. With score $w(i,j,k)$ for addresses $k$ spanning $[i,j)$, the reader computes
+\[
+ V(n)=0,\quad V(i)=\max_{j,k}\{w(i,j,k)+V(j)\}.
+\]
+An unknown edge consumes one cell. Backtracking provides the encoder input, to which we append the end-of-source address. Counts of ink in each $2\times2$ block identify the fitted glyph shapes. This design assumes aligned print. The target writer retains the preceding study's span scores, recurrent feedback, compiled glyphs and stop rule.
+
+\section*{A bound tested on complete answers}
+If two runs use the same source addresses and deterministic writer, they must emit the same answer. With identical grading that failure will survive repair of source segmentation. More generally, let $U$ count uncredited exact-path cases and $D$ count score disagreements on exact paths. The supplied-path writer must fail on at least $U-D$ requests. A finite-count proof in Lean also shows that the change in total credits equals newly credited cases minus lost credits. We audited these quantities against the original images and votes.
+\end{multicols}
+\displayfigure{Pictured_path_reading.pdf}{Correct reading with an incorrect answer}{First further failure in fixed order where the inferred source addresses matched those from the text. The writer misrenders the instruction about the mat and repeats part of the Chinese answer. Providing every correct source address yields identical pixels, boundaries and stopping.}
+\begin{multicols}{2}
+The inferred sequence matched the supplied addresses on 143/192 requests. All 143 produced identical answers. Eight of the other 49 also produced identical outputs. In sum, 103 exact-path answers were uncredited. Replacing every inferred path with its native counterpart repaired four answers and lost one, taking the score from 45 to 48.
+
+\section*{Changing type and preserving evidence}
+With Noto Serif CJK input, only 869/6,596 cells matched the original bitmaps and none of the 192 direct replies reproduced its canonical output exactly. A previously trained print normalizer recovered all 6,596 tiles and all 192 complete answers. This tests a second aligned print face. With inscriptions, preserving individual strokes can itself be part of the requested answer. On earlier word-origin questions, neither translator tested there produced a credited explanation in 14 attempts or the requested sequence in eight historical-form cases. The next experiment supplies a visual pointer that can preserve a selected source specimen exactly.
+\end{multicols}
+\newpage
+\pageheading{Reading a meaning and its historical form}
+\begin{multicols}{2}
+\section*{An independent reader of pictured entries}
+A dictionary query presents two headwords with shuffled, labelled fields. The user asks in English or Chinese for the original gloss and one named historical form in a specified order. The answer must contain the original English gloss and the particular specimen's pixels, then stop. The same page supports four requests about the same headword. Labels, values and queries are supplied as images with cell and row boundaries. Each question requires selecting the headword, fields and order.
+
+We fitted two 94,866-parameter recurrent readers from the same random seed on 5,112 requests covering 1,202 Hanziyuan character families. No pretrained weights enter either reader. Both encode grayscale tiles and the ordered question and labels. One also observes a binary indicator of whether the row's headword image occurs in the query. A recurrent selector scores labelled rows and stop. A selected value is copied exactly from the page. Source pixels at the requested stages were excluded across dataset splits. Each arm took 960 AdamW updates over 12 passes. The final match-aware fit took 7.43 seconds on the 4090 D, excluding preparation, with 134 MiB peak allocated.
+\end{multicols}
+\displayfigure{Pictured_path_origins.pdf}{A supplied specimen can be part of the answer}{The first held request asks for the gloss and seal form of the headword in record E01899. The English gloss and the attested specimen S01257 both come from the page. Below is the first failed rewording in corpus order, for the same headword with an oracle specimen requested. All answer strips show the original pixels. The cited source is displayed in the public example page.}
+\begin{multicols}{2}
+\section*{What transfers to new families?}
+The match-aware reader returned all four complete answers for each of 152 held entries (145 families). The continuous control returned 533/608 individual answers and completed 121 entries. At epochs 1, 3, 6 and 12, exact development answers were 0, 317, 720 and 720 of 720 with matching, compared with 0, 132, 229 and 633 without it. These learning curves concern the structured extraction task.
+
+Changing only the queried headword on the same page gave 513/514 correct answers with matching and 447/514 without. Swapping the two source values under their original field labels gave 608/608 and 533/608. All 3,460 original and counterfactual output images reproduced on CPU. All 960 images in the separate translation comparison also reproduced.
+
+\section*{When the words of the question change}
+After freezing the original results, we rephrased the same 608 requests. Matching gave 359 complete answers (228/304 for English prompts and 131/304 for Chinese). The control gave 147. Exact visual matching helps bind an unfamiliar headword to its entry; unfamiliar syntax can still change the intended order or script. The model has access to the written gloss and copies selected source values. Explaining an absent fact, generating a new outline, learning free translation without inherited text layers and interpreting an unsegmented scan remain open. An efficiency advantage over a language model requires matched answer quality and full training costs.
+\end{multicols}
+\small\noindent\textbf{Data and code.} \repo{publication/ilm-nature/evidence/pictured_path_answers.zip}{Original book answers}, \repo{publication/ilm-nature/evidence/pictured_path_serif.zip}{changed-face outputs}, \repo{references/evidence/pictured_path_translation_v1}{case decisions}, \repo{formal/span_list/SourcePathRepair.lean}{proof} and \repo{scripts/write_optical_span.py}{translation writer}, \repo{models/origin_value_reader}{independent reader} and \repo{publication/ilm-nature/evidence/grounded_origin_answers.zip}{dictionary outputs}.\par
+{\footnotesize
+\begin{thebibliography}{6}\setlength{\itemsep}{0pt}
+\bibitem{rust} Rust, P. et al. \href{https://arxiv.org/abs/2207.06991}{Language modelling with pixels}. \textit{ICLR} (2023).
+\bibitem{tai} Tai, Y. et al. \href{https://aclanthology.org/2024.findings-acl.874/}{PIXAR: Auto-regressive language modeling in pixel space}. \textit{Findings of ACL} (2024).
+\bibitem{chai} Chai, Y. et al. \href{https://aclanthology.org/2024.emnlp-main.182/}{Autoregressive pre-training on pixels and texts}. \textit{EMNLP} (2024).
+\bibitem{opus} Tiedemann, J. \& Thottingal, S. \href{https://aclanthology.org/2020.eamt-1.61/}{OPUS-MT -- Building open translation services for the world}. \textit{EAMT} (2020).
+\bibitem{mini} MiniMind contributors. \href{https://github.com/jingyaogong/minimind/tree/858008eb98da4428f78053a1cc4d3a3bd5973629}{MiniMind, pretrained models and training code}.
+\bibitem{eye} Inhoff, A. W. \& Liu, W. \href{https://pubmed.ncbi.nlm.nih.gov/9483822/}{The perceptual span and oculomotor activity during the reading of Chinese sentences}. \textit{J. Exp. Psychol. Hum. Percept. Perform.} \textbf{24}, 20--34 (1998).
+\end{thebibliography}}
+\end{document}

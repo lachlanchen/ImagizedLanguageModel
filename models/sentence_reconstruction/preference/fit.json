@@ -1,0 +1,141 @@
+{
+  "arm": "preference",
+  "binding": {
+    "scripts/train_sentence_reconstruction.py": "efd8bc9840960fd1ed0f67c2b31ef5ebcc5bf3fedaa55c6f7e6655bd8aeb11a4",
+    "ilm/visual_lm/sentence_reconstruction.py": "703e88cb47533a32e966a9ccb5280d44fef31f2564fa139ee7977e33c52ebc3b",
+    "references/sentence_reconstruction_protocol.md": "2bedae57292173c04bf6be525082cd1dc162be09cec3e2a684bb98a91f3bf0d1",
+    "references/evidence/emitted_history_v1/drafts.json": "75ecf2f412d40357354273455a59eb5a8ded58d47c4eb337c09c73d6dbb2b0b1",
+    "references/evidence/emitted_history_v1/panel.json": "c189445b2846f407f01a1518a0e301276bb5eff6cd3d28a61a65f9f75319b352",
+    "scripts/collect_sentence_drafts.py": "1616b7863eea86125959d5b53538286c5b5fab9accd10f11b96e8e95f686abc2",
+    "scripts/train_field_to_glyph.py": "baba63e717a9b3d75b4260609f2d3cf456033f57ae898d0cb753215c22344ed5",
+    "models/target_glyph_teaching/guided/fit.json": "01e24b17e8912c8ecb2990e8ec613b7914212347ce658d06d463b44f65cd6834"
+  },
+  "initial": {
+    "en": {
+      "real": 1.075586082357045,
+      "exchanged": 1.7240231149105527
+    },
+    "zh": {
+      "real": 3.6418412294930995,
+      "exchanged": 5.443131191278595
+    }
+  },
+  "terminal": {
+    "en": {
+      "real": 1.1057923102976799,
+      "exchanged": 1.835069909037173
+    },
+    "zh": {
+      "real": 3.687891912950076,
+      "exchanged": 5.587162990196078
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "updates": 510,
+      "order": "a4a485103377e1052c028f3fbd2ac618b3b75913b3d048dc846f58fbc4c88e73",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "pairs": [
+        4096,
+        4096
+      ],
+      "nll": [
+        0.9045612689921608,
+        2.9936792751823127
+      ],
+      "preference_loss": [
+        0.27983702524215914,
+        0.2798158108899145
+      ],
+      "alignment": [
+        0.6701807228915663,
+        0.6357483078465781
+      ]
+    },
+    {
+      "epoch": 2,
+      "updates": 510,
+      "order": "c06efd21da778b66c6224f27a139374bdfd80346529786f6d3ccdc21876c72a0",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "pairs": [
+        4096,
+        4096
+      ],
+      "nll": [
+        0.8949963212899505,
+        2.9679445120837142
+      ],
+      "preference_loss": [
+        0.21091053842428664,
+        0.15073109468482926
+      ],
+      "alignment": [
+        0.7329317269076305,
+        0.7458009526197041
+      ]
+    },
+    {
+      "epoch": 3,
+      "updates": 510,
+      "order": "a72ae8bd087e52303ca4349aa7a1868361e5ec20a00558d60009a91bec576b17",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "pairs": [
+        4096,
+        4096
+      ],
+      "nll": [
+        0.8829655917999222,
+        2.9346005714736965
+      ],
+      "preference_loss": [
+        0.17480423132292344,
+        0.10875614762215946
+      ],
+      "alignment": [
+        0.7738453815261044,
+        0.8027074454750565
+      ]
+    },
+    {
+      "epoch": 4,
+      "updates": 510,
+      "order": "c5725706a9f7e9e9fd35acc3e74170bdef9830ae01489e56693956ca6ccb8933",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "pairs": [
+        4096,
+        4096
+      ],
+      "nll": [
+        0.8734678604330369,
+        2.9115882408619
+      ],
+      "preference_loss": [
+        0.15723329576621836,
+        0.09052521707792494
+      ],
+      "alignment": [
+        0.7954317269076305,
+        0.830032589621459
+      ]
+    }
+  ],
+  "weights": "c9908e4a969dcb716c579443d8e140ccb69f42b5735af27c847b8cf28721b4fe",
+  "parent": "98d3f1fc0b0cff95d49692172098c58a86c212b5e5db197cd5f79b39cffb02b0",
+  "seconds": 42.8297919658944,
+  "peak": 4218241024,
+  "total": 10481570,
+  "trainable": 802240
+}

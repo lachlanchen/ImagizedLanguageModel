@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+같은 사전 페이지에서 뜻풀이와 옛 글자꼴을 정반대 순서로 요청했습니다. 두 요청을 모두 맞힌 경우가 608쌍 중 138쌍에서 332쌍으로 늘었습니다. 별도 자유 번역 평가에서는 독립 이미지 모델이 192개 중 1개, 텍스트를 입력받은 Qwen3-8B가 154개의 의미를 온전히 전달했습니다. [논문 6쪽](../publication/ilm-nature/manuscript.pdf) · [자원 사전 실행 예제](../models/origin_instructions/README.md)
+
+### 이전 실험
+
 철도 기사 이미지를 보고 Salamanca의 설계자를 묻자 모델은 **Matthew Murray designed Salamanca.**라고 썼다. 기사 속 이름만 Daniel Harper로 바꾸자 답변의 주어도 바뀌었다. 새로운 글 96편 중 25편에서 짧은 정답을 정확히 읽었다. 설립 연도를 제대로 읽고도 문장에서 빠뜨린 사례도 있다. 논문 첫 페이지에서 실제 출력 이미지를 볼 수 있다. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 영어와 중국어로 된 새 지문 256개에 사람이 작성한 질문을 두 개씩 제시했습니다. 대조 학습한 ILM은 34개 지문에서 두 문제를 모두 맞혔고, 텍스트를 읽은 양자화 Qwen3-8B는 101개를 맞혔습니다. 64개 지문의 동일한 이미지를 입력했을 때는 ILM이 6개, Qwen3-VL-8B가 21개 지문에서 두 문제를 모두 맞혔습니다. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

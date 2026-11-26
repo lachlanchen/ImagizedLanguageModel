@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+同じ辞書ページに対し、語義と古文字の字形を逆の順序で求めました。両方の指示に正しく答えたのは改良前の138組から332組に増えました（全608組）。別の自由翻訳試験で意味を保てたのは、独立した画像モデルが192問中1問、文字入力のQwen3-8Bが154問でした。 [論文（全6ページ）](../publication/ilm-nature/manuscript.pdf) · [字源の実行例](../models/origin_instructions/README.md)
+
+### これまでの実験
+
 鉄道の記事を画像で見せて Salamanca の設計者を尋ねると、モデルは **Matthew Murray designed Salamanca.** と書いた。記事の人名だけを Daniel Harper に変えると、答えの主語も変わった。新しい記事 96 件で事実を正しく読み取れたのは 25 件だった。創立年を正しく読み取っても、文にする際に年を落とした例もある。論文の冒頭に実際の出力画像を掲載した。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 英語と中国語の新たな 256 ページに、人が作成した質問を各 2 問用意しました。対照学習した ILM が両方に正答したのは 34 ページで、テキストを読む量子化 Qwen3-8B は 101 ページでした。64 ページの部分集合で同じ画像を与えると、ILM は 6 ページ、Qwen3-VL-8B は 21 ページで両問に正答しました。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

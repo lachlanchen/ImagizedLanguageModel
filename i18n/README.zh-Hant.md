@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+在同一頁上顛倒問題要求的順序，模型必須兩次都寫出正確的釋義與歷史字形。新模型在 608 組中答對 332 組，原模型為 138 組。另一項自由翻譯測試中，獨立影像模型獲得 1/192，以文字為輸入的 Qwen3-8B 獲得 154/192。 [六頁論文](../publication/ilm-nature/manuscript.pdf) · [執行字源範例](../models/origin_instructions/README.md)
+
+### 早期實驗
+
 給模型看一頁介紹早期火車的英文資料，問誰設計了 Salamanca，它寫出 **Matthew Murray designed Salamanca.** 只將原圖中的人名換成 Daniel Harper，答案的主詞也隨之改變。在 96 篇新文章中，它讀對了 25 個短答案；另一次雖然讀對了創校年份，寫句子時卻漏掉了日期。論文首頁並列兩種情況的原始輸出影像。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 另取 256 篇中英文文章，每篇有兩道人們實際提出的問題。經對比訓練的 ILM 有 34 篇兩題全對，本機四位元量化 Qwen3-8B 讀文字時為 101 篇。在其中 64 篇上給兩個模型完全相同的圖片，ILM 兩題全對 6 篇，Qwen3-VL-8B 為 21 篇。論文展示了實際寫出的答案與錯誤。 [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

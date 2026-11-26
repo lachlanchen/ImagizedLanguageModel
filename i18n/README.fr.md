@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Sur une même page de dictionnaire, deux demandes présentent la glose et la forme ancienne dans des ordres opposés. Le lecteur a réussi les deux demandes dans 332 paires sur 608, contre 138 auparavant. Dans un test distinct de traduction libre, le modèle visuel indépendant a restitué le sens complet dans 1 cas sur 192, contre 154 pour Qwen3-8B avec une entrée texte. [Article de six pages](../publication/ilm-nature/manuscript.pdf) · [Exemple étymologique](../models/origin_instructions/README.md)
+
+### Expériences antérieures
+
 Devant une page illustrant les débuts du chemin de fer, le modèle répond **Matthew Murray designed Salamanca.** Si seul le nom de la personne change dans la page, il écrit **Daniel Harper designed Salamanca.** Sur 96 nouveaux passages, il a retrouvé 25 réponses courtes exactes. Dans un autre cas, il a lu correctement l’année de fondation d’une école puis l’a omise dans la phrase. Les images produites figurent en première page de l’article. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 Sur 256 nouvelles pages en anglais et en chinois, chacune accompagnée de deux questions rédigées par des humains, l’ILM entraîné par contraste a répondu correctement aux deux questions sur 34 pages. Qwen3-8B quantifié, qui lisait le texte, en a réussi 101. Sur 64 pages présentées aux deux modèles sous forme d’images identiques, l’ILM en a réussi 6 et Qwen3-VL-8B 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

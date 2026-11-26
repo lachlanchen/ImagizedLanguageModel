@@ -1,0 +1,21 @@
+# Can a visual writer learn sentence meaning by reconstructing the source?
+
+On four reserved works, a 10.48-million-parameter bilingual image writer trained with a whole-draft preference earned **1/192** complete-translation credits. Its matched likelihood control and starting writer each earned **2/192**. Quantized Qwen3-8B, given source text, earned **154/192**. All 768 visual answers stopped and every emitted cell matched a physical glyph in the transcription inventory. The book sources were Yeats, Shelley, *Swann’s Way* and *Kokin Wakashū*. Each contributed 24 pairs in both directions. [Frozen questions](evidence/emitted_history_v1/panel.json) · [All original PNGs and readbacks](../publication/ilm-nature/evidence/sentence_reconstruction_answers.zip)
+
+| Whole meaning on held works | Into English, 96 | Into Chinese, 96 | Total |
+|---|---:|---:|---:|
+| Starting independent writer | 1 | 1 | 2 |
+| Matched continuation | 1 | 1 | 2 |
+| Draft preference | 0 | 1 | 1 |
+| Draft writer with a different source | 0 | 0 | 0 |
+| Qwen3-8B Q4, text input | 79 | 75 | 154 |
+| Supplied corpus wording | 45 | 56 | 101 |
+| Unrelated foil | 0 | 0 | 0 |
+
+**Training.** For each of 4,096 training pairs in each direction, the frozen parent wrote one greedy draft and one top-four sample. A training-only reverse OPUS-MT translator scored the original source given each draft. A total of 7,973/8,192 pairs gave an admissible preference. The corpus reference exceeded both draft scores on 6,807. The two forward fits used all 28,342 library pairs for four epochs with 2,040 updates each. Both scored identical drafts. The candidate alone received their ranking gradient. Its preference agreement rose from 67.0% to 79.5% into English and 63.6% to 83.0% into Chinese during training. Its continued fit took 42.83 s and 3.93 GiB peak allocated VRAM, excluding collection, evaluation and antecedent training. References are paired corpus wordings from the local interlinear editions. Their provenance and adequacy vary. [Training registration](sentence_reconstruction_protocol.md) · [Teacher cache receipt](evidence/emitted_history_v1/drafts.json) · [Terminal fits](../models/sentence_reconstruction)
+
+**Failure localization.** The paired difference was −0.52 percentage points (four-work bootstrap interval −1.56 to 0.00). No case gained credit over the control. The control alone translated 诗人。 as “The poet.” The preference writer's only credited answer rendered “Number 800.” as 第800. It wrote “It disappeased!” for 它消失了！. The corrupted spelling is visible in case 0048. Both masked readings rejected it. Supplying the reference to the judge produced 1 and 2 credits for the candidate and matched control and 77 for Qwen. Independent human adjudication remains outstanding. [Votes, comparator text and individual decisions](evidence/emitted_history_v1/assessment.json)
+
+For 190 requests neither fitted writer produced a credited image. On the two requests with an available credited answer, choosing by reverse score recovered one. Lean verifies the partition into missing candidates and routing errors for any two-image router. The empirical ceiling depends on this frozen pair of outputs and the recorded judgement. Developing a writer that can propose a complete source-conditioned meaning has higher potential here than reranking these two answers. [Reverse-score audit](evidence/emitted_history_v1/routing.json) · [Lean proof](../formal/span_list/DraftReconstruction.lean)
+
+**Execution.** The CPU reproduced all candidate, exchange and matched-control images and 191/192 parent images. The original GPU parent answer and the differing CPU result for case 0006 are preserved. On one 4090 D, median throughput rose from 115.35 requests/s at live batch 12 to 681.21 at live batch 96 and 947.76 with precomputed motor outputs at batch 96. The last rate consumed 0.110 board joules/request. Each of five settings reproduced every graded pixel and stop on all three timed traversals. Times include source batching and transfer back to host. Model loading, compilation, PNG encoding and judging are excluded. Matched-quality training or inference savings over an LLM remain unestablished. [Complete CPU replay](evidence/emitted_history_v1/replay.json) · [Measured timings and board energy](evidence/emitted_history_v1/gpu-cost.json)

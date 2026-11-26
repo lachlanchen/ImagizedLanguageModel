@@ -87,7 +87,11 @@ def main():
     query.add_argument("--prompt",help="Typeset a question into the same optical grid before inference.")
     for key in ("page","geometry","output"): p.add_argument("--"+key,required=True,type=Path)
     p.add_argument("--device",choices=("cpu","cuda"),default="cpu")
+    p.add_argument("--instruction-training",choices=("repeat","varied"),help="Use a reader continued on repeated or varied pictured instructions")
+    p.add_argument("--read-order",action="store_true",help="Apply the trained visual mention-order model with the varied reader")
     args=p.parse_args()
+    if args.read_order and args.instruction_training=="repeat": p.error("--read-order requires the varied reader")
+    if args.read_order: args.instruction_training="varied"
     torch.set_num_threads(2)
     geometry=read(args.geometry)
     if args.prompt is not None:
@@ -101,7 +105,17 @@ def main():
     else:
         question=args.question.read_bytes()
     evidence=decode(question,args.page.read_bytes(),geometry)
-    blob,n,stop=answer(model("matched",args.device),[evidence],args.device)[0]
+    if args.instruction_training:
+        from scripts.train_origin_instruction import load
+        reader=load(args.instruction_training,args.device)
+    else:
+        reader=model("matched",args.device)
+    if args.read_order:
+        from ilm.visual_lm.visual_order import VisualOrder
+        from scripts.predict_ordered_values import predict_two
+        blob,n,stop,_=predict_two(reader,VisualOrder(),[evidence],args.device)[0]["ordered"]
+    else:
+        blob,n,stop=answer(reader,[evidence],args.device)[0]
     args.output.write_bytes(blob)
     print(f"{n} cells, stopped={stop}")
 

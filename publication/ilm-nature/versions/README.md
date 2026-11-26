@@ -4,6 +4,7 @@ Published reading editions are listed newest first. Each snapshot preserves the 
 
 | Date | Revision | Reading edition | Cumulative manuscript |
 |---|---|---|---|
+| 2026-11-26 | [211c7815](https://github.com/lachlanchen/ImagizedLanguageModel/commit/211c7815) | [Pictured source paths and original dictionary questions, 4 pages](2026-11-26-211c7815/reading.pdf) | Same standalone edition |
 | 2026-11-26 | [d31f3a36](https://github.com/lachlanchen/ImagizedLanguageModel/commit/d31f3a36) | [Free visual spans and word-origin failures, 4 pages](2026-11-26-d31f3a36/reading.pdf) | Same standalone edition |
 | 2026-11-26 | [c652a269](https://github.com/lachlanchen/ImagizedLanguageModel/commit/c652a269) | [Typeface recovery and sentence meaning, 4 pages](2026-11-26-c652a269/reading.pdf) | Same standalone edition |
 | 2026-11-26 | [eabb2798](https://github.com/lachlanchen/ImagizedLanguageModel/commit/eabb2798fbf80f0d4c8698558fc6dba7164d70ea) | [72 pages](2026-11-26-eabb2798/reading.pdf) | [321 pages](2026-11-26-eabb2798/cumulative.pdf) |

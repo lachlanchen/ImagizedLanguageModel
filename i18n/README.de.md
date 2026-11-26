@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Zwei Fragen zur selben Wörterbuchseite verlangen die Bedeutung und die historische Zeichenform in entgegengesetzter Reihenfolge. Der Leser erfüllte beide Aufträge bei 332 von 608 Paaren, zuvor bei 138. In einem separaten Übersetzungstest gab das unabhängige Bildmodell bei einem von 192 Beispielen die vollständige Bedeutung wieder, Qwen3-8B mit Texteingabe bei 154. [Sechsseitiger Artikel](../publication/ilm-nature/manuscript.pdf) · [Wörterbuchbeispiel](../models/origin_instructions/README.md)
+
+### Frühere Experimente
+
 Auf die Frage nach dem Konstrukteur der Lokomotive Salamanca schrieb das Modell **Matthew Murray designed Salamanca.** Wurde nur der Name im Seitenbild in Daniel Harper geändert, wechselte auch das Subjekt der Antwort. In 96 neuen Texten las das Modell 25 Kurzantworten richtig. In einem anderen Fall erkannte es das Gründungsjahr einer Schule, ließ es im Satz aber aus. Die erste Seite des Artikels zeigt die tatsächlichen Ausgabebilder. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/visual_statements/examples/intervention)
 
 Auf 256 neuen englischen und chinesischen Seiten mit je zwei von Menschen formulierten Fragen beantwortete das kontrastiv trainierte ILM auf 34 Seiten beide Fragen richtig. Das quantisierte Qwen3-8B erreichte mit Texteingabe 101 Seiten. Bei identischer Bildeingabe auf 64 Seiten löste das ILM beide Fragen auf 6 Seiten, Qwen3-VL-8B auf 21. [PDF](../publication/ilm-nature/visual_language_paper.pdf) · [PNG](../models/competing_facts/examples)

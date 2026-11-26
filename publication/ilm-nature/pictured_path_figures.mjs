@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {Presentation, PresentationFile} from '@oai/artifact-tool';
-const [root,stage,skill,python]=process.argv.slice(2);
+const [root,stage,skill,python,edition]=process.argv.slice(2);
 const {finalizePresentation,applyPresentationChartFont}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')));
 const deck=Presentation.create({slideSize:{width:1280,height:720}});
 const pub=path.join(root,'references/evidence/pictured_path_translation_v1');
@@ -15,7 +15,7 @@ function label(s,text,x,y,w,size,bold=false,color='#19332f'){
 function slide(heading){
  const s=deck.slides.add();s.background.fill='#ffffff';label(s,heading,36,22,1208,32,true);return s;
 }
-async function plate(name,title,notes){
+async function plate(name,title,notes,assetFolder="pictured_path"){
  const v=await read(name),s=slide(title);
  const sc=Math.min(1170/v.width,586/v.height);
  const x0=42,y0=95;
@@ -26,10 +26,16 @@ async function plate(name,title,notes){
    label(s,i.meta,x0+sc*300,y+sc,sc*192,7.8*sc,false,'#49615b');
   }else{
    label(s,i.label,x0+8*sc,y+sc,sc*87,8*sc);
-   s.images.add({blob:await fs.readFile(path.join(root,'publication/ilm-nature/figures/pictured_path',i.name)),contentType:'image/png',alt:i.name,fit:'contain',position:{left:x0+i.x*sc,top:y,width:i.w*sc,height:i.h*sc}});
+   s.images.add({blob:await fs.readFile(path.join(root,'publication/ilm-nature/figures',assetFolder,i.name)),contentType:'image/png',alt:i.name,fit:'contain',position:{left:x0+i.x*sc,top:y,width:i.w*sc,height:i.h*sc}});
   }
  }
  s.speakerNotes.textFrame.setText(notes);
+}
+const draftEdition = edition === 'drafts';
+if(draftEdition) {
+ await plate('../emitted_history_v1/plate.json','Can a writer recover meaning from its own translation drafts?',
+   'Raw source and output bitmaps from the held book panel. The control and draft-supervised writer share the same starting weights and training exposures. Selection is fixed by corpus order.',
+   'sentence_reconstruction');
 }
 await plate('answers.json','Reading the same source through two visual interfaces','The first newly credited answer in each direction and the first uncredited answer under the frozen selection rule. All images come from the model archive.');
 {
@@ -45,11 +51,14 @@ await plate('answers.json','Reading the same source through two visual interface
 }
 await plate('reading.json','Even an exact source sequence can yield the wrong answer','A translation rejected in both-order scoring despite exact recovery of its source addresses. The two complete visual replies can be compared pixel by pixel.');
 await plate('origins.json','Can a small reader answer from a historical dictionary page?','The first held request and first reworded failure in fixed order. The writer selects and copies original source pixels. Both the gloss and the form were supplied on the page.');
+if(draftEdition) await plate('../visual_order_v1/plate.json','How does the requested order change a historical answer?',
+ 'Both pictured questions refer to the same labelled entries. The two models share the same selected values and stop. All four answers preserve the original source pixels.',
+ 'visual_order');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output/Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
-await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:4,
- materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[2],verifyArtifactToolImport:true,
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:draftEdition?6:4,
+ materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[draftEdition?3:2],verifyArtifactToolImport:true,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000'],receiptPath:path.join(stage,'presentation_validation.json')});
