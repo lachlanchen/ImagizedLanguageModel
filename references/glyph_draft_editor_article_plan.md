@@ -1,0 +1,3 @@
+# Editing from the source and a second image
+
+Preserve the source-coverage edition. Replace the lead with the matched independent editor experiment, including source masking of the draft, donor exchange, corpus, full-system dependencies and complete-meaning scores. Display the first cross-work book answer newly credited to the editor over matched training and the first still uncredited answer in the opposite translation direction. If the editor gains no such answer, show the first case where it changes the matched output. Identify selection rules and preserve the original PNGs in the editable presentation. Retain the eight later pages and verify both PDF aliases against the figure archive. Copy only the latest PDF to the local Nutstore destination.

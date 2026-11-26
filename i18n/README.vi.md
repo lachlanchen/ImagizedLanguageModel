@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Mô hình học các cụm chữ từ 497.775 cặp ảnh câu Anh–Trung và dịch mỗi đoạn nguồn đúng một lần. Trên bốn cuốn sách mới, mô hình tái tạo **445 trong 1.464** dải chữ khác nhau của bản dịch tham chiếu, so với 280 của mô hình căn chỉnh theo thứ tự. Không câu nào trong 96 bản dịch truyền đạt trọn nghĩa. Mô hình nơ-ron đạt 1/96 và Qwen3-8B đọc văn bản đạt 90/96. Hình bên dưới giữ nguyên đầu ra của các mô hình. [Kết quả và ảnh gốc](../references/covered_phrases_result.md) · [Chạy mô hình](../models/covered_phrases/README.md)
+Mô hình thị giác 1,82 triệu tham số được huấn luyện trên một RTX 4090 D. Khi đọc ảnh câu gốc và bản dịch nháp, mô hình viết đúng cả câu khẳng định và phủ định ở **225/236 cặp**. Trong 96 yêu cầu dịch từ bốn cuốn sách chưa gặp, chỉ **một câu** giữ trọn nghĩa và trùng với bản nháp. Mô hình đối chứng chỉ đọc câu gốc đạt 0, còn Qwen3-8B đọc văn bản đạt 89. Hình cho thấy ảnh đầu ra thật của câu dịch đúng và một câu bị mất tên một dân tộc cổ. [Kết quả và ảnh gốc](../references/glyph_draft_editor_result.md) · [Chạy mô hình](../models/glyph_draft_editor/README.md)
 
-![Kết quả](../publication/ilm-nature/figures/Covered_glyph_phrases.png)
+![Kết quả](../publication/ilm-nature/figures/Glyph_draft_editor.png)
 
 Mô hình huấn luyện trên một RTX 4090 D chọn giữa hai bản dịch dạng ảnh cho từng đoạn sách. Sau khi hiệu chỉnh thiên hướng ưu tiên một số cách diễn đạt, số cặp đúng cả hai lựa chọn tăng từ **21/96 lên 77/96**. Khi tự viết, dự đoán các dải ký tự từ ảnh nguồn giúp số câu chứa vị từ cần thiết tăng từ 17/336 lên 43/336, nhưng chỉ 1/192 bản dịch sách truyền đạt trọn nghĩa. Hình dưới là câu trả lời đầu tiên được chấm đúng trong phép thử OPUS riêng. [Kết quả](../references/source_supported_writing_result.md) · [Chạy mô hình](../models/source_supported_writing/README.md)
 

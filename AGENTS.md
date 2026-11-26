@@ -16,7 +16,14 @@ The covered-phrase study is terminal. Read
 `references/covered_phrases_result.md` for the trained tables, original
 images, complete-meaning assessment, path audit and reference reachability.
 It raises literal content retention while missing all fresh book meanings.
-The current goal prioritizes an unrestricted source-conditioned draft editor.
+The subsequent matched source-conditioned draft-editor experiment is complete.
+Read `references/glyph_draft_editor_result.md` before further model work. Its
+editor writes 225/236 controlled polarity pairs and 107/118 complete role
+sets, but earns 1/96 complete book meanings, tied with the initial neural
+writer; the single success copies the phrase draft. Only 1/96 reference
+answers scores above the editor's own emission per glyph. Preserve the two
+trained weights, 2,840 images, all readings and CPU replay. The engineering
+goal calls for a separately controlled sequence-level learning comparison.
 
 The ordered glyph-alignment fit, new-book free generation, source-only
 assessment, two search panels, repetition diagnostic and original-PNG replay

@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-視覺書寫模型從 497,775 對中英文句子影像中學習片語，每段原文只譯一次。在四本新書的測試中，它重現了參考譯文 1,464 個不同字形片段中的 **445 個**，依序對齊的模型為 280 個。但完整達意的得分仍為 **0/96**，神經書寫模型為 1/96，讀取文字的 Qwen3-8B 為 90/96。下圖是兩個獨立模型實際產生的譯文。 [實驗與原始輸出](../references/covered_phrases_result.md) · [執行片語書寫模型](../models/covered_phrases/README.md)
+這個 182 萬參數的視覺書寫模型在一張 RTX 4090 D 上訓練。給它原句和初譯的字形影像，在 236 對肯定句與否定句中，有 **225 對**都寫對了。但在四本未見書籍的 96 道翻譯題中，只有 **1 道**完整達意，而且沿用了初譯。只看原句的同條件模型答對 0 道，讀文字的 Qwen3-8B 答對 89 道。下圖保留了這一成功例和一個歷史族名譯錯時的原始輸出。 [結果與原始影像](../references/glyph_draft_editor_result.md) · [執行模型](../models/glyph_draft_editor/README.md)
 
-![實驗結果](../publication/ilm-nature/figures/Covered_glyph_phrases.png)
+![實驗結果](../publication/ilm-nature/figures/Glyph_draft_editor.png)
 
 在一張 RTX 4090 D 上訓練的模型可以閱讀原文圖像，從兩張候選譯文圖像中選擇。校正它對某些譯文措辭的偏好後，兩段書摘都選對的組數從 **21/96 提高到 77/96**。讓模型自行寫譯文更難。預測原文所支持的字形片段後，受控測試中寫出指定謂語的答案從 17/336 增至 43/336，但在 192 個書摘翻譯請求中，只有 1 個完整傳達原意。下圖是另一組 OPUS 測試中首個獲認可的模型輸出。 [實驗結果](../references/source_supported_writing_result.md) · [執行生成或選擇模型](../models/source_supported_writing/README.md)
 

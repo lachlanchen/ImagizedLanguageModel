@@ -31,9 +31,13 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const phraseEdition = edition === 'phrases';
+const editorEdition = edition === 'editor';
+const phraseEdition = edition === 'phrases' || editorEdition;
+if (editorEdition) {
+ await plate('../glyph_draft_editor_v1/plate.json','Can a visual writer use a phrase draft?','First credited editor answer over the matched writer, followed by the first uncredited editor answer in the opposite direction. All rows reproduce the archived PNGs.', 'glyph_draft_editor');
+}
 const alignmentEdition = edition === 'alignment' || phraseEdition;
-if (phraseEdition) {
+if (phraseEdition && !editorEdition) {
  await plate('../covered_phrases_v1/plate.json','Source coverage and complete meaning','First book answer credited only to the neural writer relative to covered phrases. First negative object cleft exact for the neural writer and missed by the phrase writer. Emitted PNGs are unaltered.', 'covered_phrases');
 }
 const fullImageEdition = edition === 'full-image' || alignmentEdition;
@@ -99,7 +103,7 @@ if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.js
 if(supportEdition) await plate('../source_supported_writing_v1/opus-plate.json','Free translation within the OPUS test domain',
  'First credited aligned response in fixed order if available, otherwise the first request. Compare the unchanged parent and guided output.','source_supported');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',phraseEdition?'Covered_glyph_phrases.pptx':alignmentEdition?'Ordered_glyph_alignment.pptx':fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',editorEdition?'Glyph_draft_editor.pptx':phraseEdition?'Covered_glyph_phrases.pptx':alignmentEdition?'Ordered_glyph_alignment.pptx':fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
