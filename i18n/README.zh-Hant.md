@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-在單張 RTX 4090 D 上訓練的獨立模型為兩段書摘配對譯文時，96 組中答對了 93 組。只給原文圖像，讓模型自行寫出譯文，192 個請求中僅 1 個完整傳達原意。量化的 Qwen3-8B 讀取相同原文的文字，得分為 166/192。圖一呈現原始輸出，包括「她是我的妻子。」 [實驗結果](../references/independent_optical_actions_result.md) · [執行模型](../models/independent_optical_actions/README.md)
+在一張 RTX 4090 D 上訓練的模型可以閱讀原文圖像，從兩張候選譯文圖像中選擇。校正它對某些譯文措辭的偏好後，兩段書摘都選對的組數從 **21/96 提高到 77/96**。讓模型自行寫譯文更難。預測原文所支持的字形片段後，受控測試中寫出指定謂語的答案從 17/336 增至 43/336，但在 192 個書摘翻譯請求中，只有 1 個完整傳達原意。下圖是另一組 OPUS 測試中首個獲認可的模型輸出。 [實驗結果](../references/source_supported_writing_result.md) · [執行生成或選擇模型](../models/source_supported_writing/README.md)
 
-![書摘圖像與模型實際寫出的譯文](../publication/ilm-nature/figures/Independent_optical_actions.png)
+![OPUS 原文與實際生成的譯文圖像](../publication/ilm-nature/figures/Source_supported_opus.png)
 
 在同一頁上顛倒問題要求的順序，模型必須兩次都寫出正確的釋義與歷史字形。新模型在 608 組中答對 332 組，原模型為 138 組。另一項自由翻譯測試中，獨立影像模型獲得 1/192，以文字為輸入的 Qwen3-8B 獲得 154/192。 [六頁論文](../publication/ilm-nature/manuscript.pdf) · [執行字源範例](../models/origin_instructions/README.md)
 

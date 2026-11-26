@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Mô hình độc lập được huấn luyện trên một RTX 4090 D đã ghép đúng bản dịch cho 93/96 cặp đoạn trích dưới dạng ảnh. Khi chỉ nhận ảnh nguồn và phải tự viết bản dịch, mô hình truyền đạt trọn nghĩa ở 1/192 yêu cầu. Qwen3-8B lượng tử hóa đọc cùng nội dung dưới dạng văn bản và đạt 166/192. Hình 1 cho thấy ảnh đầu ra thực tế. [Kết quả](../references/independent_optical_actions_result.md) · [Chạy mô hình](../models/independent_optical_actions/README.md)
+Mô hình huấn luyện trên một RTX 4090 D chọn giữa hai bản dịch dạng ảnh cho từng đoạn sách. Sau khi hiệu chỉnh thiên hướng ưu tiên một số cách diễn đạt, số cặp đúng cả hai lựa chọn tăng từ **21/96 lên 77/96**. Khi tự viết, dự đoán các dải ký tự từ ảnh nguồn giúp số câu chứa vị từ cần thiết tăng từ 17/336 lên 43/336, nhưng chỉ 1/192 bản dịch sách truyền đạt trọn nghĩa. Hình dưới là câu trả lời đầu tiên được chấm đúng trong phép thử OPUS riêng. [Kết quả](../references/source_supported_writing_result.md) · [Chạy mô hình](../models/source_supported_writing/README.md)
 
-![Ảnh đoạn trích và bản dịch do mô hình tạo](../publication/ilm-nature/figures/Independent_optical_actions.png)
+![Ảnh nguồn OPUS và bản dịch do mô hình viết](../publication/ilm-nature/figures/Source_supported_opus.png)
 
 Trên cùng một trang từ điển, hai câu hỏi yêu cầu nghĩa gốc và dạng chữ cổ theo hai thứ tự ngược nhau. Số cặp được trả lời đúng cả hai lần tăng từ 138 lên 332 trong 608 cặp. Trong phép thử dịch tự do riêng biệt, mô hình ảnh độc lập truyền đạt trọn nghĩa 1/192 câu, so với 154/192 khi Qwen3-8B đọc văn bản. [Bài báo sáu trang](../publication/ilm-nature/manuscript.pdf) · [Chạy ví dụ từ nguyên](../models/origin_instructions/README.md)
 

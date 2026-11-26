@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-RTX 4090 D 1枚で学習した独立モデルは、書籍の画像と提示された訳文を組み合わせる課題で96組中93組に正答した。原文画像だけから訳文を生成すると、意味を完全に伝えたのは192件中1件だった。同じ原文をテキストで受け取った量子化版Qwen3-8Bは166件に正答した。図1にモデルが生成した画像を示す。 [実験結果](../references/independent_optical_actions_result.md) · [モデルの実行](../models/independent_optical_actions/README.md)
+RTX 4090 D 1枚で学習したモデルに、原文画像と二つの訳文画像を与えた。特定の訳文を好む傾向を補正すると、二つの原文について両方とも正しく選べた組数は **21/96から77/96** に増えた。自由生成では、原文から字形列を予測することで指定の述語を含む回答が17/336から43/336に増えたが、書籍の意味を完全に伝えたのは192件中1件だった。図は別のOPUSテストで最初に正答と判定された出力。 [実験結果](../references/source_supported_writing_result.md) · [モデルの実行](../models/source_supported_writing/README.md)
 
-![書籍の原文と生成された訳文の画像](../publication/ilm-nature/figures/Independent_optical_actions.png)
+![OPUSの原文画像と生成された訳文](../publication/ilm-nature/figures/Source_supported_opus.png)
 
 同じ辞書ページに対し、語義と古文字の字形を逆の順序で求めました。両方の指示に正しく答えたのは改良前の138組から332組に増えました（全608組）。別の自由翻訳試験で意味を保てたのは、独立した画像モデルが192問中1問、文字入力のQwen3-8Bが154問でした。 [論文（全6ページ）](../publication/ilm-nature/manuscript.pdf) · [字源の実行例](../models/origin_instructions/README.md)
 

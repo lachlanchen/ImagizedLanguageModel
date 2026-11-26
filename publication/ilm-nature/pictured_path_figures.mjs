@@ -31,7 +31,12 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const actionsEdition = edition === 'actions';
+const supportEdition = edition === 'support';
+const actionsEdition = edition === 'actions' || supportEdition;
+if(supportEdition) {
+ await plate('../source_supported_writing_v1/plate.json','Writing with source-predicted content',
+   'Two fixed-order fresh book cases; additional whole-answer gain if available. All answer strips are original pixels.','source_supported');
+}
 const draftEdition = edition === 'drafts' || actionsEdition;
 if(actionsEdition) {
  await plate('../independent_optical_actions_v1/plate.json','Free writing with single glyphs or learned strips',
@@ -61,11 +66,13 @@ if(draftEdition) await plate('../visual_order_v1/plate.json','How does the reque
  'visual_order');
 if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.json','Free writing in the other two held books',
  'Same preselected first-pair rule. Images reproduce the exact raster answers from the physical motor.','independent_optical_actions');
+if(supportEdition) await plate('../source_supported_writing_v1/opus-plate.json','Free translation within the OPUS test domain',
+ 'First credited aligned response in fixed order if available, otherwise the first request. Compare the unchanged parent and guided output.','source_supported');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
-await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:actionsEdition?8:draftEdition?6:4,
- materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:supportEdition?10:actionsEdition?8:draftEdition?6:4,
+ materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000'],receiptPath:path.join(stage,'presentation_validation.json')});
