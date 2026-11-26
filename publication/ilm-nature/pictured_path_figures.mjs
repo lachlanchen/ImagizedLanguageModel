@@ -31,12 +31,16 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const sequenceEdition = edition === 'sequence-preference';
+const retrievedEdition = edition === 'retrieved';
+const sequenceEdition = edition === 'sequence-preference' || retrievedEdition;
 const editorEdition = edition === 'editor' || sequenceEdition;
 if (sequenceEdition) {
  await plate('../visual_sequence_preference_v1/plate.json','Learning a correction and writing on a new page','First repeated training example credited only after preference learning, followed by original held-out source and answer PNGs. First preference-only gain relative to likelihood or the first differing output when no such gain occurs. Second example is the subsequent uncredited answer in the opposite direction.', 'visual_sequence_preference');
 }
 const phraseEdition = edition === 'phrases' || editorEdition;
+if (retrievedEdition) {
+ await plate('../retrieved_glyph_writer_v1/plate.json','Writing with related bilingual passages','First gain over the parent if present, otherwise the first changed answer. Second example is the next uncredited answer in the opposite direction. Images are original PNGs.', 'retrieved_glyphs');
+}
 if (editorEdition && !sequenceEdition) {
  await plate('../glyph_draft_editor_v1/plate.json','Can a visual writer use a phrase draft?','First credited editor answer over the matched writer, followed by the first uncredited editor answer in the opposite direction. All rows reproduce the archived PNGs.', 'glyph_draft_editor');
 }
@@ -107,10 +111,10 @@ if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.js
 if(supportEdition) await plate('../source_supported_writing_v1/opus-plate.json','Free translation within the OPUS test domain',
  'First credited aligned response in fixed order if available, otherwise the first request. Compare the unchanged parent and guided output.','source_supported');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',sequenceEdition?'Visual_sequence_preference.pptx':editorEdition?'Glyph_draft_editor.pptx':phraseEdition?'Covered_glyph_phrases.pptx':alignmentEdition?'Ordered_glyph_alignment.pptx':fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',retrievedEdition?'Retrieved_glyphs.pptx':sequenceEdition?'Visual_sequence_preference.pptx':editorEdition?'Glyph_draft_editor.pptx':phraseEdition?'Covered_glyph_phrases.pptx':alignmentEdition?'Ordered_glyph_alignment.pptx':fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
-await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
- materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:retrievedEdition?14:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
+ materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[retrievedEdition?9:roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000'],receiptPath:path.join(stage,'presentation_validation.json')});

@@ -4,6 +4,8 @@ Auf einer RTX 4090 D lernte das visuelle Modell, **65 von 96** wiederholt geübt
 
 ![Ergebnisse](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
+Bei 96 Übersetzungen aus vier weiteren Büchern bewertete der Prüfer zwei Antworten als sinngemäß vollständig, wenn das Modell ähnliche Beispiele aus 497.775 Satzpaaren abrief. Mit zufälligen Beispielen und mit dem ursprünglichen Modell gelang dies jeweils einmal, beim textbasierten Vergleichsmodell 83-mal. [Experiment und Originalbilder](../references/retrieved_glyph_writer_result.md)
+
 Das auf einer RTX 4090 D trainierte Modell wählt für jede Buchpassage zwischen zwei abgebildeten Übersetzungen. Nach Korrektur seiner Vorliebe für bestimmte Zielformulierungen stieg die Zahl der Paare mit zwei richtigen Entscheidungen von **21/96 auf 77/96**. Beim freien Schreiben erhöhte die Vorhersage von Glyphengruppen aus dem Quellbild die Zahl der Antworten mit dem gesuchten Prädikat von 17/336 auf 43/336. Nur eine von 192 Buchübersetzungen gab die vollständige Bedeutung wieder. Die Abbildung zeigt die erste im separaten OPUS-Test akzeptierte Antwort. [Ergebnisse](../references/source_supported_writing_result.md) · [Modell ausführen](../models/source_supported_writing/README.md)
 
 ![OPUS-Quelle und erzeugtes Übersetzungsbild](../publication/ilm-nature/figures/Source_supported_opus.png)

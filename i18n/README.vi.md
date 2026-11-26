@@ -4,6 +4,8 @@ Trên một RTX 4090 D, mô hình thị giác dịch trọn nghĩa **65/96** câ
 
 ![Kết quả](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
+Trên 96 yêu cầu dịch từ bốn cuốn sách khác, mô hình tra cứu các ví dụ liên quan trong 497.775 cặp câu song ngữ được chấm là truyền đạt đủ nghĩa ở 2 câu. Tra cứu ngẫu nhiên và mô hình gốc đều đạt 1 câu, còn mô hình đối chứng dùng văn bản đạt 83 câu. [Thí nghiệm và ảnh đầu ra](../references/retrieved_glyph_writer_result.md)
+
 Mô hình huấn luyện trên một RTX 4090 D chọn giữa hai bản dịch dạng ảnh cho từng đoạn sách. Sau khi hiệu chỉnh thiên hướng ưu tiên một số cách diễn đạt, số cặp đúng cả hai lựa chọn tăng từ **21/96 lên 77/96**. Khi tự viết, dự đoán các dải ký tự từ ảnh nguồn giúp số câu chứa vị từ cần thiết tăng từ 17/336 lên 43/336, nhưng chỉ 1/192 bản dịch sách truyền đạt trọn nghĩa. Hình dưới là câu trả lời đầu tiên được chấm đúng trong phép thử OPUS riêng. [Kết quả](../references/source_supported_writing_result.md) · [Chạy mô hình](../models/source_supported_writing/README.md)
 
 ![Ảnh nguồn OPUS và bản dịch do mô hình viết](../publication/ilm-nature/figures/Source_supported_opus.png)

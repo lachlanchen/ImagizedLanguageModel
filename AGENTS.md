@@ -18,8 +18,11 @@ scored 65/96 on repeated corrections, 8/96 on ordinarily rehearsed passages
 and 1/96 on new books. All training, raw image generation, two-order grading,
 CPU replay, algebra and three-glyph memory diagnostic are complete. Keep the
 parent as a distinct control. Related passage targets voted correctly at
-187/1,274 supplied-history errors versus 54 for random memory. The current
-engineering goal tests retrieval under autonomous visual feedback.
+187/1,274 supplied-history errors versus 54 for random memory. The autonomous test on four further works is terminal. Related memory scores
+2/96 versus 1/96 for the parent and random control. It misses the interval
+and role-retention criteria. See `references/retrieved_glyph_writer_result.md`.
+Preserve all outputs and fixed grades. Next test training-data breadth at
+matched target and optimizer budgets, with new held works.
 
 The covered-phrase study is terminal. Read
 `references/covered_phrases_result.md` for the trained tables, original

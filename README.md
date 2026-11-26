@@ -6,11 +6,13 @@ A visual writer trained on one RTX 4090 D learned to correct **65 of 96** repeat
 
 ![Results](publication/ilm-nature/figures/Visual_sequence_preference.png)
 
+On four further books, retrieval from 497,775 bilingual passages gave the writer 2/96 complete-meaning credits. Random passages and the original writer each earned 1/96. The text comparator earned 83/96. [Experiment and raw images](references/retrieved_glyph_writer_result.md)
+
 On one RTX 4090 D, a reader chose between two pictured translations for each book passage. Correcting its preference for common target wording raised the number of pairs with both answers right from **21/96 to 77/96**. Free translation remains much harder. Predicting the visual strips supported by the source retained the requested predicate in 43/336 controlled answers, up from 17, but preserved the complete meaning on only 1/192 book requests. The image below is the first credited guided answer on the separate OPUS test. [Results](references/source_supported_writing_result.md) · [Run the writer or selector](models/source_supported_writing/README.md)
 
 ![Raw source and generated OPUS translation](publication/ilm-nature/figures/Source_supported_opus.png)
 
-An independent reader followed two opposite pictured questions about the same dictionary page on **332/608** pairs, up from **138/608** with the original field ordering. Each answer had to include the exact gloss and the actual historical specimen. On a separate free-translation test, a 10.48M-parameter image writer earned **1/192** complete meanings, its matched control **2/192**, and a quantized Qwen3-8B given text **154/192**. [Current paper](publication/ilm-nature/manuscript.pdf) · [Run the historical reader](models/origin_instructions/README.md) · [Inspect the translation outputs](references/sentence_reconstruction_result.md) · [Editable figures](publication/ilm-nature/figures/Covered_glyph_phrases.pptx)
+An independent reader followed two opposite pictured questions about the same dictionary page on **332/608** pairs, up from **138/608** with the original field ordering. Each answer had to include the exact gloss and the actual historical specimen. On a separate free-translation test, a 10.48M-parameter image writer earned **1/192** complete meanings, its matched control **2/192**, and a quantized Qwen3-8B given text **154/192**. [Current paper](publication/ilm-nature/manuscript.pdf) · [Run the historical reader](models/origin_instructions/README.md) · [Inspect the translation outputs](references/sentence_reconstruction_result.md) · [Editable figures](publication/ilm-nature/figures/Retrieved_glyphs.pptx)
 
 ![The two pictured questions about 遘 and the actual answers from both readers](publication/ilm-nature/figures/Origin_instruction_order.png)
 

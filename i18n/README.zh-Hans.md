@@ -4,11 +4,13 @@
 
 ![实验结果](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
+在另外四本书的 96 道翻译题上，模型从 497,775 对双语句子中检索相关例句，只有 2 个答案获评为完整达意。随机检索和原模型各为 1 个，文本对照模型为 83 个。 [实验与原始输出](../references/retrieved_glyph_writer_result.md)
+
 在一张 RTX 4090 D 上训练的模型可以看原文图像，从两张候选译文图像中选择。校正它对某些译文措辞的偏好后，两段书摘都选对的组数从 **21/96 提高到 77/96**。让模型自行写译文更难。预测原文所支持的字形片段后，受控测试中写出指定谓语的答案从 17/336 增至 43/336，但在 192 个书摘翻译请求中，只有 1 个完整传达了原意。下图是另一组 OPUS 测试中首个获认可的模型输出。 [实验结果](../references/source_supported_writing_result.md) · [运行生成或选择模型](../models/source_supported_writing/README.md)
 
 ![OPUS 原文与实际生成的译文图像](../publication/ilm-nature/figures/Source_supported_opus.png)
 
-同一页上把问题要求的顺序颠倒，模型必须两次都写出正确的释义和历史字形。新模型在 608 组中答对 332 组，原模型为 138 组。在另一项自由翻译测试中，独立图像模型获得 1/192，文本输入的 Qwen3-8B 获得 154/192。 [六页论文](../publication/ilm-nature/manuscript.pdf) · [运行字源示例](../models/origin_instructions/README.md)
+同一页上把问题要求的顺序颠倒，模型必须两次都写出正确的释义和历史字形。新模型在 608 组中答对 332 组，原模型为 138 组。在另一项自由翻译测试中，独立图像模型获得 1/192，文本输入的 Qwen3-8B 获得 154/192。 [研究论文](../publication/ilm-nature/manuscript.pdf) · [运行字源示例](../models/origin_instructions/README.md)
 
 ### 早期实验
 

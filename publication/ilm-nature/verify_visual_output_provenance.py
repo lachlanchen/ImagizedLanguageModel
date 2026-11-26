@@ -41,7 +41,7 @@ def main():
     assert sha(ARCHIVE)==report["archive"]==replay["archive"]==audit["archive"]
     assert audit["assessment"]==sha(PUB/"assessment.json")
     assert audit["proof"]==sha(PAPER.parents[1]/"formal/span_list/SourcePathRepair.lean")
-    deck = FIG/"Visual_sequence_preference.pptx"
+    deck = FIG/"Retrieved_glyphs.pptx"
     paper = PAPER/"manuscript.pdf"
     assert sha(paper)==sha(PAPER/"visual_language_paper.pdf")
     assert sum(replay["same"].values())+len(replay["differences"])==960
@@ -51,7 +51,7 @@ def main():
     figures=[]
     with fitz.open(paper) as doc, ZipFile(ARCHIVE) as archive, ZipFile(deck) as ppt:
         records=json.loads(archive.read("records.json"))
-        assert len(doc)==9 and len(records)==len(grades)==192
+        assert len(doc)==10 and len(records)==len(grades)==192
         fresh=PUB.parent/"emitted_history_v1"
         fresh_archive=PAPER/"evidence/sentence_reconstruction_answers.zip"
         new_report=read(fresh/"assessment.json")
@@ -71,11 +71,11 @@ def main():
                 assert blob==(FIG/"sentence_reconstruction"/item["name"]).read_bytes()
                 assert sha256(blob).hexdigest()==item["sha256"]
                 expected[bitmap(blob)]+=1
-            assert expected==images(pdf,pdf[0])==images(doc,doc[3])
-            assert "Fig. 4" in " ".join(doc[3].get_text().split())
+            assert expected==images(pdf,pdf[0])==images(doc,doc[4])
+            assert "Fig. 5" in " ".join(doc[4].get_text().split())
         media.update(expected)
-        figures.append(dict(page=4,file=fresh_figure.name,sha256=sha(fresh_figure)))
-        for p,name in enumerate(("answers","scores","reading","origins"),start=4):
+        figures.append(dict(page=5,file=fresh_figure.name,sha256=sha(fresh_figure)))
+        for p,name in enumerate(("answers","scores","reading","origins"),start=5):
             fig=FIG/f"Pictured_path_{name}.pdf"
             figures.append({"page":p+1,"file":fig.name,"sha256":sha(fig)})
             assert f"Fig. {p+1}" in " ".join(doc[p].get_text().split())
@@ -133,15 +133,15 @@ def main():
                 assert blob==(FIG/"visual_order"/item["name"]).read_bytes()
                 assert sha256(blob).hexdigest()==item["sha256"]
                 expected[bitmap(blob)]+=1
-            assert expected==images(doc,doc[8])==images(single,single[0])
-            assert "Fig. 9" in " ".join(doc[8].get_text().split())
+            assert expected==images(doc,doc[9])==images(single,single[0])
+            assert "Fig. 10" in " ".join(doc[9].get_text().split())
         media.update(expected)
-        figures.append(dict(page=9,file=order_fig.name,sha256=sha(order_fig)))
+        figures.append(dict(page=10,file=order_fig.name,sha256=sha(order_fig)))
         actions = PUB.parent/"independent_optical_actions_v1"
         raw_actions = PAPER/"evidence/independent_optical_actions.zip"
         assessment = read(actions/"assessment.json")
         assert sha(raw_actions)==assessment["archive"]==read(actions/"replay.json")["archive"]
-        assert "Fig. 3" in " ".join(doc[2].get_text().split())
+        assert "Fig. 4" in " ".join(doc[3].get_text().split())
         for manifest,stem,indices in (("plate","Independent_optical_actions",[0,49]+[i for i,r in enumerate(assessment["primary"]["records"]) if r["strip"]][:1]),
                                       ("other-works","Optical_actions_other_works",[96,145])):
             plate=read(actions/(manifest+".json"))
@@ -161,8 +161,8 @@ def main():
                     expected[bitmap(blob)]+=1
                 assert expected==images(pdf,pdf[0])
                 if manifest=="plate":
-                    assert expected==images(doc,doc[2])
-                    figures.insert(0,dict(page=3,file=stem+".pdf",sha256=sha(FIG/(stem+".pdf"))))
+                    assert expected==images(doc,doc[3])
+                    figures.insert(0,dict(page=4,file=stem+".pdf",sha256=sha(FIG/(stem+".pdf"))))
             media.update(expected)
         supported=PUB.parent/"source_supported_writing_v1"
         leading=Counter()
@@ -214,9 +214,9 @@ def main():
                 assert expected==images(pdf,pdf[0])
             current.update(expected)
             media.update(expected)
-        assert current==images(doc,doc[1])
-        assert "Fig. 2" in " ".join(doc[1].get_text().split())
-        figures.insert(0,dict(page=2,files={n:sha(FIG/n) for n in ("Free_strip_restoration.pdf","Supplied_strip_restoration.pdf")}))
+        assert current==images(doc,doc[2])
+        assert "Fig. 3" in " ".join(doc[2].get_text().split())
+        figures.insert(0,dict(page=3,files={n:sha(FIG/n) for n in ("Free_strip_restoration.pdf","Supplied_strip_restoration.pdf")}))
         role_pub=PUB.parent/"natural_pictured_roles_v1"
         ref_pub=PUB.parent/"visual_referents_v1"
         full_pub=PUB.parent/"full_image_roles_v1"
@@ -253,6 +253,24 @@ def main():
         assert "Fig. 1" in " ".join(doc[0].get_text().split())
         media.update(expected)
         figures.insert(0,dict(page=1,file="Visual_sequence_preference.pdf",sha256=sha(FIG/"Visual_sequence_preference.pdf")))
+        retrieved=PUB.parent/"retrieved_glyph_writer_v1"
+        rplate=read(retrieved/"plate.json")
+        rarchive=PAPER/"evidence/retrieved_glyph_writer.zip"
+        assert sha(rarchive)==rplate["archive"]==read(retrieved/"assessment.json")["archive"]
+        expected=Counter()
+        with ZipFile(rarchive) as rz,fitz.open(FIG/"Retrieved_glyphs.pdf") as figraw:
+            rr=json.loads(rz.read("records.json"))
+            for part in rplate["items"]:
+                if part["type"]!="strip":continue
+                blob=rz.read(part["member"])
+                assert sha256(blob).hexdigest()==part["sha256"] and blob==(FIG/"retrieved_glyphs"/part["name"]).read_bytes()
+                i,m=part["member"].removesuffix(".png").split("/")
+                if m!="source":assert rr[int(i)]["answers"][m]["png"]==part["sha256"]
+                expected[bitmap(blob)]+=1
+            assert expected==images(figraw,figraw[0])==images(doc,doc[1])
+            assert "Fig. 2" in " ".join(doc[1].get_text().split())
+        media.update(expected)
+        figures.insert(1,dict(page=2,file="Retrieved_glyphs.pdf",sha256=sha(FIG/"Retrieved_glyphs.pdf")))
         # A package may deduplicate identical bitmaps used in two places.
         packaged={bitmap(ppt.read(n)) for n in ppt.namelist() if n.startswith("ppt/media/")}
         assert packaged==set(media)
@@ -267,6 +285,7 @@ def main():
                original_image_instances=sum(media.values()),requests=192,answers=960,replayed=replay["same"],
                independent_trial=dict(requests=192,answers=768,archive=sha(fresh_archive),replayed=new_replay["same"],
                    cpu_differences=new_replay["differences"],assessment=sha(fresh/"assessment.json"),routing=sha(fresh/"routing.json")),
+               retrieved_glyphs={k:sha(retrieved/(k+".json")) for k in ("selection","generation","assessment","audit","calibration","plate")},
                visual_sequence_preference={k:sha(seq_pub/(k+".json")) for k in ("selection","mined","verification","confirmed","label-inspection","generation","assessment","paths","audit","prefix-weights","training-transfer","passage-memory","plate")},
                glyph_draft_editor={k:sha(editor_pub/(k+".json")) for k in ("selection","drafts","generation","assessment","audit","source-probe","path-comparison","plate")},
                covered_phrases={k:sha(phrase_pub/(k+".json")) for k in ("corpus","generation","links-0","links-1","assessment","role-meaning","audit","name-probes","plate","editing")},

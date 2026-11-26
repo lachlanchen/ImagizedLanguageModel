@@ -4,6 +4,8 @@ En una RTX 4090 D, el modelo visual aprendió a corregir **65 de 96** traduccion
 
 ![Resultados](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
+En 96 traducciones de otros cuatro libros, el modelo que buscó ejemplos afines entre 497.775 pares de frases bilingües obtuvo dos respuestas que el evaluador consideró completas. La búsqueda aleatoria y el modelo original obtuvieron una cada uno, y el modelo de referencia con entrada de texto obtuvo 83. [Experimento e imágenes originales](../references/retrieved_glyph_writer_result.md)
+
 El lector, entrenado en una RTX 4090 D, elige entre dos traducciones en imagen para cada fragmento. Al corregir su preferencia por ciertas expresiones, los pares en los que acertó ambas elecciones pasaron de **21/96 a 77/96**. Al escribir libremente, predecir grupos de glifos a partir del original elevó de 17/336 a 43/336 las respuestas que conservaron el predicado solicitado. Solo 1 de 192 traducciones de libros transmitió todo el significado. La imagen muestra la primera respuesta aceptada en la prueba independiente de OPUS. [Resultados](../references/source_supported_writing_result.md) · [Ejecutar el modelo](../models/source_supported_writing/README.md)
 
 ![Original de OPUS y traducción generada](../publication/ilm-nature/figures/Source_supported_opus.png)

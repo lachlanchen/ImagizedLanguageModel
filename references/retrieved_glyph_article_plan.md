@@ -1,0 +1,3 @@
+# Two routes from a training example to a new answer
+
+Retain the complete training correction and held failure on the opening page. Rewrite the abstract around the two tests of transfer: learning from previous errors and retrieving new evidence while generating. Insert the autonomous retrieval comparison directly after the matched training study, including a frozen example of benefit if there is one, an actual failure and paired control scores. Preserve the earlier nine-page version. Give the new result its own editable slide and verify all ten pages against the raw experiments. Include supplied-history rescues and harms and the resource costs of the visual store. Copy only the latest PDF to Nutstore.

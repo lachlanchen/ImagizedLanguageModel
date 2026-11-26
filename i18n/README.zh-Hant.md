@@ -4,6 +4,8 @@
 
 ![實驗結果](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
+在另外四本書的 96 道翻譯題上，模型從 497,775 對雙語句子中檢索相關例句，只有 2 個答案獲評為完整達意。隨機檢索和原模型各為 1 個，文字對照模型為 83 個。 [實驗與原始輸出](../references/retrieved_glyph_writer_result.md)
+
 在一張 RTX 4090 D 上訓練的模型可以閱讀原文圖像，從兩張候選譯文圖像中選擇。校正它對某些譯文措辭的偏好後，兩段書摘都選對的組數從 **21/96 提高到 77/96**。讓模型自行寫譯文更難。預測原文所支持的字形片段後，受控測試中寫出指定謂語的答案從 17/336 增至 43/336，但在 192 個書摘翻譯請求中，只有 1 個完整傳達原意。下圖是另一組 OPUS 測試中首個獲認可的模型輸出。 [實驗結果](../references/source_supported_writing_result.md) · [執行生成或選擇模型](../models/source_supported_writing/README.md)
 
 ![OPUS 原文與實際生成的譯文圖像](../publication/ilm-nature/figures/Source_supported_opus.png)
