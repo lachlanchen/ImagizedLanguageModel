@@ -1,0 +1,145 @@
+{
+  "device": "NVIDIA GeForce RTX 4090 D",
+  "requests": 192,
+  "protocol": "7ff5be391ae27d0a0ce2e69ff4113af6436222b2c4b9fc0c790e0e676c5cf33a",
+  "results": [
+    {
+      "arm": "parent",
+      "batch": 1,
+      "median_seconds": 5.825550618581474,
+      "peak_bytes": 102356480,
+      "trials": [
+        {
+          "seconds": 3.5387387787923217,
+          "cells": 6596,
+          "stops": 191
+        },
+        {
+          "seconds": 5.825550618581474,
+          "cells": 6596,
+          "stops": 191
+        },
+        {
+          "seconds": 9.224184625782073,
+          "cells": 6596,
+          "stops": 191
+        }
+      ]
+    },
+    {
+      "arm": "parent",
+      "batch": 16,
+      "median_seconds": 1.2215365236625075,
+      "peak_bytes": 109350400,
+      "trials": [
+        {
+          "seconds": 1.1796318423002958,
+          "cells": 6596,
+          "stops": 191
+        },
+        {
+          "seconds": 1.411715186201036,
+          "cells": 6596,
+          "stops": 191
+        },
+        {
+          "seconds": 1.2215365236625075,
+          "cells": 6596,
+          "stops": 191
+        }
+      ]
+    },
+    {
+      "arm": "mask",
+      "batch": 1,
+      "median_seconds": 2.1860171323642135,
+      "peak_bytes": 102581248,
+      "trials": [
+        {
+          "seconds": 2.1860171323642135,
+          "cells": 7162,
+          "stops": 192
+        },
+        {
+          "seconds": 1.4024219084531069,
+          "cells": 7162,
+          "stops": 192
+        },
+        {
+          "seconds": 2.7150252358987927,
+          "cells": 7162,
+          "stops": 192
+        }
+      ]
+    },
+    {
+      "arm": "mask",
+      "batch": 16,
+      "median_seconds": 0.13959747646003962,
+      "peak_bytes": 109371392,
+      "trials": [
+        {
+          "seconds": 0.13959747646003962,
+          "cells": 7162,
+          "stops": 192
+        },
+        {
+          "seconds": 0.16170848160982132,
+          "cells": 7162,
+          "stops": 192
+        },
+        {
+          "seconds": 0.1232275553047657,
+          "cells": 7162,
+          "stops": 192
+        }
+      ]
+    },
+    {
+      "arm": "restore",
+      "batch": 1,
+      "median_seconds": 2.0159908598288894,
+      "peak_bytes": 102581248,
+      "trials": [
+        {
+          "seconds": 2.0159908598288894,
+          "cells": 5931,
+          "stops": 191
+        },
+        {
+          "seconds": 1.6257821395993233,
+          "cells": 5931,
+          "stops": 191
+        },
+        {
+          "seconds": 2.871252343058586,
+          "cells": 5931,
+          "stops": 191
+        }
+      ]
+    },
+    {
+      "arm": "restore",
+      "batch": 16,
+      "median_seconds": 0.09145984146744013,
+      "peak_bytes": 109371392,
+      "trials": [
+        {
+          "seconds": 0.09145984146744013,
+          "cells": 5931,
+          "stops": 191
+        },
+        {
+          "seconds": 0.09538895171135664,
+          "cells": 5931,
+          "stops": 191
+        },
+        {
+          "seconds": 0.09117229375988245,
+          "cells": 5931,
+          "stops": 191
+        }
+      ]
+    }
+  ]
+}

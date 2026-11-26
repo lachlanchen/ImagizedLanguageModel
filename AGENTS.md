@@ -12,6 +12,8 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The latest completed language experiments are the free strip restoration comparison and the marked/open English participant readers. Read `references/visual_strip_restoration_result.md` and `references/natural_pictured_roles_result.md` before starting a successor. The open reader gets 901/1,196 exact official participant pairs with only the predicate marked and 347/478 on third-treebank active clauses. The subject-cleft failure is specific: 84/84 actor outputs select the relative pronoun instead of its named antecedent. Preserve the trained writers, raw PNG archives and official splits. The next intervention and controls are in the engineering goal. All training and evaluation owners for these comparisons exited.
+
 Read [the engineering goal](docs/first-imagized-language-model-goal.md) and the
 private `artifacts/glyph_tail_current_handoff.json` at the start of each model
 work unit. Use the goal for current acceptance criteria and the private handoff

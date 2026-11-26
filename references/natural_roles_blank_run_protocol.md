@@ -1,0 +1,5 @@
+# Optical spacing invariance and a matched-ink challenge
+
+The new marked reader gets every ordinary active case and every passive correct but misses all 84 active pictures with additional blank cells before the second name. Canonicalize each run of entirely blank, unmarked cells to one original cell. Accept only marked words and verbs containing ink at both ends. Remap span boundaries and return the selected original pixels. Compare the frozen context model before and after on all official examples and all paired-spacing challenges. Require retention of every official correct choice and correction of all spacing pairs. The model and training remain frozen.
+
+A second challenge uses equally wide ink-bearing words instead of padding. “A has helped Dr B” versus “A was helped by B” places both names and the participle at exactly the same physical and canonical coordinates. Extend the six original predicates to all previously admitted affirmative name pairs in both orders. Credit choice in both constructions per pair. Report geometry-only, unmodified and normalized readers. No parameter updates or choice of examples depend on these results.

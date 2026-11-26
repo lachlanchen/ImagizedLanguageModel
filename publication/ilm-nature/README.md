@@ -1,5 +1,7 @@
 # Language Is Image: Imagized Language Modeling
 
+The current nine-page reading edition opens with visual localization of grammatical roles in genuine English clauses. Figure 1 shows the original participant crops, including a wrong head word. Figure 2 shows free bilingual writing and the separate supplied-content test. The accompanying editable PowerPoint includes all thirteen panels. [Reading edition](manuscript.pdf) · [Editable figures](figures/Visual_role_reading.pptx) · [Source-image audit](evidence/visual_output_figure_index.json)
+
 This six-page article follows an independent image writer from training drafts to free translations, compares two visual interfaces to a pretrained translator, and tests whether a pictured question controls the order of a historical specimen and its gloss. Pages 1 and 6 show the new raw responses. The independent translation comparison gave one versus two complete meanings in 192 trials. Order-sensitive reading increased completely answered pairs from 138 to 332 of 608. [Reading edition](manuscript.pdf) · [Editable figures](figures/Sentence_reconstruction.pptx) · [Translation results](../../references/sentence_reconstruction_result.md) · [Historical instructions](../../references/visual_order_result.md)
 
 Rebuild with the project Python environment, TeX Live and latexmk. The verifier checks displayed pixel content against archived model answers, including the historical source specimens, and checks the chart and its embedded workbook.

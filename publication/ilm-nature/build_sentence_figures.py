@@ -16,6 +16,8 @@ def main():
     cli=argparse.ArgumentParser(description=__doc__)
     cli.add_argument("--actions",action="store_true")
     cli.add_argument("--support",action="store_true")
+    cli.add_argument("--restoration",action="store_true")
+    cli.add_argument("--roles",action="store_true")
     args=cli.parse_args()
     actions=args.actions or args.support
     edition="actions" if actions else "drafts"
@@ -23,6 +25,10 @@ def main():
     corpus="independent_optical_actions_v1" if actions else "emitted_history_v1"
     if args.support:
         edition,stem,corpus="support","Source_supported_writing","source_supported_writing_v1"
+    if args.restoration:
+        edition,stem,corpus="restoration","Visual_strip_restoration","visual_strip_restoration_v1"
+    if args.roles:
+        edition,stem,corpus="roles","Visual_role_reading","natural_pictured_roles_v1"
     with TemporaryDirectory(prefix="ilm-draft-figures-",dir=ROOT/"artifacts") as work:
         stage=Path(work)
         (stage/"node_modules").symlink_to(NODE/"node_modules")

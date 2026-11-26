@@ -1,0 +1,3 @@
+# Latency at fixed input and deployment precision
+
+After training, time three passes over the 192 reserved pictured book requests on the same GPU. Compare causal, masked and displaced writers under the same process, input order within each language, and precision. Time the deployed write operation, including transfer and collection of output ink. Exclude model loading and PNG compression. Warm each model at both batch sizes, one and sixteen. Synchronize CUDA at each boundary. Report median wall time, output cells and CUDA peak allocated bytes per model and batch size. Read quality alongside speed. A latency ratio can only support an efficiency-at-quality claim when the target meaning standard is met.

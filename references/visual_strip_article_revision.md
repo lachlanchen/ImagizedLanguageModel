@@ -1,0 +1,5 @@
+# Main article revision for conditional strip restoration
+
+Replace the current lead on target content selection with the fixed comparison of two visual sequence writers. Keep the eight-page reading edition and the archived original answer evidence. The new lead should state the corpus, free-input conditions, independent length decision, semantic outcomes and the role of the unordered target inventory. Report the measured single-GPU cost. Retain the earlier content-selection result as context. Use the first Chinese-directed book request, followed by the first successful assisted order reversal or the first evaluated reversal if none succeeds. Include the full score archive so either selection can be checked. Inspect the new page and original PNG contents. Include editable figures and update only the current local manuscript PDF.
+
+The post-fit active/passive challenge tests a first-name-order explanation for the high supplied-choice score. Report both directions and make this limitation prominent in the abstract. Include the first credited free masking-only translation, explicitly selected after judging, alongside the fixed book failure and the assisted output.

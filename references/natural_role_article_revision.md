@@ -1,0 +1,3 @@
+# Put the grammatical intervention at the front of the reading edition
+
+The fixed printed-order trial exposed a voice shortcut. Lead with the subsequent authentic-clause comparison and the stronger test with both participant marks removed. Report the official eligible examples, third-treebank transfer, physical spacing and equal-geometry control, exact span success and a failure. Use raw selected words and pictured sources. State all supplied information and distinguish copied head words from freely composed translations. Retain free-translation evidence as Figure 2 and the earlier independent comparisons thereafter. Keep the previous archived PDF. Verify every published image against the experiment archive and inspect the rendered main page and editable figures.

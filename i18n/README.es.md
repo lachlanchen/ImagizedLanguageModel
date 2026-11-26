@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Un lector visual entrenado en una RTX 4090 D identifica quién hizo qué en una oración inglesa. Con solo el verbo marcado, localizó las dos palabras solicitadas en **901 de 1.196** cláusulas de prueba y en **347 de 478** de un tercer corpus. Devuelve recortes de la imagen original. En traducción libre, el modelo entrenado con enmascaramiento conservó el sentido completo de un solo pasaje de 192. [Resultados](../references/natural_pictured_roles_result.md) · [Ejecutar el lector](../models/visual_role_locator/README.md)
+
+![Resultados](../publication/ilm-nature/figures/Natural_role_reading.png)
+
 El lector, entrenado en una RTX 4090 D, elige entre dos traducciones en imagen para cada fragmento. Al corregir su preferencia por ciertas expresiones, los pares en los que acertó ambas elecciones pasaron de **21/96 a 77/96**. Al escribir libremente, predecir grupos de glifos a partir del original elevó de 17/336 a 43/336 las respuestas que conservaron el predicado solicitado. Solo 1 de 192 traducciones de libros transmitió todo el significado. La imagen muestra la primera respuesta aceptada en la prueba independiente de OPUS. [Resultados](../references/source_supported_writing_result.md) · [Ejecutar el modelo](../models/source_supported_writing/README.md)
 
 ![Original de OPUS y traducción generada](../publication/ilm-nature/figures/Source_supported_opus.png)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+تعلّم قارئ بصري على بطاقة RTX 4090 D واحدة تحديد طرفَي الفعل في صورة جملة إنجليزية. عند إعطائه موضع الفعل وحده، حدّد الكلمتين بدقة في **901 من 1,196** جملة اختبار، وفي **347 من 478** جملة من مجموعة ثالثة. ويُرجع صورتي الكلمتين من الأصل. في الترجمة الحرة، نقل نموذج الكتابة معنى جملة كتابية كاملة واحدة من أصل 192. [النتائج](../references/natural_pictured_roles_result.md) · [تشغيل القارئ](../models/visual_role_locator/README.md)
+
+![النتائج](../publication/ilm-nature/figures/Natural_role_reading.png)
+
 اختار نموذج دُرّب على بطاقة RTX 4090 D واحدة بين صورتين لترجمتين لكل مقطع كتاب. بعد تصحيح ميله إلى تفضيل صياغات معيّنة، ارتفع عدد الأزواج التي صحّ فيها الاختيار للمقطعين من **21/96 إلى 77/96**. وعند كتابة الترجمة بحرية، زاد توقّع أشكال الكتابة من المصدر عدد الإجابات التي احتفظت بالفعل المطلوب من 17 إلى 43 من أصل 336. لكن إجابة واحدة فقط من 192 نقلت معنى المقطع كاملًا. تعرض الصورة أول إجابة مقبولة في اختبار OPUS المنفصل. [النتائج](../references/source_supported_writing_result.md) · [تشغيل النموذج](../models/source_supported_writing/README.md)
 
 ![صورة المصدر والترجمة الناتجة في اختبار OPUS](../publication/ilm-nature/figures/Source_supported_opus.png)

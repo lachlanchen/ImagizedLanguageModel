@@ -31,7 +31,19 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const supportEdition = edition === 'support';
+const roleEdition = edition === 'roles';
+if (roleEdition) {
+ await plate('../natural_pictured_roles_v1/plate.json','Finding the participants in a pictured clause',
+   'Original pictured test sentences and both crops emitted by the model. Only the predicate was marked. Cases selected by the fixed display rule.', 'natural_roles');
+}
+const restorationEdition = edition === 'restoration' || roleEdition;
+const supportEdition = edition === 'support' || restorationEdition;
+if (restorationEdition) {
+ await plate('../visual_strip_restoration_v1/Free_strip_restoration.json','Can a visual writer supply the words of a translation?',
+   'First Chinese-directed request in the reserved book panel. The source alone determines the number and content of output strips.', 'strip_restoration');
+ await plate('../visual_strip_restoration_v1/Supplied_strip_restoration.json','Can the source resolve order when the content is given?',
+   'The supplied multiset is identical across the role reversal. First both-exact pair in fixed order if available, otherwise the first pair.', 'strip_restoration');
+}
 const actionsEdition = edition === 'actions' || supportEdition;
 if(supportEdition) {
  await plate('../source_supported_writing_v1/plate.json','Writing with source-predicted content',
@@ -69,10 +81,10 @@ if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.js
 if(supportEdition) await plate('../source_supported_writing_v1/opus-plate.json','Free translation within the OPUS test domain',
  'First credited aligned response in fixed order if available, otherwise the first request. Compare the unchanged parent and guided output.','source_supported');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
-await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:supportEdition?10:actionsEdition?8:draftEdition?6:4,
- materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
+ materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000'],receiptPath:path.join(stage,'presentation_validation.json')});

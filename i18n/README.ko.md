@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+RTX 4090 D 한 장으로 학습한 시각 모델이 영어 문장 이미지에서 동사의 위치만 주어졌을 때 행위의 두 참여자를 나타내는 단어를 찾습니다. 공식 시험 **1,196개 절 중 901개**, 세 번째 말뭉치에서는 **478개 중 347개**에서 두 단어를 모두 정확히 잘라 냈습니다. 자유 번역에서는 마스킹으로 학습한 모델이 책 구절 192개 중 하나의 의미를 온전히 전달했습니다. [실험 결과](../references/natural_pictured_roles_result.md) · [실행 방법](../models/visual_role_locator/README.md)
+
+![실험 결과](../publication/ilm-nature/figures/Natural_role_reading.png)
+
 RTX 4090 D 한 장으로 학습한 모델에 원문 이미지와 번역 후보 이미지 두 장을 제시했다. 특정 번역 표현을 선호하는 경향을 보정하자 두 원문에서 모두 정답을 고른 쌍이 **21/96에서 77/96**으로 늘었다. 자유 생성에서는 원문으로부터 글자 조각을 예측해 요청한 서술어를 쓴 답이 17/336에서 43/336으로 늘었지만, 책 원문의 뜻을 온전히 전달한 번역은 192건 중 1건이었다. 아래는 별도의 OPUS 시험에서 처음으로 정답 판정을 받은 출력이다. [실험 결과](../references/source_supported_writing_result.md) · [모델 실행](../models/source_supported_writing/README.md)
 
 ![OPUS 원문과 실제 생성된 번역 이미지](../publication/ilm-nature/figures/Source_supported_opus.png)

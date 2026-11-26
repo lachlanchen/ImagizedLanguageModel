@@ -1,0 +1,13 @@
+\begin{multicols}{2}
+\section*{Which pictured strips belong in the answer?}
+Both content predictors saw 268,342 parallel pairs in each direction over four passes. For each target strip, a linear head scored the frozen source windows. The maximum logit predicted whether the strip occurred anywhere in the translation. Training used Bernoulli loss weighted by inverse square root frequency. We then added up to 2.4 nats to the frozen writer's first-emission score, according to the log probability relative to training prevalence. The shuffled control permuted training sources inside the same size buckets. The aligned and shuffled heads each contained 1.56 million trainable parameters and took 56 and 52 seconds to fit on one card.
+
+At held reference prefixes, 2,045 of 3,910 correct decisions lay beyond the maximum possible correction. The aligned head repaired 103 first choices and lost 68. With the true unordered strip inventory supplied, the frozen writer reconstructed 7/192 book translations and 24/336 controlled sentences exactly. Of 84 role pairs sharing the entire strip multiset, only one had both orders reconstructed. These results isolate a difficulty arranging known content.
+\end{multicols}
+\displayfigure{Independent_optical_actions.pdf}{Two fixed book passages and the one credited strip translation}{Top and middle show the first pair from each of the first two works, in alternating directions. Both writers lose the action of the first passage and the objects of the second. The final example was selected after scoring. All sources and answers are original PNGs.}
+\begin{multicols}{2}
+\section*{Recognition under controlled changes}
+We assigned two complete targets to two sources of similar length from the same work by comparing summed conditional log likelihoods. Matching longer answers to longer sources earned 57/96 with half credit for ties. The single-glyph and strip writers reached 95/96 and 93/96. With exactly equal source lengths they reached 22/23 and 23/23.
+
+Reversing who acted on whom kept every input and output glyph count fixed. The models correctly assigned 167/168 and 164/168 pairs among six transitive predicates. When asked to produce the sentences freely, neither reproduced a canonical answer among 336 requests. The single-glyph writer included both prescribed names in seven outputs. The strip writer included both in zero. Alternative names and paraphrases remain possible under this literal check.
+\end{multicols}
