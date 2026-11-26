@@ -20,7 +20,7 @@ class MotorTranslator(nn.Module):
         for t,n in enumerate((english_choices,chinese_choices)):
             self.register_buffer(f"codes_{t}",torch.zeros(n,160))
 
-    def scene(self,tiles,lengths):
+    def scene(self,tiles,lengths,direction=None):
         """Encode actual 32-square images, preserving real empty space as an occupied cell."""
         b,n,h,w=tiles.shape
         if (h,w)!=(32,32) or (lengths<=0).any() or (lengths>96).any() or (lengths>n).any():
@@ -33,7 +33,7 @@ class MotorTranslator(nn.Module):
 
     @torch.inference_mode()
     def write(self,tiles,lengths,direction,limit=128):
-        ctx,valid=self.scene(tiles,lengths)
+        ctx,valid=self.scene(tiles,lengths,direction)
         codes=getattr(self,f"codes_{direction}")
         keys=torch.cat((self.writer.end[None],self.writer.target(codes)))
         x=self.writer.begin[direction].expand(len(tiles),1,-1)

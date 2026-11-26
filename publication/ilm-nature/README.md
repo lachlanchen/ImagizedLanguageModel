@@ -1,6 +1,6 @@
 # Language Is Image: Imagized Language Modeling
 
-The current reading edition opens with two traced visual writers. Figure 1 shows a sharp but incorrect translation and a damaged name written directly in pixels. Figures 67–68 compare a frozen translation readout with the compact ILM and give the new pixel motor's complete outputs. Every image and stop from the motor matched its predecessor on the 192 literary requests. Two answers conveyed the requested meaning. [Reading PDF](visual_language_paper.pdf) · [Editable figures](figures/Visual_writer_evidence.pptx) · [Figure-by-figure index](evidence/visual_output_figure_index.json) · [Raw inputs and outputs](evidence/neural_motor_answers.zip)
+The reading edition opens with traced examples from three visual writers. Figure 69 reports the independent translators' complete-meaning scores and a source intervention. Figure 70 shows original inputs and six complete answers. All 768 GPU answers reproduced on CPU. Correctly drawn words often gave the wrong translation. [Reading PDF](visual_language_paper.pdf) · [Editable figures 69–70](figures/Independent_field_writer.pptx) · [Figure-by-figure index](evidence/visual_output_figure_index.json) · [Complete raw images and outcomes](evidence/field_writer_outputs.zip)
 
 
 [Read the paper](visual_language_paper.pdf) · [Cumulative manuscript](manuscript.pdf) · [Historical PDFs](versions/README.md)

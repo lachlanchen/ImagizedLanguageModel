@@ -31,14 +31,14 @@ def grid_bits(path,n):
     return a.reshape(h//32,32,w//32,32).transpose(0,2,1,3).reshape(-1,32,32)[:n].copy()
 
 
-def save_ink(bits,path):
+def save_ink(bits,path,*,image_format=None):
     n=len(bits)
     cols=min(32,max(1,n))
     rows=max(1,(n+cols-1)//cols)
     page=np.zeros((rows*cols,32,32),dtype=np.uint8)
     page[:n]=bits
     ink=page.reshape(rows,cols,32,32).transpose(0,2,1,3).reshape(rows*32,cols*32)
-    Image.fromarray(255-ink*255).save(path)
+    Image.fromarray(255-ink*255).save(path, format=image_format)
 
 
 def main():
@@ -48,9 +48,15 @@ def main():
     p.add_argument("--to",choices=("en","zh"),required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--device",choices=("cpu","cuda"),default="cpu")
+    p.add_argument("--source-field",choices=("regression","prediction"),
+                   help="Use a fitted independent decoder with the corresponding optical source reader")
     args=p.parse_args()
     torch.set_num_threads(2)
-    net=load_model(args.device)
+    if args.source_field:
+        from ilm.visual_lm.field_to_glyph import restore
+        net,_=restore(args.source_field,args.device)
+    else:
+        net=load_model(args.device)
     x=torch.from_numpy(grid_bits(args.input,args.cells)).to(args.device)[None]
     ink,count,stop=net.write(x,torch.tensor([args.cells],device=x.device),("en","zh").index(args.to))
     save_ink(ink[0,:int(count[0])].cpu().numpy(),args.output)

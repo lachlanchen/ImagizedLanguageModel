@@ -1,0 +1,53 @@
+{
+  "colors": {
+    "To English": "#087260",
+    "To Chinese": "#b37744"
+  },
+  "panels": [
+    {
+      "title": "a   Complete literary translations",
+      "unit": "Credited answers per 96 requests",
+      "labels": [
+        "Original ILM",
+        "Regression field",
+        "Prediction field",
+        "Exchanged input",
+        "Qwen 8B Q4"
+      ],
+      "series": {
+        "To English": [
+          1,
+          1,
+          1,
+          0,
+          85
+        ],
+        "To Chinese": [
+          4,
+          4,
+          3,
+          0,
+          86
+        ]
+      }
+    },
+    {
+      "title": "b   Marginal contribution of each source path",
+      "unit": "Gain in log probability (nats per glyph or stop)",
+      "labels": [
+        "Original image path",
+        "Learned field"
+      ],
+      "series": {
+        "To English": [
+          0.6176,
+          0.0563
+        ],
+        "To Chinese": [
+          1.497,
+          0.2308
+        ]
+      }
+    }
+  ]
+}
