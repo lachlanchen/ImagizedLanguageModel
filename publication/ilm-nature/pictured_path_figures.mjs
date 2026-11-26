@@ -31,8 +31,13 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const roleEdition = edition === 'roles';
-if (roleEdition) {
+const referentEdition = edition === 'referents';
+const roleEdition = edition === 'roles' || referentEdition;
+if (referentEdition) {
+ await plate('../visual_referents_v1/plate.json','Can a pictured reader resolve a relative expression?',
+   'First newly correct controlled answer and first external failure. The English event strips are selected source cells in a fixed print face. Both Chinese answers were emitted by the frozen writer.', 'visual_referents');
+}
+if (roleEdition && !referentEdition) {
  await plate('../natural_pictured_roles_v1/plate.json','Finding the participants in a pictured clause',
    'Original pictured test sentences and both crops emitted by the model. Only the predicate was marked. Cases selected by the fixed display rule.', 'natural_roles');
 }
@@ -81,7 +86,7 @@ if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.js
 if(supportEdition) await plate('../source_supported_writing_v1/opus-plate.json','Free translation within the OPUS test domain',
  'First credited aligned response in fixed order if available, otherwise the first request. Compare the unchanged parent and guided output.','source_supported');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,

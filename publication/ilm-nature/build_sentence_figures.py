@@ -18,6 +18,7 @@ def main():
     cli.add_argument("--support",action="store_true")
     cli.add_argument("--restoration",action="store_true")
     cli.add_argument("--roles",action="store_true")
+    cli.add_argument("--referents",action="store_true")
     args=cli.parse_args()
     actions=args.actions or args.support
     edition="actions" if actions else "drafts"
@@ -29,6 +30,8 @@ def main():
         edition,stem,corpus="restoration","Visual_strip_restoration","visual_strip_restoration_v1"
     if args.roles:
         edition,stem,corpus="roles","Visual_role_reading","natural_pictured_roles_v1"
+    if args.referents:
+        edition,stem,corpus="referents","Visual_referent_answers","visual_referents_v1"
     with TemporaryDirectory(prefix="ilm-draft-figures-",dir=ROOT/"artifacts") as work:
         stage=Path(work)
         (stage/"node_modules").symlink_to(NODE/"node_modules")

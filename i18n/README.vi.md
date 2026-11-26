@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Một mô hình học trên một RTX 4090 D có thể đọc ảnh câu tiếng Anh và tìm hai từ chỉ các bên tham gia hành động. Khi chỉ được đánh dấu vị trí động từ, mô hình tìm đúng cả hai từ trong **901/1.196** mệnh đề kiểm tra và **347/478** mệnh đề từ kho ngữ liệu thứ ba. Câu trả lời là các phần cắt từ ảnh gốc. Khi tự dịch, mô hình học bằng cách che các đoạn chữ chỉ truyền đạt trọn nghĩa một trong 192 đoạn sách. [Kết quả](../references/natural_pictured_roles_result.md) · [Chạy mô hình](../models/visual_role_locator/README.md)
+Khi đọc ảnh câu *It was Mary who helped Tom* có đánh dấu động từ, mô hình viết **玛丽帮助了汤姆。** Giữ nguyên bộ sinh tiếng Trung và dạy bộ đọc tìm tiền ngữ của đại từ quan hệ đã nâng số đáp án khớp hoàn toàn với ảnh tham chiếu từ 0 lên 180 trong 236 câu chẻ nhấn mạnh chủ ngữ. Với tám mệnh đề tự nhiên từ một ngữ liệu khác, chưa có câu trả lời nào truyền đạt trọn vẹn sự việc. [Thí nghiệm và ảnh đầu ra gốc](../references/visual_referent_learning_result.md)
 
-![Kết quả](../publication/ilm-nature/figures/Natural_role_reading.png)
+![Kết quả](../publication/ilm-nature/figures/Visual_referent_answers.png)
 
 Mô hình huấn luyện trên một RTX 4090 D chọn giữa hai bản dịch dạng ảnh cho từng đoạn sách. Sau khi hiệu chỉnh thiên hướng ưu tiên một số cách diễn đạt, số cặp đúng cả hai lựa chọn tăng từ **21/96 lên 77/96**. Khi tự viết, dự đoán các dải ký tự từ ảnh nguồn giúp số câu chứa vị từ cần thiết tăng từ 17/336 lên 43/336, nhưng chỉ 1/192 bản dịch sách truyền đạt trọn nghĩa. Hình dưới là câu trả lời đầu tiên được chấm đúng trong phép thử OPUS riêng. [Kết quả](../references/source_supported_writing_result.md) · [Chạy mô hình](../models/source_supported_writing/README.md)
 

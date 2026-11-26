@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-在一张 RTX 4090 D 上训练的视觉模型，可以从英文句子图像中找出谁做了什么。只标出动词的位置，模型就在 **1,196 个测试分句中的 901 个**准确找到了两个参与者的中心词。在第三个树库上，它答对了 **347/478**。输出是从原图中裁取的字词。自由翻译仍有明显差距：仅用掩码训练的模型在 192 个书摘翻译请求中只完整传达了 1 个的含义。 [实验结果](../references/natural_pictured_roles_result.md) · [运行模型](../models/visual_role_locator/README.md)
+给模型看英文句子 *It was Mary who helped Tom*，并标出动词，它写出了 **玛丽帮助了汤姆。** 写入模型保持不变，仅训练阅读模型找出关系代词所指的人，236 个主语强调句的中文输出便从 0 个增加到 180 个与参考答案完全一致。在来自另一语料库的 8 个自然分句中，模型还没有一次完整表达事件。 [实验与原始输出](../references/visual_referent_learning_result.md)
 
-![实验结果](../publication/ilm-nature/figures/Natural_role_reading.png)
+![实验结果](../publication/ilm-nature/figures/Visual_referent_answers.png)
 
 在一张 RTX 4090 D 上训练的模型可以看原文图像，从两张候选译文图像中选择。校正它对某些译文措辞的偏好后，两段书摘都选对的组数从 **21/96 提高到 77/96**。让模型自行写译文更难。预测原文所支持的字形片段后，受控测试中写出指定谓语的答案从 17/336 增至 43/336，但在 192 个书摘翻译请求中，只有 1 个完整传达了原意。下图是另一组 OPUS 测试中首个获认可的模型输出。 [实验结果](../references/source_supported_writing_result.md) · [运行生成或选择模型](../models/source_supported_writing/README.md)
 

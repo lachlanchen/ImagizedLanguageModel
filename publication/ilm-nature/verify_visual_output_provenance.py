@@ -41,7 +41,7 @@ def main():
     assert sha(ARCHIVE)==report["archive"]==replay["archive"]==audit["archive"]
     assert audit["assessment"]==sha(PUB/"assessment.json")
     assert audit["proof"]==sha(PAPER.parents[1]/"formal/span_list/SourcePathRepair.lean")
-    deck = FIG/"Visual_role_reading.pptx"
+    deck = FIG/"Visual_referent_answers.pptx"
     paper = PAPER/"manuscript.pdf"
     assert sha(paper)==sha(PAPER/"visual_language_paper.pdf")
     assert sum(replay["same"].values())+len(replay["differences"])==960
@@ -218,21 +218,22 @@ def main():
         assert "Fig. 2" in " ".join(doc[1].get_text().split())
         figures.insert(0,dict(page=2,files={n:sha(FIG/n) for n in ("Free_strip_restoration.pdf","Supplied_strip_restoration.pdf")}))
         role_pub=PUB.parent/"natural_pictured_roles_v1"
-        role_archive=PAPER/"evidence/visual_role_localization.zip"
-        role_plate=read(role_pub/"plate.json")
-        assert sha(role_archive)==role_plate["archive"]==read(role_pub/"localization.json")["archive"]
+        ref_pub=PUB.parent/"visual_referents_v1"
+        role_archive=PAPER/"evidence/visual_referents.zip"
+        role_plate=read(ref_pub/"plate.json")
+        assert sha(role_archive)==role_plate["archive"]==read(ref_pub/"outcomes.json")["archive"]
         expected=Counter()
-        with ZipFile(role_archive) as raw, fitz.open(FIG/"Natural_role_reading.pdf") as pdf:
+        with ZipFile(role_archive) as raw, fitz.open(FIG/"Visual_referent_answers.pdf") as pdf:
             for item in role_plate["items"]:
                 if item["type"]!="strip":continue
                 blob=raw.read(item["member"])
-                assert blob==(FIG/"natural_roles"/item["name"]).read_bytes()
+                assert blob==(FIG/"visual_referents"/item["name"]).read_bytes()
                 assert sha256(blob).hexdigest()==item["sha256"]
                 expected[bitmap(blob)]+=1
             assert expected==images(pdf,pdf[0])==images(doc,doc[0])
         assert "Fig. 1" in " ".join(doc[0].get_text().split())
         media.update(expected)
-        figures.insert(0,dict(page=1,file="Natural_role_reading.pdf",sha256=sha(FIG/"Natural_role_reading.pdf")))
+        figures.insert(0,dict(page=1,file="Visual_referent_answers.pdf",sha256=sha(FIG/"Visual_referent_answers.pdf")))
         # A package may deduplicate identical bitmaps used in two places.
         packaged={bitmap(ppt.read(n)) for n in ppt.namelist() if n.startswith("ppt/media/")}
         assert packaged==set(media)
@@ -247,6 +248,7 @@ def main():
                original_image_instances=sum(media.values()),requests=192,answers=960,replayed=replay["same"],
                independent_trial=dict(requests=192,answers=768,archive=sha(fresh_archive),replayed=new_replay["same"],
                    cpu_differences=new_replay["differences"],assessment=sha(fresh/"assessment.json"),routing=sha(fresh/"routing.json")),
+               visual_referents={k:sha(ref_pub/(k+".json")) for k in ("corpus","outcomes","audit","plate","external-assessment")},
                natural_roles={k:sha(role_pub/(k+".json")) for k in ("corpus","assessment","audit","spacing","pud","localization")},
                strip_restoration={k:sha(restoration/(k+".json")) for k in ("book-assessment","opus-assessment","supplied","book-replay","opus-replay")},
                source_support={k:sha(supported/(k+".json")) for k in ("assessment","replay","roles","prefixes","opus-assessment","oracle-inventory","assignment-bias","independent-choices","book-candidate-selection","opus-candidate-selection")},

@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Ein auf einer RTX 4090 D trainiertes Modell liest englische Sätze als Bilder. Ist nur das Verb markiert, findet es in **901 von 1.196** Testfällen beide gesuchten Wörter. In einer dritten Baumbank gelingt das in **347 von 478** Fällen. Die Antworten sind Ausschnitte des Originals. Beim freien Übersetzen gab der mit Maskierung trainierte Schreiber nur einen von 192 Buchausschnitten vollständig wieder. [Ergebnisse](../references/natural_pictured_roles_result.md) · [Modell ausführen](../models/visual_role_locator/README.md)
+Aus dem Bild des Satzes *It was Mary who helped Tom* mit markiertem Verb erzeugte das Modell **玛丽帮助了汤姆。** Bei unverändertem chinesischem Generator erhöhte das Training auf die Bezugswörter von Relativpronomen die Zahl exakt übereinstimmender Antworten von 0 auf 180 bei 236 Spaltsätzen mit hervorgehobenem Subjekt. Bei acht natürlichen Teilsätzen aus einem externen Korpus gab keine Antwort das vollständige Ereignis wieder. [Experiment und Originalausgaben](../references/visual_referent_learning_result.md)
 
-![Ergebnisse](../publication/ilm-nature/figures/Natural_role_reading.png)
+![Ergebnisse](../publication/ilm-nature/figures/Visual_referent_answers.png)
 
 Das auf einer RTX 4090 D trainierte Modell wählt für jede Buchpassage zwischen zwei abgebildeten Übersetzungen. Nach Korrektur seiner Vorliebe für bestimmte Zielformulierungen stieg die Zahl der Paare mit zwei richtigen Entscheidungen von **21/96 auf 77/96**. Beim freien Schreiben erhöhte die Vorhersage von Glyphengruppen aus dem Quellbild die Zahl der Antworten mit dem gesuchten Prädikat von 17/336 auf 43/336. Nur eine von 192 Buchübersetzungen gab die vollständige Bedeutung wieder. Die Abbildung zeigt die erste im separaten OPUS-Test akzeptierte Antwort. [Ergebnisse](../references/source_supported_writing_result.md) · [Modell ausführen](../models/source_supported_writing/README.md)
 

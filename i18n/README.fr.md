@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Un lecteur visuel entraîné sur une RTX 4090 D repère les participants à une action dans une phrase anglaise. Avec le seul verbe indiqué, il a retrouvé les deux mots attendus dans **901 propositions sur 1 196**, puis dans **347 sur 478** dans un troisième corpus. Il en restitue les images originales. En traduction libre, le modèle entraîné par masquage a préservé le sens complet d’un seul passage sur 192. [Résultats](../references/natural_pictured_roles_result.md) · [Exécuter le lecteur](../models/visual_role_locator/README.md)
+À partir de l’image de la phrase *It was Mary who helped Tom*, avec le verbe indiqué, le modèle a écrit **玛丽帮助了汤姆。** Avec le même générateur chinois, apprendre au lecteur à retrouver l’antécédent d’un pronom a porté le nombre de réponses exactes de 0 à 180 sur 236 phrases clivées mettant le sujet en relief. Aucune des huit réponses sur des propositions issues d’un corpus externe n’a restitué l’événement complet. [Expérience et sorties originales](../references/visual_referent_learning_result.md)
 
-![Résultats](../publication/ilm-nature/figures/Natural_role_reading.png)
+![Résultats](../publication/ilm-nature/figures/Visual_referent_answers.png)
 
 Entraîné sur une RTX 4090 D, le lecteur choisit entre deux traductions en image pour chaque extrait. Corriger sa préférence pour certaines formulations fait passer le nombre de paires dont les deux choix sont justes de **21/96 à 77/96**. En rédaction libre, prédire les groupes de glyphes à partir de la source porte de 17/336 à 43/336 le nombre de réponses contenant le prédicat attendu. Une seule des 192 traductions de livres restitue le sens complet. La figure montre la première réponse acceptée sur le test OPUS distinct. [Résultats](../references/source_supported_writing_result.md) · [Exécuter le modèle](../models/source_supported_writing/README.md)
 

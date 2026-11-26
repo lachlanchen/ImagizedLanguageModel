@@ -1,0 +1,3 @@
+# Article revision for reading relative clauses
+
+Preserve the November 27 head-localization edition. Replace the lead with the measured local-head and resolved-head comparison, an external treebank test, and a direct downstream test of the freely emitted Chinese event image. Keep the nine-page article, including the prior book and historical-glyph evidence. Use two original source/writer cases, with a correct controlled response and a genuine external failure if available. Label the marked predicate, supplied print normalization, deterministic extraction, training supervision and the external assessment method. Authenticate the original image contents through the archive, PDF and editable PowerPoint. Update the local latest PDF after visual inspection.

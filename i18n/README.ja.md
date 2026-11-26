@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-RTX 4090 D 1枚で学習したモデルが、英語の文を画像として読み、動詞の位置だけを手掛かりに動作の参与者を表す2語を探します。公式テストでは **1,196節中901節**、別のコーパスでは **478節中347節**で両方を正しく切り出しました。一方、マスク学習による自由翻訳で書籍の一節の意味を完全に伝えられたのは192件中1件でした。 [実験結果](../references/natural_pictured_roles_result.md) · [実行方法](../models/visual_role_locator/README.md)
+動詞に印を付けた英文 *It was Mary who helped Tom* の画像から、モデルは **玛丽帮助了汤姆。** と出力した。中国語の生成器を固定し、関係代名詞の先行詞を読み取るように学習させると、主語を強調した236文のうち中国語の出力が参照画像と完全に一致した件数は0件から180件に増えた。一方、外部コーパスから取った実例8件では、出来事の意味を完全に伝えた回答はなかった。 [実験と出力画像](../references/visual_referent_learning_result.md)
 
-![実験結果](../publication/ilm-nature/figures/Natural_role_reading.png)
+![実験結果](../publication/ilm-nature/figures/Visual_referent_answers.png)
 
 RTX 4090 D 1枚で学習したモデルに、原文画像と二つの訳文画像を与えた。特定の訳文を好む傾向を補正すると、二つの原文について両方とも正しく選べた組数は **21/96から77/96** に増えた。自由生成では、原文から字形列を予測することで指定の述語を含む回答が17/336から43/336に増えたが、書籍の意味を完全に伝えたのは192件中1件だった。図は別のOPUSテストで最初に正答と判定された出力。 [実験結果](../references/source_supported_writing_result.md) · [モデルの実行](../models/source_supported_writing/README.md)
 
