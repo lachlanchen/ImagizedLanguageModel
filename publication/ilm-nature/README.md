@@ -2,6 +2,8 @@
 
 [Read the paper](visual_language_paper.pdf) · [Cumulative manuscript](manuscript.pdf) · [Historical PDFs](versions/README.md)
 
+Pages 50–52 show actual agent-reversal and literary replies, complete natural-translation scores, a source-likelihood check and the same input in two held typefaces. [Editable charts and raw images](figures/Reading_roles_across_typefaces.pptx) · [Result and weights](../../references/book_rehearsal_result.md)
+
 Pages 47–49 show matched training on bilingual literary and talk passages, all five credited free replies, and three held literary cases selected independently of grading. Original PNGs retain their physical cell spacing. [Editable figures](figures/Reading_bilingual_books.pptx) · [Original input and output images](figures/book_breadth/) · [Complete results](../../references/book_breadth_result.md)
 
 Page 1 reproduces the input PNG and the emitted Chinese translation at their original cell spacing. Pages 45–46 show the exchanged roles, two freely written scientific translations, the separate physical-pixel writer and the tests of meaning and glyph order. [Original PNGs](figures/raw_ilm/) · [Editable figures and chart data](figures/Raw_ILM_images.pptx) · [Training and tests](../../references/paired_ink_result.md)

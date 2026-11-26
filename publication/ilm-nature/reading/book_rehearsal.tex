@@ -1,0 +1,39 @@
+\newpage
+\spread{Can a writer keep track of who did what?}
+\noindent Reading a broader corpus erased a passive construction that the translator had previously learned. We tested whether a small amount of rehearsal could preserve that construction while the writer continued to read books and talks.
+\platehere{Figure_198_rehearsal_and_transfer}{Role binding and open translation after rehearsal}{\textbf{a}, A role family counts once when the same writer gives all eight exact stopped answers under agent exchange, negation and change of voice. Each bar covers 118 families. Four flips changes four of the 1,024 pixels per glyph, with one fixed mask per symbol. Serif uses Noto Serif CJK SC Regular. \textbf{b}, Both masked grading orders had to accept the complete translation. The earlier panel contains 144 requests and the fresh panel 96. Qwen3-8B Q4 received the source text.}
+\begin{multicols}{2}
+\section*{Preserving a construction}
+We replaced 3,219 of 231,337 training pairs with previously learned active and passive constructions. Each replacement matched the English and Chinese lengths of the original pair. Rehearsal used 0.703\% of target positions. The two writers started from identical weights and saw 108,657,378 positions each over six passes. Development loss selected the final rehearsal pass. The 1,688,480-parameter model took 234 seconds across these passes on one RTX 4090 D. Earlier training, corpus preparation and assessment are additional costs.
+\par The book-trained control gave 86/472 active and 0/472 passive answers exactly. Rehearsal raised these counts to 472 and 463. The starting writer, the control and the rehearsal writer completed 76, zero and 110 of the 118 families respectively. This establishes transfer of the tested construction to held combinations.
+\section*{Translation on new material}
+The rehearsal writer kept all three earlier exact natural translations. It earned four strict semantic credits on the earlier panel; the control earned five and the text comparator 79 in this grading run. We then translated 24 passages from four other literary works and 24 FLORES passages from distinct article URLs in both directions. Both visual writers scored zero on these 96 requests. Qwen scored 22/48 on the books and 36/48 on FLORES. The grader credited 95/96 references and rejected all 96 unrelated translations twice. Its ratings have not received independent bilingual human adjudication.
+\end{multicols}
+\newpage
+\spread{A reversal the model learned and a passage it missed}
+\noindent These are the original input images and stopped replies. Exchanging the participants in the English sentence changes the agent of the action in the Chinese output.
+\platehere{Figure_199_who_helped_whom}{Complete replies from the two independently trained writers}{\textbf{a,b}, Affirmative passives from the first fully recovered family in assessment order. In both panels the rehearsal writer's output equals the independently held Chinese target, including its stop. \textbf{c}, The first fresh literary request in the reserved order. The Chinese source describes the house and the author's reception. Both writers lose that relation. All six emitted images were reproduced independently on CPU from the published input PNGs.}
+\begin{multicols}{2}
+\section*{What the contrast establishes}
+The output is a sequence of physical bitmaps selected by a causal decoder. The network observes pooled ink on a 32-by-32 cell grid and generates without reference glyphs or an external language model. Its repertoire comes from the training inventory. In the first two requests the only change is which person helped the other. Both answers retain the verb and reverse the agent and patient correctly.
+\section*{The limit of a short construction}
+In the book passage, repeating the word for the house lends the reply a superficial connection to the source. The model does not express the reception of the author. Success on the controlled eight-way changes did not carry over to complete propositions in independently selected prose. The old control produced the same output bytes and stops as its original run on every revisited case.
+\section*{Does the writer use the pictured source?}
+For each fresh reference translation $y$, we evaluated the probability of its entire glyph stream and stop under each of the 24 pictured sources $x_j$ in its domain and direction. The true source strictly maximized $p_\theta(y\mid x_j)$ on 90/96 requests. Restricting the foils to the five nearest sources in length gave 93/96. Reversing the order of the correct source glyphs reduced the reference likelihood on 93/96. Each comparison supplies the complete reference; autonomous generation still earned zero on the same requests.
+\par\smallskip{\small\sffamily\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lrr@{}}\hline
+Pictured sources & To English & To Chinese\\\hline
+Books, strict first of 24 & 22/24 & 20/24\\
+FLORES, strict first of 24 & 24/24 & 24/24\\\hline
+\end{tabular*}}
+\end{multicols}
+\newpage
+\spread{Keeping the words when the ink changes}
+\noindent A change of font erased all 110 complete families. We kept the translator fixed and trained a convolutional input reader on paired glyph images from other typefaces.
+\platehere{Figure_200_optical_transfer}{The same passive request seen through two unfamiliar typefaces}{Each input is the observed raster, before any optical correction. Below it are the original answer PNGs from the unaided writer and the writer with the learned input reader. Noto Serif was excluded as a family. DejaVu Serif Condensed was held as a face within a family used for training. All four replies were reproduced from the pictured inputs on CPU.}
+\begin{multicols}{2}
+\section*{An optical correction with a finite guarantee}
+Let $s_c$ be the Hamming distance from a reference bitmap $c$ to its nearest other reference. An observed glyph $q$ and up to $e$ further pixel flips identify the same unique closest reference when $2[d(q,c)+e]<s_c$. The triangle inequality proves the claim for any rival. We checked this result for finite binary images in Lean. The resulting deterministic decoder restored 110/118 families under four flipped pixels per input glyph. It restored zero families under the serif substitution.
+\section*{What a learned reader changes}
+The optical adapter learned from 28,097 glyph examples including the canonical palette. It predicts a physical training shape, keeps exact input shapes, and passes uncertain images through. Its 1,423,653 parameters add to the writer for a total of 3,112,133. Fitting took 3,000 updates and 14 seconds of GPU training time. With the Noto Serif inputs it restored 110 families and reproduced the original answers on 239/240 natural requests. With DejaVu Serif Condensed it restored 48 families; only English sources had complete font coverage on the natural panel.
+\par All 96 fresh natural replies matched the canonical writer under the Noto Serif repair. For a fixed rubric, the gain in correct answers cannot exceed the number of changed complete replies; we also verified this bound in Lean. Here the upper bound is zero. The experiment localizes the remaining error to a stage beyond the successful transfer between these two pictured inputs.
+\end{multicols}

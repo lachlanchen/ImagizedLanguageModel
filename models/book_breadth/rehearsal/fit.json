@@ -1,0 +1,107 @@
+{
+  "binding": {
+    "scripts/train_book_breadth.py": "a26de5d82d9e469509e9d0dc8a52e92e0ce7f278f5622c50eda7ce56535fc929",
+    "scripts/prepare_book_breadth.py": "63a87d5d743976a373955113e46fba23072d257f6f0447aa657f0ca9d61ec2f9",
+    "references/book_breadth_protocol.md": "2489573829e065bc5731b4aca7efe6656149e184327e5c7954cc12bad6a0ff98",
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "references/evidence/book_breadth_v1/corpus.json": "39cdc7a3f9ab9699df7bc8d72721363034c6d3665a49f13e10611698c499f0a2",
+    "models/translation_paraphrases/varied/weights.safetensors": "cca8dd644f2b08cded72480a7f752f3f6e4a7caae1a3465589e93276560e50a0",
+    "models/ordered_translation/palette.npy": "46015fdef3372fcd59de12776e62fe9fe75becffc77edc052745c53d313863ab",
+    "models/ordered_translation/inventories.json": "344f774a1982c1ce1ae2a62d148426aa501e1ffb7a303917873ce6d8cc64851a",
+    "references/book_rehearsal_protocol.md": "609875cedfd5e9864c549b851d326f52f4713c6693365eb24b3ec92ed3ec2d6a",
+    "scripts/prepare_book_rehearsal.py": "7319f434fb14007e9bfb2f0c3dcc2c1b954ec73677acd7e8f2b3853a8021a5e8",
+    "scripts/train_book_rehearsal.py": "5b02b3dd35e2aa851a7a340428fe9293e5773b27740d8f8978355a50ec07c616",
+    "references/evidence/book_rehearsal_v1/design.json": "a9bd222f91bfb93ae75e47eb421c97e69a83b37b2094f3b40981a3987c08ce14"
+  },
+  "weights": "26f2e5281a4a001f71107ecd1936f8b9ec258a03d708de07910fc832c25fbc03",
+  "initial_dev_nll": {
+    "book": 2.3983856760732545,
+    "talk": 1.9140037294966064,
+    "flores": 2.137670459861527
+  },
+  "selected_pass": 6,
+  "epochs": [
+    {
+      "pass_number": 1,
+      "updates": 1858,
+      "positions": 18109563,
+      "nll": 1.6781145618675313,
+      "dev_nll": {
+        "book": 2.1464710316301567,
+        "talk": 1.6086474388433258,
+        "flores": 2.009985017409378
+      },
+      "seconds": 35.83356382045895,
+      "peak_bytes": 1301139456
+    },
+    {
+      "pass_number": 2,
+      "updates": 1858,
+      "positions": 18109563,
+      "nll": 1.5666300035859901,
+      "dev_nll": {
+        "book": 2.0927860921797867,
+        "talk": 1.5757304886347567,
+        "flores": 1.9757427806217922
+      },
+      "seconds": 38.038241065107286,
+      "peak_bytes": 1301139456
+    },
+    {
+      "pass_number": 3,
+      "updates": 1858,
+      "positions": 18109563,
+      "nll": 1.51050028050799,
+      "dev_nll": {
+        "book": 2.055886681560737,
+        "talk": 1.5449779389670533,
+        "flores": 1.9637139991779833
+      },
+      "seconds": 38.74678832385689,
+      "peak_bytes": 1301139456
+    },
+    {
+      "pass_number": 4,
+      "updates": 1858,
+      "positions": 18109563,
+      "nll": 1.469024905597011,
+      "dev_nll": {
+        "book": 2.035441625942128,
+        "talk": 1.5128330696761878,
+        "flores": 1.9382329439892536
+      },
+      "seconds": 42.28638926986605,
+      "peak_bytes": 1301139456
+    },
+    {
+      "pass_number": 5,
+      "updates": 1858,
+      "positions": 18109563,
+      "nll": 1.4363206779861026,
+      "dev_nll": {
+        "book": 2.018102476391705,
+        "talk": 1.5114549455599549,
+        "flores": 1.9315025779913388
+      },
+      "seconds": 36.914470569230616,
+      "peak_bytes": 1301139456
+    },
+    {
+      "pass_number": 6,
+      "updates": 1858,
+      "positions": 18109563,
+      "nll": 1.4094804445747564,
+      "dev_nll": {
+        "book": 2.0233207670354374,
+        "talk": 1.491109138592336,
+        "flores": 1.9125470633788226
+      },
+      "seconds": 42.49370188638568,
+      "peak_bytes": 1301139456
+    }
+  ],
+  "parameters": 1688480,
+  "distinct_pairs": 231337,
+  "presentation_entropy_bits": 17.81963650326225,
+  "pair_presentations_per_pass": 231337
+}

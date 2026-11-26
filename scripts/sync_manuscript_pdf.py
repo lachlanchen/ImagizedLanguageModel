@@ -34,6 +34,6 @@ def sync(source, destination):
 
 if __name__ == "__main__":
     root = Path(__file__).resolve().parents[1]
-    source = root / "publication/ilm-nature/manuscript.pdf"
+    source = root / "publication/ilm-nature/visual_language_paper.pdf"
     destination = Path.home() / "Nutstore Files/Projects/ILM/ILM_Manuscript_LATEST.pdf"
     print(f"{sync(source, destination)}  {destination}")

@@ -22,6 +22,7 @@ def restore(stride, device):
         "bilingual-aligned",
         "book-narrow",
         "book-broad",
+        "book-rehearsal",
         "paired-likelihood",
         "paired-assignment",
         "paraphrase-canonical",
@@ -142,6 +143,7 @@ if __name__ == "__main__":
             "bilingual-aligned",
             "book-narrow",
             "book-broad",
+            "book-rehearsal",
             "paired-likelihood",
             "paired-assignment",
             "paraphrase-canonical",
@@ -161,7 +163,23 @@ if __name__ == "__main__":
     )
     ap.add_argument("--output", type=Path, required=True)
     ap.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
+    ap.add_argument(
+        "--guard-ink",
+        action="store_true",
+        help="Correct input bitmaps strictly inside a training shape's half-separation radius",
+    )
+    ap.add_argument(
+        "--typeface-reader",
+        action="store_true",
+        help="Apply the trained optical adapter before reading a glyph grid",
+    )
     a = ap.parse_args()
+    if a.typeface_reader and (a.preserve_specimens or a.guard_ink):
+        ap.error("Select one input treatment")
+    if a.guard_ink and a.preserve_specimens:
+        ap.error(
+            "--guard-ink changes input pixels and cannot preserve original specimens"
+        )
     if a.decode != "greedy" and (a.preserve_specimens or a.stride == "specimen"):
         ap.error("The selected decoder requires an ordinary translation writer")
     if a.device == "cuda":
@@ -177,6 +195,18 @@ if __name__ == "__main__":
         if ink.bad:
             raise ValueError("Font lacks a supplied glyph")
         raw = ink.array()[ids]
+    if a.guard_ink:
+        from ilm.visual_lm.ink_transport import InkTransport
+
+        raw = InkTransport(np.load(MODEL / "palette.npy")[2:]).apply(raw)
+    if a.typeface_reader:
+        from ilm.visual_lm.glyph_typeface_reader import load_typeface_reader
+
+        palette = np.load(MODEL / "palette.npy")[2:]
+        reader = load_typeface_reader(
+            MODEL.parent / "book_breadth/typeface", palette, a.device
+        )
+        raw = reader.transport(raw, palette)
     direction = int(a.to == "zh")
     if a.preserve_specimens:
         from ilm.visual_lm.specimen_plan import SpecimenPlanWriter
