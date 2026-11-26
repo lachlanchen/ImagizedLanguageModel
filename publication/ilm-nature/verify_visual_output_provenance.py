@@ -1,4 +1,5 @@
 """Authenticate the pictured-source article's raw image panels and editable scores."""
+import re
 from collections import Counter
 from hashlib import sha256
 from io import BytesIO
@@ -41,7 +42,7 @@ def main():
     assert sha(ARCHIVE)==report["archive"]==replay["archive"]==audit["archive"]
     assert audit["assessment"]==sha(PUB/"assessment.json")
     assert audit["proof"]==sha(PAPER.parents[1]/"formal/span_list/SourcePathRepair.lean")
-    deck = FIG/"Retrieved_glyphs.pptx"
+    deck = FIG/"Visual_training_breadth.pptx"
     paper = PAPER/"manuscript.pdf"
     assert sha(paper)==sha(PAPER/"visual_language_paper.pdf")
     assert sum(replay["same"].values())+len(replay["differences"])==960
@@ -51,7 +52,7 @@ def main():
     figures=[]
     with fitz.open(paper) as doc, ZipFile(ARCHIVE) as archive, ZipFile(deck) as ppt:
         records=json.loads(archive.read("records.json"))
-        assert len(doc)==10 and len(records)==len(grades)==192
+        assert len(doc)==12 and len(records)==len(grades)==192
         fresh=PUB.parent/"emitted_history_v1"
         fresh_archive=PAPER/"evidence/sentence_reconstruction_answers.zip"
         new_report=read(fresh/"assessment.json")
@@ -71,11 +72,11 @@ def main():
                 assert blob==(FIG/"sentence_reconstruction"/item["name"]).read_bytes()
                 assert sha256(blob).hexdigest()==item["sha256"]
                 expected[bitmap(blob)]+=1
-            assert expected==images(pdf,pdf[0])==images(doc,doc[4])
-            assert "Fig. 5" in " ".join(doc[4].get_text().split())
+            assert expected==images(pdf,pdf[0])==images(doc,doc[6])
+            assert "Fig. 7" in " ".join(doc[6].get_text().split())
         media.update(expected)
-        figures.append(dict(page=5,file=fresh_figure.name,sha256=sha(fresh_figure)))
-        for p,name in enumerate(("answers","scores","reading","origins"),start=5):
+        figures.append(dict(page=7,file=fresh_figure.name,sha256=sha(fresh_figure)))
+        for p,name in enumerate(("answers","scores","reading","origins"),start=7):
             fig=FIG/f"Pictured_path_{name}.pdf"
             figures.append({"page":p+1,"file":fig.name,"sha256":sha(fig)})
             assert f"Fig. {p+1}" in " ".join(doc[p].get_text().split())
@@ -133,15 +134,15 @@ def main():
                 assert blob==(FIG/"visual_order"/item["name"]).read_bytes()
                 assert sha256(blob).hexdigest()==item["sha256"]
                 expected[bitmap(blob)]+=1
-            assert expected==images(doc,doc[9])==images(single,single[0])
-            assert "Fig. 10" in " ".join(doc[9].get_text().split())
+            assert expected==images(doc,doc[11])==images(single,single[0])
+            assert "Fig. 12" in " ".join(doc[11].get_text().split())
         media.update(expected)
-        figures.append(dict(page=10,file=order_fig.name,sha256=sha(order_fig)))
+        figures.append(dict(page=12,file=order_fig.name,sha256=sha(order_fig)))
         actions = PUB.parent/"independent_optical_actions_v1"
         raw_actions = PAPER/"evidence/independent_optical_actions.zip"
         assessment = read(actions/"assessment.json")
         assert sha(raw_actions)==assessment["archive"]==read(actions/"replay.json")["archive"]
-        assert "Fig. 4" in " ".join(doc[3].get_text().split())
+        assert "Fig. 6" in " ".join(doc[5].get_text().split())
         for manifest,stem,indices in (("plate","Independent_optical_actions",[0,49]+[i for i,r in enumerate(assessment["primary"]["records"]) if r["strip"]][:1]),
                                       ("other-works","Optical_actions_other_works",[96,145])):
             plate=read(actions/(manifest+".json"))
@@ -161,8 +162,8 @@ def main():
                     expected[bitmap(blob)]+=1
                 assert expected==images(pdf,pdf[0])
                 if manifest=="plate":
-                    assert expected==images(doc,doc[3])
-                    figures.insert(0,dict(page=4,file=stem+".pdf",sha256=sha(FIG/(stem+".pdf"))))
+                    assert expected==images(doc,doc[5])
+                    figures.insert(0,dict(page=6,file=stem+".pdf",sha256=sha(FIG/(stem+".pdf"))))
             media.update(expected)
         supported=PUB.parent/"source_supported_writing_v1"
         leading=Counter()
@@ -214,9 +215,9 @@ def main():
                 assert expected==images(pdf,pdf[0])
             current.update(expected)
             media.update(expected)
-        assert current==images(doc,doc[2])
-        assert "Fig. 3" in " ".join(doc[2].get_text().split())
-        figures.insert(0,dict(page=3,files={n:sha(FIG/n) for n in ("Free_strip_restoration.pdf","Supplied_strip_restoration.pdf")}))
+        assert current==images(doc,doc[4])
+        assert "Fig. 5" in " ".join(doc[4].get_text().split())
+        figures.insert(0,dict(page=5,files={n:sha(FIG/n) for n in ("Free_strip_restoration.pdf","Supplied_strip_restoration.pdf")}))
         role_pub=PUB.parent/"natural_pictured_roles_v1"
         ref_pub=PUB.parent/"visual_referents_v1"
         full_pub=PUB.parent/"full_image_roles_v1"
@@ -249,10 +250,10 @@ def main():
                     if training:
                         assert int(i)==example["index"] and train_check["rows"][int(i)]["png"][kind]==item["sha256"]
                 expected[bitmap(blob)]+=1
-            assert expected==images(pdf,pdf[0])==images(doc,doc[0])
-        assert "Fig. 1" in " ".join(doc[0].get_text().split())
+            assert expected==images(pdf,pdf[0])==images(doc,doc[2])
+        assert "Fig. 3" in " ".join(doc[2].get_text().split())
         media.update(expected)
-        figures.insert(0,dict(page=1,file="Visual_sequence_preference.pdf",sha256=sha(FIG/"Visual_sequence_preference.pdf")))
+        figures.insert(0,dict(page=3,file="Visual_sequence_preference.pdf",sha256=sha(FIG/"Visual_sequence_preference.pdf")))
         retrieved=PUB.parent/"retrieved_glyph_writer_v1"
         rplate=read(retrieved/"plate.json")
         rarchive=PAPER/"evidence/retrieved_glyph_writer.zip"
@@ -267,24 +268,68 @@ def main():
                 i,m=part["member"].removesuffix(".png").split("/")
                 if m!="source":assert rr[int(i)]["answers"][m]["png"]==part["sha256"]
                 expected[bitmap(blob)]+=1
-            assert expected==images(figraw,figraw[0])==images(doc,doc[1])
-            assert "Fig. 2" in " ".join(doc[1].get_text().split())
+            assert expected==images(figraw,figraw[0])==images(doc,doc[3])
+            assert "Fig. 4" in " ".join(doc[3].get_text().split())
         media.update(expected)
-        figures.insert(1,dict(page=2,file="Retrieved_glyphs.pdf",sha256=sha(FIG/"Retrieved_glyphs.pdf")))
+        figures.insert(1,dict(page=4,file="Retrieved_glyphs.pdf",sha256=sha(FIG/"Retrieved_glyphs.pdf")))
+        bp=PUB.parent/"visual_training_breadth_v1"
+        ba=PAPER/"evidence/visual_training_breadth.zip"
+        assert sha(ba)==read(bp/"generation.json")["archive"]==read(bp/"assessment.json")["archive"]==read(bp/"audit.json")["archive"]
+        expected=Counter()
+        with ZipFile(ba) as raw,ZipFile(PAPER/"evidence/breadth_pretrained_images.zip") as alternate,fitz.open(FIG/"Visual_training_breadth.pdf") as fp:
+            for item in read(bp/"plate.json")["items"]:
+                if item["type"]!="strip":continue
+                blob=(alternate if item["member"].endswith("/pretrained.png") else raw).read(item["member"])
+                assert sha256(blob).hexdigest()==item["sha256"] and blob==(FIG/"visual_training_breadth"/item["name"]).read_bytes()
+                expected[bitmap(blob)]+=1
+            assert expected==images(fp,fp[0])==images(doc,doc[0])
+        media.update(expected)
+        for page,file in enumerate(("Visual_training_breadth.pdf","Training_breadth_curves.pdf"),start=1):
+            assert f"Fig. {page}" in " ".join(doc[page-1].get_text().split())
+            figures.insert(page-1,dict(page=page,file=file,sha256=sha(FIG/file)))
+        curves=read(bp/"curve.json")["series"]
+        for direction,lang in enumerate(("English","Chinese")):
+            for arm in ("broad","narrow"):
+                fit=read(PAPER.parents[1]/"models/visual_training_breadth"/arm/"fit.json")
+                assert curves[lang+" / "+arm]==[read(bp/"starting-development.json")[direction]["mean_glyph_f2"]]+[e["development"][direction]["mean_glyph_f2"] for e in fit["epochs"]]
+        with fitz.open(FIG/"Training_breadth_curves.pdf") as curve_pdf:
+            assert "Into English" in doc[1].get_text() and "Into Chinese" in curve_pdf[0].get_text()
+            assert len([d for d in doc[1].get_drawings() if d["type"]=="s"])>=len([d for d in curve_pdf[0].get_drawings() if d["type"]=="s"])
+        phase_count=Counter()
+        with fitz.open(FIG/"Phase_feedback_example.pdf") as fig:
+            for item in read(bp/"phase-plate.json")["items"]:
+                if item["type"]!="strip":continue
+                with ZipFile(PAPER/"evidence"/item["file"]) as archive:
+                    blob=archive.read(item["member"])
+                assert sha256(blob).hexdigest()==item["sha256"] and blob==(FIG/"visual_training_breadth"/item["name"]).read_bytes()
+                phase_count[bitmap(blob)]+=1
+            assert phase_count==images(fig,fig[0])==images(doc,doc[1])
+        media.update(phase_count)
+        figures[1]["companion"]=sha(FIG/"Phase_feedback_example.pdf")
         # A package may deduplicate identical bitmaps used in two places.
         packaged={bitmap(ppt.read(n)) for n in ppt.namelist() if n.startswith("ppt/media/")}
         assert packaged==set(media)
-        native=etree.fromstring(ppt.read(next(n for n in ppt.namelist() if n.endswith("/charts/chart1.xml"))))
-        series=[chart["series"][k] for k in ("en","zh")]
-        for s,expected in zip(native.xpath('//*[local-name()="ser"]'),series,strict=True):
-            assert list(map(float,s.xpath('./*[local-name()="val"]//*[local-name()="pt"]/*[local-name()="v"]/text()')))==expected
-        wb=load_workbook(BytesIO(ppt.read(next(n for n in ppt.namelist() if n.endswith(".xlsx")))),read_only=True,data_only=True)
-        table=list(wb.active.values);wb.close()
-        assert [list(r[1::2]) for r in table[1:]]==[list(pair) for pair in zip(*series,strict=True)]
+        expected_charts=[list(curves.values()),[chart["series"][k] for k in ("en","zh")]]
+        actual_charts=[]
+        workbooks=[]
+        for n in ppt.namelist():
+            if re.search(r"/charts/chart[0-9]+[.]xml$",n):
+                node=etree.fromstring(ppt.read(n))
+                actual_charts.append([list(map(float,ser.xpath('./*[local-name()="val"]//*[local-name()="pt"]/*[local-name()="v"]/text()'))) for ser in node.xpath('//*[local-name()="ser"]')])
+            if n.endswith(".xlsx"):
+                wb=load_workbook(BytesIO(ppt.read(n)),read_only=True,data_only=True)
+                rows=list(wb.active.values);wb.close()
+                workbooks.append(list(map(list,zip(*[r[1::2] for r in rows[1:]]))))
+        assert len(actual_charts)==len(workbooks)==2
+        for values in expected_charts:
+            for collection in (actual_charts,workbooks):
+                matched=[v for v in collection if len(v)==len(values) and len(v[0])==len(values[0])]
+                assert len(matched)==1 and all(abs(a-b)<1e-12 for x,y in zip(values,matched[0],strict=True) for a,b in zip(x,y,strict=True))
     index=dict(paper=sha(paper),figures=figures,archive=sha(ARCHIVE),editable=sha(deck),
                original_image_instances=sum(media.values()),requests=192,answers=960,replayed=replay["same"],
                independent_trial=dict(requests=192,answers=768,archive=sha(fresh_archive),replayed=new_replay["same"],
                    cpu_differences=new_replay["differences"],assessment=sha(fresh/"assessment.json"),routing=sha(fresh/"routing.json")),
+               training_breadth={k:sha(bp/(k+".json")) for k in ("selection","drafts","assessment","generation","audit","curve","plate","transfer","transfer-generation","surface-coverage","phase-generation","phase","phase-plate")},
                retrieved_glyphs={k:sha(retrieved/(k+".json")) for k in ("selection","generation","assessment","audit","calibration","plate")},
                visual_sequence_preference={k:sha(seq_pub/(k+".json")) for k in ("selection","mined","verification","confirmed","label-inspection","generation","assessment","paths","audit","prefix-weights","training-transfer","passage-memory","plate")},
                glyph_draft_editor={k:sha(editor_pub/(k+".json")) for k in ("selection","drafts","generation","assessment","audit","source-probe","path-comparison","plate")},

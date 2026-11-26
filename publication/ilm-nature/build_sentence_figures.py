@@ -25,6 +25,7 @@ def main():
     cli.add_argument("--editor",action="store_true")
     cli.add_argument("--sequence-preference",action="store_true")
     cli.add_argument("--retrieved",action="store_true")
+    cli.add_argument("--breadth",action="store_true")
     args=cli.parse_args()
     actions=args.actions or args.support
     edition="actions" if actions else "drafts"
@@ -50,6 +51,8 @@ def main():
         edition,stem,corpus="sequence-preference","Visual_sequence_preference","visual_sequence_preference_v1"
     if args.retrieved:
         edition,stem,corpus="retrieved","Retrieved_glyphs","retrieved_glyph_writer_v1"
+    if args.breadth:
+        edition,stem,corpus="breadth","Visual_training_breadth","visual_training_breadth_v1"
     with TemporaryDirectory(prefix="ilm-draft-figures-",dir=ROOT/"artifacts") as work:
         stage=Path(work)
         (stage/"node_modules").symlink_to(NODE/"node_modules")

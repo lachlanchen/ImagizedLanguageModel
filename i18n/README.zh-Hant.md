@@ -1,10 +1,10 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-在一張 RTX 4090 D 上訓練後，視覺書寫模型在 96 個反覆練習的中英互譯例句中，有 **65 個**完整達意；只使用概似目標的對照模型答對 61 個。在其他練習過的句子上，它答對 **8/96**，在四本未見書籍上答對 **1/96**。圖中是模型實際寫出的完整訓練句、在新書頁上譯對的圖號，以及一段未能譯出的句子。 [原始影像與成績](../references/visual_sequence_preference_result.md) · [執行模型](../models/visual_sequence_preference/README.md)
+面對未見書籍中的句子圖像「我理解你的痛苦。」，獨立視覺模型寫出了「I understand your pain.」。在單張 RTX 4090 D 上，以相同的訓練預算學習 147,456 組不同的雙語句子後，96 道新書翻譯題有 6 道完整達意；反覆學習 24,576 組的對照模型為 4 道，訓練前為 5 道。量化文字模型 Qwen3-8B 為 88 道。按書估計的差值區間包含零。 [實驗與權重](../references/visual_training_breadth_result.md)
 
-![實驗結果](../publication/ilm-nature/figures/Visual_sequence_preference.png)
+![原始輸出](../publication/ilm-nature/figures/Visual_training_breadth.png)
 
-在另外四本書的 96 道翻譯題上，模型從 497,775 對雙語句子中檢索相關例句，只有 2 個答案獲評為完整達意。隨機檢索和原模型各為 1 個，文字對照模型為 83 個。 [實驗與原始輸出](../references/retrieved_glyph_writer_result.md)
+[先前的糾錯與檢索實驗](../references/visual_sequence_preference_result.md) · [2/96](../references/retrieved_glyph_writer_result.md)
 
 在一張 RTX 4090 D 上訓練的模型可以閱讀原文圖像，從兩張候選譯文圖像中選擇。校正它對某些譯文措辭的偏好後，兩段書摘都選對的組數從 **21/96 提高到 77/96**。讓模型自行寫譯文更難。預測原文所支持的字形片段後，受控測試中寫出指定謂語的答案從 17/336 增至 43/336，但在 192 個書摘翻譯請求中，只有 1 個完整傳達原意。下圖是另一組 OPUS 測試中首個獲認可的模型輸出。 [實驗結果](../references/source_supported_writing_result.md) · [執行生成或選擇模型](../models/source_supported_writing/README.md)
 

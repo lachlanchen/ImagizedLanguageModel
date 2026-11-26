@@ -10,8 +10,14 @@
 \newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
 \begin{document}
 \noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
-\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Learning from corrected and retrieved visual translations\par}
+\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Training a visual translator on six times as many distinct sentences\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\medskip
+\input{training_breadth_opening}
+\newpage
+\pageheading{Where the source changes a translation}
+\input{training_breadth_analysis}
+\newpage
+\pageheading{Learning from earlier translation errors}
 \input{visual_sequence_preference_opening}
 \newpage
 \pageheading{Writing with retrieved bilingual passages}
@@ -55,7 +61,7 @@ Both readers receive ordered binary $32\times32$ cells. A shared target writer c
 \displayfigure{Pictured_path_answers.pdf}{Two readers, the same writer}{First newly credited answer in each direction and first uncredited answer in the fixed order. The first pair of Chinese replies is close in meaning, making the binary automated distinction uncertain. The English gain preserves the negative clause. In the final pair the path reader recovers the mat, which the continuous reader calls a table. Its answer loses the instruction to spread the mat. All nine strips are original bitmaps.}
 \begin{multicols}{2}
 \section*{A change in what the writer says}
-Across the four works the path reader gained 35 previously uncredited answers and lost ten. In one case the continuous reader ends an English answer with \emph{but I'm}. The path reader writes \emph{He came, sat by me, but I didn't wake up.} It preserves both the visitor's action and the speaker's state. The close calls in Fig.~6 coexist with this kind of substantive correction and with newly introduced errors.
+Across the four works the path reader gained 35 previously uncredited answers and lost ten. In one case the continuous reader ends an English answer with \emph{but I'm}. The path reader writes \emph{He came, sat by me, but I didn't wake up.} It preserves both the visitor's action and the speaker's state. The close calls in Fig.~8 coexist with this kind of substantive correction and with newly introduced errors.
 \end{multicols}
 \newpage
 \pageheading{Translation on unseen works}
@@ -68,7 +74,7 @@ Into English, 31 of 96 path-reader answers and 14 continuous-reader answers earn
 \displayfigure{Pictured_path_scores.pdf}{Complete meanings by input and model}{Each bar counts naturally stopped answers accepted in both anonymous, source-only assessment orders. The supplied-path diagnostic gives reference source addresses to the same visual writer. The exchange control supplies another source image of similar length in the same direction and work. The independent writer receives images and the Qwen comparator receives text.}
 \begin{multicols}{2}
 \section*{Scoring the actual pixels}
-We froze all five visual outputs per request before scoring. Exact bitmap matching transcribed the emitted ink. A Qwen3-VL judge assessed complete meaning in two candidate orders. It credited 123 of 192 corpus translations and zero unrelated foils. With a reference supplied to the judge, the scores were 36 for the path reader, ten for the continuous reader, 42 for supplied paths and 114 for Qwen. These changes and the first example in Fig.~6 qualify the precision of automated semantic scores. Bilingual human adjudication is outstanding.
+We froze all five visual outputs per request before scoring. Exact bitmap matching transcribed the emitted ink. A Qwen3-VL judge assessed complete meaning in two candidate orders. It credited 123 of 192 corpus translations and zero unrelated foils. With a reference supplied to the judge, the scores were 36 for the path reader, ten for the continuous reader, 42 for supplied paths and 114 for Qwen. These changes and the first example in Fig.~8 qualify the precision of automated semantic scores. Bilingual human adjudication is outstanding.
 
 The independent 10.48-million-parameter visual writer earned 5/192. Quantized Qwen3-8B earned 167/192. The compact autoregressive training used in MiniMind provides a conventional small-language-model reference.\cite{mini} Our path writer retains text-trained source and target layers and finite lexical alternatives. Its improvement measures transfer of existing translation capability to an image interface.
 

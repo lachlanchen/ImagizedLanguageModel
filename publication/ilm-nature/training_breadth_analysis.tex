@@ -1,0 +1,16 @@
+\begin{multicols}{2}
+\section*{Holding the learning budget fixed}
+From 497,775 bilingual pairs, 436,852 passed screens for length, script, numerals and prior editor exposure. Each of 24,576 slots held six distinct pairs with identical lengths in both languages. Both arms saw the same first cohort. Each subsequent pass kept the slots, 6,240 controlled examples and optimizer schedule fixed. The broad arm replaced every natural example at each pass. The phrase tables had previously seen the larger corpus. In a fixed inspection sample of 32 pairs, one Chinese target asked about lemonade where the English speaker asked two people to talk. Another reversed a preference. Screening for form leaves translation noise.
+\end{multicols}
+\par\medskip{\centering\includegraphics[width=.82\linewidth]{Training_breadth_curves.pdf}\par
+\includegraphics[width=.90\linewidth]{Phase_feedback_example.pdf}\par}
+\begingroup\captionsetup{hypcap=false}\captionof{figure}{\textbf{Training exposure and visual feedback.} Top, mean glyph 1--4-gram F2 for all six passes and 72 freely generated development translations per direction. Bottom, the first previously credited answer lost when the pretrained reader recovered the embedding of a visible span separately at initial and later steps. It repeats the interest clause. All three strips are original bitmaps.}\endgroup\par
+\begin{multicols}{2}
+\section*{Restoring the source or its draft}
+We supplied the correct preceding cells and measured the score of each reference glyph. Replacing an unrelated source with the true source while holding the true draft fixed improved mean reference log probability on 94/96 requests. It repaired 696 incorrect next-cell choices and spoiled 114 correct choices in the broader fit. With both inputs intact, the same model scored its own free output above the supplied translation on 92 requests. One comparison favoured the reference and three tied within tolerance.
+\section*{Accounting for both inputs}
+Let $M_{ij}$ denote mean log probability per glyph of the reference minus that of the free answer, where $i$ restores the true source and $j$ the true draft. Averaging the two restoration orders assigns the source
+$\{(M_{10}-M_{00})+(M_{11}-M_{01})\}/2$ and the remainder to the draft. These contributions averaged $-0.327$ and $-0.389$ nats per glyph. The intact inputs also raised the probability of the reference itself, but raised that of the writer's preferred answer more in relative terms. This comparison uses a single reference spelling for each request. \repo{formal/span_list/PicturedEvidenceAttribution.lean}{Formal identity} and \repo{references/evidence/visual_training_breadth_v1/audit.json}{all case scores}.
+\section*{A pretrained visual comparison}
+\input{training_breadth_transfer}
+\end{multicols}

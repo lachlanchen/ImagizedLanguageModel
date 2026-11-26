@@ -31,7 +31,21 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const retrievedEdition = edition === 'retrieved';
+const breadthEdition = edition === 'breadth';
+if (breadthEdition) {
+ await plate('../visual_training_breadth_v1/plate.json','Writing after exposure to more distinct translations','First credited English broad answer, first broad gain against the repeated arm or first changed answer, and next uncredited output in the opposite direction. All pretrained outputs use the same pictured sources.', 'visual_training_breadth');
+ const data=await read('../visual_training_breadth_v1/curve.json');
+ const s=slide('Development translations over six passes');
+ const colors=['#126b62','#975733','#3476ae','#705286'];
+ const chart=s.charts.add('line',{position:{left:60,top:88,width:1150,height:535},categories:data.labels.map(String),lineOptions:{smooth:false},
+  yAxis:{visible:true,min:0,max:.5,majorUnit:.1,numberFormatCode:'0.0',tickLabelPosition:'nextTo'},
+  series:Object.entries(data.series).map(([name,values],i)=>({name,values:values.map(v=>Number(v.toFixed(12))),line:{fill:colors[i],width:3}})),
+  hasLegend:true,legend:{position:'bottom'}});
+ applyPresentationChartFont(chart,{fontFamily:'Arial'});
+ label(s,'Mean glyph 1–4-gram F2 on 72 translations per direction. Pass zero is the shared starting writer.',65,636,1170,18);
+ s.speakerNotes.textFrame.setText('Each retained training pass has the same number of supervised positions. Complete meaning was graded on fresh books after the final pass.');
+}
+const retrievedEdition = edition === 'retrieved' || breadthEdition;
 const sequenceEdition = edition === 'sequence-preference' || retrievedEdition;
 const editorEdition = edition === 'editor' || sequenceEdition;
 if (sequenceEdition) {
@@ -110,11 +124,12 @@ if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.js
  'Same preselected first-pair rule. Images reproduce the exact raster answers from the physical motor.','independent_optical_actions');
 if(supportEdition) await plate('../source_supported_writing_v1/opus-plate.json','Free translation within the OPUS test domain',
  'First credited aligned response in fixed order if available, otherwise the first request. Compare the unchanged parent and guided output.','source_supported');
+if (breadthEdition) await plate('../visual_training_breadth_v1/phase-plate.json','When the same pixels have two embeddings','First credit lost by phase-conditioned feedback relative to original pooled feedback. Source and all outputs are archived PNGs.', 'visual_training_breadth');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',retrievedEdition?'Retrieved_glyphs.pptx':sequenceEdition?'Visual_sequence_preference.pptx':editorEdition?'Glyph_draft_editor.pptx':phraseEdition?'Covered_glyph_phrases.pptx':alignmentEdition?'Ordered_glyph_alignment.pptx':fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',breadthEdition?'Visual_training_breadth.pptx':retrievedEdition?'Retrieved_glyphs.pptx':sequenceEdition?'Visual_sequence_preference.pptx':editorEdition?'Glyph_draft_editor.pptx':phraseEdition?'Covered_glyph_phrases.pptx':alignmentEdition?'Ordered_glyph_alignment.pptx':fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
-await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:retrievedEdition?14:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
- materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[retrievedEdition?9:roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:breadthEdition?17:retrievedEdition?14:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
+ materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:breadthEdition?[2,11]:[retrievedEdition?9:roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000'],receiptPath:path.join(stage,'presentation_validation.json')});

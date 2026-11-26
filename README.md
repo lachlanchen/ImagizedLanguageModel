@@ -2,17 +2,17 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
-A visual writer trained on one RTX 4090 D learned to correct **65 of 96** repeated English–Chinese translations. Matched likelihood training corrected 61. On other rehearsed passages the writer scored **8/96**, and on four unseen books **1/96**. The figure shows a complete sentence the model learned to write, the figure label it preserved on a new page and a sentence it failed to translate. [Raw outputs and scores](references/visual_sequence_preference_result.md) · [Run the writer](models/visual_sequence_preference/README.md)
+Given the pictured sentence 我理解你的痛苦。, the independent visual writer produced “I understand your pain.” on a new book passage. On one RTX 4090 D, training on 147,456 distinct bilingual pairs earned 6/96 complete-meaning credits, against 4/96 with 24,576 repeated pairs and 5/96 before training. Quantized text Qwen3-8B earned 88/96. The intervals across books include zero. [Experiment and weights](references/visual_training_breadth_result.md)
 
-![Results](publication/ilm-nature/figures/Visual_sequence_preference.png)
+![Raw outputs](publication/ilm-nature/figures/Visual_training_breadth.png)
 
-On four further books, retrieval from 497,775 bilingual passages gave the writer 2/96 complete-meaning credits. Random passages and the original writer each earned 1/96. The text comparator earned 83/96. [Experiment and raw images](references/retrieved_glyph_writer_result.md)
+[Earlier correction and retrieval studies](references/visual_sequence_preference_result.md) · [2/96](references/retrieved_glyph_writer_result.md)
 
 On one RTX 4090 D, a reader chose between two pictured translations for each book passage. Correcting its preference for common target wording raised the number of pairs with both answers right from **21/96 to 77/96**. Free translation remains much harder. Predicting the visual strips supported by the source retained the requested predicate in 43/336 controlled answers, up from 17, but preserved the complete meaning on only 1/192 book requests. The image below is the first credited guided answer on the separate OPUS test. [Results](references/source_supported_writing_result.md) · [Run the writer or selector](models/source_supported_writing/README.md)
 
 ![Raw source and generated OPUS translation](publication/ilm-nature/figures/Source_supported_opus.png)
 
-An independent reader followed two opposite pictured questions about the same dictionary page on **332/608** pairs, up from **138/608** with the original field ordering. Each answer had to include the exact gloss and the actual historical specimen. On a separate free-translation test, a 10.48M-parameter image writer earned **1/192** complete meanings, its matched control **2/192**, and a quantized Qwen3-8B given text **154/192**. [Current paper](publication/ilm-nature/manuscript.pdf) · [Run the historical reader](models/origin_instructions/README.md) · [Inspect the translation outputs](references/sentence_reconstruction_result.md) · [Editable figures](publication/ilm-nature/figures/Retrieved_glyphs.pptx)
+An independent reader followed two opposite pictured questions about the same dictionary page on **332/608** pairs, up from **138/608** with the original field ordering. Each answer had to include the exact gloss and the actual historical specimen. On a separate free-translation test, a 10.48M-parameter image writer earned **1/192** complete meanings, its matched control **2/192**, and a quantized Qwen3-8B given text **154/192**. [Current paper](publication/ilm-nature/manuscript.pdf) · [Run the historical reader](models/origin_instructions/README.md) · [Inspect the translation outputs](references/sentence_reconstruction_result.md) · [Editable figures](publication/ilm-nature/figures/Visual_training_breadth.pptx)
 
 ![The two pictured questions about 遘 and the actual answers from both readers](publication/ilm-nature/figures/Origin_instruction_order.png)
 

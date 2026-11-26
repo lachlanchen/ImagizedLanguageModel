@@ -12,6 +12,17 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The matched corpus-breadth comparison is complete. Read
+`references/visual_training_breadth_result.md`. The broad fit earns 6/96 on
+new books versus 4/96 repeated and 5/96 parent. The paired intervals include
+zero. Restore the published weights for inference. The four-corner CPU
+source/draft audit, archived optical/native comparisons and exploratory
+phase-feedback test are also complete. The latter loses four meaning credits
+and gains one. Preserve all raw outputs and every separate grader panel.
+The next independent intervention tests source-conditioned teacher preferences
+under paired proposition edits, gated by teacher competence and fresh free
+answers. Keep the original optical and independent parents as controls.
+
 The whole-sequence preference fit and matched likelihood fit are terminal.
 Read `references/visual_sequence_preference_result.md`. The preference writer
 scored 65/96 on repeated corrections, 8/96 on ordinarily rehearsed passages
@@ -21,8 +32,7 @@ parent as a distinct control. Related passage targets voted correctly at
 187/1,274 supplied-history errors versus 54 for random memory. The autonomous test on four further works is terminal. Related memory scores
 2/96 versus 1/96 for the parent and random control. It misses the interval
 and role-retention criteria. See `references/retrieved_glyph_writer_result.md`.
-Preserve all outputs and fixed grades. Next test training-data breadth at
-matched target and optimizer budgets, with new held works.
+Preserve all outputs and fixed grades. The later matched corpus-breadth result is recorded above.
 
 The covered-phrase study is terminal. Read
 `references/covered_phrases_result.md` for the trained tables, original

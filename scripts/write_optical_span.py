@@ -13,12 +13,15 @@ def main():
     parser.add_argument("--to",choices=("en","zh"),required=True)
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--device",choices=("cpu","cuda"),default="cpu")
-    parser.add_argument("--reader", choices=("field", "path"), default="field",
-                        help="Use the continuous image reader or recover source spans from print.")
+    parser.add_argument("--reader", choices=("field", "path", "phase"), default="field",
+                        help="Select the continuous reader, pictured source paths, or paths with phase-conditioned ink feedback.")
     parser.add_argument("--normalize-print", action="store_true", help="Normalize aligned alternate print glyphs before reading.")
     args = parser.parse_args()
     torch.set_num_threads(2)
-    if args.reader == "path":
+    if args.reader == "phase":
+        from ilm.visual_lm.phase_feedback import PhaseFeedbackWriter
+        writer = PhaseFeedbackWriter(args.to, args.device)
+    elif args.reader == "path":
         from ilm.visual_lm.pictured_path_writer import PicturedPathWriter
         writer = PicturedPathWriter(args.to, args.device)
     else:

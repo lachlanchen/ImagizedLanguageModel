@@ -1,10 +1,10 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Trên một RTX 4090 D, mô hình thị giác dịch trọn nghĩa **65/96** câu Anh–Trung được luyện sửa nhiều lần. Mô hình đối chứng học theo hợp lý đạt 61 câu. Mô hình đạt **8/96** trên những câu khác từng gặp và **1/96** trên bốn cuốn sách chưa gặp. Hình cho thấy câu hoàn chỉnh đã học, số hình minh họa dịch đúng trên trang mới và một câu dịch sai. [Ảnh gốc và kết quả](../references/visual_sequence_preference_result.md) · [Chạy mô hình](../models/visual_sequence_preference/README.md)
+Với ảnh chụp câu “我理解你的痛苦。” từ một cuốn sách chưa dùng khi huấn luyện, mô hình thị giác độc lập viết “I understand your pain.”. Trên một RTX 4090 D, với cùng ngân sách huấn luyện, 147.456 cặp câu khác nhau cho 6/96 bản dịch đủ nghĩa; lặp lại 24.576 cặp cho 4/96 và mô hình ban đầu đạt 5/96. Mô hình văn bản lượng tử hóa Qwen3-8B đạt 88/96. Khoảng ước lượng chênh lệch theo sách bao gồm 0. [Thí nghiệm và trọng số](../references/visual_training_breadth_result.md)
 
-![Kết quả](../publication/ilm-nature/figures/Visual_sequence_preference.png)
+![Ảnh đầu ra](../publication/ilm-nature/figures/Visual_training_breadth.png)
 
-Trên 96 yêu cầu dịch từ bốn cuốn sách khác, mô hình tra cứu các ví dụ liên quan trong 497.775 cặp câu song ngữ được chấm là truyền đạt đủ nghĩa ở 2 câu. Tra cứu ngẫu nhiên và mô hình gốc đều đạt 1 câu, còn mô hình đối chứng dùng văn bản đạt 83 câu. [Thí nghiệm và ảnh đầu ra](../references/retrieved_glyph_writer_result.md)
+[Các thí nghiệm sửa và tra cứu trước đây](../references/visual_sequence_preference_result.md) · [2/96](../references/retrieved_glyph_writer_result.md)
 
 Mô hình huấn luyện trên một RTX 4090 D chọn giữa hai bản dịch dạng ảnh cho từng đoạn sách. Sau khi hiệu chỉnh thiên hướng ưu tiên một số cách diễn đạt, số cặp đúng cả hai lựa chọn tăng từ **21/96 lên 77/96**. Khi tự viết, dự đoán các dải ký tự từ ảnh nguồn giúp số câu chứa vị từ cần thiết tăng từ 17/336 lên 43/336, nhưng chỉ 1/192 bản dịch sách truyền đạt trọn nghĩa. Hình dưới là câu trả lời đầu tiên được chấm đúng trong phép thử OPUS riêng. [Kết quả](../references/source_supported_writing_result.md) · [Chạy mô hình](../models/source_supported_writing/README.md)
 

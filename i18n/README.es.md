@@ -1,10 +1,10 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-En una RTX 4090 D, el modelo visual aprendió a corregir **65 de 96** traducciones repetidas entre el inglés y el chino. El control entrenado solo por verosimilitud corrigió 61. En otras frases ya estudiadas obtuvo **8/96** y en cuatro libros nuevos **1/96**. La figura reproduce una oración aprendida, el número de figura que tradujo bien en una página nueva y una traducción fallida. [Imágenes y resultados](../references/visual_sequence_preference_result.md) · [Ejecutar el modelo](../models/visual_sequence_preference/README.md)
+Ante la imagen de la frase «我理解你的痛苦。» de un libro nuevo, el modelo visual independiente escribió «I understand your pain.». Con el mismo presupuesto en una RTX 4090 D, obtuvo 6 traducciones completas de 96 al aprender de 147.456 pares distintos, frente a 4 al repetir 24.576 pares y 5 antes del entrenamiento. El modelo de texto cuantizado Qwen3-8B obtuvo 88. Los intervalos de la diferencia estimados por libro incluyen cero. [Experimento y pesos](../references/visual_training_breadth_result.md)
 
-![Resultados](../publication/ilm-nature/figures/Visual_sequence_preference.png)
+![Imágenes originales](../publication/ilm-nature/figures/Visual_training_breadth.png)
 
-En 96 traducciones de otros cuatro libros, el modelo que buscó ejemplos afines entre 497.775 pares de frases bilingües obtuvo dos respuestas que el evaluador consideró completas. La búsqueda aleatoria y el modelo original obtuvieron una cada uno, y el modelo de referencia con entrada de texto obtuvo 83. [Experimento e imágenes originales](../references/retrieved_glyph_writer_result.md)
+[Estudios anteriores de corrección y recuperación](../references/visual_sequence_preference_result.md) · [2/96](../references/retrieved_glyph_writer_result.md)
 
 El lector, entrenado en una RTX 4090 D, elige entre dos traducciones en imagen para cada fragmento. Al corregir su preferencia por ciertas expresiones, los pares en los que acertó ambas elecciones pasaron de **21/96 a 77/96**. Al escribir libremente, predecir grupos de glifos a partir del original elevó de 17/336 a 43/336 las respuestas que conservaron el predicado solicitado. Solo 1 de 192 traducciones de libros transmitió todo el significado. La imagen muestra la primera respuesta aceptada en la prueba independiente de OPUS. [Resultados](../references/source_supported_writing_result.md) · [Ejecutar el modelo](../models/source_supported_writing/README.md)
 

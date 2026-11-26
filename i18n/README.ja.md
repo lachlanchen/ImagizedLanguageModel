@@ -1,10 +1,10 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-単一の RTX 4090 D で訓練した視覚モデルは、繰り返し学習した英中翻訳96問のうち **65問**で意味を正しく伝えました。尤度だけで学習した対照モデルは61問でした。他の学習済み例文では **8/96**、未見の4冊では **1/96** でした。図には実際に書けるようになった文、新しいページで正しく書いた図番号、翻訳に失敗した文を示します。 [出力画像と評価](../references/visual_sequence_preference_result.md) · [モデルの実行](../models/visual_sequence_preference/README.md)
+独立型の視覚モデルは、未見の本にある「我理解你的痛苦。」の画像から「I understand your pain.」と書いた。RTX 4090 D 1枚で訓練量を揃え、異なる対訳147,456組で学習すると、新しい本の96問中6問で意味を伝えられた。24,576組を繰り返した場合は4問、訓練前は5問、量子化テキストモデル Qwen3-8B は88問だった。書籍単位で推定した差の区間にはゼロが含まれる。 [実験と重み](../references/visual_training_breadth_result.md)
 
-![実験結果](../publication/ilm-nature/figures/Visual_sequence_preference.png)
+![出力画像](../publication/ilm-nature/figures/Visual_training_breadth.png)
 
-別の4冊から選んだ96問では、約50万組の対訳から関連例を検索すると、意味を伝えたと判定された訳は2件だった。無作為に検索した場合と元のモデルは各1件、テキスト入力の比較モデルは83件だった。 [実験と出力画像](../references/retrieved_glyph_writer_result.md)
+[以前の訂正・検索実験](../references/visual_sequence_preference_result.md) · [2/96](../references/retrieved_glyph_writer_result.md)
 
 RTX 4090 D 1枚で学習したモデルに、原文画像と二つの訳文画像を与えた。特定の訳文を好む傾向を補正すると、二つの原文について両方とも正しく選べた組数は **21/96から77/96** に増えた。自由生成では、原文から字形列を予測することで指定の述語を含む回答が17/336から43/336に増えたが、書籍の意味を完全に伝えたのは192件中1件だった。図は別のOPUSテストで最初に正答と判定された出力。 [実験結果](../references/source_supported_writing_result.md) · [モデルの実行](../models/source_supported_writing/README.md)
 

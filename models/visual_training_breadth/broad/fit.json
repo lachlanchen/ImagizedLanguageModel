@@ -1,0 +1,144 @@
+{
+  "weights": "55a0b976063c22052e70a63f62c436057af8f8f45d5e2423137f2134b6631cc2",
+  "bindings": {
+    "scripts/train_visual_training_breadth.py": "24c03b3d591561171f253b5ed98e6b72e9539732454db28de0acce9565e35440",
+    "references/visual_training_breadth_protocol.md": "2dc7bd8f8d25dbd4afbe235b36c64b0c3b9b962ed48230369b4abe6187a5083d",
+    "references/evidence/visual_training_breadth_v1/selection.json": "01f39c6b93976b98c5120b299be58d30af5a3d20cd47325127ca985bc038a4f3",
+    "references/evidence/visual_training_breadth_v1/drafts.json": "a6f0ed3d629e245dbac77d1458f85cf1395fa78635ab4876020b571809b9ac1d",
+    "models/glyph_draft_editor/editor/fit.json": "5e62a92ae5219d3d8bf45b51ef55687bfc508a419c8007bb0816889d05c6dbfc",
+    "ilm/visual_lm/glyph_draft_editor.py": "f3d2858301b7e8023239b2bb546771b7c1ba5df629079d7701d0de19abcfb0d7",
+    "scripts/prepare_visual_training_breadth.py": "b017bb767bb6b63f805dbc666b78b18017f5c48f1eb8f2ce56e06d498c4e2c26"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "positions": 1883434,
+      "draft_cells": 1708595,
+      "updates": 348,
+      "schedule": "e31741b1b126eecb5cb71ba4494ff4b84e70fac68b3d2122ad50e3673f0810da",
+      "train_nll": 1.2534226100002146,
+      "development": [
+        {
+          "mean_glyph_f2": 0.39235888283816056,
+          "stopped": 72,
+          "n": 72
+        },
+        {
+          "mean_glyph_f2": 0.16233337896910988,
+          "stopped": 72,
+          "n": 72
+        }
+      ],
+      "elapsed_s": 9.427293626591563
+    },
+    {
+      "epoch": 2,
+      "positions": 1883434,
+      "draft_cells": 1709811,
+      "updates": 348,
+      "schedule": "6925784778171704713b294a4ec6d1a59998f6c9a7cdd744f54d188cab6caa5d",
+      "train_nll": 1.2368745806122337,
+      "development": [
+        {
+          "mean_glyph_f2": 0.37525603711376854,
+          "stopped": 72,
+          "n": 72
+        },
+        {
+          "mean_glyph_f2": 0.16170268702005544,
+          "stopped": 72,
+          "n": 72
+        }
+      ],
+      "elapsed_s": 19.321998824365437
+    },
+    {
+      "epoch": 3,
+      "positions": 1883434,
+      "draft_cells": 1710733,
+      "updates": 348,
+      "schedule": "0952fe7ebbbd329909856b65e115ac416a48f5b0898603a0dacef155b281f6ea",
+      "train_nll": 1.2345567942346056,
+      "development": [
+        {
+          "mean_glyph_f2": 0.3788006563227685,
+          "stopped": 72,
+          "n": 72
+        },
+        {
+          "mean_glyph_f2": 0.16786897543172927,
+          "stopped": 72,
+          "n": 72
+        }
+      ],
+      "elapsed_s": 29.507906261831522
+    },
+    {
+      "epoch": 4,
+      "positions": 1883434,
+      "draft_cells": 1707540,
+      "updates": 348,
+      "schedule": "749c81fece2aaf554a58843a991cd5b77015a2732d1965e59ab2f642b3d51817",
+      "train_nll": 1.2243700799844082,
+      "development": [
+        {
+          "mean_glyph_f2": 0.3895136498708241,
+          "stopped": 72,
+          "n": 72
+        },
+        {
+          "mean_glyph_f2": 0.1721156726302494,
+          "stopped": 72,
+          "n": 72
+        }
+      ],
+      "elapsed_s": 36.590849096886814
+    },
+    {
+      "epoch": 5,
+      "positions": 1883434,
+      "draft_cells": 1708108,
+      "updates": 348,
+      "schedule": "ef10e8eb0cf3e84fb4d284ef3e86ca49733a450ff613d7e7f40f7808512ffcf7",
+      "train_nll": 1.2202452540265423,
+      "development": [
+        {
+          "mean_glyph_f2": 0.3819187680091934,
+          "stopped": 72,
+          "n": 72
+        },
+        {
+          "mean_glyph_f2": 0.17148871847388283,
+          "stopped": 72,
+          "n": 72
+        }
+      ],
+      "elapsed_s": 46.120996753685176
+    },
+    {
+      "epoch": 6,
+      "positions": 1883434,
+      "draft_cells": 1709103,
+      "updates": 348,
+      "schedule": "e522ca138fb8fd6e804360cb6b5c217950c25ee90a5c3a8bf1a06429ce7583c1",
+      "train_nll": 1.2188435200309886,
+      "development": [
+        {
+          "mean_glyph_f2": 0.3930858310923017,
+          "stopped": 72,
+          "n": 72
+        },
+        {
+          "mean_glyph_f2": 0.17057683785328992,
+          "stopped": 72,
+          "n": 72
+        }
+      ],
+      "elapsed_s": 57.94297662284225
+    }
+  ],
+  "seconds": 57.96351921465248,
+  "parameters": 1817441,
+  "peak_bytes": 1349347840,
+  "gpu": "NVIDIA GeForce RTX 4090 D"
+}

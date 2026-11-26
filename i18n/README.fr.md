@@ -1,10 +1,10 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Sur une seule RTX 4090 D, le modèle visuel a appris à corriger **65 traductions sur 96** parmi les exemples anglais–chinois répétés, contre 61 pour le témoin entraîné par vraisemblance. Il obtient **8/96** sur d’autres phrases déjà étudiées et **1/96** sur quatre livres inédits. La figure reproduit la phrase apprise, le numéro de figure correctement traduit sur une nouvelle page et un échec de traduction. [Images et résultats](../references/visual_sequence_preference_result.md) · [Exécuter le modèle](../models/visual_sequence_preference/README.md)
+Devant l’image de la phrase « 我理解你的痛苦。 » tirée d’un livre inédit pour lui, le modèle visuel indépendant a écrit « I understand your pain. ». À budget égal sur une RTX 4090 D, il a obtenu 6 traductions jugées complètes sur 96 après apprentissage sur 147 456 paires distinctes, contre 4 avec 24 576 paires répétées et 5 avant entraînement. Le modèle textuel quantifié Qwen3-8B en a obtenu 88. Les intervalles de différence estimés par livre incluent zéro. [Expérience et poids](../references/visual_training_breadth_result.md)
 
-![Résultats](../publication/ilm-nature/figures/Visual_sequence_preference.png)
+![Images originales](../publication/ilm-nature/figures/Visual_training_breadth.png)
 
-Sur 96 demandes de traduction tirées de quatre autres livres, le modèle qui cherchait des exemples pertinents parmi 497 775 paires de phrases bilingues a obtenu deux traductions jugées complètes. La recherche aléatoire et le modèle initial en ont obtenu une chacun, et le modèle de comparaison sur texte en a obtenu 83. [Expérience et images originales](../references/retrieved_glyph_writer_result.md)
+[Études antérieures sur la correction et la recherche](../references/visual_sequence_preference_result.md) · [2/96](../references/retrieved_glyph_writer_result.md)
 
 Entraîné sur une RTX 4090 D, le lecteur choisit entre deux traductions en image pour chaque extrait. Corriger sa préférence pour certaines formulations fait passer le nombre de paires dont les deux choix sont justes de **21/96 à 77/96**. En rédaction libre, prédire les groupes de glyphes à partir de la source porte de 17/336 à 43/336 le nombre de réponses contenant le prédicat attendu. Une seule des 192 traductions de livres restitue le sens complet. La figure montre la première réponse acceptée sur le test OPUS distinct. [Résultats](../references/source_supported_writing_result.md) · [Exécuter le modèle](../models/source_supported_writing/README.md)
 
