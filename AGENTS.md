@@ -76,6 +76,16 @@ training/development splits with `scripts/span_reservation.py` for new work.
 Keep original receipts and do not rescore cached records from the reserved
 test file. Historical mixed cohorts are unsuitable as independent confirmation.
 
+The paired translation teacher audit is complete. Read
+`references/paired_translation_teacher_result.md`. The 147,456-row broad
+training cohort includes 1,032 constructed event pairs. Only 69/128 families
+passed the teacher qualification. Free visual writing preserved both sources
+in both languages on 3/77 corpus-derived and 46/51 constructed families.
+Preserve all images, votes, provenance and rejected labels. The independent
+OPUS training corpus qualification follows
+`references/opus_paired_supervision_protocol.md`. Check the private handoff
+and live owner before scheduling model work.
+
 The full continuation-only trial is complete: 13,766 sequences, 41,298 updates,
 6,108,741 scheduled target positions and all 732 prescribed output streams.
 All 183 opaque boards and 96 visible normal-book prefixes have actual review

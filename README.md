@@ -2,6 +2,8 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
+With two pictured Chinese sources, the writer changed “Look at me, Mom.” to “Look at me, Harry.” It also wrote “a nice dream” for a nightmare. On familiar corpus-derived sentences it preserved a one-word change for both sources in both languages on 3/77 families. On constructed role sentences it did so on 46/51. [Original source and answer images](publication/ilm-nature/figures/Paired_visual_answers.png) · [Provenance and scores](references/paired_translation_teacher_result.md)
+
 Given the pictured sentence 我理解你的痛苦。, the independent visual writer produced “I understand your pain.” on a new book passage. On one RTX 4090 D, training on 147,456 distinct bilingual pairs earned 6/96 complete-meaning credits, against 4/96 with 24,576 repeated pairs and 5/96 before training. Quantized text Qwen3-8B earned 88/96. The intervals across books include zero. [Experiment and weights](references/visual_training_breadth_result.md)
 
 ![Raw outputs](publication/ilm-nature/figures/Visual_training_breadth.png)

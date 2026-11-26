@@ -4,6 +4,7 @@ Published reading editions are listed newest first. Each snapshot preserves the 
 
 | Date | Revision | Reading edition | Cumulative manuscript |
 |---|---|---|---|
+| 2026-11-27 | [494174b7](https://github.com/lachlanchen/ImagizedLanguageModel/commit/494174b7) | [Training breadth and visual feedback, 12 pages](2026-11-27-494174b7/reading.pdf) | Same standalone edition |
 | 2026-11-27 | [a3b11dec](https://github.com/lachlanchen/ImagizedLanguageModel/commit/a3b11dec) | [Corrections and retrieved translations, 10 pages](2026-11-27-a3b11dec/reading.pdf) | Same standalone edition |
 | 2026-11-27 | [d2b3558f](https://github.com/lachlanchen/ImagizedLanguageModel/commit/d2b3558f) | [Learning a visual correction and testing its transfer, 9 pages](2026-11-27-d2b3558f/reading.pdf) | Same standalone edition |
 | 2026-11-27 | [4d1d31fc](https://github.com/lachlanchen/ImagizedLanguageModel/commit/4d1d31fc) | [Recognising and writing meaning from pictured language, 9 pages](2026-11-27-4d1d31fc/reading.pdf) | Same standalone edition |
