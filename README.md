@@ -2,6 +2,10 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
+The visual writer now accepts unfamiliar printed shapes. After matched training on 1,368 professionally reviewed translations, it earned 0/96 complete-meaning credits on Chinese news sentences containing a previously unsupported shape and 2/96 on sentences with familiar shapes. Showing the unfamiliar strokes changed 93 answer images. The example below shows the unaltered model output. [Experiment and weights](references/reviewed_news_writer_result.md)
+
+![Free visual writing before and after training](publication/ilm-nature/figures/Reviewed_news_writer.png)
+
 With two pictured Chinese sources, the writer changed “Look at me, Mom.” to “Look at me, Harry.” It also wrote “a nice dream” for a nightmare. On familiar corpus-derived sentences it preserved a one-word change for both sources in both languages on 3/77 families. On constructed role sentences it did so on 46/51. [Original source and answer images](publication/ilm-nature/figures/Paired_visual_answers.png) · [Provenance and scores](references/paired_translation_teacher_result.md)
 
 ![Original English answers to two pairs of pictured Chinese sentences](publication/ilm-nature/figures/Paired_visual_answers.png)

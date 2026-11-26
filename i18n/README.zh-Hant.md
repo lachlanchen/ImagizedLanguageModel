@@ -2,6 +2,10 @@
 
 同一個視覺模型會隨中文原圖中的稱呼，把答案裡的 “Mom” 改為 “Harry”，也曾把「噩夢」寫成 “a nice dream”。每組有兩種原句，兩個翻譯方向都須保留語意的變化。訓練語料中的句子有 3/77 組通過，依樣板構造的句子則有 46/51 組通過。
 
+視覺模型現在可以接收字形庫以外的印刷字形。以 1,368 對經專業譯者評審的譯例訓練後，在含有原字形庫外字形的 96 個中文新聞句子中，完整譯意得分為 0/96，在僅含熟悉字形的句子中為 2/96。顯示陌生字形的筆畫改變了 93 幅回答影像。下圖保留模型的原始輸出。 [實驗與權重](../references/reviewed_news_writer_result.md)
+
+![訓練前後模型實際寫出的譯文](../publication/ilm-nature/figures/Reviewed_news_writer.png)
+
 ![模型產生的原始影像](../publication/ilm-nature/figures/Paired_visual_answers.png)
 
 面對未見書籍中的句子圖像「我理解你的痛苦。」，獨立視覺模型寫出了「I understand your pain.」。在單張 RTX 4090 D 上，以相同的訓練預算學習 147,456 組不同的雙語句子後，96 道新書翻譯題有 6 道完整達意；反覆學習 24,576 組的對照模型為 4 道，訓練前為 5 道。量化文字模型 Qwen3-8B 為 88 道。按書估計的差值區間包含零。 [實驗與權重](../references/visual_training_breadth_result.md)

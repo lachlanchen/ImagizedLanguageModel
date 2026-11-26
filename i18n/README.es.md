@@ -2,6 +2,10 @@
 
 Al cambiar el destinatario en la imagen de una frase china, el modelo cambió «Mom» por «Harry» en su respuesta en inglés. También tradujo una pesadilla como «a nice dream». Conservó la diferencia de significado en ambos sentidos de traducción en 3 de 77 pares extraídos del corpus de entrenamiento y en 46 de 51 pares construidos con plantillas.
 
+El modelo visual ya admite formas impresas ajenas a su repertorio inicial. Tras entrenarse con 1.368 pares de traducciones evaluadas por profesionales, transmitió el sentido completo al traducir noticias del chino al inglés en 0 de 96 oraciones con algún glifo desconocido y en 2 de 96 con solo glifos conocidos. Mostrar los trazos desconocidos cambió 93 imágenes de respuesta. La figura reproduce las salidas originales. [Experimento y pesos](../references/reviewed_news_writer_result.md)
+
+![Salidas originales antes y después del entrenamiento](../publication/ilm-nature/figures/Reviewed_news_writer.png)
+
 ![Imágenes originales de las respuestas](../publication/ilm-nature/figures/Paired_visual_answers.png)
 
 Ante la imagen de la frase «我理解你的痛苦。» de un libro nuevo, el modelo visual independiente escribió «I understand your pain.». Con el mismo presupuesto en una RTX 4090 D, obtuvo 6 traducciones completas de 96 al aprender de 147.456 pares distintos, frente a 4 al repetir 24.576 pares y 5 antes del entrenamiento. El modelo de texto cuantizado Qwen3-8B obtuvo 88. Los intervalos de la diferencia estimados por libro incluyen cero. [Experimento y pesos](../references/visual_training_breadth_result.md)

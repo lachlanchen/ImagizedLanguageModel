@@ -2,6 +2,10 @@
 
 Wenn sich die angesprochene Person im chinesischen Satzbild änderte, wechselte das Modell in seiner englischen Antwort von „Mom“ zu „Harry“. Einen Albtraum übersetzte es dagegen als „a nice dream“. In beiden Übersetzungsrichtungen gab es den Bedeutungsunterschied bei 3 von 77 Satzpaaren aus dem Trainingskorpus und bei 46 von 51 nach Vorlagen gebildeten Paaren wieder.
 
+Das visuelle Modell verarbeitet nun auch gedruckte Zeichenformen außerhalb seines ursprünglichen Vorrats. Nach dem Training mit 1.368 fachlich geprüften Übersetzungspaaren gab es bei chinesischen Nachrichtensätzen den vollständigen Sinn in 0 von 96 Fällen mit unbekannten Zeichenformen und in 2 von 96 Fällen mit ausschließlich vertrauten Formen auf Englisch wieder. Die sichtbaren Striche unbekannter Zeichen veränderten 93 Antwortbilder. Die Abbildung zeigt die Originalausgaben. [Experiment und Gewichte](../references/reviewed_news_writer_result.md)
+
+![Originalausgaben vor und nach dem Training](../publication/ilm-nature/figures/Reviewed_news_writer.png)
+
 ![Originalbilder der Antworten](../publication/ilm-nature/figures/Paired_visual_answers.png)
 
 Für das Satzbild „我理解你的痛苦。“ aus einem bisher ungesehenen Buch schrieb das eigenständige visuelle Modell „I understand your pain.“. Bei gleichem Trainingsbudget auf einer RTX 4090 D gelangen mit 147.456 unterschiedlichen Satzpaaren 6 von 96 vollständigen Übersetzungen, mit 24.576 wiederholten Paaren 4 und vor dem Training 5. Das quantisierte Textmodell Qwen3-8B erreichte 88. Die über Bücher geschätzten Intervalle der Differenzen schließen null ein. [Versuch und Gewichte](../references/visual_training_breadth_result.md)

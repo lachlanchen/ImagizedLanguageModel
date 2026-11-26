@@ -12,6 +12,17 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The open-source-ink news qualification, two human-reviewed translation fits,
+192-case external free-writing assessment and supplied-history audit are complete.
+Read `references/reviewed_news_writer_result.md` and the current engineering goal.
+The model can consume new printed shapes and changed 93/96 output bitmaps when
+those strokes were shown, but both fits earned 0/96 complete unfamiliar-source
+meanings and 2/96 familiar-source meanings. The original OPUS bulk certification
+also closed at 88/128. Preserve the weights, scores and raw PNGs. The next
+comparison concerns target-side pretraining on coherent pictured prose and
+matched scrambled words. See the private handoff for runtime ownership.
+
+
 The matched corpus-breadth comparison is complete. Read
 `references/visual_training_breadth_result.md`. The broad fit earns 6/96 on
 new books versus 4/96 repeated and 5/96 parent. The paired intervals include

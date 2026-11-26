@@ -2,6 +2,10 @@
 
 Lorsque le destinataire a changé dans la phrase chinoise en image, le modèle a remplacé « Mom » par « Harry » dans sa réponse anglaise. Il a aussi traduit un cauchemar par « a nice dream ». Dans les deux sens de traduction, il a restitué la différence de sens pour 3 des 77 paires tirées du corpus d’entraînement et 46 des 51 paires construites à partir de patrons.
 
+Le modèle visuel accepte désormais des glyphes imprimés absents de son répertoire initial. Après un entraînement sur 1 368 paires de traductions évaluées par des professionnels, il a restitué le sens complet de 0 phrase sur 96 contenant un glyphe jusque-là inconnu et de 2 phrases sur 96 composées de glyphes familiers, dans un test de traduction de nouvelles chinoises vers l’anglais. Montrer les traits des glyphes inconnus a modifié 93 images de réponse. La figure reproduit les sorties du modèle. [Expérience et poids](../references/reviewed_news_writer_result.md)
+
+![Sorties originales avant et après entraînement](../publication/ilm-nature/figures/Reviewed_news_writer.png)
+
 ![Images originales des réponses](../publication/ilm-nature/figures/Paired_visual_answers.png)
 
 Devant l’image de la phrase « 我理解你的痛苦。 » tirée d’un livre inédit pour lui, le modèle visuel indépendant a écrit « I understand your pain. ». À budget égal sur une RTX 4090 D, il a obtenu 6 traductions jugées complètes sur 96 après apprentissage sur 147 456 paires distinctes, contre 4 avec 24 576 paires répétées et 5 avant entraînement. Le modèle textuel quantifié Qwen3-8B en a obtenu 88. Les intervalles de différence estimés par livre incluent zéro. [Expérience et poids](../references/visual_training_breadth_result.md)

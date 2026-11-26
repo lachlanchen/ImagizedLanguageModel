@@ -2,6 +2,10 @@
 
 Khi người được gọi trong ảnh câu tiếng Trung thay đổi, mô hình đổi “Mom” thành “Harry” trong ảnh trả lời bằng tiếng Anh. Nhưng nó cũng viết “a nice dream” khi gặp từ chỉ cơn ác mộng. Mô hình giữ được sự khác biệt về nghĩa ở cả hai chiều dịch cho 3 trong 77 cặp câu từ ngữ liệu huấn luyện và 46 trong 51 cặp câu tạo theo mẫu.
 
+Mô hình thị giác nay nhận được cả những dạng chữ in ngoài bộ hình chữ ban đầu. Sau khi học từ 1.368 cặp câu dịch đã qua đánh giá chuyên môn, mô hình truyền đạt trọn nghĩa khi dịch tin tiếng Trung sang tiếng Anh ở 0/96 câu có dạng chữ lạ và 2/96 câu chỉ có dạng chữ quen. Hiển thị nét của chữ lạ làm thay đổi 93 ảnh trả lời. Hình dưới giữ nguyên đầu ra của mô hình. [Thí nghiệm và trọng số](../references/reviewed_news_writer_result.md)
+
+![Ảnh do mô hình xuất trước và sau huấn luyện](../publication/ilm-nature/figures/Reviewed_news_writer.png)
+
 ![Ảnh đầu ra gốc](../publication/ilm-nature/figures/Paired_visual_answers.png)
 
 Với ảnh chụp câu “我理解你的痛苦。” từ một cuốn sách chưa dùng khi huấn luyện, mô hình thị giác độc lập viết “I understand your pain.”. Trên một RTX 4090 D, với cùng ngân sách huấn luyện, 147.456 cặp câu khác nhau cho 6/96 bản dịch đủ nghĩa; lặp lại 24.576 cặp cho 4/96 và mô hình ban đầu đạt 5/96. Mô hình văn bản lượng tử hóa Qwen3-8B đạt 88/96. Khoảng ước lượng chênh lệch theo sách bao gồm 0. [Thí nghiệm và trọng số](../references/visual_training_breadth_result.md)

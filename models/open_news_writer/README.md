@@ -20,4 +20,4 @@ scripts/with_ilm_gpu python -m scripts.train_open_news_writer
 scripts/with_ilm_gpu python -m scripts.evaluate_open_news_writer
 ```
 
-[External evaluation protocol](../../references/open_news_external_training_protocol.md) · [Fit schedule and objectives](../../references/open_news_training_protocol.md)
+[Measured transfer and original outputs](../../references/reviewed_news_writer_result.md) · [External evaluation protocol](../../references/open_news_external_training_protocol.md) · [Fit schedule and objectives](../../references/open_news_training_protocol.md)

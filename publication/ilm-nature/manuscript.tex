@@ -10,9 +10,15 @@
 \newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
 \begin{document}
 \noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
-\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont When a visual translator changes an answer with its source\par}
+\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Learning to translate unfamiliar printed shapes\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\medskip
+\input{reviewed_news_opening}
+\newpage
+\pageheading{Does the answer follow a change in the source?}
 \input{paired_translation_opening}
+\newpage
+\pageheading{Testing what a translation grade measures}
+\input{expert_news_translation}
 \newpage
 \pageheading{Training on six times as many distinct sentences}
 \input{training_breadth_opening}
@@ -138,13 +144,14 @@ We froze the recurrent reader and located two nonoverlapping fragments of its se
 On a further four unseen formulations the unchanged selector completed 138/608 pairs and the order model completed 332 (gain 31.9 percentage points, paired 95\% family-bootstrap interval 29.1--34.7 within these four formulations). English improved from 138 to 146 of 304 and Chinese from zero to 186 of 304. Of the new pairs, 450 contained the needed values on both requests. Choosing the right order on all of them would recover the remaining 118 order failures. The other 158 require different field selections. A Lean proof establishes the exact order-only ceiling for any fixed pair of selections. The revised reader retained 607/608 familiar requests and all 4,256 of its evaluated answer PNGs replayed on CPU. These results measure controlled instructions with named fields. Free etymological explanation and continuous-page reading remain open.
 \end{multicols}
 \small\noindent\textbf{Data and code.} \repo{references/source_supported_writing_result.md}{Source-content experiments}, \repo{publication/ilm-nature/evidence/source_supported_writing.zip}{book outputs}, \repo{scripts/select_visual_translation.py}{single-image candidate reader}, \repo{models/independent_optical_actions}{Independent writers}, \repo{publication/ilm-nature/evidence/independent_optical_actions.zip}{held-book PNGs}, \repo{references/independent_optical_actions_result.md}{matched evidence}, \repo{references/sentence_reconstruction_result.md}{Independent writing}, \repo{publication/ilm-nature/evidence/sentence_reconstruction_answers.zip}{all independent translation images}, \repo{references/visual_order_result.md}{order experiments}, \repo{publication/ilm-nature/evidence/visual_order_answers.zip}{original order-pair images}, \repo{formal/span_list/VisualFieldOrder.lean}{order bound}. \repo{publication/ilm-nature/evidence/pictured_path_answers.zip}{Original book answers}, \repo{publication/ilm-nature/evidence/pictured_path_serif.zip}{changed-face outputs}, \repo{references/evidence/pictured_path_translation_v1}{case decisions}, \repo{formal/span_list/SourcePathRepair.lean}{proof} and \repo{scripts/write_optical_span.py}{translation writer}, \repo{models/origin_value_reader}{independent reader} and \repo{publication/ilm-nature/evidence/grounded_origin_answers.zip}{dictionary outputs}.\par
-{\footnotesize
-\begin{thebibliography}{11}\setlength{\itemsep}{0pt}
+{\fontsize{8}{8.6}\selectfont
+\begin{thebibliography}{13}\setlength{\itemsep}{-1pt}
 \bibitem{ma} Ma, S., Sun, X., Wang, Y. \& Lin, J. \href{https://aclanthology.org/P18-2053/}{Bag-of-words as target for neural machine translation}. \textit{ACL}, 332--338 (2018).
 \bibitem{sennrich} Sennrich, R., Haddow, B. \& Birch, A. \href{https://aclanthology.org/P16-1162/}{Neural machine translation of rare words with subword units}. \textit{ACL}, 1715--1725 (2016).
 \bibitem{rust} Rust, P. et al. \href{https://arxiv.org/abs/2207.06991}{Language modelling with pixels}. \textit{ICLR} (2023).
 \bibitem{tai} Tai, Y. et al. \href{https://aclanthology.org/2024.findings-acl.874/}{PIXAR: Auto-regressive language modeling in pixel space}. \textit{Findings of ACL} (2024).
 \bibitem{chai} Chai, Y. et al. \href{https://aclanthology.org/2024.emnlp-main.182/}{Autoregressive pre-training on pixels and texts}. \textit{EMNLP} (2024).
+\bibitem{freitagmqm} Freitag, M. et al. \href{https://aclanthology.org/2021.tacl-1.87/}{Experts, errors, and context: A large-scale study of human evaluation for machine translation}. \textit{Trans. Assoc. Comput. Linguist.} \textbf{9}, 1460--1474 (2021).
 \bibitem{opus} Tiedemann, J. \& Thottingal, S. \href{https://aclanthology.org/2020.eamt-1.61/}{OPUS-MT -- Building open translation services for the world}. \textit{EAMT} (2020).
 \bibitem{mini} MiniMind contributors. \href{https://github.com/jingyaogong/minimind/tree/858008eb98da4428f78053a1cc4d3a3bd5973629}{MiniMind, pretrained models and training code}.
 \bibitem{brown} Brown, P. F. et al. \href{https://aclanthology.org/J93-2003/}{The mathematics of statistical machine translation: parameter estimation}. \textit{Computational Linguistics} \textbf{19}, 263--311 (1993).
