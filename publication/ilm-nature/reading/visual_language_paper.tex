@@ -10,7 +10,7 @@
 \noindent{\sffamily\bfseries\fontsize{22}{26}\selectfont \ILMPaperTitle\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\vspace{8pt}
 \noindent{\bfseries\fontsize{10.5}{12.6}\selectfont
-Historical writing preserves distinctions that a transcription can lose. Can a small network read pictured language and answer in ink? We trained visual readers and writers on one RTX 4090 D. A repertoire-based translator handled all eight changes of role and polarity in 111 of 118 controlled families. On 384 literary requests it conveyed ten complete meanings. A reader trained against a pretrained decoder's predictions conveyed 22 of 192 meanings on a fresh panel, versus ten for matched state regression. A separate compact translator learned to generate each glyph's pixels. Its complete images and stops matched the repertoire writer on all 192 requests, including 190 rejected answers. On another 192 requests, transferring the prediction-trained visual reader to this pixel writer yielded four complete translations against five for regression (difference, $-0.52$ percentage points, 95\% work-bootstrap interval $-1.56$ to $0.00$).\par}
+Reading writing as an image preserves shapes that a transcription can lose. We tested whether a small model can also use those shapes to compose a meaningful answer. The model reads aligned English or Chinese glyphs, chooses visual codes and predicts the pixels it will read at its next step. A visual translator recovered all controlled role changes in 111 of 118 grammatical families. Literary translation proved harder. We trained two independent writers on 28,342 bilingual passage pairs, giving one the probability that a text teacher assigned to the next visible glyph. In a two-order assessment on 192 fresh requests, this writer conveyed five complete meanings against four for matched training on human translations and 173 for a quantized 8B text model. The paired four-work interval for the gain was $-1.56$ to $+3.12$ percentage points. The guided writer reproduced every held answer on CPU. The remaining difficulty is choosing a sequence of visually legible words that conveys the source proposition.\par}
 \vspace{4pt}
 \platehere{Figure_215_writer_provenance}{Where the strokes in a visual answer come from}{\textbf{a}, A 1.69-million-parameter translator chooses each next glyph from a repertoire of 32-square binary images. The complete output to the short English prompt matches the Chinese reference. The equally sharp English reply to the Chinese prompt repeats itself and misses the meaning. Both replies reproduced byte for byte when the network read the original PNG on CPU. \textbf{b}, A different model predicts ink in each cell and feeds the emitted pixels back. The two complete answers are the first exact and the first unreadable reply in fixed order among 32 proportional-layout questions at the final checkpoint. Both stopped. The images agree with the saved network tensors at every pixel.}
 \begin{multicols}{2}
@@ -25,7 +25,7 @@ The pixel writer answered seven of 32 questions exactly and solved both question
 \includegraphics[height=12pt]{../figures/field_transfer/0000-input.png}\end{minipage}\hfill
 \begin{minipage}[t]{.58\linewidth}{\small\sffamily Predicted pixels}\par
 \includegraphics[height=12pt]{../figures/field_transfer/0000-prediction.png}\end{minipage}\par
-\noindent{\small First credited prediction-field reply. Figure~70 shows the first change in credit and the first failure.}
+\noindent{\small First credited prediction-field reply. Figures~70 and 72 show complete answers before and after target-side teaching.}
 
 \newpage
 \spread{Which fact does the question ask for?}
@@ -316,4 +316,5 @@ Additional reading corpora include CoQA, CMRC 2018 and DRCD. For external readin
 \input{optical_state_reader.tex}
 \input{readout_objective.tex}
 \input{field_transfer.tex}
+\input{target_glyph_teaching.tex}
 \end{document}

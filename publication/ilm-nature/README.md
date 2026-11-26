@@ -1,5 +1,7 @@
 # Language Is Image: Imagized Language Modeling
 
+Figure 71 reports the effect of teaching an image writer the probabilities of visible next glyphs. Figure 72 shows six complete model outputs alongside three pictured inputs. All six answer PNGs reproduced on CPU. Across 192 requests, teacher guidance earned five complete-meaning credits, compared with four for matched training and 173 for a quantized text model. The difference from matched training remains uncertain. [Reading PDF, pp. 71–72](visual_language_paper.pdf#page=71) · [Editable figures](figures/Teaching_the_next_glyph.pptx) · [Original GPU images](evidence/target_glyph_answers.zip)
+
 The reading edition opens with traced examples from three visual writers. Figure 69 reports the independent translators' complete-meaning scores and a source intervention. Figure 70 shows original inputs and six complete answers. All 768 GPU answers reproduced on CPU. Correctly drawn words often gave the wrong translation. [Reading PDF](visual_language_paper.pdf) · [Editable figures 69–70](figures/Independent_field_writer.pptx) · [Figure-by-figure index](evidence/visual_output_figure_index.json) · [Complete raw images and outcomes](evidence/field_writer_outputs.zip)
 
 

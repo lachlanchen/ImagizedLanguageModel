@@ -12,7 +12,7 @@ from PIL import Image
 
 PAPER=Path(__file__).resolve().parent
 ROOT=PAPER.parents[1]
-STATS={4,7,9,20,23,25,27,30,32,34,38,39,41,43,44,46,47,50,53,57,60,63,65,66,67,69}
+STATS={4,7,9,20,23,25,27,30,32,34,38,39,41,43,44,46,47,50,53,57,60,63,65,66,67,69,71}
 MIXED={10}
 PICTURE_AND_MECHANISM={1,45}
 
@@ -40,6 +40,53 @@ def flatten(p):
         sub=p.parent/m[1]
         return flatten(sub) if sub.is_file() else ""
     return re.sub(r"\\input\{([^}]+)\}",insert,text)
+
+
+def verify_target_glyph_plate():
+    evidence = ROOT / "references/evidence/target_glyph_teaching_v1"
+    assets = PAPER / "figures/target_glyph_teaching"
+    def record(name):
+        return json.loads((evidence / name).read_text())
+    examples = record("illustrated.json")
+    replay = record("replay.json")
+    archive = PAPER / "evidence/target_glyph_answers.zip"
+    assert sha(archive) == replay["archive"] == record("evaluation.json")["archive"]
+    assert examples["replay"] == sha(evidence / "replay.json")
+    assert replay["program"] == sha(ROOT / "scripts/replay_target_glyph_output.py")
+    assert replay["reproduced"] == dict(start=192, likelihood=191, guided=192, exchange=192)
+    trace = record("replay_difference.json")
+    assert trace["replay"] == examples["replay"]
+    assert trace["program"] == sha(ROOT / "scripts/trace_glyph_replay_difference.py")
+    diff, = replay["differences"]
+    case, = trace["cases"]
+    assert (diff["i"], diff["mode"]) == (case["index"], case["arm"]) == (152, "likelihood")
+    assert case["first_different_choice_zero_based"] == 57
+    assert diff["png"] == sha(evidence / "replay-0152-cpu.png") == case["runs"]["cpu_12"]["png"]
+    illustrated = {r["index"] for r in examples["examples"]}
+    assert len(illustrated) == 3 and diff["i"] not in illustrated
+    tiles = Counter()
+    with ZipFile(archive) as z:
+        rows = json.loads(z.read("request-outcomes.json"))
+        assert [r["id"] for r in rows] == list(range(192)) and len(z.namelist()) == 961
+        for row in rows:
+            i = row["id"]
+            for mode in ["input", "start", "likelihood", "guided", "exchange"]:
+                raw = z.read(f"{i:04d}/{mode}.png")
+                if mode != "input":
+                    answer = row["answers"][mode]
+                    digest = sha256(raw).hexdigest()
+                    assert digest == answer["png"] and answer["stop"]
+                    if (i, mode) == (diff["i"], diff["mode"]):
+                        assert digest == case["runs"]["cuda_24"]["png"]
+                if i in illustrated and mode in ("input", "guided", "likelihood"):
+                    assert raw == (assets / f"{i:04d}-{mode}.png").read_bytes()
+                    tiles[raster(raw)] += 1
+    assert sum(tiles.values()) == 9
+    deck = PAPER / "figures/Teaching_the_next_glyph.pptx"
+    chart_data(deck, record("chart.json")["panels"])
+    with ZipFile(deck) as z:
+        assert Counter(raster(z.read(n)) for n in z.namelist() if n.startswith("ppt/media/")) == tiles
+    return tiles
 
 
 def main():
@@ -90,6 +137,7 @@ def main():
                 blob=z.read(f"{folder}/{name}.png")
                 assert sha256(blob).hexdigest()==replay[key]
                 assert blob==(field_assets/f"{folder}-{name}.png").read_bytes()
+    target_tiles = verify_target_glyph_plate()
     plates=re.findall(r"\\platehere\{(Figure_[^}]+)\}\{([^}]+)\}",flatten(PAPER/"reading/visual_language_paper.tex"))
     results=[]
     with fitz.open(PAPER/"visual_language_paper.pdf") as doc,fitz.open(PAPER/"manuscript.pdf") as full:
@@ -109,6 +157,7 @@ def main():
                 for part in ("input","prediction"):
                     key=raster((field_assets/f"{first:04d}-{part}.png").read_bytes())
                     assert actual[key] and page_pictures(full,full[page])[key]
+            if n==72: assert expected==target_tiles
             if n==70: assert expected==field_tiles
             if n==68: assert expected==motor_tiles
             kind=("Measured outcomes" if n in STATS else "Examples and measurements" if n in MIXED else
@@ -117,7 +166,7 @@ def main():
                                 embedded_source_images=sum(expected.values())))
     evidence=PAPER/"evidence/visual_output_figure_index.json"
     evidence.write_text(json.dumps(dict(paper_sha256=sha(PAPER/"visual_language_paper.pdf"),figures=results,
-        scope="Every numbered plate located in both compiled editions. Raster identity checks establish what the PDF contains. Historical plates include pictured inputs, references, copied shapes, learned repertoire choices, pixel predictions and measurements. The six answer panels of Figure 70 have independent CPU replays against the archived GPU PNGs. Figure 69 contains measurements."),indent=2)+"\n")
+        scope="Every numbered plate located in both compiled editions. Raster identity checks establish what the PDF contains. Historical plates include pictured inputs, references, copied shapes, learned repertoire choices, pixel predictions and measurements. Figures 69 and 71 report measurements. For Figures 70 and 72, the six illustrated answers on each plate match the archived GPU outputs and reproduced on CPU. Across all four conditions underlying Figure 72, one unillustrated control differs between devices (767/768 match)."),indent=2)+"\n")
     print("Matched",len(results),"numbered plates and",sum(r["embedded_source_images"] for r in results),"source image instances")
 
 

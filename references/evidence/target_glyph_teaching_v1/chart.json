@@ -1,0 +1,61 @@
+{
+  "colors": {
+    "To English": "#126957",
+    "To Chinese": "#b17646",
+    "Human likelihood": "#757c80",
+    "Teacher + human": "#126957"
+  },
+  "panels": [
+    {
+      "title": "a   Complete translations",
+      "unit": "Whole meanings credited per 96 requests",
+      "labels": [
+        "Starting writer",
+        "Human likelihood",
+        "Teacher + human",
+        "Exchanged source",
+        "Qwen 8B Q4"
+      ],
+      "series": {
+        "To English": [
+          1,
+          1,
+          1,
+          0,
+          87
+        ],
+        "To Chinese": [
+          2,
+          3,
+          4,
+          0,
+          86
+        ]
+      }
+    },
+    {
+      "title": "b   Training on visible probability",
+      "unit": "Mean one-sided divergence per aligned boundary",
+      "labels": [
+        "Pass 1",
+        "Pass 2",
+        "Pass 3",
+        "Pass 4"
+      ],
+      "series": {
+        "Human likelihood": [
+          0.9878,
+          0.9858,
+          0.9851,
+          0.9827
+        ],
+        "Teacher + human": [
+          0.7946,
+          0.7489,
+          0.7275,
+          0.7159
+        ]
+      }
+    }
+  ]
+}

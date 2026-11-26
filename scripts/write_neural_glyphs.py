@@ -48,11 +48,17 @@ def main():
     p.add_argument("--to",choices=("en","zh"),required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--device",choices=("cpu","cuda"),default="cpu")
-    p.add_argument("--source-field",choices=("regression","prediction"),
+    select=p.add_mutually_exclusive_group()
+    select.add_argument("--target-training",choices=("likelihood","guided"),
+                        help="Use the independent writer continued with this target objective")
+    select.add_argument("--source-field",choices=("regression","prediction"),
                    help="Use a fitted independent decoder with the corresponding optical source reader")
     args=p.parse_args()
     torch.set_num_threads(2)
-    if args.source_field:
+    if args.target_training:
+        from ilm.visual_lm.target_glyph_teaching import load_writer
+        net=load_writer(args.target_training,args.device)
+    elif args.source_field:
         from ilm.visual_lm.field_to_glyph import restore
         net,_=restore(args.source_field,args.device)
     else:

@@ -1,0 +1,128 @@
+{
+  "arm": "likelihood",
+  "binding": {
+    "scripts/train_target_glyph_teaching.py": "6ed0953f3a3978b443e58860619e7318299801dd27ba9c9903a4aa53ef48ba50",
+    "ilm/visual_lm/target_glyph_teaching.py": "1463bee7da46913394dd10ae5b25ad2ebc57a55052672748850ef406e531bbce",
+    "references/evidence/target_glyph_teaching_v1/targets.json": "a3a179920bbca05ea37e27bb9284b6ef3c67f49eab9fe23ec1ec0b5b191f2f3f",
+    "references/evidence/target_glyph_teaching_v1/panel.json": "04b27219133afc2e70d2cdb530a75b48939424815284c133ae20d007961014c9",
+    "references/target_glyph_teaching_protocol.md": "19d14b2e581615683c2acfcc5f6103ea5c69cf3073a6a7f9a724c4b26217f266",
+    "scripts/train_field_to_glyph.py": "baba63e717a9b3d75b4260609f2d3cf456033f57ae898d0cb753215c22344ed5"
+  },
+  "parents": [
+    "4b42453372cc400026a64f94fec14d92e8be226125238d54c2a5b39a25bd1c3b",
+    "23476fa9ceeb25163a6d3f4f166eaef252108d84c3f1dea7e1a1b66fa69e7f46",
+    "1e49afacfc35f286c967b43c5f085d629e4ab7620bec500e1301474c396dbcdb",
+    "55a936fecc6d56febb6751bc1dcd67fd66c8a08227b06844eb6f5b839d2c6804"
+  ],
+  "weights": "0bc4fee7f157028afd4afa4bd93730d21e7248c3de7b1574b88ed58c3e9ba536",
+  "initial": {
+    "en": {
+      "real": 1.0766216150298902,
+      "exchanged": 1.7544285777923014
+    },
+    "zh": {
+      "real": 3.6746034025589402,
+      "exchanged": 5.4654912868467695
+    }
+  },
+  "terminal": {
+    "en": {
+      "real": 1.0862503501225593,
+      "exchanged": 1.7871062621145692
+    },
+    "zh": {
+      "real": 3.6875764221704306,
+      "exchanged": 5.539046058690404
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "updates": 510,
+      "order": "51ee2b335b0073806b95173abb2f4d26fce14dde3efa2af054be56380b71cb2a",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "boundaries": [
+        364385,
+        318323
+      ],
+      "nll": [
+        0.9085280052361323,
+        3.0460599552589844
+      ],
+      "deficit": [
+        0.28155406459080035,
+        1.7962659976910382
+      ]
+    },
+    {
+      "epoch": 2,
+      "updates": 510,
+      "order": "c94214379f6d0c1a8b525c02c72f710e96a198a03b822d0fa6a766367b66d402",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "boundaries": [
+        364385,
+        318323
+      ],
+      "nll": [
+        0.8962286907880753,
+        2.9980248399189744
+      ],
+      "deficit": [
+        0.2832060844556317,
+        1.7900972440663974
+      ]
+    },
+    {
+      "epoch": 3,
+      "updates": 510,
+      "order": "fdab98d13e4204c68ca8a31bba51f01b78f0e0531071101d88f26522a423c3ee",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "boundaries": [
+        364385,
+        318323
+      ],
+      "nll": [
+        0.879070786225671,
+        2.948669038495875
+      ],
+      "deficit": [
+        0.28218344022396985,
+        1.7897289938114844
+      ]
+    },
+    {
+      "epoch": 4,
+      "updates": 510,
+      "order": "d44e1ffad89dea8aa77905cc08c1ecf6ddfa87a820766f3665fc69f45fd81bbc",
+      "positions": [
+        1370563,
+        465251
+      ],
+      "boundaries": [
+        364385,
+        318323
+      ],
+      "nll": [
+        0.8671471468671643,
+        2.9145116001114992
+      ],
+      "deficit": [
+        0.2819828826927096,
+        1.7848093735565533
+      ]
+    }
+  ],
+  "seconds": 23.888127144426107,
+  "peak_bytes": 4388698624,
+  "trainable": 802240,
+  "total": 10481570
+}
