@@ -25,6 +25,8 @@ def restore(stride, device):
         "book-rehearsal",
         "prefix-reference",
         "prefix-recovery",
+        "teacher-corpus",
+        "teacher-distilled",
         "paired-likelihood",
         "paired-assignment",
         "paraphrase-canonical",
@@ -40,6 +42,7 @@ def restore(stride, device):
                 "paired": "paired_ink",
                 "book": "book_breadth",
                 "prefix": "visual_prefix",
+                "teacher": "teacher_translation",
             }[family]
         )
         path = base / objective
@@ -155,6 +158,8 @@ if __name__ == "__main__":
             "book-rehearsal",
             "prefix-reference",
             "prefix-recovery",
+            "teacher-corpus",
+            "teacher-distilled",
             "wide",
             "paired-likelihood",
             "paired-assignment",

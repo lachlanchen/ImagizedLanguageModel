@@ -1,0 +1,4282 @@
+{
+  "exact": {
+    "book": {
+      "n": 48,
+      "parent": 0,
+      "parent_stop": 48,
+      "corpus": 0,
+      "corpus_stop": 48,
+      "distilled": 0,
+      "distilled_stop": 48
+    },
+    "talk": {
+      "n": 48,
+      "parent": 0,
+      "parent_stop": 48,
+      "corpus": 0,
+      "corpus_stop": 48,
+      "distilled": 0,
+      "distilled_stop": 48
+    },
+    "earlier-articles": {
+      "n": 64,
+      "parent": 0,
+      "parent_stop": 64,
+      "corpus": 0,
+      "corpus_stop": 64,
+      "distilled": 0,
+      "distilled_stop": 64
+    },
+    "fit-book": {
+      "n": 48,
+      "parent": 0,
+      "parent_stop": 48,
+      "parent_teacher_exact": 0,
+      "corpus": 2,
+      "corpus_stop": 48,
+      "corpus_teacher_exact": 0,
+      "distilled": 1,
+      "distilled_stop": 48,
+      "distilled_teacher_exact": 2
+    },
+    "fit-talk": {
+      "n": 48,
+      "parent": 1,
+      "parent_stop": 48,
+      "parent_teacher_exact": 0,
+      "corpus": 3,
+      "corpus_stop": 48,
+      "corpus_teacher_exact": 3,
+      "distilled": 0,
+      "distilled_stop": 48,
+      "distilled_teacher_exact": 1
+    },
+    "role-active": {
+      "n": 472,
+      "parent": 472,
+      "parent_stop": 472,
+      "corpus": 467,
+      "corpus_stop": 472,
+      "distilled": 471,
+      "distilled_stop": 472
+    },
+    "role-passive": {
+      "n": 472,
+      "parent": 465,
+      "parent_stop": 472,
+      "corpus": 464,
+      "corpus_stop": 472,
+      "distilled": 468,
+      "distilled_stop": 472
+    }
+  },
+  "families": {
+    "parent": 111,
+    "corpus": 107,
+    "distilled": 113
+  },
+  "paired_95pct": {
+    "parent": [
+      0.0,
+      0.0
+    ],
+    "corpus": [
+      -0.03125,
+      0.0
+    ]
+  },
+  "semantic": {
+    "groups": {
+      "book": {
+        "n": 48,
+        "foil_rejected_twice": 48,
+        "parent": 0,
+        "corpus": 0,
+        "distilled": 0,
+        "qwen": 27,
+        "reference": 48,
+        "foil": 0
+      },
+      "talk": {
+        "n": 48,
+        "foil_rejected_twice": 48,
+        "parent": 0,
+        "corpus": 1,
+        "distilled": 0,
+        "qwen": 31,
+        "reference": 47,
+        "foil": 0
+      },
+      "earlier-articles": {
+        "n": 64,
+        "foil_rejected_twice": 64,
+        "parent": 0,
+        "corpus": 0,
+        "distilled": 0,
+        "qwen": 47,
+        "reference": 64,
+        "foil": 0
+      },
+      "fit-book": {
+        "n": 48,
+        "foil_rejected_twice": 48,
+        "parent": 0,
+        "corpus": 4,
+        "distilled": 2,
+        "qwen": 23,
+        "reference": 48,
+        "foil": 0
+      },
+      "fit-talk": {
+        "n": 48,
+        "foil_rejected_twice": 48,
+        "parent": 1,
+        "corpus": 7,
+        "distilled": 0,
+        "qwen": 33,
+        "reference": 48,
+        "foil": 0
+      }
+    },
+    "paired": {
+      "book": {
+        "n": 24,
+        "parent": 0,
+        "corpus": 0,
+        "distilled": 0,
+        "qwen": 10,
+        "reference": 24,
+        "foil": 0
+      },
+      "talk": {
+        "n": 24,
+        "parent": 0,
+        "corpus": 0,
+        "distilled": 0,
+        "qwen": 12,
+        "reference": 23,
+        "foil": 0
+      },
+      "earlier-articles": {
+        "n": 32,
+        "parent": 0,
+        "corpus": 0,
+        "distilled": 0,
+        "qwen": 19,
+        "reference": 32,
+        "foil": 0
+      }
+    },
+    "votes": [
+      {
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "qwen": false,
+        "distilled": false,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "qwen": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": true,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "qwen": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": false,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "qwen": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "qwen": false,
+        "foil": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "qwen": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "qwen": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "parent": false,
+        "distilled": true,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "qwen": false,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "distilled": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "qwen": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "qwen": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "qwen": false,
+        "parent": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "distilled": false,
+        "qwen": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "qwen": false,
+        "foil": false,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": false,
+        "corpus": true,
+        "foil": false,
+        "qwen": true,
+        "parent": true
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": true,
+        "reference": false,
+        "distilled": true
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "qwen": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "qwen": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "qwen": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "qwen": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": false,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "qwen": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": false,
+        "parent": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "qwen": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "qwen": false,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "corpus": true,
+        "qwen": true,
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "reference": true,
+        "qwen": false,
+        "corpus": true
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "qwen": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "parent": false,
+        "qwen": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "qwen": false,
+        "corpus": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "qwen": false,
+        "parent": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "qwen": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "foil": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "corpus": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": true,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "distilled": true,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "distilled": true
+      },
+      {
+        "foil": false,
+        "qwen": false,
+        "corpus": false,
+        "reference": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "qwen": false,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "distilled": true,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "qwen": true,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "corpus": true
+      },
+      {
+        "corpus": true,
+        "foil": false,
+        "reference": true,
+        "distilled": true,
+        "parent": false,
+        "qwen": true
+      },
+      {
+        "corpus": true,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "corpus": true
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "corpus": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "corpus": true,
+        "qwen": true,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "qwen": false,
+        "corpus": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "distilled": false,
+        "qwen": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": false
+      },
+      {
+        "qwen": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "qwen": false,
+        "foil": false
+      },
+      {
+        "distilled": true,
+        "parent": false,
+        "qwen": false,
+        "foil": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "distilled": false,
+        "qwen": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "qwen": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "parent": true,
+        "distilled": false,
+        "foil": false,
+        "corpus": true
+      },
+      {
+        "corpus": true,
+        "foil": false,
+        "distilled": false,
+        "parent": true,
+        "qwen": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "corpus": true,
+        "parent": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "corpus": true,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "qwen": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "qwen": false,
+        "parent": false,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "parent": false,
+        "distilled": false,
+        "corpus": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "corpus": true,
+        "distilled": false,
+        "parent": false,
+        "qwen": false,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "corpus": false,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false,
+        "foil": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": false,
+        "parent": false
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "corpus": true
+      },
+      {
+        "corpus": true,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": true,
+        "parent": false,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "distilled": true,
+        "foil": false,
+        "reference": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "foil": false,
+        "parent": false,
+        "qwen": true,
+        "distilled": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "distilled": false,
+        "qwen": true,
+        "parent": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true
+      },
+      {
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "reference": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "reference": true,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "parent": false,
+        "qwen": true,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "parent": false,
+        "qwen": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false,
+        "corpus": true
+      },
+      {
+        "corpus": true,
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "parent": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true,
+        "corpus": true
+      },
+      {
+        "corpus": true,
+        "reference": true,
+        "distilled": false,
+        "qwen": false,
+        "foil": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "corpus": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "distilled": false,
+        "corpus": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "foil": false,
+        "corpus": false,
+        "distilled": false,
+        "parent": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": true,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "distilled": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "parent": false,
+        "qwen": true,
+        "corpus": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "corpus": false,
+        "qwen": false,
+        "parent": false,
+        "distilled": false
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "corpus": false,
+        "parent": false
+      },
+      {
+        "parent": false,
+        "corpus": false,
+        "qwen": false,
+        "foil": false,
+        "reference": true,
+        "distilled": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "foil": false,
+        "qwen": true,
+        "distilled": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "distilled": false,
+        "qwen": true,
+        "foil": false,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "parent": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "parent": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "corpus": false
+      },
+      {
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "parent": false,
+        "distilled": false,
+        "corpus": true
+      },
+      {
+        "corpus": false,
+        "distilled": false,
+        "parent": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "distilled": false,
+        "reference": true,
+        "corpus": false,
+        "foil": false,
+        "parent": false,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "parent": false,
+        "foil": false,
+        "corpus": true,
+        "reference": true,
+        "distilled": true
+      },
+      {
+        "distilled": false,
+        "foil": false,
+        "qwen": true,
+        "corpus": false,
+        "parent": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "parent": false,
+        "corpus": false,
+        "qwen": false,
+        "foil": false,
+        "distilled": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "distilled": false,
+        "parent": false,
+        "corpus": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "corpus": false,
+        "parent": false,
+        "distilled": false,
+        "qwen": true,
+        "foil": false
+      }
+    ],
+    "judge": "1329cd5ab37e5ef6faef37cd8ff8660ffc96ed5b47b34fddf8eb0912e6c82466",
+    "qwen": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f"
+  },
+  "binding": {
+    "program": "7d1fc4336b69acabd8e0c6a15c2b3f96ea588323f02ea447af65db9486da95d5",
+    "held": "61b5bd21016239a9764eef87440e83d331b6c78416c58866b82530a6d0c98651",
+    "selected": "b6a9bc79cf69944ce9209f6b48d362501eb6e8a905ac3be5c371c46558089b69",
+    "fits": {
+      "corpus": "b184acc814a9c86ca1c1a9c71e962684436587a0b56b18ed6f53230f2b1aa9e1",
+      "distilled": "11ef8e38cf49a345bfadfb866af03d544f2e632a3489a14bb4e7fdbce1977866"
+    }
+  },
+  "generated": "e915201584074a4d825df37450ef916e16acd6ebf4ed33b47bcbadc6b8140fb0",
+  "graded": "0dbaf55f60258129580c0c105c513456e774e680aae221d3dd463de0fa9ef4ae"
+}

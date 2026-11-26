@@ -1,0 +1,30 @@
+\newpage
+\spread{Can a visual writer translate an unfamiliar sentence?}
+\noindent We reserved passages from four novels and 24 talks before collecting new training translations. Each source was presented as a grid of printed glyphs. The student chose each successive answer bitmap from its repertoire, read back the emitted ink and chose when to stop.
+\platehere{Figure_204_translating_from_the_ink}{Three translations credited in a source-only reading}{\textbf{a}, A sentence from a reserved novel. After training with teacher translations, the writer preserves the glance, its participants and the silence. Both comparison writers lose part of the meaning. \textbf{b}, The teacher-trained writer conveys the removal of a presentation slide in awkward Chinese. \textbf{c}, Both trained writers translate the source about ongoing work. Its supplied reference instead concerns the time of birth. Every pictured input and answer shows the original pixels.}
+\begin{multicols}{2}
+\section*{What the pictured words convey}
+The English answer in panel a reads \emph{She looked at him and said nothing}. The starting writer ends with \emph{she didn't say him}. Changing a few words alters the proposition. All three credited distilled answers were absent as whole strings from the comparison pools of 609,090 English-target and 610,645 Chinese-target pairs. Phrases within those answers can still be familiar.
+\section*{How often it works}
+A bilingual model reader assessed all 96 requests from the source with writer identities concealed. It credited three distilled answers, one corpus-trained answer, two starting answers and 88 from quantized text Qwen3-8B. The interval for the paired distilled gain over the starting writer includes zero. The reader had prior exposure to some cases. These three examples exhaust its credits for the distilled writer.
+\end{multicols}
+\newpage
+\spread{Teaching complete translations}
+\noindent We trained two copies of the same 1.69-million-parameter visual writer. Each read the same source images in the same order. One saw the corpus translation as its target image. The other saw a separately written, screened translation from Qwen3-8B Q4.
+\platehere{Figure_205_teaching_complete_translations}{Remembering a wording and conveying a new meaning}{\textbf{a}, Whole-answer semantic credits under the registered two-order evaluation and subsequent masked source-only review. Each column covers the same 96 requests. Qwen received the source text. \textbf{b}, Exact stopped outputs on the 2,614 fitted requests, scored against each writer's own target. Development selection retained pass four for the corpus writer and pass two for the distilled writer. Pass twelve was assessed separately.}
+\begin{multicols}{2}
+\section*{Matched visual supervision}
+We collected 4,096 training translations in four equal strata by domain and direction. Of these, 3,753 stopped and fit the bitmap repertoire, and 2,766 also passed both source-only and reference-informed screens. Integer selection retained 2,614 requests with exactly equal total target lengths within each stratum. With mixed rehearsal, each arm used 2,208 updates and 7,424,220 supervised positions over twelve passes. The student fits took 27.4 and 27.7 seconds on one RTX 4090 D. Teacher generation and screening took a further 801 seconds.
+\section*{Where assessment disagreed}
+The registered reference-informed test gave zero credits to the distilled writer and one to the matched control. In the subsequent source-only reading, the supplied references themselves earned 80/96 and shuffled foils earned zero. The mistaken reference in the preceding image plate illustrates why a single-reference comparison is fragile. The registered promotion criterion failed. On a separate controlled role task the student retained all eight realizations in 113/118 families.
+\end{multicols}
+\newpage
+\spread{Learning a wording from its first differing glyph}
+\noindent A writer can assign a higher likelihood to a complete training answer while producing an incorrect reply on a new page. We located the change in probability at the earliest point where the two training translations diverge.
+\platehere{Figure_206_learning_a_wording}{Errors on new prose and an answer encountered during training}{\textbf{a,b}, The first reserved literary passage in each direction, shown in the evaluation order. Neither distilled answer preserved the full source meaning. \textbf{c}, A chapter heading used for fitting. All responses are independently emitted images. No reference was supplied to the writer during generation.}
+\begin{multicols}{2}
+\section*{A causal decomposition}
+For pictured source $x$, let $S(y)$ be the sum of conditional log scores along an answer, including its stop. Two proposed answers share a prefix $p$ and then write $a$ or $b$. Subtracting their scores cancels the shared history. The remainder is the log odds of $a$ against $b$ at $p$, plus the difference between the two subsequent conditional sequence scores. Subtracting this identity across the two trained writers isolates the change at the fork and in the remaining suffixes. Lean verifies the identity for integer scores, and the experiment evaluates it at micro-nat precision.
+\section*{Where the probability moved}
+Across the 2,563 distinct target pairs, distillation shifted the mean complete log odds towards the teacher by 35.36 nats. The first differing decision accounted for 3.75 and the subsequent glyphs for 31.61. The identity held in every case at the recorded precision. By pass twelve the distilled writer could reproduce 1,117 of its 2,614 training answers exactly. Its exact match on the new 96 requests remained zero at that pass. The large shift in fitted sequence probability gives little evidence of transfer to an unfamiliar proposition.
+\end{multicols}

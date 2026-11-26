@@ -1,0 +1,188 @@
+{
+  "binding": {
+    "scripts/train_teacher_translation.py": "a0dcd58339dc7f52a4f46f5d628287c973ca82d3bd6b5cb61b25f5cd3dacc319",
+    "references/complete_teacher_translation_protocol.md": "c91fa4b7cbf50c4896a34d32464ead3a77574e649d14321e5e0cdaf941bb21e8",
+    "references/evidence/teacher_translation_v1/design.json": "b521f9bdff75b523d2348dee6671ebf20dceabbfe48c1923dbc6d9045e2ecef4",
+    "references/evidence/teacher_translation_v1/teacher.json": "d799d15db14b050098178d29a9a32d44f56f393401161e61d20674199b9a5c56",
+    "models/visual_prefix/recovery/fit.json": "0cb9947f45b5130a3cead32ae907734d69f8b8601a108a3e717d8030585b38a5",
+    "models/visual_prefix/recovery/weights.safetensors": "876bcfd641c8e3e7b5b736dfdaea9e3e4c4edbb3c0ac624565ec14ff62bfbb4c",
+    "artifacts/teacher_translation_v1/selected.json": "b6a9bc79cf69944ce9209f6b48d362501eb6e8a905ac3be5c371c46558089b69"
+  },
+  "weights": "e615788bafedc33c2ed88c5b4febde0cdd83c33827acf0c98d062f4e57e2f9b0",
+  "selected_pass": 2,
+  "initial_development": {
+    "book": 0.316062092247745,
+    "talk": 0.30676063287243543,
+    "flores": 0.2655700747990374
+  },
+  "history": [
+    {
+      "pass_number": 1,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 1.2782596500451096,
+      "development": {
+        "book": 0.2908650023914323,
+        "talk": 0.3108517753882187,
+        "flores": 0.26301186508771485
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.1622326197102666
+    },
+    {
+      "pass_number": 2,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 1.156578776395578,
+      "development": {
+        "book": 0.2987519612780696,
+        "talk": 0.31291689827438934,
+        "flores": 0.25991371092586296
+      },
+      "peak_bytes": 736682496,
+      "seconds": 1.978439156897366
+    },
+    {
+      "pass_number": 3,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 1.0736706019028812,
+      "development": {
+        "book": 0.29645419134609724,
+        "talk": 0.29916097443089834,
+        "flores": 0.2423143016959773
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.20834082365036
+    },
+    {
+      "pass_number": 4,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 1.0029043378085734,
+      "development": {
+        "book": 0.29490031321181465,
+        "talk": 0.2986672848537935,
+        "flores": 0.2559116198646269
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.4604914002120495
+    },
+    {
+      "pass_number": 5,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.940881565575156,
+      "development": {
+        "book": 0.26506798018556205,
+        "talk": 0.29251858464832853,
+        "flores": 0.24859283298054555
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.1148309903219342
+    },
+    {
+      "pass_number": 6,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.8880198485528815,
+      "development": {
+        "book": 0.2864900454720612,
+        "talk": 0.27479210564648876,
+        "flores": 0.2556910785695399
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.5664508854970336
+    },
+    {
+      "pass_number": 7,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.8390846042875229,
+      "development": {
+        "book": 0.27770585900644806,
+        "talk": 0.28997905227653314,
+        "flores": 0.2618415269824179
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.5413030674681067
+    },
+    {
+      "pass_number": 8,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.7958529277919082,
+      "development": {
+        "book": 0.2669213953519176,
+        "talk": 0.2902391103747379,
+        "flores": 0.24572330747963722
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.498611473478377
+    },
+    {
+      "pass_number": 9,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.7578305595863658,
+      "development": {
+        "book": 0.2604448312534734,
+        "talk": 0.275597656876635,
+        "flores": 0.24828170709344077
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.243281962350011
+    },
+    {
+      "pass_number": 10,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.7246470637559342,
+      "development": {
+        "book": 0.2615804856544757,
+        "talk": 0.26652144125134836,
+        "flores": 0.2380426957668923
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.512432673946023
+    },
+    {
+      "pass_number": 11,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.6957583621501479,
+      "development": {
+        "book": 0.2658329411365522,
+        "talk": 0.276892835218942,
+        "flores": 0.2404309072153925
+      },
+      "peak_bytes": 736682496,
+      "seconds": 2.4875448374077678
+    },
+    {
+      "pass_number": 12,
+      "updates": 184,
+      "supervised_glyphs_and_stops": 618685,
+      "stops": 17570,
+      "nll": 0.6707772110624035,
+      "development": {
+        "book": 0.25948165333338974,
+        "talk": 0.26778071665825043,
+        "flores": 0.24110553581106164
+      },
+      "peak_bytes": 736682496,
+      "seconds": 1.9247670453041792
+    }
+  ]
+}
