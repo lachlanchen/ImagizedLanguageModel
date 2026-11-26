@@ -1,0 +1,28 @@
+# Visual translation from broader bilingual reading
+
+The broad writer reproduced three unseen reference translations exactly as stopped PNGs. They include the reporting clause “asked he.” from *Jane Eyre*, which it wrote as **他问道。**, and a talk sentence about who is who in which it preserved negation. On other passages it produced legible but incorrect Chinese or English. [All five credited replies](../publication/ilm-nature/figures/Figure_197_credited_book_replies.png) · [Three literary cases selected independently of grading](../publication/ilm-nature/figures/Figure_196_original_book_replies.png)
+
+## Same exposures, different passages
+
+Both continuations started from the 1,688,480-parameter varied-source visual translator. The broad writer trained on 24,512 single or adjacent literary units from eight local multilingual editions and 206,825 units from 3,411 TED documents. The narrow writer used 31,918 distinct pairs from the same collection, sampled within exact English and Chinese lengths and domain. In each of six passes both received 1,858 updates, 462,674 directed requests and 18,109,563 target positions including stop. Six broad passes took 220 seconds on one RTX 4090 D, measured within the fit. These times exclude antecedent training, preparation and evaluation. Development selection chose narrow pass one and broad pass six. [Protocol](book_breadth_protocol.md) · [Corpus receipts](evidence/book_breadth_v1/corpus.json) · [Broad weights and fit history](../models/book_breadth/broad/fit.json) · [Narrow control](../models/book_breadth/narrow/fit.json)
+
+| Complete meanings, in both masked grading orders | Starting writer | Narrow | Broad | Qwen3-8B Q4, text | Reference |
+|---|---:|---:|---:|---:|---:|
+| Three held novels, 48 requests | 0 | 0 | 1 | 19 | 47 |
+| 24 held talks, 48 requests | 0 | 0 | 4 | 30 | 45 |
+| 24 held FLORES articles, 48 requests | 0 | 0 | 0 | 37 | 48 |
+| **Total** | **0** | **0** | **5** | **86** | **140** |
+
+The local Qwen3-VL grader accepted no contrasting foil twice. It credited a Chinese reply that drops the source's phrase “in this city.” The original grade remains in the count. Two credits concern opposite directions of one passage. Per-domain 95% paired bootstrap intervals over documents include zero. There are only three held novels. Language assessment still needs independent bilingual human review. [All counts, votes, stop rates and paired intervals](evidence/book_breadth_v1/result.json)
+
+The broad fit reduced development loss on books from 2.398 to 2.021 nats per glyph, on talks from 1.914 to 1.488 and on FLORES from 2.138 to 1.911. The price of continuation is visible on the original controlled role challenge. Passive exact answers fell from 422/472 to zero for both writers. Active exact answers fell from 471/472 to 118/472 for narrow and 86/472 for broad. These checks use exact pixels and stop. They measure preservation of the earlier demonstrated ability. [Learning curves and complete meanings](../publication/ilm-nature/figures/Figure_195_book_learning.png)
+
+## What the data contain
+
+The local literary source is the capitalized `ZhJpBook` collection. Its interlinear files preserve aligned units and language fields. Machine-assisted literary translations can be imperfect. The initial ordinary Chinese field occurs in the held novels *Jane Eyre*, *Adventures of Huckleberry Finn* and *A Tale of Two Cities*. The classical editions store modern and classical Chinese in separate fields. We used those editions in a separate evaluation: 12 units each from the *Daodejing* and *Shanhaijing*, presented in both written forms. The broad writer earned 0/24 complete English meanings in each form. Quantized Qwen earned 9/24 from classical and 15/24 from modern Chinese, succeeding on both versions for seven units. The private lowercase page library provided a coverage audit. Of 1,070 pages scanned, 865 contained both languages and nine complete pairs fit this writer's inventories and 96-cell input limit. No private page text enters this release. [Script protocol](book_script_transfer_protocol.md) · [Script results](evidence/book_breadth_v1/script-result.json)
+
+The two public corpora are OPUS TED2020 v1 and FLORES-101. FLORES supplies professional translations and article URLs. We used whole talk documents and works to divide training and assessment, separate development and devtest article URLs, and screened earlier translation material for complete-sentence overlap. A physical-stream audit found no exact same-side duplicates between the current training corpus and either assessment split. Source segmentation, upstream overlap, optical repertory restrictions and the use of rendered cells constrain transfer to page scans. [TED2020](https://opus.nlpl.eu/TED2020/corpus/version/TED2020) · [FLORES-101](https://aclanthology.org/2022.tacl-1.30/)
+
+## What the information calculation establishes
+
+With uniform presentation of each broad pair, a narrow representative of multiplicity c loses log₂ c bits of pair identity on average within its group. The observed gain from broad reading was 2.903 bits per presented pair at identical glyph exposure. The independently counted integer lower bound was 627,639 bits per pass over 231,337 pairs. Lean verifies the finite product inequality underlying the bound and the equality of position counts under length-preserving substitution. The measured entropy is of the presented visual pairs. Semantic performance is a separate observation, and these experiments establish no energy or compute advantage over a matched text model. [Proofs](../formal/span_list/BookExposure.lean) · [Physical-stream audit](evidence/book_breadth_v1/exposure.json)

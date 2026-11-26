@@ -20,6 +20,8 @@ def restore(stride, device):
         "proposition-contrast",
         "bilingual-likelihood",
         "bilingual-aligned",
+        "book-narrow",
+        "book-broad",
         "paired-likelihood",
         "paired-assignment",
         "paraphrase-canonical",
@@ -33,6 +35,7 @@ def restore(stride, device):
                 "bilingual": "bilingual_ink",
                 "paraphrase": "translation_paraphrases",
                 "paired": "paired_ink",
+                "book": "book_breadth",
             }[family]
         )
         path = base / objective
@@ -137,6 +140,8 @@ if __name__ == "__main__":
             "proposition-contrast",
             "bilingual-likelihood",
             "bilingual-aligned",
+            "book-narrow",
+            "book-broad",
             "paired-likelihood",
             "paired-assignment",
             "paraphrase-canonical",

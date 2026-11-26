@@ -1,0 +1,36 @@
+\newpage
+\spread{How much does a writer gain from reading more books?}
+\noindent Does seeing more distinct sentences help a visual writer express a complete proposition? We continued the same bilingual checkpoint twice, matching the length of both sides of every translation in every minibatch.
+\platehere{Figure_195_book_learning}{Corpus breadth changes the probability of held writing}{\textbf{a}, Mean development loss across literary passages, TED talks and FLORES articles. Pass zero is the common starting writer. Each subsequent point follows 1,858 updates. \textbf{b}, Complete translations credited in both masked grading orders. Each domain comprises 24 held passages translated in both directions. Qwen3-8B Q4 received text.}
+\begin{multicols}{2}
+\section*{The training material}
+The broader corpus contains 24,512 English--Chinese units from eight literary works and 206,825 units from 3,411 talks. One unit contains an aligned segment or two consecutive segments that fit in the visual field. Literary translations come from locally prepared multilingual editions and may contain machine translation errors. A separate private page collection contains 865 bilingual pages. Only nine complete page pairs fit both the field and the two glyph inventories.
+\par The systems read 32-pixel cells through the same optical encoder, score the same output repertoire, and train in both directions. The narrow corpus repeats 31,918 distinct pairs. The broader corpus presents all 231,337 distinct pairs in every pass. Each writer receives 108,657,378 target positions over six passes. Starting weights, target lengths, source lengths, minibatch order and optimizer schedule are identical.
+\section*{Measuring the information in an exposure}
+If a narrow representative stands for $c$ equally frequent broad pairs, replacing its identity discards $\log_2 c$ bits per presentation. For $N$ presentations, the difference in empirical pair-identity entropy is $N^{-1}\sum c\log_2 c$. We measured 2.903 bits per presentation on the actual ink pairs. Lean verifies the integer certificate $2^{\sum c\lfloor\log_2 c\rfloor}\leq\prod c^c$ and exact preservation of the number of positions under a length-preserving replacement. The measured integer lower bound is 2.713 bits per pair. These bits describe the training examples. Their value for communicating a proposition must be measured on the generated reply.
+\section*{Independent writing}
+The lowest mean development loss selects pass one for narrow training and pass six for broad training. Held literary passages come from three other novels. No complete assessment input or target image stream occurred as either corresponding side of a current training row. TED and FLORES evaluation uses distinct source documents. Exposure to related documents in antecedent corpora or comparator pretraining remains possible.
+\input{book_breadth_counts.tex}
+\end{multicols}
+\noindent{\small \href{https://opus.nlpl.eu/TED2020/corpus/version/TED2020}{TED2020, OPUS}. \href{https://aclanthology.org/2022.tacl-1.30/}{Goyal et al., FLORES-101 (2022)}.}
+\newpage
+\spread{What the model writes from an unseen book}
+\noindent These are the original English input image and the Chinese reply emitted by each trained writer. Both readers receive the same pixel grid. Neither receives the translator's Chinese sentence.
+\platehere{Figure_196_original_book_replies}{Three complete visual translations in their original spacing}{First English input in the fixed assessment order for each of the three held novels. Each reply is a sequence of selected physical bitmaps from the writer's training repertoire. Cell spacing, row wrapping and blank margins are preserved. Independent CPU inference from each source PNG reproduces all six released outputs.}
+\begin{multicols}{2}
+\section*{What survives in a sentence?}
+In the passage from \textit{Huckleberry Finn}, the broader writer begins with recognizable Chinese about a difficult question. It repeats a clause and loses the tattoo on the man's chest. In \textit{Jane Eyre} it writes about knowing while losing the exclamation about the extent of someone's knowledge. The short imperative from \textit{A Tale of Two Cities} becomes an unrelated statement about depth. Legible pixels can make such failures easy to overlook.
+\section*{Changing the written form}
+Two other editions pair classical Chinese, modern Chinese and English. We reserved twelve complete units each from the \textit{Daodejing} and \textit{Shanhaijing}. Each frozen writer separately read the classical and modern grids and drew an English answer to each. Both source forms and the English target fit the unchanged inventory. The split uses distinct test strings and screens the main fit's physical training pairs. These works contributed no examples to the current training or checkpoint selection.
+\input{book_script_counts.tex}
+\end{multicols}
+\newpage
+\spread{Which original replies passed the meaning test?}
+\noindent Five responses from the broader writer received credit in both grading orders. Showing all five makes the judgment open to inspection.
+\platehere{Figure_197_credited_book_replies}{All credited broad-writer replies from 144 natural requests}{English and Chinese input images and the original emitted images. Three responses reproduce the target pixels and stop. Two other replies earned automated semantic credit. The final response omits a location specified in the prompt. The three literary examples on the preceding page were selected in fixed order independently of grades.}
+\begin{multicols}{2}
+\section*{Where the visual writer succeeds}
+The Chinese reporting clause in \textit{Jane Eyre} reproduces the reference exactly. For the talk about who is who, the writer preserves both negation and the repeated question word. The two directions of the statement of belief are from one passage. Its English output omits the initial conjunction. A correct translation at this length is possible within a fixed visual repertoire.
+\section*{Where the evidence ends}
+The final credited Chinese sentence omits the phrase specifying the city. Credit is the judgment of a local model in two anonymized orders. The original grades remain in the counts. Separately, exact role-preserving output from passive requests fell from 422 of 472 to zero after either continuation. The broader corpus improved some natural answers while a previously learned grammatical skill was lost. Learning new material while retaining those roles remains a requirement for a usable reader and writer.
+\end{multicols}
