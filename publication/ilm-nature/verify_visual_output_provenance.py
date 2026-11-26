@@ -1,173 +1,145 @@
-"""Inventory every numbered plate in the reading edition; compare embedded raw pixels."""
+"""Authenticate every figure in the current article against its primary experimental records."""
 from collections import Counter
 from hashlib import sha256
-from pathlib import Path
 from io import BytesIO
+from pathlib import Path
+from zipfile import ZipFile
 import json
 import re
-from zipfile import ZipFile
-from verify_role_and_state import chart_data
+
 import fitz
+from lxml import etree
+from openpyxl import load_workbook
 from PIL import Image
 
 PAPER=Path(__file__).resolve().parent
 ROOT=PAPER.parents[1]
-STATS={4,7,9,20,23,25,27,30,32,34,38,39,41,43,44,46,47,50,53,57,60,63,65,66,67,69,71}
-MIXED={10}
-PICTURE_AND_MECHANISM={1,45}
+EVIDENCE=ROOT/"references/evidence/print_translation_v1"
+ASSETS=PAPER/"figures/print_translation"
 
 
-def sha(p):
+def digest(p):
     return sha256(p.read_bytes()).hexdigest()
 
 
+def load(p):
+    return json.loads(p.read_text())
+
+
 def raster(blob):
-    with Image.open(BytesIO(blob)) as im:
-        return im.size,sha256(im.convert("RGB").tobytes()).hexdigest()
+    with Image.open(BytesIO(blob)) as img:
+        return img.size,sha256(img.convert("RGB").tobytes()).hexdigest()
 
 
-def page_pictures(doc,page):
-    vals=Counter()
-    for im in page.get_image_info(xrefs=True):
-        val=raster(doc.extract_image(im["xref"])["image"])
-        vals[val]+=1
-    return vals
+def extracted(doc,page):
+    return Counter(raster(doc.extract_image(im["xref"])["image"]) for im in page.get_image_info(xrefs=True))
 
 
-def flatten(p):
-    text=p.read_text()
-    def insert(m):
-        sub=p.parent/m[1]
-        return flatten(sub) if sub.is_file() else ""
-    return re.sub(r"\\input\{([^}]+)\}",insert,text)
+def verify_printed_grades(doc, blocks):
+    """Read each coloured cell back from the matrices embedded on page two."""
+    panels = sorted(doc[1].get_image_info(xrefs=True),
+                    key=lambda item: (round(item["bbox"][1], 1), item["bbox"][0]))
+    for panel, block in zip(panels, blocks, strict=True):
+        blob = doc.extract_image(panel["xref"])["image"]
+        with Image.open(BytesIO(blob)) as source:
+            img = source.convert("RGB")
+        rows = block["values"]
+        for r, values in enumerate(rows):
+            y = int(img.height * (r + 0.5) / len(rows))
+            for c, credit in enumerate(values):
+                x = int(img.width * (c + 0.5) / len(values))
+                expected = (21, 108, 98) if credit else (227, 232, 230)
+                assert img.getpixel((x, y)) == expected, (block["work"], r, c)
 
 
-def verify_target_glyph_plate():
-    evidence = ROOT / "references/evidence/target_glyph_teaching_v1"
-    assets = PAPER / "figures/target_glyph_teaching"
-    def record(name):
-        return json.loads((evidence / name).read_text())
-    examples = record("illustrated.json")
-    replay = record("replay.json")
-    archive = PAPER / "evidence/target_glyph_answers.zip"
-    assert sha(archive) == replay["archive"] == record("evaluation.json")["archive"]
-    assert examples["replay"] == sha(evidence / "replay.json")
-    assert replay["program"] == sha(ROOT / "scripts/replay_target_glyph_output.py")
-    assert replay["reproduced"] == dict(start=192, likelihood=191, guided=192, exchange=192)
-    trace = record("replay_difference.json")
-    assert trace["replay"] == examples["replay"]
-    assert trace["program"] == sha(ROOT / "scripts/trace_glyph_replay_difference.py")
-    diff, = replay["differences"]
-    case, = trace["cases"]
-    assert (diff["i"], diff["mode"]) == (case["index"], case["arm"]) == (152, "likelihood")
-    assert case["first_different_choice_zero_based"] == 57
-    assert diff["png"] == sha(evidence / "replay-0152-cpu.png") == case["runs"]["cpu_12"]["png"]
-    illustrated = {r["index"] for r in examples["examples"]}
-    assert len(illustrated) == 3 and diff["i"] not in illustrated
-    tiles = Counter()
-    with ZipFile(archive) as z:
-        rows = json.loads(z.read("request-outcomes.json"))
-        assert [r["id"] for r in rows] == list(range(192)) and len(z.namelist()) == 961
-        for row in rows:
-            i = row["id"]
-            for mode in ["input", "start", "likelihood", "guided", "exchange"]:
-                raw = z.read(f"{i:04d}/{mode}.png")
-                if mode != "input":
-                    answer = row["answers"][mode]
-                    digest = sha256(raw).hexdigest()
-                    assert digest == answer["png"] and answer["stop"]
-                    if (i, mode) == (diff["i"], diff["mode"]):
-                        assert digest == case["runs"]["cuda_24"]["png"]
-                if i in illustrated and mode in ("input", "guided", "likelihood"):
-                    assert raw == (assets / f"{i:04d}-{mode}.png").read_bytes()
-                    tiles[raster(raw)] += 1
-    assert sum(tiles.values()) == 9
-    deck = PAPER / "figures/Teaching_the_next_glyph.pptx"
-    chart_data(deck, record("chart.json")["panels"])
-    with ZipFile(deck) as z:
-        assert Counter(raster(z.read(n)) for n in z.namelist() if n.startswith("ppt/media/")) == tiles
-    return tiles
+def vote_counts(rows,results):
+    tally=Counter()
+    for i,(row,credits) in enumerate(zip(rows,results["primary"]["records"],strict=True)):
+        votes=results["primary_votes"][i*2:i*2+2]
+        answers={**row["answers"],**results["comparators"][i]}
+        for mode,a in answers.items():
+            got=bool(a["stop"] and all(v[mode] for v in votes))
+            assert got==credits[mode]
+            tally[mode]+=got
+    assert all(tally[m]==results["primary"]["total"].get(m,0) for m in tally)
+    return dict(tally)
 
 
 def main():
-    scene=json.loads((PAPER/"evidence/writer_provenance.json").read_text())
-    assets=PAPER/"figures/writer_provenance"
-    local=Counter(raster((assets/it["name"]).read_bytes()) for it in scene["items"] if it["type"]=="image")
-    motor_path=ROOT/"references/evidence/neural_glyph_motor_v1"
-    motor=json.loads((motor_path/"scene.json").read_text())
-    motor_tiles=Counter(raster((assets/it["name"]).read_bytes()) for it in motor["items"] if it["type"]=="image")
-    record=json.loads((motor_path/"evaluation.json").read_text())
-    assert record["weights"]==sha(ROOT/"models/neural_glyph_motor/weights.safetensors")
-    deck=PAPER/"figures/Visual_writer_evidence.pptx"
-    charts=json.loads((ROOT/"references/evidence/readout_objective_v1/chart.json").read_text())
-    chart_data(deck,charts["panels"])
-    with ZipFile(deck) as z:
-        assert {raster(z.read(n)) for n in z.namelist() if n.startswith("ppt/media/")}==set(local)|set(motor_tiles)
-    archive=PAPER/"evidence/neural_motor_answers.zip"
-    assert sha(archive)==record["archive"]
-    with ZipFile(archive) as z:
-        assert len(z.namelist())==2*len(record["records"])==384
-        for r in record["records"]:
-            k=f'{r["index"]:04d}'
-            for name,key in (("input","input_png"),("output","output_png")):
-                assert sha256(z.read(f"{k}/{name}.png")).hexdigest()==r[key]
-    field_path=ROOT/"references/evidence/field_to_glyph_v1"
-    field_assets=PAPER/"figures/field_transfer"
-    field_scene=json.loads((field_path/"scene.json").read_text())
-    replays=json.loads((field_path/"illustrated.json").read_text())
-    field_tiles=Counter(raster((field_assets/it["name"]).read_bytes()) for it in field_scene["items"] if it["type"]=="image")
-    field_deck=PAPER/"figures/Independent_field_writer.pptx"
-    chart_data(field_deck,json.loads((field_path/"chart.json").read_text())["panels"])
-    with ZipFile(field_deck) as z:
-        assert Counter(raster(z.read(n)) for n in z.namelist() if n.startswith("ppt/media/"))==field_tiles
-    field_record=json.loads((field_path/"evaluation.json").read_text())
-    field_archive=PAPER/"evidence/field_writer_outputs.zip"
-    assert sha(field_archive)==field_record["archive"]
-    with ZipFile(field_archive) as z:
-        outcomes=json.loads(z.read("request-outcomes.json"))
-        assert len(outcomes)==192 and len(z.namelist())==961
-        for row in outcomes:
-            folder=f'{row["id"]:04d}'
-            for mode in ("parent","prediction","regression","exchange"):
-                assert sha256(z.read(f"{folder}/{mode}.png")).hexdigest()==row["answers"][mode]["png"]
-        for replay in replays["replays"]:
-            folder=f'{replay["index"]:04d}'
-            mode=replay["mode"]
-            for name,key in (("input","source_sha256"),(mode,"png")):
-                blob=z.read(f"{folder}/{name}.png")
-                assert sha256(blob).hexdigest()==replay[key]
-                assert blob==(field_assets/f"{folder}-{name}.png").read_bytes()
-    target_tiles = verify_target_glyph_plate()
-    plates=re.findall(r"\\platehere\{(Figure_[^}]+)\}\{([^}]+)\}",flatten(PAPER/"reading/visual_language_paper.tex"))
+    paper=PAPER/"manuscript.pdf"
+    assert digest(paper)==digest(PAPER/"visual_language_paper.pdf")
+    study=load(EVIDENCE/"assessment.json")
+    replay=load(EVIDENCE/"replay.json")
+    timed=load(EVIDENCE/"inference.json")
+    archive=PAPER/"evidence/print_translation_answers.zip"
+    assert digest(archive)==study["archive"]==timed["archive"]==replay["archive"]
+    assert replay["matches"]==dict(guided=192,likelihood=192,serif=192,adapted=192,exchange=192) and not replay["differences"]
+    assert timed["archived_mismatches"]==dict(direct=[],compiled=[])
+    deck=PAPER/"figures/Glyph_stream_experiments.pptx"
+    names=["Print_translation_outputs","Print_translation_outcomes","Print_translation_credits","Print_translation_time"]
+    descriptors=["Paired print inputs and original writer emissions","Complete per-request assessment",
+                 "Original sources and every credited canonical emission","Five paired on-device inference timings"]
     results=[]
-    with fitz.open(PAPER/"visual_language_paper.pdf") as doc,fitz.open(PAPER/"manuscript.pdf") as full:
-        for n,(name,title) in enumerate(plates,1):
-            page=next(i for i,p in enumerate(doc) if re.search(rf"Fig\.\s*{n}\s*\|",p.get_text()))
-            raw=PAPER/"figures"/(name+".pdf")
-            with fitz.open(raw) as fig:
-                expected=page_pictures(fig,fig[0])
-            actual=page_pictures(doc,doc[page])
-            if expected-actual or expected-page_pictures(full,full[page]):
-                raise ValueError(f"Lost embedded rasters in Figure {n}")
-            compact=lambda p:"".join(p.get_text().split())
-            assert compact(doc[page])==compact(full[page])
-            if n==1:
-                assert expected==local
-                first=replays["first_credit"]
-                for part in ("input","prediction"):
-                    key=raster((field_assets/f"{first:04d}-{part}.png").read_bytes())
-                    assert actual[key] and page_pictures(full,full[page])[key]
-            if n==72: assert expected==target_tiles
-            if n==70: assert expected==field_tiles
-            if n==68: assert expected==motor_tiles
-            kind=("Measured outcomes" if n in STATS else "Examples and measurements" if n in MIXED else
-                  "Multiple image-generation mechanisms" if n in PICTURE_AND_MECHANISM else "Image examples")
-            results.append(dict(number=n,page=page+1,title=title,figure=name,kind=kind,source_sha256=sha(raw),
-                                embedded_source_images=sum(expected.values())))
-    evidence=PAPER/"evidence/visual_output_figure_index.json"
-    evidence.write_text(json.dumps(dict(paper_sha256=sha(PAPER/"visual_language_paper.pdf"),figures=results,
-        scope="Every numbered plate located in both compiled editions. Raster identity checks establish what the PDF contains. Historical plates include pictured inputs, references, copied shapes, learned repertoire choices, pixel predictions and measurements. Figures 69 and 71 report measurements. For Figures 70 and 72, the six illustrated answers on each plate match the archived GPU outputs and reproduced on CPU. Across all four conditions underlying Figure 72, one unillustrated control differs between devices (767/768 match)."),indent=2)+"\n")
-    print("Matched",len(results),"numbered plates and",sum(r["embedded_source_images"] for r in results),"source image instances")
+    with ZipFile(archive) as raw, fitz.open(paper) as doc, ZipFile(deck) as slides:
+        rows=json.loads(raw.read("outcomes.json"))
+        assert len(rows)==192 and len(raw.namelist())==1536+1 and len(doc)==4
+        for r in rows:
+            for mode,a in r["answers"].items():
+                assert a["png"]==sha256(raw.read(f'{r["id"]:04d}/{mode}.png')).hexdigest()
+        totals=vote_counts(rows,study)
+        all_tiles=Counter()
+        for j,(name,kind) in enumerate(zip(names,descriptors,strict=True),1):
+            page=doc[j-1]
+            txt=" ".join(page.get_text().split())
+            assert re.search(rf'Fig\.\s*{j}\s*\|',txt) and 'RESEARCH ARTICLE' in txt
+            fig=PAPER/"figures"/(name+".pdf")
+            with fitz.open(fig) as standalone:
+                source=extracted(standalone,standalone[0])
+            assert extracted(doc,page)==source
+            if j in (1,3):
+                scene=load(EVIDENCE/("scene.json" if j==1 else "credits.json"))
+                tiles=Counter(); indices=set()
+                for item in scene["items"]:
+                    if item["type"]!="strip":continue
+                    prefix,filename=item["name"].split("-",1)
+                    blob=raw.read(prefix+"/"+filename)
+                    assert blob==(ASSETS/item["name"]).read_bytes() and sha256(blob).hexdigest()==item["sha256"]
+                    tiles[raster(blob)]+=1;indices.add(int(prefix))
+                if j==3:
+                    assert indices=={i for i,c in enumerate(study["primary"]["records"]) if c["guided"]}
+                assert tiles==source
+                all_tiles+=tiles
+            results.append(dict(number=j,page=j,figure=name,kind=kind,source_sha256=digest(fig),embedded_images=sum(source.values())))
+        assert Counter(raster(slides.read(n)) for n in slides.namelist() if n.startswith("ppt/media/"))==all_tiles
+        matrix=load(EVIDENCE/"blocks.json")
+        verify_printed_grades(doc, matrix["blocks"])
+        xml=etree.fromstring(slides.read("ppt/slides/slide2.xml"))
+        tables=xml.xpath('//*[local-name()="tbl"]')
+        assert len(tables)==8
+        for table,block in zip(tables,matrix["blocks"],strict=True):
+            tr=table.xpath('./*[local-name()="tr"]')
+            for line,m,values in zip(tr,matrix["methods"],block["values"],strict=True):
+                assert values==[int(study["primary"]["records"][i][m]) for i in block["ids"]]
+                for cell,value in zip(line.xpath('./*[local-name()="tc"]'),values,strict=True):
+                    color=cell.xpath('./*[local-name()="tcPr"]/*[local-name()="solidFill"]/*[local-name()="srgbClr"]/@val')
+                    assert [v.lower() for v in color]==["156c62" if value else "e3e8e6"]
+        books=[n for n in slides.namelist() if n.endswith(".xlsx")]
+        assert len(books)==1
+        wb=load_workbook(BytesIO(slides.read(books[0])),read_only=True,data_only=True)
+        values=list(wb.active.values);wb.close()
+        expected=[[round(p[k]*1000,3) for p in timed["samples"]] for k in ("direct","compiled")]
+        assert [list(row[1::2]) for row in values[1:]]==expected
+        charts = [n for n in slides.namelist() if re.search(r"/charts/chart[0-9]+\.xml$", n)]
+        assert len(charts) == 1
+        series = etree.fromstring(slides.read(charts[0])).xpath('//*[local-name()="ser"]')
+        for pair, measurement in zip(series, zip(*expected, strict=True), strict=True):
+            points = pair.xpath('./*[local-name()="val"]//*[local-name()="pt"]/*[local-name()="v"]/text()')
+            assert tuple(map(float, points)) == measurement
+    evidence=dict(paper_sha256=digest(paper),figures=results,primary_counts=totals,raw_archive_sha256=digest(archive),
+                  deck_sha256=digest(deck),replay_sha256=digest(EVIDENCE/"replay.json"),timing_sha256=digest(EVIDENCE/"inference.json"),
+                  scope="Four current article figures; original input/output images, paired votes and measured GPU timings.")
+    (PAPER/"evidence/visual_output_figure_index.json").write_text(json.dumps(evidence,indent=2)+"\n")
+    print("Verified four article figures, 960 neural answers, primary grades, native slide tables and timing workbook.")
 
 
 if __name__=="__main__":

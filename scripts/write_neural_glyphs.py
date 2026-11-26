@@ -48,6 +48,8 @@ def main():
     p.add_argument("--to",choices=("en","zh"),required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--device",choices=("cpu","cuda"),default="cpu")
+    p.add_argument("--compile-motor", action="store_true",
+                   help="Precompute this output repertoire before writing; most useful across repeated calls")
     select=p.add_mutually_exclusive_group()
     select.add_argument("--target-training",choices=("likelihood","guided"),
                         help="Use the independent writer continued with this target objective")
@@ -63,6 +65,9 @@ def main():
         net,_=restore(args.source_field,args.device)
     else:
         net=load_model(args.device)
+    if args.compile_motor:
+        from ilm.visual_lm.compiled_glyph_stream import CompiledGlyphStream
+        net=CompiledGlyphStream(net, (("en","zh").index(args.to),))
     x=torch.from_numpy(grid_bits(args.input,args.cells)).to(args.device)[None]
     ink,count,stop=net.write(x,torch.tensor([args.cells],device=x.device),("en","zh").index(args.to))
     save_ink(ink[0,:int(count[0])].cpu().numpy(),args.output)

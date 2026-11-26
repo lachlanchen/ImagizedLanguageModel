@@ -19,3 +19,16 @@ python -m scripts.replay_target_glyph_output
 ```
 
 For the source collection, frozen parent weights, teacher revisions, split exclusions, fit order and assessment, see the [training protocol](../../references/target_glyph_teaching_protocol.md), [teacher cache receipts](../../references/evidence/target_glyph_teaching_v1/targets.json) and [training code](../../scripts/train_target_glyph_teaching.py).
+
+## Read a second print face
+
+The optional optical typeface reader normalizes a pictured serif sentence before translation. It maps confidently recognized shapes to the canonical glyph inventory. On the four-book print test it restored every original input cell, including punctuation and space. This example replays the first changed-and-restored answer. The needed length is the number of occupied cells in the source image, including punctuation.
+
+```sh
+python -m scripts.write_print_translation --normalize-print \
+  --input publication/ilm-nature/figures/print_translation/0000-serif-input.png \
+  --cells 17 --to en --output answer.png
+cmp answer.png publication/ilm-nature/figures/print_translation/0000-adapted.png
+```
+
+For repeated requests, wrap a restored guided writer in `CompiledGlyphStream` once, then use its usual `write` method. The frozen motor computes the finite pixel and visual-feedback tables on initialization. Use the same instance for later requests. The original CLI also accepts `--compile-motor`. [Implementation](../../ilm/visual_lm/compiled_glyph_stream.py) · [Timing results](../../references/evidence/print_translation_v1/inference.json)

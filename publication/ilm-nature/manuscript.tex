@@ -1,14 +1,118 @@
-\documentclass[10pt,a4paper,twocolumn]{article}
-\usepackage[left=13.5mm,right=13.5mm,top=17mm,bottom=17mm,columnsep=5mm]{geometry}
-\usepackage{nature_reading,pdfpages}
-\extrafloats{128}
-\input{frontmatter.tex}
+\documentclass[10pt,a4paper]{article}
+\usepackage[left=18mm,right=18mm,top=18mm,bottom=19mm,columnsep=6mm]{geometry}
+\usepackage{nature_reading,multicol}
 \input{paper_title.tex}
+\graphicspath{{figures/}{../figures/}}
+\fancyhead[L]{\sffamily\footnotesize RESEARCH ARTICLE}
+\setlength{\multicolsep}{8pt}\setlength{\columnsep}{6mm}\raggedcolumns
+\newcommand{\displayfigure}[3]{\par\medskip{\centering\includegraphics[width=\linewidth]{#1}\par}\vspace{3pt}\begingroup\captionsetup{hypcap=false}\captionof{figure}{\textbf{#2.} #3}\endgroup\par}
+\newcommand{\pageheading}[1]{\noindent{\sffamily\bfseries\fontsize{17}{20}\selectfont #1\par}\vspace{4pt}}
+\newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
 \begin{document}
-% The short primary article is followed by the cumulative experimental record.
-\includepdf[pages=-,pagecommand={\thispagestyle{empty}},linktodoc=true]{visual_language_paper.pdf}
-\twocolumn[{\noindent{\sffamily\bfseries\fontsize{23}{26}\selectfont\PaperTitle\par}
-\vspace{7pt}\noindent{\fontsize{11}{13}\selectfont Imagized Language Model Project\par}
-\vspace{12pt}\noindent{\bfseries\fontsize{10.5}{12.2}\selectfont\PaperSummary\par}\vspace{13pt}}]
-\input{article_content.tex}
+
+\noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
+\vspace{4pt}
+\noindent{\sffamily\fontsize{13}{16}\selectfont Typeface invariance and sentence meaning in a bilingual glyph stream\par}
+\vspace{7pt}\noindent Imagized Language Model Project\par\medskip
+\noindent{\bfseries Reading a sentence from ink and writing a translation in ink impose two demands. The model must recognize the same expression across print faces and choose a new expression that carries its meaning. We separated these demands in a 10.48-million-parameter English--Chinese writer. We printed 96 paired passages from four held books in two typefaces and generated 192 translations per condition. Changing the source to a serif face changed every answer. A learned visual reader restored all 6,432 source cells and all 192 original answers. A masked translation judge credited five of these answers for conveying the full meaning, compared with zero for untreated serif input and 161 for a quantized 8B model given text. Two of the five credited replies omit a detail. Compiling the writer's recurrent drawing operation yielded a median $1.18\times$ throughput gain on one RTX 4090~D, with identical outputs. The experiment locates a failure that sharper glyphs cannot repair: even when the input and output shapes are recovered exactly, the sentence can express the wrong event.\par}
+
+\begin{multicols}{2}
+\section*{Reading and writing in pixels}
+A transcription preserves a sequence of symbols while discarding differences in their shape. A model operating on ink could retain evidence about script, typeface or historical form. PIXEL learned multilingual representations by reconstructing masked patches of printed text.\cite{rust} PIXAR and PixelGPT extended autoregressive training to visual text.\cite{tai,chai} Generating a legible patch, however, leaves open whether a complete answer says what the source says.
+
+We studied this distinction in translation, where a correct answer can have a visibly different spelling and still preserve the proposition. We held the words, their order and the model weights fixed while changing the typeface of the source. This gives the experiment a physical control. Recovering the original source pixel for pixel makes errors remaining in the original translation directly inspectable.
+\end{multicols}
+\displayfigure{Print_translation_outputs.pdf}{One passage produces two different English answers}{The first held source for which normalization restored the canonical answer, also the first rejected canonical translation. Each source row displays the same Chinese question from \textit{The Count of Monte Cristo}. The direct serif answer repeats a phrase about a story. Normalization recovers a question about an enemy but leaves the English syntax broken and loses the action being queried. The last row is also pixel-identical to the output from the canonical source. The complete strips come directly from the test archive.}
+\begin{multicols}{2}
+\section*{An independent visual writer}
+The input is an ordered sequence of aligned $32\times32$ binary cells and a target-language choice. The writer pools each cell, encodes the sequence and attends to the pictured source while generating. At each step it selects a learned visual code or a stop. A neural motor maps the code to 1,024 ink decisions. The next step receives an encoding of the actual emitted pixels.
+
+The motor can draw 3,717 distinct shapes accurately. This finite repertoire makes the origin of each stroke auditable. It also restricts what the writer can invent. Text teachers were used during training. During generation the writer receives only the source pixels, occupied length and target direction. The recurrent computation can be written as $k_t=\arg\max_k s(k\mid h_t)$, $I_t=D(k_t)$ and $h_{t+1}=F(h_t,R(I_t),X)$, where $X$ is the pictured source. This separation lets us change the input appearance or the implementation of $D$ while holding the language decision rule fixed.
+\end{multicols}
+
+\newpage
+\pageheading{Print recovery and translation accuracy}
+\begin{multicols}{2}
+\section*{Changing only the print face}
+The same 192 requests were shown in Noto Sans CJK SC and Noto Serif CJK SC. Before normalization, 791/6,432 occupied serif cells already matched the canonical pixels. None of the 192 complete source images matched. The same frozen writer generated a different answer on every serif request. All its emitted cells were recognizable members of its repertoire.
+
+A separately fitted optical reader recovered all 6,432 canonical cells from serif input. Feeding those normalized cells to the writer restored every answer image, length and stop. Exact source counts include spaces and punctuation. Both typefaces were printed on the same grid. This intervention tests typeface tolerance at known cell positions.
+
+\section*{What survived in the answer?}
+The primary judge credited 0/192 direct serif translations and 5/192 normalized translations (Fig.~2). The increase was 2.60 percentage points, with a paired four-book bootstrap interval of 1.04 to 4.17 points. Normalized and canonical answers received identical primary grades. Exchanging normalized passages within book and direction earned zero. Continuing the same starting writer with corpus likelihood alone yielded four canonical credits. The five-versus-four contrast offers little evidence for the incremental target-teaching objective.
+
+The text comparator reached 161/192 on these passages. The judge credited 137/192 parallel-edition references and rejected all 192 unrelated foils. These calibrations qualify the absolute scores. A low credit count can reflect a difficult reference or a strict reading as well as a failed translation.
+\end{multicols}
+\displayfigure{Print_translation_outcomes.pdf}{Whole-meaning decisions for every passage}{Green marks an answer that stopped and was accepted in both orders of the source-only assessment. Grey marks all other outcomes. Within each book, the upper and lower panels show opposite translation directions for the same 24 passage pairs. The canonical and normalized rows coincide throughout. The serif row has no credits. The text comparator and reference are evaluated on the same requests.}
+\vspace{6pt}
+\begin{center}
+\begingroup\small
+\begin{tabular}{@{}lrrr@{}}\toprule
+System or comparison & To English / 96 & To Chinese / 96 & Total / 192 \\ \midrule
+Canonical source, guided writer & 1 & 4 & 5 \\
+Canonical source, likelihood control & 2 & 2 & 4 \\
+Serif source, direct & 0 & 0 & 0 \\
+Serif source, normalized & 1 & 4 & 5 \\
+Normalized, exchanged source & 0 & 0 & 0 \\
+Qwen3-8B Q4, text source & 81 & 80 & 161 \\
+Corpus reference & 61 & 76 & 137 \\
+Cross-book foil & 0 & 0 & 0 \\ \bottomrule
+\end{tabular}\endgroup\par
+\end{center}
+\noindent{\small\sffamily\textbf{Table 1 |} Stopped translations accepted under the primary assessment. Of the 960 neural answers, 959 stopped within the generation limit. The single length-limited answer belonged to the canonical likelihood control.}
+
+\newpage
+\pageheading{What the credited translations actually say}
+\noindent The writer can produce natural short utterances. Its five credited answers also show where an automatic reading can be generous. Figure~3 includes the entire set in test order, with the source image above each answer.
+\displayfigure{Print_translation_credits.pdf}{Every credited canonical answer on the four-book test}{The original GPU images are reproduced without typesetting the model's words. The numbers identify requests in the public archive. Each answer also reproduced from its input on CPU. These same answer pixels were obtained after normalizing the serif source.}
+\begin{multicols}{2}
+\section*{A close reading of the five credits}
+Request 0027 asks when someone proposes going \emph{thither}. The reply asks when the person intends to go, dropping the explicit destination. In 0028 the English reply says the addressee is a doctor while losing the force of \emph{only} in the Chinese source. Both received credit. These omissions illustrate the resolution of the automatic assessment. Figure~2 preserves the original votes.
+
+The other three convey that something is absurd, invite someone inside, and ask whether the addressee beats another person. Their idiomatic glyphs and word order illustrate what a small visual writer can do on individual passages. The earliest failed request in Fig.~1 preserves the question mark and the word \emph{enemy} while failing to compose an intelligible equivalent. Of the 192 canonical answers, 187 failed the primary assessment.
+
+\section*{An upper bound on what print recovery can fix}
+Let $c_i$ be the canonical credit and $e_i$ indicate that an intervention reproduced the canonical answer and stop. If identical answers receive the same grade, the largest attainable credit count consistent with these observations is
+\[
+   \sum_i \mathbf{1}\{c_i=1\ \text{or}\ e_i=0\}.
+\]
+Every reproduced, uncredited answer must remain uncredited. Assigning credit to every other answer attains the bound under these constraints. We checked this finite statement in Lean~4. On the normalized test all $e_i=1$, so the ceiling was five. An improved input reader has restored the writer's existing performance. Improving that ceiling on the same passages requires changing what it writes.
+
+\section*{The unit of linguistic prediction}
+Single-cell decisions devote model capacity to spelling each word. A separate development experiment supplied a pretrained decoder with a vector estimated from each preceding \emph{span} of target glyphs. Its preferred next piece agreed with the native embedding path on 2,866/2,951 English and 2,808/2,957 Chinese decisions. Scrambling the vectors among spans of the same length reduced agreement to 3.6\% and 10.8\%. The test supplied correct preceding ink, true span boundaries and the inherited output head. It motivates a writer that learns its own visual span boundaries. Whether this improves freely generated translations is open. The \repo{references/evidence/target_glyph_teaching_v1/span_feedback.json}{complete development results} identify the controls and both decoder revisions.
+\end{multicols}
+
+\newpage
+\pageheading{Computation and experimental methods}
+\begin{multicols}{2}
+\section*{Computing a recurrent glyph stream}
+For fixed weights and a selected code $k$, let $D(k)$ be the thresholded image made by the motor and $R(D(k))$ its next-step visual embedding. Both functions depend only on $k$. Precomputing the two functions trades memory for repeated computation. The contextual decoder still runs on every step and decides the sequence and its stopping point. Induction on the remaining generation budget gives the same emitted sequence whenever the stored image and feedback equal their direct evaluations. Our second Lean theorem proves this claim for an arbitrary state transition. Floating-point and threshold decisions also require empirical comparison.
+
+\begin{center}\includegraphics[width=.98\linewidth]{Print_translation_time.pdf}\end{center}
+\begingroup\captionsetup{hypcap=false}\captionof{figure}{\textbf{Time to generate the same 192 canonical answers.} Each line joins one pair of synchronized GPU timings. Numbers indicate measurement order. The large variation across five rounds limits the precision of the throughput estimate.}\endgroup
+
+Direct and compiled execution both reproduced the original GPU answers in all 192 cases. The median paired ratio was $1.18\times$ (range $1.02$--$1.43$). Preparing both directional tables took 97\,ms and added 8.30\,MiB. Median compiled time was 387\,ms per panel, or 484\,ms with table construction included. This benchmark measures inference on this writer. Training cost, energy and throughput at matched quality with PixelGPT or Qwen remain unmeasured.
+
+\section*{Corpus, fits and held requests}
+Both final fits started from the same prediction-trained source reader and writer. They saw 28,342 bilingual pairs from 21 works in both directions, in the same order over four passes. In 2,040 AdamW updates, each saw 7,343,256 target positions. The guided fit added a penalty wherever the next visible glyph had lower predicted probability than the minimum assigned by an offline Marian translation teacher's 32 leading pieces. The likelihood control continued on the parallel-edition targets. The visual system has 10,481,570 parameters and 604,480 stored optical-code scalars. Each final fit updated 802,240 parameters in about 24\,s on one RTX 4090~D after preparation. These times exclude all prerequisite training.
+
+The fresh panel comprised 24 paired passages per work. We excluded normalized strings and exact optical sides from the project's recorded training, development and earlier evaluation pools. The four titles were absent from the named book corpora checked at selection. Coverage by the external models' pretraining data is unknown. The sampling rule required complete, representable sentences of at most 96 cells per side. The local parallel editions supplied aligned passages. Their translation provenance has not been independently audited.
+
+\section*{Interventions and assessment}
+The optional 1,423,653-parameter typeface reader was previously trained on 28,097 glyph images. It passes known shapes through and maps an unfamiliar cell to the canonical bitmap when classifier confidence reaches 0.5. Noto Serif CJK SC Regular was absent from its fitting faces. Every condition used the same frozen guided writer except the canonical likelihood control. An exchanged request came from the same book and direction, paired by source length.
+
+A deterministic bitmap dictionary transcribed the emitted images for assessment. All 34,732 emitted cells across five conditions matched a known shape. Qwen3-VL-8B-Instruct Q4 graded anonymized candidate strings against the source in two reversed orders. The primary protocol deduplicated identical strings and required two positive votes plus a natural stop. A sensitivity assessment supplied the reference and scored labeled candidates separately. It credited two canonical guided outputs, three normalized outputs and 90 text-comparator outputs. One pair of identical answers received different sensitivity grades. The two Qwen models share a family. Independent human assessment remains outstanding.
+
+For uncertainty we enumerated all $4^4$ ordered bootstrap resamples of books, keeping both directions of each passage together. For throughput we alternated execution order over five warm pairs at batch size 24. Weight loading, input transfer and PNG encoding were outside the timed region. All 960 original neural answers also reproduced on CPU at batch size 12.
+
+\section*{Data, code and scope}
+The \repo{publication/ilm-nature/evidence/print_translation_answers.zip}{test archive} contains all input grids, free outputs, lengths and stops. \repo{references/evidence/print_translation_v1}{Votes, split and timing records}, the \repo{models/target_glyph_teaching}{checkpoints}, and \repo{formal/span_list}{Lean proofs} accompany the article. The study tests aligned modern print. Unsegmented pages, handwriting, unencoded historical forms and open-ended explanations require other tests. Human reading experiments suggest a specific extension: vary the width of visible context and measure how meaning changes.\cite{inhoff} Our model's cells and stop decisions make that intervention possible.
+\end{multicols}
+\vspace{-3pt}{\small
+\begin{thebibliography}{4}\setlength{\itemsep}{0pt}
+\bibitem{rust} Rust, P. et al. \href{https://arxiv.org/abs/2207.06991}{Language modelling with pixels}. \textit{ICLR} (2023).
+\bibitem{tai} Tai, Y., Liao, X., Suglia, A. \& Vergari, A. \href{https://aclanthology.org/2024.findings-acl.874/}{PIXAR: Auto-regressive language modeling in pixel space}. \textit{Findings of ACL} (2024).
+\bibitem{chai} Chai, Y. et al. \href{https://aclanthology.org/2024.emnlp-main.182/}{Autoregressive pre-training on pixels and texts}. \textit{EMNLP} (2024).
+\bibitem{inhoff} Inhoff, A. W. \& Liu, W. \href{https://pubmed.ncbi.nlm.nih.gov/9483822/}{The perceptual span and oculomotor activity during the reading of Chinese sentences}. \textit{J. Exp. Psychol. Hum. Percept. Perform.} \textbf{24}, 20--34 (1998).
+\end{thebibliography}}
 \end{document}

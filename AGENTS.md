@@ -6,6 +6,10 @@ Purpose: Operating conventions for agents and collaborators working in this repo
 
 Note on precedence: If direct system/developer/user instructions conflict with this file, follow those direct instructions first.
 
+## Current manuscript
+
+Maintain the main paper as a standalone research article about the current evidence. Reassess the abstract, methods, results, discussion and main figures together whenever the scientific result changes. Place the newest relevant experiment in the argument where it belongs. Keep the historical experiment ledger and superseded PDFs in versions. The canonical source is `publication/ilm-nature/manuscript.tex`; the two current public PDF names contain the same article. Build with `publication/ilm-nature/build_current_article.py`. Show original output pixels, disclose selection and grader limitations, and validate each figure against its experiment. Deliver only the current PDF to the local Nutstore latest alias.
+
 ## Model-work priority
 
 Read [the engineering goal](docs/first-imagized-language-model-goal.md) and the
