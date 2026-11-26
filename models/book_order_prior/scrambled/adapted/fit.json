@@ -1,0 +1,78 @@
+{
+  "arm": "scrambled",
+  "stage": "adapted",
+  "weights": "cb5564b26dd7f27502bbce557e66ac03f638ffa5bde0bf1d44fcdf6ce4bb19f7",
+  "bindings": {
+    "references/book_order_prior_protocol.md": "e55f0b437419205d4a37b72e1b1790b2035a1bcfb8aa0e956867369de2a35025",
+    "references/evidence/book_order_prior_v1/data.json": "570b41bbf0a7066b0b9fe85220abfdef4601f5f479108a872183f400d5680daf",
+    "scripts/train_book_order_prior.py": "cef1b0b9a1a2d20bcc9e14b13b2770803a46adf1c378d7ee83c7ef06c5e6bf1e",
+    "scripts/prepare_book_order_prior.py": "7c18d72dd18a400a751c6b406de1e34731b5a669d8dc2e1d2efa2dc06e8c0c60",
+    "scripts/train_open_news_writer.py": "346292707a20b670a312cadc1352615934b7be30297ea152b7febd3b6a464cdb",
+    "ilm/visual_lm/glyph_draft_editor.py": "f3d2858301b7e8023239b2bb546771b7c1ba5df629079d7701d0de19abcfb0d7",
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "models/open_news_writer/ink/fit.json": "077687f942a3d884545c491817eb25e1513ee71e360cbf7fbba165520c15c98f",
+    "models/visual_training_breadth/broad/fit.json": "9af1e538309e1efd465151ed9285bd6b793c64b08e0530c9eb657e534463ebd2"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "steps": 86,
+      "positions": 146496,
+      "schedule": "b45abd9d9752512d3df6303f8b6b12de172ad66106ee80a1d2a7e717fc05ae94",
+      "nll": 1.1242326767281081
+    },
+    {
+      "epoch": 2,
+      "steps": 86,
+      "positions": 146675,
+      "schedule": "f8b5689e3990bbd3ea9cf0624b3c18f85f66d888bdefe719a6e597ae496a4be6",
+      "nll": 1.0050228244644304
+    },
+    {
+      "epoch": 3,
+      "steps": 86,
+      "positions": 146170,
+      "schedule": "7e84440376602adc811d0b415c80a356249efb9108eaaf2daaf8a8d4a6c638c7",
+      "nll": 0.9378057520179307
+    },
+    {
+      "epoch": 4,
+      "steps": 86,
+      "positions": 146728,
+      "schedule": "fbe09e475468290c55a14170afd1d430df4d8e8a9beb426ce52329f91953f06f",
+      "nll": 0.9044037014985318
+    },
+    {
+      "epoch": 5,
+      "steps": 86,
+      "positions": 146327,
+      "schedule": "4cd940458fafafa6d59ca8aed95897edc3736b839b036523bfad9992f3890e45",
+      "nll": 0.8617646247854228
+    },
+    {
+      "epoch": 6,
+      "steps": 86,
+      "positions": 145773,
+      "schedule": "2f5422a4f612e99ea24516921327d8be97fb1820b9543d728b4a3483f8ac606c",
+      "nll": 0.8434138236701659
+    },
+    {
+      "epoch": 7,
+      "steps": 86,
+      "positions": 147758,
+      "schedule": "d864266bfab886786a610e6d2c008ba0e8120455c8e2714211e1436ec2f63bf8",
+      "nll": 0.8337686564229496
+    },
+    {
+      "epoch": 8,
+      "steps": 86,
+      "positions": 147464,
+      "schedule": "93241090b2a6d5e00e5580772a5e0e246a6ac1d180b30fc08f65fe3067286e48",
+      "nll": 0.8248486172995771
+    }
+  ],
+  "parameters": 1817441,
+  "trainables": 1817441,
+  "seconds": 11.235241279006004,
+  "peak_bytes": 453306368
+}

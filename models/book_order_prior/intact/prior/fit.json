@@ -1,0 +1,43 @@
+{
+  "arm": "intact",
+  "stage": "prior",
+  "weights": "457c0384cd15017d40b2624c01fc84eabb1fbfa625d714e98f09ba18297d45a3",
+  "bindings": {
+    "references/book_order_prior_protocol.md": "e55f0b437419205d4a37b72e1b1790b2035a1bcfb8aa0e956867369de2a35025",
+    "references/evidence/book_order_prior_v1/data.json": "570b41bbf0a7066b0b9fe85220abfdef4601f5f479108a872183f400d5680daf",
+    "scripts/train_book_order_prior.py": "cef1b0b9a1a2d20bcc9e14b13b2770803a46adf1c378d7ee83c7ef06c5e6bf1e",
+    "scripts/prepare_book_order_prior.py": "7c18d72dd18a400a751c6b406de1e34731b5a669d8dc2e1d2efa2dc06e8c0c60",
+    "scripts/train_open_news_writer.py": "346292707a20b670a312cadc1352615934b7be30297ea152b7febd3b6a464cdb",
+    "ilm/visual_lm/glyph_draft_editor.py": "f3d2858301b7e8023239b2bb546771b7c1ba5df629079d7701d0de19abcfb0d7",
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "models/open_news_writer/ink/fit.json": "077687f942a3d884545c491817eb25e1513ee71e360cbf7fbba165520c15c98f",
+    "models/visual_training_breadth/broad/fit.json": "9af1e538309e1efd465151ed9285bd6b793c64b08e0530c9eb657e534463ebd2"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "positions": 5482723,
+      "steps": 381,
+      "nll": 1.564608683742991,
+      "schedule": "1e868782ea3a753a46027acb6aced29f063e363a2c1c540a05bb6eb7ce52e8c6"
+    },
+    {
+      "epoch": 2,
+      "positions": 5482723,
+      "steps": 381,
+      "nll": 1.4299625790307857,
+      "schedule": "dd272e4d7a53597813b38753607b108b693a4f81320490d01e68dac5ec064020"
+    },
+    {
+      "epoch": 3,
+      "positions": 5482723,
+      "steps": 381,
+      "nll": 1.4029637084226185,
+      "schedule": "8ceeafc4eeaa64efc21cfe60800d711686b929901bc4f5f1ad7023f1517c714e"
+    }
+  ],
+  "parameters": 1817441,
+  "trainables": 541120,
+  "seconds": 7.960823024623096,
+  "peak_bytes": 325847552
+}
