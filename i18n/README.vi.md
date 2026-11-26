@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Mô hình thị giác 1,82 triệu tham số được huấn luyện trên một RTX 4090 D. Khi đọc ảnh câu gốc và bản dịch nháp, mô hình viết đúng cả câu khẳng định và phủ định ở **225/236 cặp**. Trong 96 yêu cầu dịch từ bốn cuốn sách chưa gặp, chỉ **một câu** giữ trọn nghĩa và trùng với bản nháp. Mô hình đối chứng chỉ đọc câu gốc đạt 0, còn Qwen3-8B đọc văn bản đạt 89. Hình cho thấy ảnh đầu ra thật của câu dịch đúng và một câu bị mất tên một dân tộc cổ. [Kết quả và ảnh gốc](../references/glyph_draft_editor_result.md) · [Chạy mô hình](../models/glyph_draft_editor/README.md)
+Trên một RTX 4090 D, mô hình thị giác dịch trọn nghĩa **65/96** câu Anh–Trung được luyện sửa nhiều lần. Mô hình đối chứng học theo hợp lý đạt 61 câu. Mô hình đạt **8/96** trên những câu khác từng gặp và **1/96** trên bốn cuốn sách chưa gặp. Hình cho thấy câu hoàn chỉnh đã học, số hình minh họa dịch đúng trên trang mới và một câu dịch sai. [Ảnh gốc và kết quả](../references/visual_sequence_preference_result.md) · [Chạy mô hình](../models/visual_sequence_preference/README.md)
 
-![Kết quả](../publication/ilm-nature/figures/Glyph_draft_editor.png)
+![Kết quả](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
 Mô hình huấn luyện trên một RTX 4090 D chọn giữa hai bản dịch dạng ảnh cho từng đoạn sách. Sau khi hiệu chỉnh thiên hướng ưu tiên một số cách diễn đạt, số cặp đúng cả hai lựa chọn tăng từ **21/96 lên 77/96**. Khi tự viết, dự đoán các dải ký tự từ ảnh nguồn giúp số câu chứa vị từ cần thiết tăng từ 17/336 lên 43/336, nhưng chỉ 1/192 bản dịch sách truyền đạt trọn nghĩa. Hình dưới là câu trả lời đầu tiên được chấm đúng trong phép thử OPUS riêng. [Kết quả](../references/source_supported_writing_result.md) · [Chạy mô hình](../models/source_supported_writing/README.md)
 

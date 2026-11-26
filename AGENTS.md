@@ -12,6 +12,15 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The whole-sequence preference fit and matched likelihood fit are terminal.
+Read `references/visual_sequence_preference_result.md`. The preference writer
+scored 65/96 on repeated corrections, 8/96 on ordinarily rehearsed passages
+and 1/96 on new books. All training, raw image generation, two-order grading,
+CPU replay, algebra and three-glyph memory diagnostic are complete. Keep the
+parent as a distinct control. Related passage targets voted correctly at
+187/1,274 supplied-history errors versus 54 for random memory. The current
+engineering goal tests retrieval under autonomous visual feedback.
+
 The covered-phrase study is terminal. Read
 `references/covered_phrases_result.md` for the trained tables, original
 images, complete-meaning assessment, path audit and reference reachability.

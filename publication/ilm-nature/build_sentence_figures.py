@@ -23,6 +23,7 @@ def main():
     cli.add_argument("--alignment",action="store_true")
     cli.add_argument("--phrases",action="store_true")
     cli.add_argument("--editor",action="store_true")
+    cli.add_argument("--sequence-preference",action="store_true")
     args=cli.parse_args()
     actions=args.actions or args.support
     edition="actions" if actions else "drafts"
@@ -44,6 +45,8 @@ def main():
         edition,stem,corpus="phrases","Covered_glyph_phrases","covered_phrases_v1"
     if args.editor:
         edition,stem,corpus="editor","Glyph_draft_editor","glyph_draft_editor_v1"
+    if args.sequence_preference:
+        edition,stem,corpus="sequence-preference","Visual_sequence_preference","visual_sequence_preference_v1"
     with TemporaryDirectory(prefix="ilm-draft-figures-",dir=ROOT/"artifacts") as work:
         stage=Path(work)
         (stage/"node_modules").symlink_to(NODE/"node_modules")

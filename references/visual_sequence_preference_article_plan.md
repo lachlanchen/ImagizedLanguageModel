@@ -1,0 +1,5 @@
+# Whole-answer training in the reading edition
+
+Preserve the current nine-page draft-editor edition, its figure index and source. Revise the first page, principal claim and result figure around the actual matched comparison. Include direct source evidence and both successful and failed output where available, the frozen selection order, controls, uncertainty, target-versus-emitted probabilities and complete-sentence limitations. Show the loss, notationally or in words, and distinguish mathematical properties of greedy decoding from observed accuracy. Add the training-label qualification and the true costs of mining, verification and fitting to the linked results. Use the existing PowerPoint and PDF generation pipeline. Verify the original panel images in the PDF and editable slide, render all pages, and copy only the current manuscript PDF to Nutstore.
+
+Place the first training example credited to the preference writer over both other writers alongside the two prespecified held examples. Label its repeated training exposure in the figure and verify its source archive and released example separately.

@@ -41,7 +41,7 @@ def main():
     assert sha(ARCHIVE)==report["archive"]==replay["archive"]==audit["archive"]
     assert audit["assessment"]==sha(PUB/"assessment.json")
     assert audit["proof"]==sha(PAPER.parents[1]/"formal/span_list/SourcePathRepair.lean")
-    deck = FIG/"Glyph_draft_editor.pptx"
+    deck = FIG/"Visual_sequence_preference.pptx"
     paper = PAPER/"manuscript.pdf"
     assert sha(paper)==sha(PAPER/"visual_language_paper.pdf")
     assert sum(replay["same"].values())+len(replay["differences"])==960
@@ -224,27 +224,35 @@ def main():
         aligned_pub=PUB.parent/"ordered_alignment_v1"
         phrase_pub=PUB.parent/"covered_phrases_v1"
         editor_pub=PUB.parent/"glyph_draft_editor_v1"
-        raw_path=PAPER/"evidence/glyph_draft_editor.zip"
-        plate=read(editor_pub/"plate.json")
-        assert sha(raw_path)==plate["archive"]==read(editor_pub/"assessment.json")["archive"]
+        seq_pub=PUB.parent/"visual_sequence_preference_v1"
+        raw_path=PAPER/"evidence/visual_sequence_preference.zip"
+        plate=read(seq_pub/"plate.json")
+        assert sha(raw_path)==plate["archive"]==read(seq_pub/"assessment.json")["archive"]
         expected=Counter()
-        with ZipFile(raw_path) as raw, fitz.open(FIG/"Glyph_draft_editor.pdf") as pdf:
+        with ZipFile(raw_path) as raw, ZipFile(PAPER/"evidence/visual_preference_training_example.zip") as train, fitz.open(FIG/"Visual_sequence_preference.pdf") as pdf:
             responses=json.loads(raw.read("records.json"))
+            example=json.loads(train.read("record.json"))
+            train_check=read(seq_pub/"training-transfer.json")
+            assert example["source_archive"]==train_check["archive"]
             assert len(responses)==568
             for item in plate["items"]:
                 if item["type"]!="strip":
                     continue
-                blob=raw.read(item["member"])
-                assert blob==(FIG/"glyph_draft_editor"/item["name"]).read_bytes()
+                training=item["origin"]=="training"
+                blob=(train if training else raw).read(item["member"])
+                assert blob==(FIG/"visual_sequence_preference"/item["name"]).read_bytes()
                 assert sha256(blob).hexdigest()==item["sha256"]
                 i,kind=item["member"].removesuffix(".png").split("/")
                 if kind!="source":
-                    assert responses[int(i)]["answers"][kind]["png"]==item["sha256"]
+                    record=example["record"] if training else responses[int(i)]
+                    assert record["answers"][kind]["png"]==item["sha256"]
+                    if training:
+                        assert int(i)==example["index"] and train_check["rows"][int(i)]["png"][kind]==item["sha256"]
                 expected[bitmap(blob)]+=1
             assert expected==images(pdf,pdf[0])==images(doc,doc[0])
         assert "Fig. 1" in " ".join(doc[0].get_text().split())
         media.update(expected)
-        figures.insert(0,dict(page=1,file="Glyph_draft_editor.pdf",sha256=sha(FIG/"Glyph_draft_editor.pdf")))
+        figures.insert(0,dict(page=1,file="Visual_sequence_preference.pdf",sha256=sha(FIG/"Visual_sequence_preference.pdf")))
         # A package may deduplicate identical bitmaps used in two places.
         packaged={bitmap(ppt.read(n)) for n in ppt.namelist() if n.startswith("ppt/media/")}
         assert packaged==set(media)
@@ -259,6 +267,7 @@ def main():
                original_image_instances=sum(media.values()),requests=192,answers=960,replayed=replay["same"],
                independent_trial=dict(requests=192,answers=768,archive=sha(fresh_archive),replayed=new_replay["same"],
                    cpu_differences=new_replay["differences"],assessment=sha(fresh/"assessment.json"),routing=sha(fresh/"routing.json")),
+               visual_sequence_preference={k:sha(seq_pub/(k+".json")) for k in ("selection","mined","verification","confirmed","label-inspection","generation","assessment","paths","audit","prefix-weights","training-transfer","passage-memory","plate")},
                glyph_draft_editor={k:sha(editor_pub/(k+".json")) for k in ("selection","drafts","generation","assessment","audit","source-probe","path-comparison","plate")},
                covered_phrases={k:sha(phrase_pub/(k+".json")) for k in ("corpus","generation","links-0","links-1","assessment","role-meaning","audit","name-probes","plate","editing")},
                ordered_alignment={k:sha(aligned_pub/(k+".json")) for k in ("corpus","generation","kernel-check","assessment","audit","repetition","retrieval","plate")},

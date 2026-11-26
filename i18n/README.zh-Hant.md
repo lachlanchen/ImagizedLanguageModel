@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-這個 182 萬參數的視覺書寫模型在一張 RTX 4090 D 上訓練。給它原句和初譯的字形影像，在 236 對肯定句與否定句中，有 **225 對**都寫對了。但在四本未見書籍的 96 道翻譯題中，只有 **1 道**完整達意，而且沿用了初譯。只看原句的同條件模型答對 0 道，讀文字的 Qwen3-8B 答對 89 道。下圖保留了這一成功例和一個歷史族名譯錯時的原始輸出。 [結果與原始影像](../references/glyph_draft_editor_result.md) · [執行模型](../models/glyph_draft_editor/README.md)
+在一張 RTX 4090 D 上訓練後，視覺書寫模型在 96 個反覆練習的中英互譯例句中，有 **65 個**完整達意；只使用概似目標的對照模型答對 61 個。在其他練習過的句子上，它答對 **8/96**，在四本未見書籍上答對 **1/96**。圖中是模型實際寫出的完整訓練句、在新書頁上譯對的圖號，以及一段未能譯出的句子。 [原始影像與成績](../references/visual_sequence_preference_result.md) · [執行模型](../models/visual_sequence_preference/README.md)
 
-![實驗結果](../publication/ilm-nature/figures/Glyph_draft_editor.png)
+![實驗結果](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
 在一張 RTX 4090 D 上訓練的模型可以閱讀原文圖像，從兩張候選譯文圖像中選擇。校正它對某些譯文措辭的偏好後，兩段書摘都選對的組數從 **21/96 提高到 77/96**。讓模型自行寫譯文更難。預測原文所支持的字形片段後，受控測試中寫出指定謂語的答案從 17/336 增至 43/336，但在 192 個書摘翻譯請求中，只有 1 個完整傳達原意。下圖是另一組 OPUS 測試中首個獲認可的模型輸出。 [實驗結果](../references/source_supported_writing_result.md) · [執行生成或選擇模型](../models/source_supported_writing/README.md)
 

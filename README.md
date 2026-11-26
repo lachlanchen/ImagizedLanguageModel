@@ -2,9 +2,9 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
-A 1.82-million-parameter visual writer trained on one RTX 4090 D. Given a pictured source and a phrase draft, it wrote both polarities correctly in **225/236** controlled sentence pairs. On 96 translations from four unseen books it conveyed the complete meaning **once**, reproducing its draft. The matched source-only writer scored zero and text-input Qwen3-8B scored 89. The figure shows the original answer images for that success and a lost historical name. [Results and raw outputs](references/glyph_draft_editor_result.md) · [Run the editor](models/glyph_draft_editor/README.md)
+A visual writer trained on one RTX 4090 D learned to correct **65 of 96** repeated English–Chinese translations. Matched likelihood training corrected 61. On other rehearsed passages the writer scored **8/96**, and on four unseen books **1/96**. The figure shows a complete sentence the model learned to write, the figure label it preserved on a new page and a sentence it failed to translate. [Raw outputs and scores](references/visual_sequence_preference_result.md) · [Run the writer](models/visual_sequence_preference/README.md)
 
-![Results](publication/ilm-nature/figures/Glyph_draft_editor.png)
+![Results](publication/ilm-nature/figures/Visual_sequence_preference.png)
 
 On one RTX 4090 D, a reader chose between two pictured translations for each book passage. Correcting its preference for common target wording raised the number of pairs with both answers right from **21/96 to 77/96**. Free translation remains much harder. Predicting the visual strips supported by the source retained the requested predicate in 43/336 controlled answers, up from 17, but preserved the complete meaning on only 1/192 book requests. The image below is the first credited guided answer on the separate OPUS test. [Results](references/source_supported_writing_result.md) · [Run the writer or selector](models/source_supported_writing/README.md)
 

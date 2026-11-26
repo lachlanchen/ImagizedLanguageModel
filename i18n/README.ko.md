@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-RTX 4090 D 한 장에서 학습한 182만 매개변수 모델은 원문과 초벌 번역의 글자 이미지를 읽고 통제된 문장 236쌍 중 **225쌍**에서 긍정문과 부정문을 모두 정확히 썼습니다. 처음 보는 책 네 권의 번역 96개 중 뜻을 온전히 살린 답은 **1개**였고 초벌 번역과 같았습니다. 원문만 본 대조 모델은 0개, 텍스트를 읽은 Qwen3-8B는 89개였습니다. 그림은 성공한 답과 역사적 민족 이름을 잘못 옮긴 답의 실제 출력입니다. [결과와 원본 이미지](../references/glyph_draft_editor_result.md) · [모델 실행](../models/glyph_draft_editor/README.md)
+RTX 4090 D 한 장에서 학습한 시각 모델은 반복 연습한 영중 번역 96개 중 **65개**에서 뜻을 온전히 전달했습니다. 우도만으로 학습한 대조 모델은 61개였습니다. 다른 학습 문장에서는 **8/96**, 처음 보는 책 네 권에서는 **1/96**이었습니다. 그림은 학습한 완전한 문장, 새 책에서 맞힌 그림 번호, 번역에 실패한 문장의 실제 출력입니다. [원본 이미지와 평가](../references/visual_sequence_preference_result.md) · [모델 실행](../models/visual_sequence_preference/README.md)
 
-![실험 결과](../publication/ilm-nature/figures/Glyph_draft_editor.png)
+![실험 결과](../publication/ilm-nature/figures/Visual_sequence_preference.png)
 
 RTX 4090 D 한 장으로 학습한 모델에 원문 이미지와 번역 후보 이미지 두 장을 제시했다. 특정 번역 표현을 선호하는 경향을 보정하자 두 원문에서 모두 정답을 고른 쌍이 **21/96에서 77/96**으로 늘었다. 자유 생성에서는 원문으로부터 글자 조각을 예측해 요청한 서술어를 쓴 답이 17/336에서 43/336으로 늘었지만, 책 원문의 뜻을 온전히 전달한 번역은 192건 중 1건이었다. 아래는 별도의 OPUS 시험에서 처음으로 정답 판정을 받은 출력이다. [실험 결과](../references/source_supported_writing_result.md) · [모델 실행](../models/source_supported_writing/README.md)
 
