@@ -1,5 +1,8 @@
 # Language Is Image: Imagized Language Modeling
 
+The current reading edition opens with two traced visual writers. Figure 1 shows a sharp but incorrect translation and a damaged name written directly in pixels. Figures 67–68 compare a frozen translation readout with the compact ILM and give the new pixel motor's complete outputs. Every image and stop from the motor matched its predecessor on the 192 literary requests. Two answers conveyed the requested meaning. [Reading PDF](visual_language_paper.pdf) · [Editable figures](figures/Visual_writer_evidence.pptx) · [Figure-by-figure index](evidence/visual_output_figure_index.json) · [Raw inputs and outputs](evidence/neural_motor_answers.zip)
+
+
 [Read the paper](visual_language_paper.pdf) · [Cumulative manuscript](manuscript.pdf) · [Historical PDFs](versions/README.md)
 
 Pages 63–66 show all three matched grammatical-role fits, their original bitmap answers, an exact attention-mass control, the two learned optical readers and the field-versus-weight intervention. The readers' pretrained text-piece readout is identified separately. [Raw output archive](evidence/role_translation_outputs.zip) · [Role figures](figures/Writing_with_grammatical_roles.pptx) · [Visual state figures](figures/Glyph_attention_and_reading.pptx)

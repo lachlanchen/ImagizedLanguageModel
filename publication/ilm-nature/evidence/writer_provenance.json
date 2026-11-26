@@ -1,0 +1,228 @@
+{
+  "width": 512,
+  "height": 274,
+  "items": [
+    {
+      "type": "text",
+      "x": 2,
+      "y": 0,
+      "size": 13,
+      "bold": true,
+      "text": "a   Translating by choosing successive glyph images",
+      "color": "#314544"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 22,
+      "size": 8,
+      "bold": true,
+      "text": "Pictured input",
+      "color": "#314544"
+    },
+    {
+      "type": "text",
+      "x": 208,
+      "y": 22,
+      "size": 8,
+      "bold": true,
+      "text": "Stopped output",
+      "color": "#314544"
+    },
+    {
+      "type": "image",
+      "x": 3,
+      "y": 34,
+      "w": 169.0,
+      "h": 13.0,
+      "name": "tile-exact-input.png"
+    },
+    {
+      "type": "image",
+      "x": 208,
+      "y": 34,
+      "w": 80.0,
+      "h": 16.0,
+      "name": "tile-exact.png"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 56,
+      "size": 8,
+      "bold": false,
+      "text": "The first exact match in 384 literary requests",
+      "color": "#314544"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 77,
+      "size": 8,
+      "bold": true,
+      "text": "Pictured input",
+      "color": "#314544"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 108,
+      "size": 8,
+      "bold": true,
+      "text": "Stopped output",
+      "color": "#314544"
+    },
+    {
+      "type": "image",
+      "x": 115,
+      "y": 74,
+      "w": 240.0,
+      "h": 15.0,
+      "name": "tile-rejected-input.png"
+    },
+    {
+      "type": "image",
+      "x": 115,
+      "y": 104,
+      "w": 384.0,
+      "h": 36.0,
+      "name": "tile-rejected.png"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 147,
+      "size": 8,
+      "bold": false,
+      "text": "The first rejected translation repeats a phrase and loses the apology.",
+      "color": "#314544"
+    },
+    {
+      "type": "text",
+      "x": 2,
+      "y": 167,
+      "size": 13,
+      "bold": true,
+      "text": "b   Answering by predicting the pixels in each successive cell",
+      "color": "#314544"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 192,
+      "size": 8,
+      "bold": true,
+      "text": "First exact answer",
+      "color": "#314544"
+    },
+    {
+      "type": "image",
+      "x": 111,
+      "y": 188,
+      "w": 378.0,
+      "h": 18.0,
+      "name": "pixel-exact.png"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 223,
+      "size": 8,
+      "bold": true,
+      "text": "First unreadable answer",
+      "color": "#314544"
+    },
+    {
+      "type": "image",
+      "x": 111,
+      "y": 217,
+      "w": 126.0,
+      "h": 21.0,
+      "name": "pixel-damaged.png"
+    },
+    {
+      "type": "text",
+      "x": 4,
+      "y": 252,
+      "size": 8,
+      "bold": false,
+      "text": "Original binary grids, with each writer using its own previous output at inference",
+      "color": "#314544"
+    }
+  ],
+  "repertoire": [
+    {
+      "case": 13,
+      "method": "selected repertoire",
+      "output": "tile-exact.png",
+      "input": "tile-exact-input.png",
+      "source_sha256": "81323e80530fd8f3bd5c4ff16be9437794a3c531fbdb035412ec7f0c78748a7b",
+      "checkpoint": "e7baf7d5af8c5653d2ff6b4234c5b6dae159ff9e62a9110bb14d0570750e2213",
+      "output_sha256": "460791e073b7ed88573dfcbe3ba059d1060374eba201ded3e74a0d7238853a76",
+      "packed_sha256": "b9ecac94f5db07da3df3980694aa52c972b4cdfa80623f89e0afa9a4f1aa50f6",
+      "cpu_replay": true,
+      "stop": true,
+      "emitted": 5,
+      "source_cells": 13,
+      "target_direction": 1
+    },
+    {
+      "case": 0,
+      "method": "selected repertoire",
+      "output": "tile-rejected.png",
+      "input": "tile-rejected-input.png",
+      "source_sha256": "be3a2a030788cd50a14e79057cd7ea1520c7d8e8b65d39744966f947abbeb6f4",
+      "checkpoint": "e7baf7d5af8c5653d2ff6b4234c5b6dae159ff9e62a9110bb14d0570750e2213",
+      "output_sha256": "3311a76983ea9a8dc32aa0ec0984d3a602fc9f4ce96ce8c955d76dcb1198e802",
+      "packed_sha256": "3ea776337241698b2f19f93661f65d45a3e4602d2abee93ace3bad5c45783452",
+      "cpu_replay": true,
+      "stop": true,
+      "emitted": 83,
+      "source_cells": 16,
+      "target_direction": 0
+    }
+  ],
+  "physical": [
+    {
+      "case": "qa_02_a_normal",
+      "method": "autoregressive pixel feedback",
+      "output": "pixel-exact.png",
+      "input": "pixel-exact-input.png",
+      "source_sha256": "9bacfec205a4bbf9cca397cc7ad1b4337bf22d4d98bd4be33d69c9f59f84b278",
+      "checkpoint": "64b575af064c2229cd4b06bb024cf5ca7a8f455cc37d44b14fed9b82a698793d",
+      "array_sha256": "c527f2416d4f455eb3c2921a9efab0e3b4f8bf30d2cd139c312785fcbfbca27f",
+      "tensor_sha256": "99e84d464581d08965fb36d8e1b6dca9a5e0a4a1363dbb1a910f9e654de35485",
+      "output_sha256": "00481e54b8652267af4a2c0f68bfa7f72715139a989f2f8069858a913ebebc16",
+      "emitted": 21,
+      "stop": true,
+      "frozen_exact": true,
+      "frozen_reading": {
+        "text": "生长于海拔2,200米至3,200米的地区",
+        "uncertain": false,
+        "coherent_continuation": null,
+        "notes": "Clear complete phrase 生长于海拔2,200米至3,200米的地区."
+      }
+    },
+    {
+      "case": "qa_01_a_normal",
+      "method": "autoregressive pixel feedback",
+      "output": "pixel-damaged.png",
+      "input": "pixel-damaged-input.png",
+      "source_sha256": "53269e382038b9ecd2821d58ef39c45e57f99a59a39187d7280800058f2063d0",
+      "checkpoint": "64b575af064c2229cd4b06bb024cf5ca7a8f455cc37d44b14fed9b82a698793d",
+      "array_sha256": "7f9ec3f949b034e3f2ebc530e77ef051de3c730521ea11ddf264f479c8a91e03",
+      "tensor_sha256": "48a667a4de809f7fb2b83ada0b2d77fc80b29067d23d707ac11a358b67d76b69",
+      "output_sha256": "98deda2a08f0935920faeed1f7e7ba8d1e9c03360657f48088a4492bda890d09",
+      "emitted": 6,
+      "stop": true,
+      "frozen_exact": false,
+      "frozen_reading": {
+        "text": "?莱顿-霍夫",
+        "uncertain": true,
+        "coherent_continuation": null,
+        "notes": "Name-like phrase has a dense damaged first glyph; remainder reads 莱顿-霍夫. Whole phrase uncertain."
+      }
+    }
+  ],
+  "figure_sha256": "f0562cb6c78bf795be57ceca87c18f9f80a6295a3ed93649f71606e266c47a9f"
+}

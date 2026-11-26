@@ -1,0 +1,5276 @@
+{
+  "binding": {
+    "training": "a3ca26ba7281c0cdd8607322c59beabdd9dd2331b811ef724efe65253185f58f",
+    "panel": "d15cef1b58afcdd522e13f32ab234313ce2cc74b300846b176bd9cf0b7b9708d",
+    "program": "94cc9ad89234113cc3d98f68f65b072265cad92959ba346f463ffc0f7542eacc"
+  },
+  "scorer": "8c0e1bd0044fd78b4b925fce20e499333824fc11ac3a5526528bb0f94b7c2703",
+  "exact_interval": "8f26cd44f2a7c6360ed1a4238732c6af43d5e2fff3843a81b2979e4c100817d7",
+  "raw": "9ee630bfba074bea6a0acc1958bed05d8991a7f65db069e569b234ac16cc3d3c",
+  "votes": {
+    "reference.json": "6af95f67e9bea765ea79abbaf98057ed7891130f72ded4d7e96bbd32bb9a9a37",
+    "source-votes.json": "b4d4ce1c54c4da2198293236520d9a67a4a0879441bd0c67dc553d56bbf6c268",
+    "exchange-votes.json": "01faf2f514e25a8d036377f4095d01f4599cc9530a257865ddbb63f678258249"
+  },
+  "dev": {
+    "en": {
+      "positions": 3191,
+      "mean_retained_mass": 0.8491954175852863,
+      "full_kl": {
+        "start": 0.7269595936252439,
+        "regression": 0.670529252836379,
+        "prediction": 0.43494178907776376
+      }
+    },
+    "zh": {
+      "positions": 3197,
+      "mean_retained_mass": 0.7944917031515752,
+      "full_kl": {
+        "start": 1.0031772248116042,
+        "regression": 0.9333278579658668,
+        "prediction": 0.6115512762165789
+      }
+    }
+  },
+  "stops": {
+    "start": 191,
+    "regression": 188,
+    "prediction": 191,
+    "native": 192,
+    "ilm": 192,
+    "qwen": 192,
+    "reference": 192,
+    "foil": 192
+  },
+  "exchange_stops": 191,
+  "qualification": {
+    "more": true,
+    "positive_interval": false,
+    "lower_full_kl": true
+  },
+  "passed": false,
+  "source": {
+    "works": {
+      "great-gatsby": {
+        "start": 2,
+        "regression": 2,
+        "prediction": 5,
+        "native": 11,
+        "ilm": 0,
+        "qwen": 40,
+        "reference": 34,
+        "foil": 0,
+        "n": 48
+      },
+      "plato-republic": {
+        "start": 7,
+        "regression": 6,
+        "prediction": 14,
+        "native": 19,
+        "ilm": 2,
+        "qwen": 40,
+        "reference": 27,
+        "foil": 0,
+        "n": 48
+      },
+      "water-margin-120": {
+        "start": 1,
+        "regression": 1,
+        "prediction": 0,
+        "native": 11,
+        "ilm": 0,
+        "qwen": 41,
+        "reference": 24,
+        "foil": 0,
+        "n": 48
+      },
+      "bible": {
+        "start": 1,
+        "regression": 1,
+        "prediction": 3,
+        "native": 16,
+        "ilm": 0,
+        "qwen": 39,
+        "reference": 31,
+        "foil": 0,
+        "n": 48
+      }
+    },
+    "directions": {
+      "en": {
+        "start": 5,
+        "regression": 4,
+        "prediction": 15,
+        "native": 27,
+        "ilm": 1,
+        "qwen": 78,
+        "reference": 57,
+        "foil": 0,
+        "n": 96
+      },
+      "zh": {
+        "start": 6,
+        "regression": 6,
+        "prediction": 7,
+        "native": 30,
+        "ilm": 1,
+        "qwen": 82,
+        "reference": 59,
+        "foil": 0,
+        "n": 96
+      }
+    },
+    "total": {
+      "start": 11,
+      "regression": 10,
+      "prediction": 22,
+      "native": 57,
+      "qwen": 160,
+      "reference": 116,
+      "n": 192,
+      "ilm": 2
+    },
+    "records": [
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": true,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": false,
+        "ilm": true,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": true,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": true,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": true,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": true,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "regression": true,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": true,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      }
+    ],
+    "paired_95": [
+      0.0,
+      0.13541666666666666
+    ]
+  },
+  "exchange": {
+    "works": {
+      "great-gatsby": {
+        "prediction": 8,
+        "exchange": 0,
+        "reference": 41,
+        "foil": 0,
+        "n": 48
+      },
+      "plato-republic": {
+        "prediction": 18,
+        "exchange": 2,
+        "reference": 37,
+        "foil": 0,
+        "n": 48
+      },
+      "water-margin-120": {
+        "prediction": 2,
+        "exchange": 0,
+        "reference": 41,
+        "foil": 0,
+        "n": 48
+      },
+      "bible": {
+        "prediction": 5,
+        "exchange": 0,
+        "reference": 41,
+        "foil": 0,
+        "n": 48
+      }
+    },
+    "directions": {
+      "en": {
+        "prediction": 20,
+        "exchange": 1,
+        "reference": 76,
+        "foil": 0,
+        "n": 96
+      },
+      "zh": {
+        "prediction": 13,
+        "exchange": 1,
+        "reference": 84,
+        "foil": 0,
+        "n": 96
+      }
+    },
+    "total": {
+      "prediction": 33,
+      "reference": 160,
+      "n": 192,
+      "exchange": 2
+    },
+    "records": [
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "exchange": false,
+        "reference": true,
+        "foil": false
+      }
+    ]
+  },
+  "guided": {
+    "works": {
+      "great-gatsby": {
+        "ilm": 0,
+        "start": 0,
+        "native": 9,
+        "regression": 0,
+        "prediction": 4,
+        "reference": 48,
+        "foil": 0,
+        "qwen": 30,
+        "n": 48
+      },
+      "plato-republic": {
+        "regression": 7,
+        "ilm": 2,
+        "native": 13,
+        "reference": 48,
+        "foil": 0,
+        "start": 5,
+        "qwen": 29,
+        "prediction": 9,
+        "n": 48
+      },
+      "water-margin-120": {
+        "qwen": 24,
+        "foil": 0,
+        "prediction": 0,
+        "native": 9,
+        "reference": 48,
+        "regression": 0,
+        "ilm": 0,
+        "start": 1,
+        "n": 48
+      },
+      "bible": {
+        "reference": 48,
+        "ilm": 0,
+        "prediction": 3,
+        "regression": 0,
+        "qwen": 30,
+        "foil": 0,
+        "native": 13,
+        "start": 0,
+        "n": 48
+      }
+    },
+    "directions": {
+      "en": {
+        "ilm": 1,
+        "start": 4,
+        "native": 25,
+        "regression": 5,
+        "prediction": 11,
+        "reference": 96,
+        "foil": 0,
+        "qwen": 54,
+        "n": 96
+      },
+      "zh": {
+        "prediction": 5,
+        "qwen": 59,
+        "regression": 2,
+        "native": 19,
+        "start": 2,
+        "reference": 96,
+        "ilm": 1,
+        "foil": 0,
+        "n": 96
+      }
+    },
+    "total": {
+      "native": 44,
+      "prediction": 16,
+      "reference": 192,
+      "qwen": 113,
+      "n": 192,
+      "regression": 7,
+      "ilm": 2,
+      "start": 6
+    },
+    "records": [
+      {
+        "ilm": false,
+        "start": false,
+        "native": true,
+        "regression": false,
+        "prediction": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "prediction": false,
+        "qwen": false,
+        "regression": false,
+        "native": false,
+        "start": false,
+        "reference": true,
+        "ilm": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "native": false,
+        "regression": false,
+        "reference": true,
+        "foil": false,
+        "ilm": false,
+        "start": false,
+        "qwen": false
+      },
+      {
+        "reference": true,
+        "qwen": true,
+        "ilm": false,
+        "native": false,
+        "foil": false,
+        "prediction": false,
+        "regression": false,
+        "start": false
+      },
+      {
+        "regression": false,
+        "qwen": false,
+        "prediction": false,
+        "native": false,
+        "foil": false,
+        "reference": true,
+        "start": false,
+        "ilm": false
+      },
+      {
+        "prediction": false,
+        "reference": true,
+        "ilm": false,
+        "native": false,
+        "qwen": true,
+        "regression": false,
+        "start": false,
+        "foil": false
+      },
+      {
+        "ilm": false,
+        "qwen": true,
+        "native": true,
+        "prediction": true,
+        "start": false,
+        "regression": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "start": false,
+        "prediction": false,
+        "ilm": false,
+        "native": false,
+        "qwen": false,
+        "regression": false,
+        "foil": false
+      },
+      {
+        "native": false,
+        "regression": false,
+        "foil": false,
+        "prediction": false,
+        "start": false,
+        "reference": true,
+        "qwen": false,
+        "ilm": false
+      },
+      {
+        "regression": false,
+        "start": false,
+        "reference": true,
+        "native": false,
+        "foil": false,
+        "qwen": false,
+        "prediction": false,
+        "ilm": false
+      },
+      {
+        "foil": false,
+        "native": false,
+        "ilm": false,
+        "prediction": false,
+        "start": false,
+        "regression": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "native": false,
+        "regression": false,
+        "start": false,
+        "prediction": false,
+        "ilm": false,
+        "reference": true
+      },
+      {
+        "native": true,
+        "prediction": true,
+        "ilm": false,
+        "foil": false,
+        "qwen": false,
+        "regression": false,
+        "reference": true,
+        "start": false
+      },
+      {
+        "prediction": false,
+        "native": false,
+        "qwen": false,
+        "regression": false,
+        "start": false,
+        "ilm": false,
+        "foil": false,
+        "reference": true
+      },
+      {
+        "regression": false,
+        "qwen": true,
+        "prediction": false,
+        "native": false,
+        "reference": true,
+        "foil": false,
+        "start": false,
+        "ilm": false
+      },
+      {
+        "start": false,
+        "qwen": true,
+        "ilm": false,
+        "reference": true,
+        "native": true,
+        "foil": false,
+        "regression": false,
+        "prediction": false
+      },
+      {
+        "prediction": false,
+        "qwen": true,
+        "native": false,
+        "start": false,
+        "reference": true,
+        "regression": false,
+        "ilm": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "start": false,
+        "regression": false,
+        "native": false,
+        "prediction": false,
+        "ilm": false,
+        "qwen": true
+      },
+      {
+        "native": false,
+        "regression": false,
+        "ilm": false,
+        "prediction": false,
+        "qwen": true,
+        "reference": true,
+        "start": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "ilm": false,
+        "prediction": false,
+        "native": false,
+        "foil": false,
+        "qwen": true,
+        "regression": false,
+        "start": false
+      },
+      {
+        "qwen": true,
+        "native": false,
+        "regression": false,
+        "reference": true,
+        "start": false,
+        "ilm": false,
+        "foil": false,
+        "prediction": false
+      },
+      {
+        "regression": false,
+        "ilm": false,
+        "start": false,
+        "foil": false,
+        "qwen": true,
+        "prediction": false,
+        "native": false,
+        "reference": true
+      },
+      {
+        "start": false,
+        "regression": false,
+        "qwen": false,
+        "foil": false,
+        "ilm": false,
+        "reference": true,
+        "native": false,
+        "prediction": false
+      },
+      {
+        "native": false,
+        "prediction": false,
+        "ilm": false,
+        "qwen": true,
+        "start": false,
+        "foil": false,
+        "reference": true,
+        "regression": false
+      },
+      {
+        "foil": false,
+        "start": false,
+        "native": false,
+        "regression": false,
+        "ilm": false,
+        "qwen": true,
+        "prediction": false,
+        "reference": true
+      },
+      {
+        "qwen": false,
+        "start": false,
+        "ilm": false,
+        "foil": false,
+        "native": false,
+        "regression": false,
+        "reference": true,
+        "prediction": false
+      },
+      {
+        "ilm": false,
+        "native": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "start": false,
+        "regression": false,
+        "prediction": false
+      },
+      {
+        "start": false,
+        "ilm": false,
+        "native": false,
+        "regression": false,
+        "foil": false,
+        "prediction": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "foil": false,
+        "start": false,
+        "reference": true,
+        "native": true,
+        "qwen": true,
+        "prediction": false,
+        "regression": false,
+        "ilm": false
+      },
+      {
+        "start": false,
+        "ilm": false,
+        "reference": true,
+        "prediction": false,
+        "qwen": true,
+        "foil": false,
+        "regression": false,
+        "native": false
+      },
+      {
+        "reference": true,
+        "ilm": false,
+        "qwen": false,
+        "start": false,
+        "prediction": false,
+        "foil": false,
+        "regression": false,
+        "native": true
+      },
+      {
+        "prediction": false,
+        "regression": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false,
+        "native": false,
+        "ilm": false,
+        "start": false
+      },
+      {
+        "regression": false,
+        "native": false,
+        "start": false,
+        "foil": false,
+        "ilm": false,
+        "qwen": false,
+        "prediction": false,
+        "reference": true
+      },
+      {
+        "prediction": false,
+        "foil": false,
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "reference": true,
+        "start": false,
+        "qwen": true
+      },
+      {
+        "start": false,
+        "foil": false,
+        "qwen": false,
+        "ilm": false,
+        "prediction": false,
+        "regression": false,
+        "reference": true,
+        "native": false
+      },
+      {
+        "prediction": false,
+        "reference": true,
+        "ilm": false,
+        "foil": false,
+        "regression": false,
+        "qwen": false,
+        "start": false,
+        "native": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "qwen": true,
+        "prediction": true,
+        "reference": true,
+        "foil": false,
+        "ilm": false,
+        "native": true
+      },
+      {
+        "native": false,
+        "regression": false,
+        "ilm": false,
+        "foil": false,
+        "reference": true,
+        "prediction": false,
+        "qwen": false,
+        "start": false
+      },
+      {
+        "qwen": true,
+        "prediction": false,
+        "foil": false,
+        "native": true,
+        "regression": false,
+        "start": false,
+        "reference": true,
+        "ilm": false
+      },
+      {
+        "regression": false,
+        "prediction": false,
+        "ilm": false,
+        "native": false,
+        "start": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "start": false,
+        "ilm": false,
+        "native": false,
+        "prediction": false,
+        "qwen": true,
+        "regression": false
+      },
+      {
+        "start": false,
+        "foil": false,
+        "native": false,
+        "prediction": false,
+        "regression": false,
+        "ilm": false,
+        "qwen": false,
+        "reference": true
+      },
+      {
+        "regression": false,
+        "foil": false,
+        "qwen": true,
+        "start": false,
+        "reference": true,
+        "prediction": false,
+        "ilm": false,
+        "native": false
+      },
+      {
+        "regression": false,
+        "start": false,
+        "ilm": false,
+        "foil": false,
+        "qwen": true,
+        "prediction": false,
+        "native": false,
+        "reference": true
+      },
+      {
+        "native": false,
+        "foil": false,
+        "ilm": false,
+        "regression": false,
+        "prediction": false,
+        "start": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "start": false,
+        "regression": false,
+        "qwen": true,
+        "foil": false,
+        "prediction": false,
+        "reference": true,
+        "native": false,
+        "ilm": false
+      },
+      {
+        "native": true,
+        "prediction": true,
+        "qwen": true,
+        "foil": false,
+        "start": false,
+        "regression": false,
+        "reference": true,
+        "ilm": false
+      },
+      {
+        "foil": false,
+        "prediction": false,
+        "qwen": true,
+        "native": false,
+        "reference": true,
+        "start": false,
+        "ilm": false,
+        "regression": false
+      },
+      {
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "reference": true,
+        "foil": false,
+        "start": false,
+        "qwen": false,
+        "prediction": false
+      },
+      {
+        "start": false,
+        "prediction": false,
+        "qwen": true,
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "ilm": false,
+        "qwen": true,
+        "regression": false,
+        "reference": true,
+        "prediction": false,
+        "start": false,
+        "foil": false,
+        "native": false
+      },
+      {
+        "reference": true,
+        "ilm": false,
+        "start": false,
+        "foil": false,
+        "qwen": true,
+        "prediction": false,
+        "regression": false,
+        "native": false
+      },
+      {
+        "prediction": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "native": false,
+        "regression": false,
+        "start": false,
+        "ilm": false
+      },
+      {
+        "ilm": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "start": false,
+        "native": true,
+        "prediction": false,
+        "regression": false
+      },
+      {
+        "ilm": false,
+        "qwen": true,
+        "reference": true,
+        "start": false,
+        "foil": false,
+        "native": false,
+        "regression": false,
+        "prediction": true
+      },
+      {
+        "native": false,
+        "regression": false,
+        "ilm": false,
+        "qwen": false,
+        "prediction": false,
+        "reference": true,
+        "start": false,
+        "foil": false
+      },
+      {
+        "regression": false,
+        "native": false,
+        "ilm": false,
+        "foil": false,
+        "prediction": false,
+        "start": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "qwen": true,
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "native": false,
+        "ilm": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "qwen": false,
+        "start": false,
+        "ilm": true,
+        "foil": false,
+        "native": false,
+        "reference": true,
+        "prediction": true,
+        "regression": false
+      },
+      {
+        "start": false,
+        "ilm": false,
+        "foil": false,
+        "reference": true,
+        "prediction": false,
+        "regression": false,
+        "qwen": true,
+        "native": false
+      },
+      {
+        "prediction": true,
+        "regression": true,
+        "reference": true,
+        "ilm": false,
+        "qwen": true,
+        "native": true,
+        "foil": false,
+        "start": true
+      },
+      {
+        "ilm": false,
+        "qwen": false,
+        "regression": false,
+        "foil": false,
+        "prediction": false,
+        "start": false,
+        "native": false,
+        "reference": true
+      },
+      {
+        "ilm": false,
+        "prediction": false,
+        "foil": false,
+        "start": true,
+        "reference": true,
+        "regression": true,
+        "native": true,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "reference": true,
+        "ilm": false,
+        "start": false,
+        "native": false,
+        "qwen": false,
+        "regression": false,
+        "prediction": false
+      },
+      {
+        "prediction": false,
+        "ilm": false,
+        "regression": false,
+        "foil": false,
+        "native": false,
+        "qwen": false,
+        "start": false,
+        "reference": true
+      },
+      {
+        "native": true,
+        "foil": false,
+        "ilm": false,
+        "regression": true,
+        "reference": true,
+        "qwen": false,
+        "prediction": true,
+        "start": true
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "prediction": false,
+        "foil": false,
+        "start": false,
+        "regression": false,
+        "ilm": false,
+        "native": true
+      },
+      {
+        "ilm": false,
+        "reference": true,
+        "start": false,
+        "qwen": false,
+        "prediction": true,
+        "native": true,
+        "regression": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "start": false,
+        "native": false,
+        "ilm": false,
+        "regression": false,
+        "prediction": false,
+        "reference": true,
+        "qwen": true
+      },
+      {
+        "reference": true,
+        "prediction": false,
+        "qwen": false,
+        "start": false,
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "foil": false
+      },
+      {
+        "ilm": false,
+        "start": false,
+        "reference": true,
+        "regression": false,
+        "prediction": false,
+        "foil": false,
+        "qwen": true,
+        "native": false
+      },
+      {
+        "ilm": false,
+        "reference": true,
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "native": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "regression": false,
+        "qwen": true,
+        "ilm": false,
+        "native": false,
+        "prediction": false,
+        "start": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "qwen": false,
+        "foil": false,
+        "ilm": false,
+        "reference": true,
+        "native": false,
+        "start": false,
+        "prediction": false,
+        "regression": false
+      },
+      {
+        "start": true,
+        "ilm": false,
+        "foil": false,
+        "prediction": false,
+        "regression": true,
+        "native": true,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "ilm": true,
+        "start": false,
+        "reference": true,
+        "foil": false,
+        "prediction": true,
+        "qwen": false,
+        "regression": false,
+        "native": true
+      },
+      {
+        "prediction": false,
+        "reference": true,
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "foil": false,
+        "qwen": true,
+        "start": false
+      },
+      {
+        "qwen": true,
+        "ilm": false,
+        "prediction": false,
+        "start": false,
+        "native": false,
+        "reference": true,
+        "regression": false,
+        "foil": false
+      },
+      {
+        "prediction": false,
+        "qwen": true,
+        "foil": false,
+        "ilm": false,
+        "reference": true,
+        "regression": false,
+        "start": false,
+        "native": true
+      },
+      {
+        "qwen": false,
+        "start": false,
+        "foil": false,
+        "ilm": false,
+        "native": false,
+        "prediction": false,
+        "regression": false,
+        "reference": true
+      },
+      {
+        "ilm": false,
+        "native": true,
+        "foil": false,
+        "qwen": false,
+        "regression": true,
+        "reference": true,
+        "start": false,
+        "prediction": true
+      },
+      {
+        "qwen": true,
+        "native": false,
+        "reference": true,
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "ilm": false,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "ilm": false,
+        "regression": false,
+        "start": false,
+        "prediction": false,
+        "native": false,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "native": true,
+        "start": false,
+        "regression": false,
+        "reference": true,
+        "prediction": false,
+        "ilm": false,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "ilm": false,
+        "reference": true,
+        "start": true,
+        "native": false,
+        "prediction": false,
+        "qwen": false,
+        "regression": true
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "start": false,
+        "reference": true,
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "prediction": false
+      },
+      {
+        "start": false,
+        "ilm": false,
+        "regression": false,
+        "reference": true,
+        "prediction": false,
+        "foil": false,
+        "qwen": true,
+        "native": false
+      },
+      {
+        "ilm": false,
+        "prediction": false,
+        "reference": true,
+        "qwen": true,
+        "foil": false,
+        "regression": false,
+        "native": false,
+        "start": false
+      },
+      {
+        "regression": false,
+        "qwen": true,
+        "foil": false,
+        "prediction": true,
+        "reference": true,
+        "start": false,
+        "native": true,
+        "ilm": false
+      },
+      {
+        "ilm": false,
+        "start": false,
+        "prediction": false,
+        "reference": true,
+        "regression": false,
+        "native": false,
+        "qwen": false,
+        "foil": false
+      },
+      {
+        "prediction": true,
+        "start": false,
+        "qwen": true,
+        "native": false,
+        "regression": false,
+        "ilm": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "qwen": true,
+        "regression": false,
+        "reference": true,
+        "start": false,
+        "foil": false,
+        "native": false,
+        "ilm": false,
+        "prediction": false
+      },
+      {
+        "reference": true,
+        "prediction": false,
+        "native": false,
+        "foil": false,
+        "ilm": false,
+        "regression": false,
+        "qwen": false,
+        "start": false
+      },
+      {
+        "ilm": false,
+        "foil": false,
+        "qwen": false,
+        "native": false,
+        "prediction": false,
+        "reference": true,
+        "start": false,
+        "regression": false
+      },
+      {
+        "foil": false,
+        "regression": false,
+        "prediction": false,
+        "start": false,
+        "native": false,
+        "reference": true,
+        "ilm": false,
+        "qwen": false
+      },
+      {
+        "native": true,
+        "prediction": false,
+        "qwen": true,
+        "reference": true,
+        "ilm": false,
+        "foil": false,
+        "regression": false,
+        "start": false
+      },
+      {
+        "qwen": false,
+        "foil": false,
+        "prediction": false,
+        "native": false,
+        "reference": true,
+        "regression": false,
+        "ilm": false,
+        "start": false
+      },
+      {
+        "regression": false,
+        "start": false,
+        "reference": true,
+        "prediction": false,
+        "ilm": false,
+        "qwen": false,
+        "foil": false,
+        "native": false
+      },
+      {
+        "prediction": false,
+        "ilm": false,
+        "foil": false,
+        "regression": false,
+        "qwen": false,
+        "native": false,
+        "reference": true,
+        "start": false
+      },
+      {
+        "regression": false,
+        "prediction": false,
+        "start": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "native": false,
+        "ilm": false
+      },
+      {
+        "prediction": false,
+        "foil": false,
+        "qwen": false,
+        "start": false,
+        "native": false,
+        "ilm": false,
+        "reference": true,
+        "regression": false
+      },
+      {
+        "ilm": false,
+        "regression": false,
+        "native": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "start": false,
+        "prediction": false
+      },
+      {
+        "qwen": false,
+        "ilm": false,
+        "native": false,
+        "prediction": false,
+        "start": false,
+        "regression": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "native": true,
+        "regression": false,
+        "foil": false,
+        "reference": true,
+        "ilm": false,
+        "qwen": true,
+        "prediction": false,
+        "start": false
+      },
+      {
+        "regression": false,
+        "ilm": false,
+        "start": false,
+        "prediction": false,
+        "qwen": false,
+        "native": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "prediction": false,
+        "ilm": false,
+        "start": false,
+        "qwen": true,
+        "foil": false,
+        "regression": false,
+        "native": false
+      },
+      {
+        "native": false,
+        "start": false,
+        "regression": false,
+        "foil": false,
+        "prediction": false,
+        "ilm": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "reference": true,
+        "regression": false,
+        "native": false,
+        "start": false,
+        "prediction": false,
+        "ilm": false,
+        "qwen": true,
+        "foil": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "ilm": false,
+        "prediction": false,
+        "regression": false,
+        "reference": true,
+        "native": true,
+        "start": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "native": false,
+        "ilm": false
+      },
+      {
+        "ilm": false,
+        "native": false,
+        "reference": true,
+        "foil": false,
+        "start": false,
+        "prediction": false,
+        "qwen": true,
+        "regression": false
+      },
+      {
+        "native": false,
+        "foil": false,
+        "start": false,
+        "ilm": false,
+        "qwen": true,
+        "regression": false,
+        "prediction": false,
+        "reference": true
+      },
+      {
+        "native": false,
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "ilm": false
+      },
+      {
+        "start": false,
+        "qwen": true,
+        "reference": true,
+        "ilm": false,
+        "regression": false,
+        "native": false,
+        "prediction": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "start": false,
+        "qwen": true,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "regression": false,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "native": false,
+        "foil": false,
+        "regression": false,
+        "start": false,
+        "prediction": false,
+        "qwen": false,
+        "ilm": false
+      },
+      {
+        "ilm": false,
+        "start": false,
+        "native": false,
+        "foil": false,
+        "qwen": false,
+        "reference": true,
+        "prediction": false,
+        "regression": false
+      },
+      {
+        "ilm": false,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "native": true
+      },
+      {
+        "prediction": false,
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "foil": false,
+        "start": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "start": false,
+        "native": false,
+        "reference": true,
+        "regression": false,
+        "ilm": false,
+        "prediction": false,
+        "foil": false,
+        "qwen": true
+      },
+      {
+        "native": false,
+        "foil": false,
+        "ilm": false,
+        "prediction": false,
+        "start": false,
+        "qwen": false,
+        "reference": true,
+        "regression": false
+      },
+      {
+        "regression": false,
+        "reference": true,
+        "foil": false,
+        "prediction": false,
+        "ilm": false,
+        "start": false,
+        "native": false,
+        "qwen": true
+      },
+      {
+        "start": false,
+        "prediction": false,
+        "reference": true,
+        "foil": false,
+        "qwen": false,
+        "regression": false,
+        "ilm": false,
+        "native": false
+      },
+      {
+        "prediction": false,
+        "reference": true,
+        "start": false,
+        "regression": false,
+        "foil": false,
+        "qwen": true,
+        "native": true,
+        "ilm": false
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "foil": false,
+        "native": false,
+        "ilm": false
+      },
+      {
+        "foil": false,
+        "start": false,
+        "native": true,
+        "qwen": false,
+        "ilm": false,
+        "regression": false,
+        "prediction": false,
+        "reference": true
+      },
+      {
+        "native": false,
+        "ilm": false,
+        "start": false,
+        "qwen": false,
+        "foil": false,
+        "regression": false,
+        "reference": true,
+        "prediction": false
+      },
+      {
+        "native": true,
+        "ilm": false,
+        "regression": false,
+        "foil": false,
+        "prediction": false,
+        "start": false,
+        "qwen": true,
+        "reference": true
+      },
+      {
+        "start": false,
+        "foil": false,
+        "qwen": false,
+        "reference": true,
+        "prediction": false,
+        "regression": false,
+        "native": false,
+        "ilm": false
+      },
+      {
+        "foil": false,
+        "qwen": true,
+        "ilm": false,
+        "regression": false,
+        "reference": true,
+        "start": false,
+        "native": false,
+        "prediction": false
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "foil": false,
+        "regression": false,
+        "native": false,
+        "prediction": false,
+        "ilm": false,
+        "start": false
+      },
+      {
+        "regression": false,
+        "ilm": false,
+        "native": false,
+        "qwen": true,
+        "reference": true,
+        "start": true,
+        "foil": false,
+        "prediction": false
+      },
+      {
+        "ilm": false,
+        "reference": true,
+        "prediction": false,
+        "start": false,
+        "foil": false,
+        "native": false,
+        "regression": false,
+        "qwen": false
+      },
+      {
+        "start": false,
+        "reference": true,
+        "regression": false,
+        "native": false,
+        "prediction": false,
+        "foil": false,
+        "qwen": false,
+        "ilm": false
+      },
+      {
+        "reference": true,
+        "prediction": false,
+        "regression": false,
+        "foil": false,
+        "ilm": false,
+        "native": false,
+        "qwen": false,
+        "start": false
+      },
+      {
+        "qwen": true,
+        "native": false,
+        "ilm": false,
+        "regression": false,
+        "start": false,
+        "reference": true,
+        "prediction": false,
+        "foil": false
+      },
+      {
+        "ilm": false,
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "foil": false,
+        "reference": true,
+        "native": false,
+        "qwen": false
+      },
+      {
+        "regression": false,
+        "prediction": false,
+        "ilm": false,
+        "foil": false,
+        "start": false,
+        "qwen": true,
+        "reference": true,
+        "native": true
+      },
+      {
+        "qwen": true,
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "foil": false,
+        "ilm": false,
+        "reference": true,
+        "native": false
+      },
+      {
+        "prediction": false,
+        "qwen": true,
+        "ilm": false,
+        "reference": true,
+        "start": false,
+        "native": true,
+        "regression": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "ilm": false,
+        "reference": true,
+        "regression": false,
+        "prediction": false,
+        "qwen": false,
+        "foil": false,
+        "native": false
+      },
+      {
+        "prediction": false,
+        "qwen": true,
+        "foil": false,
+        "reference": true,
+        "regression": false,
+        "start": false,
+        "native": false,
+        "ilm": false
+      },
+      {
+        "qwen": false,
+        "ilm": false,
+        "foil": false,
+        "regression": false,
+        "native": false,
+        "reference": true,
+        "start": false,
+        "prediction": false
+      },
+      {
+        "foil": false,
+        "native": true,
+        "start": false,
+        "reference": true,
+        "ilm": false,
+        "qwen": true,
+        "prediction": false,
+        "regression": false
+      },
+      {
+        "reference": true,
+        "ilm": false,
+        "prediction": false,
+        "regression": false,
+        "qwen": true,
+        "foil": false,
+        "native": false,
+        "start": false
+      },
+      {
+        "reference": true,
+        "regression": false,
+        "foil": false,
+        "native": false,
+        "qwen": true,
+        "ilm": false,
+        "start": false,
+        "prediction": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "reference": true,
+        "ilm": false,
+        "foil": false,
+        "qwen": true,
+        "native": true,
+        "prediction": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "foil": false,
+        "reference": true,
+        "ilm": false,
+        "native": false,
+        "qwen": true,
+        "prediction": false
+      },
+      {
+        "foil": false,
+        "prediction": false,
+        "native": false,
+        "ilm": false,
+        "reference": true,
+        "qwen": true,
+        "regression": false,
+        "start": false
+      },
+      {
+        "prediction": false,
+        "native": true,
+        "qwen": true,
+        "start": false,
+        "ilm": false,
+        "reference": true,
+        "regression": false,
+        "foil": false
+      },
+      {
+        "regression": false,
+        "reference": true,
+        "native": false,
+        "qwen": false,
+        "foil": false,
+        "prediction": false,
+        "start": false,
+        "ilm": false
+      },
+      {
+        "prediction": false,
+        "foil": false,
+        "regression": false,
+        "start": false,
+        "ilm": false,
+        "reference": true,
+        "qwen": true,
+        "native": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "ilm": false,
+        "native": false,
+        "start": false,
+        "regression": false,
+        "prediction": false,
+        "qwen": true
+      },
+      {
+        "foil": false,
+        "ilm": false,
+        "prediction": false,
+        "reference": true,
+        "qwen": true,
+        "regression": false,
+        "start": false,
+        "native": false
+      },
+      {
+        "prediction": false,
+        "start": false,
+        "native": false,
+        "reference": true,
+        "foil": false,
+        "regression": false,
+        "qwen": true,
+        "ilm": false
+      },
+      {
+        "ilm": false,
+        "native": false,
+        "reference": true,
+        "prediction": false,
+        "foil": false,
+        "start": false,
+        "regression": false,
+        "qwen": false
+      },
+      {
+        "reference": true,
+        "start": false,
+        "regression": false,
+        "qwen": true,
+        "ilm": false,
+        "prediction": false,
+        "native": true,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "native": false,
+        "foil": false,
+        "qwen": false,
+        "ilm": false,
+        "regression": false,
+        "start": false,
+        "prediction": false
+      },
+      {
+        "start": false,
+        "regression": false,
+        "native": true,
+        "foil": false,
+        "reference": true,
+        "qwen": true,
+        "prediction": false,
+        "ilm": false
+      },
+      {
+        "reference": true,
+        "qwen": false,
+        "native": false,
+        "prediction": false,
+        "foil": false,
+        "regression": false,
+        "start": false,
+        "ilm": false
+      },
+      {
+        "ilm": false,
+        "native": true,
+        "qwen": true,
+        "prediction": false,
+        "start": false,
+        "reference": true,
+        "foil": false,
+        "regression": false
+      },
+      {
+        "start": false,
+        "reference": true,
+        "prediction": false,
+        "qwen": false,
+        "regression": false,
+        "native": false,
+        "foil": false,
+        "ilm": false
+      },
+      {
+        "reference": true,
+        "qwen": true,
+        "prediction": false,
+        "regression": false,
+        "start": false,
+        "native": false,
+        "foil": false,
+        "ilm": false
+      },
+      {
+        "reference": true,
+        "regression": false,
+        "qwen": false,
+        "start": false,
+        "prediction": false,
+        "ilm": false,
+        "native": false,
+        "foil": false
+      },
+      {
+        "native": false,
+        "reference": true,
+        "ilm": false,
+        "prediction": false,
+        "regression": false,
+        "foil": false,
+        "qwen": true,
+        "start": false
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "native": false,
+        "ilm": false,
+        "regression": false,
+        "start": false,
+        "qwen": false,
+        "prediction": false
+      },
+      {
+        "regression": false,
+        "prediction": false,
+        "start": false,
+        "qwen": true,
+        "ilm": false,
+        "reference": true,
+        "foil": false,
+        "native": false
+      },
+      {
+        "foil": false,
+        "start": false,
+        "native": false,
+        "qwen": true,
+        "regression": false,
+        "ilm": false,
+        "prediction": false,
+        "reference": true
+      },
+      {
+        "ilm": false,
+        "native": false,
+        "reference": true,
+        "foil": false,
+        "qwen": true,
+        "start": false,
+        "prediction": false,
+        "regression": false
+      },
+      {
+        "foil": false,
+        "ilm": false,
+        "start": false,
+        "qwen": false,
+        "regression": false,
+        "reference": true,
+        "native": true,
+        "prediction": false
+      },
+      {
+        "reference": true,
+        "regression": false,
+        "foil": false,
+        "qwen": false,
+        "native": false,
+        "prediction": false,
+        "start": false,
+        "ilm": false
+      },
+      {
+        "regression": false,
+        "prediction": false,
+        "start": false,
+        "ilm": false,
+        "reference": true,
+        "qwen": false,
+        "native": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "foil": false,
+        "ilm": false,
+        "qwen": false,
+        "prediction": false,
+        "reference": true,
+        "regression": false,
+        "native": false
+      },
+      {
+        "regression": false,
+        "ilm": false,
+        "reference": true,
+        "prediction": false,
+        "qwen": true,
+        "start": false,
+        "native": false,
+        "foil": false
+      },
+      {
+        "regression": false,
+        "native": false,
+        "prediction": false,
+        "qwen": true,
+        "reference": true,
+        "start": false,
+        "foil": false,
+        "ilm": false
+      },
+      {
+        "qwen": false,
+        "foil": false,
+        "reference": true,
+        "native": false,
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "ilm": false
+      },
+      {
+        "regression": false,
+        "qwen": true,
+        "reference": true,
+        "start": false,
+        "ilm": false,
+        "prediction": true,
+        "foil": false,
+        "native": true
+      },
+      {
+        "regression": false,
+        "qwen": true,
+        "ilm": false,
+        "reference": true,
+        "start": false,
+        "native": true,
+        "prediction": true,
+        "foil": false
+      },
+      {
+        "reference": true,
+        "regression": false,
+        "ilm": false,
+        "qwen": true,
+        "start": false,
+        "native": true,
+        "foil": false,
+        "prediction": false
+      },
+      {
+        "foil": false,
+        "native": false,
+        "prediction": false,
+        "reference": true,
+        "qwen": true,
+        "ilm": false,
+        "regression": false,
+        "start": false
+      },
+      {
+        "prediction": false,
+        "regression": false,
+        "reference": true,
+        "foil": false,
+        "native": false,
+        "ilm": false,
+        "start": false,
+        "qwen": false
+      },
+      {
+        "prediction": false,
+        "qwen": false,
+        "native": false,
+        "foil": false,
+        "reference": true,
+        "start": false,
+        "regression": false,
+        "ilm": false
+      },
+      {
+        "foil": false,
+        "start": false,
+        "qwen": false,
+        "ilm": false,
+        "prediction": false,
+        "native": true,
+        "regression": false,
+        "reference": true
+      },
+      {
+        "reference": true,
+        "foil": false,
+        "native": true,
+        "ilm": false,
+        "qwen": false,
+        "regression": false,
+        "prediction": true,
+        "start": false
+      },
+      {
+        "ilm": false,
+        "start": false,
+        "reference": true,
+        "regression": false,
+        "qwen": true,
+        "foil": false,
+        "native": false,
+        "prediction": false
+      },
+      {
+        "start": false,
+        "prediction": false,
+        "regression": false,
+        "foil": false,
+        "native": false,
+        "ilm": false,
+        "reference": true,
+        "qwen": false
+      },
+      {
+        "ilm": false,
+        "foil": false,
+        "qwen": true,
+        "reference": true,
+        "regression": false,
+        "native": true,
+        "start": false,
+        "prediction": false
+      },
+      {
+        "qwen": true,
+        "reference": true,
+        "foil": false,
+        "regression": false,
+        "ilm": false,
+        "prediction": false,
+        "start": false,
+        "native": false
+      },
+      {
+        "qwen": true,
+        "prediction": false,
+        "foil": false,
+        "native": true,
+        "ilm": false,
+        "regression": false,
+        "reference": true,
+        "start": false
+      },
+      {
+        "native": false,
+        "ilm": false,
+        "foil": false,
+        "regression": false,
+        "start": false,
+        "reference": true,
+        "prediction": false,
+        "qwen": true
+      },
+      {
+        "reference": true,
+        "prediction": false,
+        "start": false,
+        "qwen": false,
+        "regression": false,
+        "ilm": false,
+        "foil": false,
+        "native": false
+      },
+      {
+        "qwen": true,
+        "foil": false,
+        "native": false,
+        "reference": true,
+        "ilm": false,
+        "prediction": false,
+        "regression": false,
+        "start": false
+      }
+    ],
+    "paired_95": [
+      0.015625,
+      0.07291666666666667
+    ]
+  }
+}

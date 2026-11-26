@@ -10,21 +10,21 @@
 \noindent{\sffamily\bfseries\fontsize{22}{26}\selectfont \ILMPaperTitle\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\vspace{8pt}
 \noindent{\bfseries\fontsize{10.5}{12.6}\selectfont
-Historical writing preserves distinctions that a transcription can lose. Can a compact model read a pictured question and answer in glyphs? We trained visual readers and writers on one RTX 4090 D using bilingual passages, human answers and attested Chinese forms. A 1.18-million-parameter system drew the requested specimen under all 16 interventions in 63 of 64 held families. New paraphrases reduced exact responses to 261 of 512. An untrained label matcher solved all 512. A 1.69-million-parameter translator retrieved 109 of 128 Chinese translations. Training on its own mistaken drafts preserved all eight role and polarity changes in 111 of 118 families, including in a held typeface with a learned reader. Yet it earned zero complete-meaning credits on 144 new literary, conversational and encyclopaedic requests, against 96 for a quantized 8B text model. Supervising grammatical roles yielded 10 complete meanings in 384 new literary requests, equal to the likelihood control. Redistributing pretrained source states across glyph cells with conserved attention mass preserved all 480 native translations. Learning those states from pixels earned three complete meanings in 96 requests with a frozen piece decoder, against 35 for its original source encoder.\par}
+Historical writing preserves distinctions that a transcription can lose. Can a small network read pictured language and answer in ink? We trained visual readers and writers on one RTX 4090 D. A repertoire-based translator handled all eight changes of role and polarity in 111 of 118 controlled families. On 384 literary requests it conveyed ten complete meanings. A reader trained against a pretrained decoder's predictions conveyed 22 of 192 meanings on a fresh panel, versus ten for matched state regression. A separate compact translator learned to generate each glyph's pixels. Its complete images and stops matched the repertoire writer on all 192 requests, including 190 rejected answers. These experiments distinguish the ability to read an event, choose a reply and draw its strokes.\par}
 \vspace{4pt}
-\platehere{Figure_150_optical_reading_and_writing}{Following a name through the reader and writer}{The two reader stages are shown above a held SQuAD question. The second source row substitutes a fictitious name as a test. The identical pictured question goes to both. Each fact and sentence is the actual emitted ink, reproduced on CPU. Panel b shows a separately authored page on which the reader finds the date and the writer drops it. Intercell spacing in this panel is reduced for print.}
+\platehere{Figure_215_writer_provenance}{Where the strokes in a visual answer come from}{\textbf{a}, A 1.69-million-parameter translator chooses each next glyph from a repertoire of 32-square binary images. The complete output to the short English prompt matches the Chinese reference. The equally sharp English reply to the Chinese prompt repeats itself and misses the meaning. Both replies reproduced byte for byte when the network read the original PNG on CPU. \textbf{b}, A different model predicts ink in each cell and feeds the emitted pixels back. The two complete answers are the first exact and the first unreadable reply in fixed order among 32 proportional-layout questions at the final checkpoint. Both stopped. The images agree with the saved network tensors at every pixel.}
 \begin{multicols}{2}
-\section*{What changes when the page changes?}
-The original railway page mentions Trevithick, Murray and Stephenson. The question asks who designed Salamanca. The answer joins a name from the page to a predicate from the question and stops. Changing only the name in the page changes the subject of the reply (Fig.~1a). Another page asks who wrote about bronze inscriptions. Replacing Lena with Mira changes the entire answer appropriately in both cases.
-\section*{Where the same mechanism fails}
-On a school page the system correctly reads 1635. Replacing it with 1735 changes the intermediate image, yet the writer produces exactly the same defective sentence on both pages (Fig.~1b). On a fossil page the model follows the change from Niger to Nepal and omits the English preposition both times. Legible letters, selection of a fact and expression of the relation can be tested separately.
+\section*{Language at fixed resolution}
+Of 384 literary requests, the repertoire writer conveyed ten complete meanings in a two-order automated reading. One answer reproduced the reference exactly. The repertoire contains 78 English-output choices and 3,700 Chinese-output choices, excluding stop. A clean contour is guaranteed whenever the corresponding stored drawing is clean.
+\section*{Language in predicted pixels}
+The pixel writer answered seven of 32 questions exactly and solved both questions on zero of 16 passages. The first exact answer gives an elevation range from 2,200 to 3,200 metres. The damaged first glyph in the other answer survives in the original binary array. This earlier model used 7.58 billion parameters including inherited weights.
 \end{multicols}
-\noindent{\sffamily\bfseries Raw ILM translation}\par\vspace{3pt}
-\noindent\begin{minipage}[t]{.69\linewidth}{\small\sffamily Pictured English input}\par
-\includegraphics[width=.96\linewidth]{../figures/raw_ilm/role-54-input.png}\end{minipage}\hfill
-\begin{minipage}[t]{.29\linewidth}{\small\sffamily Emitted Chinese image}\par
-\includegraphics[width=.57\linewidth]{../figures/raw_ilm/role-54-output.png}\end{minipage}\par
-\noindent{\small The ILM reads a passive clause and draws an active Chinese sentence meaning \emph{The nurse invited the doctor}. Both grids retain their original cell spacing. Full raw outputs for a reversal and a failed scientific translation appear on p.~\pageref{page:raw-ilm}.}
+\noindent{\sffamily\bfseries The compact neural motor on a new book passage}\par\vspace{2pt}
+\noindent\begin{minipage}[t]{.37\linewidth}{\small\sffamily Pictured input}\par
+\includegraphics[height=12pt]{../figures/writer_provenance/motor-0058-input.png}\end{minipage}\hfill
+\begin{minipage}[t]{.58\linewidth}{\small\sffamily Predicted pixels}\par
+\includegraphics[height=12pt]{../figures/writer_provenance/motor-0058-0058.png}\end{minipage}\par
+\noindent{\small First credited reply in the fresh literary panel. Figure~68 shows the first failure alongside it.}
 
 \newpage
 \spread{Which fact does the question ask for?}
@@ -313,4 +313,5 @@ Additional reading corpora include CoQA, CMRC 2018 and DRCD. For external readin
 \input{library_diversity.tex}
 \input{role_grounding.tex}
 \input{optical_state_reader.tex}
+\input{readout_objective.tex}
 \end{document}

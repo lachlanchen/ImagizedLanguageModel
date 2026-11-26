@@ -1,0 +1,59 @@
+{
+  "binding": {
+    "scripts/train_readout_objective.py": "173ce36365207716e8d536d04d545a52b7b1ea0ba2f355319e8bd403b6018094",
+    "models/optical_state/en/weights.safetensors": "8a164f260aca7f68dee07d0e0aa171df0b3915f51d6717d65eee142adf888ef2",
+    "references/evidence/visual_library_v1.json": "84f4d0ce955ba164c9ba1f88c6776c47a5d0b879c46dbc63f76e8a8067720595",
+    "references/readout_objective_protocol.md": "b9b45da91edf1364a7b4e3509914709f16d8fb8e7a5a636e08f59c564162bbb1",
+    "ilm/visual_lm/glyph_measure.py": "09dff54dd97ed96d38d7410f07657b21cc6882b7449d1bde36fb3086e7de39e5",
+    "ilm/visual_lm/optical_state_reader.py": "934d25d25d4f8468ca3cf645e685fa966f1e36a0bdf8ab6f9d014f34d3441da1",
+    "pretrained_revision": "cf109095479db38d6df799875e34039d4938aaa6"
+  },
+  "arm": "regression",
+  "direction": "en",
+  "history": [
+    {
+      "pass_number": 1,
+      "order_sha256": "703e901245e7bd55d8a51eb2133450cedcc6877507cd2cbd3d12dad4fd27c261",
+      "positions": 367007,
+      "source_cells": 493593,
+      "updates": 591,
+      "state_mse": 0.33680803012788235,
+      "mass_mse": 0.03641431268884528,
+      "grouped_kl": null
+    },
+    {
+      "pass_number": 2,
+      "order_sha256": "29346a1b66b6b63a751181efef67a13554c5f49905f822bfd0552eda41958f34",
+      "positions": 367007,
+      "source_cells": 493593,
+      "updates": 591,
+      "state_mse": 0.3263416090651556,
+      "mass_mse": 0.032257324045231364,
+      "grouped_kl": null
+    },
+    {
+      "pass_number": 3,
+      "order_sha256": "7d05320f301073c6a5052c6a9c5112fd954a6c827fbfa5b00081dd3d4fc8f160",
+      "positions": 367007,
+      "source_cells": 493593,
+      "updates": 591,
+      "state_mse": 0.3150799145960653,
+      "mass_mse": 0.02760023015548682,
+      "grouped_kl": null
+    },
+    {
+      "pass_number": 4,
+      "order_sha256": "55f1eea675b13470e0bacacdda5fc629e606bcbf98b286e709f38da5deacbeea",
+      "positions": 367007,
+      "source_cells": 493593,
+      "updates": 591,
+      "state_mse": 0.30793851038357906,
+      "mass_mse": 0.024719487784807963,
+      "grouped_kl": null
+    }
+  ],
+  "seconds": 23.41408818680793,
+  "peak_allocated_bytes": 1012906496,
+  "weights": "f77ac56439c76242e3b32b6912018cd2bf4d07e30649144f5fa89416331f7042",
+  "parameters": 3222529
+}

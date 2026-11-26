@@ -1,0 +1,5 @@
+# Visual evidence in the reading edition
+
+Replace the opening plate with the first exact and first rejected literary translations already identified in Figure 64, alongside the first exact and first unreadable complete outputs in fixed case order from the final proportional QA pixel writer. Preserve the historical edition. Bind each labelled output to its checkpoint, source PNG, recorded emission and final PDF pixels. Independently run the released small writer from the source PNG. Check the earlier closed physical experiment against the retained neural tensor, binary array and frozen reading. Preserve full images and native aspect ratios.
+
+Add a reader's index identifying evidence types throughout the reading edition and distinguish external text readouts in the captions. Include the matched prediction-loss experiment only after its full development and free-generation evaluations, and keep its text outputs explicitly labelled. Rebuild both current PDFs, render and inspect affected pages, compare embedded pictures with the source arrays, and copy only the reading PDF to the local sync folder.
