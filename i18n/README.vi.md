@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Trên bốn cuốn sách mới, mô hình tìm đúng đoạn gốc trong 48 ảnh ở **91 trên 96 lượt tìm kiếm** từ ảnh bản dịch. Việc học thứ tự đọc nguyên văn giữ nguyên điểm số này. Khi mô hình tự viết toàn bộ bản dịch, bộ chấm tự động đánh giá **0/96** câu trả lời truyền đạt trọn nghĩa. Qwen3-8B lượng tử hóa đọc văn bản đạt 81/96. Hình dưới giữ nguyên đầu ra của mô hình. [Kết quả và ảnh gốc](../references/ordered_alignment_result.md) · [Chạy mô hình](../models/ordered_alignment/README.md)
+Mô hình học các cụm chữ từ 497.775 cặp ảnh câu Anh–Trung và dịch mỗi đoạn nguồn đúng một lần. Trên bốn cuốn sách mới, mô hình tái tạo **445 trong 1.464** dải chữ khác nhau của bản dịch tham chiếu, so với 280 của mô hình căn chỉnh theo thứ tự. Không câu nào trong 96 bản dịch truyền đạt trọn nghĩa. Mô hình nơ-ron đạt 1/96 và Qwen3-8B đọc văn bản đạt 90/96. Hình bên dưới giữ nguyên đầu ra của các mô hình. [Kết quả và ảnh gốc](../references/covered_phrases_result.md) · [Chạy mô hình](../models/covered_phrases/README.md)
 
-![Kết quả](../publication/ilm-nature/figures/Ordered_glyph_alignment.png)
+![Kết quả](../publication/ilm-nature/figures/Covered_glyph_phrases.png)
 
 Mô hình huấn luyện trên một RTX 4090 D chọn giữa hai bản dịch dạng ảnh cho từng đoạn sách. Sau khi hiệu chỉnh thiên hướng ưu tiên một số cách diễn đạt, số cặp đúng cả hai lựa chọn tăng từ **21/96 lên 77/96**. Khi tự viết, dự đoán các dải ký tự từ ảnh nguồn giúp số câu chứa vị từ cần thiết tăng từ 17/336 lên 43/336, nhưng chỉ 1/192 bản dịch sách truyền đạt trọn nghĩa. Hình dưới là câu trả lời đầu tiên được chấm đúng trong phép thử OPUS riêng. [Kết quả](../references/source_supported_writing_result.md) · [Chạy mô hình](../models/source_supported_writing/README.md)
 

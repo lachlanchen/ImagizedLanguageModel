@@ -12,6 +12,12 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The covered-phrase study is terminal. Read
+`references/covered_phrases_result.md` for the trained tables, original
+images, complete-meaning assessment, path audit and reference reachability.
+It raises literal content retention while missing all fresh book meanings.
+The current goal prioritizes an unrestricted source-conditioned draft editor.
+
 The ordered glyph-alignment fit, new-book free generation, source-only
 assessment, two search panels, repetition diagnostic and original-PNG replay
 are complete. Read `references/ordered_alignment_result.md` for the 91/96

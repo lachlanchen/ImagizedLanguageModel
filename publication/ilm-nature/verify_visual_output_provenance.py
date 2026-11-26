@@ -41,7 +41,7 @@ def main():
     assert sha(ARCHIVE)==report["archive"]==replay["archive"]==audit["archive"]
     assert audit["assessment"]==sha(PUB/"assessment.json")
     assert audit["proof"]==sha(PAPER.parents[1]/"formal/span_list/SourcePathRepair.lean")
-    deck = FIG/"Ordered_glyph_alignment.pptx"
+    deck = FIG/"Covered_glyph_phrases.pptx"
     paper = PAPER/"manuscript.pdf"
     assert sha(paper)==sha(PAPER/"visual_language_paper.pdf")
     assert sum(replay["same"].values())+len(replay["differences"])==960
@@ -222,18 +222,19 @@ def main():
         full_pub=PUB.parent/"full_image_roles_v1"
         lex_pub=PUB.parent/"optical_lexicon_v1"
         aligned_pub=PUB.parent/"ordered_alignment_v1"
-        raw_path=PAPER/"evidence/ordered_alignment.zip"
-        plate=read(aligned_pub/"plate.json")
-        assert sha(raw_path)==plate["archive"]==read(aligned_pub/"assessment.json")["archive"]
+        phrase_pub=PUB.parent/"covered_phrases_v1"
+        raw_path=PAPER/"evidence/covered_phrases.zip"
+        plate=read(phrase_pub/"plate.json")
+        assert sha(raw_path)==plate["archive"]==read(phrase_pub/"assessment.json")["archive"]
         expected=Counter()
-        with ZipFile(raw_path) as raw, fitz.open(FIG/"Ordered_glyph_alignment.pdf") as pdf:
+        with ZipFile(raw_path) as raw, fitz.open(FIG/"Covered_glyph_phrases.pdf") as pdf:
             responses=json.loads(raw.read("records.json"))
             assert len(responses)==568
             for item in plate["items"]:
                 if item["type"]!="strip":
                     continue
                 blob=raw.read(item["member"])
-                assert blob==(FIG/"ordered_alignment"/item["name"]).read_bytes()
+                assert blob==(FIG/"covered_phrases"/item["name"]).read_bytes()
                 assert sha256(blob).hexdigest()==item["sha256"]
                 i,kind=item["member"].removesuffix(".png").split("/")
                 if kind!="source":
@@ -242,7 +243,7 @@ def main():
             assert expected==images(pdf,pdf[0])==images(doc,doc[0])
         assert "Fig. 1" in " ".join(doc[0].get_text().split())
         media.update(expected)
-        figures.insert(0,dict(page=1,file="Ordered_glyph_alignment.pdf",sha256=sha(FIG/"Ordered_glyph_alignment.pdf")))
+        figures.insert(0,dict(page=1,file="Covered_glyph_phrases.pdf",sha256=sha(FIG/"Covered_glyph_phrases.pdf")))
         # A package may deduplicate identical bitmaps used in two places.
         packaged={bitmap(ppt.read(n)) for n in ppt.namelist() if n.startswith("ppt/media/")}
         assert packaged==set(media)
@@ -257,6 +258,7 @@ def main():
                original_image_instances=sum(media.values()),requests=192,answers=960,replayed=replay["same"],
                independent_trial=dict(requests=192,answers=768,archive=sha(fresh_archive),replayed=new_replay["same"],
                    cpu_differences=new_replay["differences"],assessment=sha(fresh/"assessment.json"),routing=sha(fresh/"routing.json")),
+               covered_phrases={k:sha(phrase_pub/(k+".json")) for k in ("corpus","generation","links-0","links-1","assessment","role-meaning","audit","name-probes","plate","editing")},
                ordered_alignment={k:sha(aligned_pub/(k+".json")) for k in ("corpus","generation","kernel-check","assessment","audit","repetition","retrieval","plate")},
                optical_lexicon={k:sha(lex_pub/(k+".json")) for k in ("corpus","generation","audit","assessment","calibration","retrieval","pixel-search")},
                full_image_roles={k:sha(full_pub/(k+".json")) for k in ("corpus","generation","audit","assessment","plate","influence","external-assessment")},

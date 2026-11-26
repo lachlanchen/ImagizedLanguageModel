@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-新たな書籍4冊の訳文画像を与えると、モデルは48枚の候補から **96問中91問**で正しい原文を見つけた。原文をたどる順序を学習しても、この検索成績は同じだった。訳文を自由に生成した場合、意味を完全に伝えたと自動評価されたのは **0/96**。テキスト入力の量子化 Qwen3-8B は 81/96 だった。図には実際の出力を示す。 [結果と出力画像](../references/ordered_alignment_result.md) · [モデルを実行](../models/ordered_alignment/README.md)
+英中の文画像497,775組からフレーズを学び、原文の各区間を一度ずつ訳すモデルを作った。新たな書籍4冊では、参照訳の異なる字形列1,464個のうち **445個**を再現した。順序を学ぶモデルは280個だった。意味を完全に伝えた回答は **0/96**、ニューラルモデルは1/96、テキストを読むQwen3-8Bは90/96だった。図は実際の出力画像である。 [実験と出力画像](../references/covered_phrases_result.md) · [モデルを実行](../models/covered_phrases/README.md)
 
-![実験結果](../publication/ilm-nature/figures/Ordered_glyph_alignment.png)
+![実験結果](../publication/ilm-nature/figures/Covered_glyph_phrases.png)
 
 RTX 4090 D 1枚で学習したモデルに、原文画像と二つの訳文画像を与えた。特定の訳文を好む傾向を補正すると、二つの原文について両方とも正しく選べた組数は **21/96から77/96** に増えた。自由生成では、原文から字形列を予測することで指定の述語を含む回答が17/336から43/336に増えたが、書籍の意味を完全に伝えたのは192件中1件だった。図は別のOPUSテストで最初に正答と判定された出力。 [実験結果](../references/source_supported_writing_result.md) · [モデルの実行](../models/source_supported_writing/README.md)
 

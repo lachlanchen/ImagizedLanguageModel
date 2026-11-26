@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-在四本未参与过评估的新书上，视觉模型从 48 张原文图像中寻找译文的出处，**96 次检索找对了 91 次**。学会按顺序读原文后，检索分数持平。让模型自行写出整段译文时，自动评审给出的完整达意分为 **0/96**，读取文字的量化 Qwen3-8B 得到 81/96。下图保留模型输出的原始像素。在《跳房子》的例子里，它译出了“冷”，却丢掉了说话人的名字。 [实验与原始图像](../references/ordered_alignment_result.md) · [运行书写模型](../models/ordered_alignment/README.md)
+视觉书写模型从 497,775 对中英文句子图像中学习短语，每段原文只译一次。在四本新书的测试中，它复现了参考译文 1,464 个不同字形片段中的 **445 个**，按顺序对齐的模型为 280 个。但完整达意的得分仍为 **0/96**，神经书写模型为 1/96，读文字的 Qwen3-8B 为 90/96。下图是两个独立模型实际生成的译文。 [实验与原始输出](../references/covered_phrases_result.md) · [运行短语书写模型](../models/covered_phrases/README.md)
 
-![实验结果](../publication/ilm-nature/figures/Ordered_glyph_alignment.png)
+![实验结果](../publication/ilm-nature/figures/Covered_glyph_phrases.png)
 
 在一张 RTX 4090 D 上训练的模型可以看原文图像，从两张候选译文图像中选择。校正它对某些译文措辞的偏好后，两段书摘都选对的组数从 **21/96 提高到 77/96**。让模型自行写译文更难。预测原文所支持的字形片段后，受控测试中写出指定谓语的答案从 17/336 增至 43/336，但在 192 个书摘翻译请求中，只有 1 个完整传达了原意。下图是另一组 OPUS 测试中首个获认可的模型输出。 [实验结果](../references/source_supported_writing_result.md) · [运行生成或选择模型](../models/source_supported_writing/README.md)
 

@@ -4,6 +4,7 @@ Published reading editions are listed newest first. Each snapshot preserves the 
 
 | Date | Revision | Reading edition | Cumulative manuscript |
 |---|---|---|---|
+| 2026-11-27 | [fd114a14](https://github.com/lachlanchen/ImagizedLanguageModel/commit/fd114a14) | [Ordered glyph alignment, 9 pages](2026-11-27-fd114a14/reading.pdf) | Same standalone edition |
 | 2026-11-27 | [159e217a](https://github.com/lachlanchen/ImagizedLanguageModel/commit/159e217a) | [Full pictured source and bilingual passage matching, 9 pages](2026-11-27-159e217a/reading.pdf) | Same standalone edition |
 | 2026-11-27 | [7eb1525e](https://github.com/lachlanchen/ImagizedLanguageModel/commit/7eb1525e) | [Pictured referents and generated Chinese answers, 9 pages](2026-11-27-7eb1525e/reading.pdf) | Same standalone edition |
 | 2026-11-27 | [50254019](https://github.com/lachlanchen/ImagizedLanguageModel/commit/50254019) | [Grammatical head localization, 9 pages](2026-11-27-50254019/reading.pdf) | Same standalone edition |

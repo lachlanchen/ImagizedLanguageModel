@@ -21,6 +21,7 @@ def main():
     cli.add_argument("--referents",action="store_true")
     cli.add_argument("--full-image",action="store_true")
     cli.add_argument("--alignment",action="store_true")
+    cli.add_argument("--phrases",action="store_true")
     args=cli.parse_args()
     actions=args.actions or args.support
     edition="actions" if actions else "drafts"
@@ -38,6 +39,8 @@ def main():
         edition,stem,corpus="full-image","Full_image_role_writing","full_image_roles_v1"
     if args.alignment:
         edition,stem,corpus="alignment","Ordered_glyph_alignment","ordered_alignment_v1"
+    if args.phrases:
+        edition,stem,corpus="phrases","Covered_glyph_phrases","covered_phrases_v1"
     with TemporaryDirectory(prefix="ilm-draft-figures-",dir=ROOT/"artifacts") as work:
         stage=Path(work)
         (stage/"node_modules").symlink_to(NODE/"node_modules")
