@@ -4,7 +4,7 @@ from pathlib import Path
 import torch
 from ilm.visual_lm.open_source_cells import OpenSourceCells
 from ilm.visual_lm.portable_writer import read_image,save_grid
-from scripts.train_visual_training_breadth import restore,base
+from scripts.train_open_news_writer import restore,base
 
 
 def main():
@@ -15,6 +15,7 @@ def main():
     parser.add_argument('--cells',type=int)
     parser.add_argument('--to',choices=['en','zh'],required=True)
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--arm',choices=('parent','hidden','ink'),default='parent')
     args=parser.parse_args()
     torch.set_num_threads(2)
     if args.image:
@@ -29,8 +30,8 @@ def main():
         if face.bad:
             parser.error('The local print face cannot draw every requested shape. Supply an image.')
         source=face.array()[ids]
-    reader=OpenSourceCells(restore('broad','cpu'),int(args.to=='zh'))
-    pixels,stop=reader.translate(source)
+    reader=OpenSourceCells(restore(args.arm,'cpu'),int(args.to=='zh'))
+    pixels,stop=reader.translate(source,hide_unfamiliar=args.arm=='hidden')
     save_grid(pixels.tobytes(),args.output)
     print(f'Wrote {len(pixels)} glyphs. Learned stop={stop}.')
 

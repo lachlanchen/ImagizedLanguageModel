@@ -19,6 +19,20 @@ class OpenSourceCells:
         self.known = {writer.palette[i].tobytes(): i for i in writer.inv[1-direction].tolist() if i >= 2}
         self.mean = writer.features[list(self.known.values())].mean(0)
 
+    def phrase_cells(self, image):
+        hints = []
+        start = None
+        for j, row in enumerate(image):
+            if row.tobytes() in self.known:
+                if start is None:
+                    start = j
+            elif start is not None:
+                hints.extend(self.writer.addresses(self.dictionary.translate(image[start:j])[0]))
+                start = None
+        if start is not None:
+            hints.extend(self.writer.addresses(self.dictionary.translate(image[start:])[0]))
+        return hints or [0]
+
     @torch.inference_mode()
     def translate(self, image, *, hide_unfamiliar=False):
         if image.dtype != np.uint8 or image.ndim != 2 or image.shape[1] != 128 or not 1 <= len(image) <= 96:
@@ -28,21 +42,11 @@ class OpenSourceCells:
         if all(i is not None for i in known):
             return writer.translate([image], self.direction)[0]
         extras, addresses = {}, []
-        hints = []
-        start = None
-        for j, (row, idx) in enumerate(zip(image, known, strict=True)):
-            if idx is not None:
-                if start is None:
-                    start = j
-                addresses.append(idx)
-                continue
-            if start is not None:
-                hints.extend(writer.addresses(self.dictionary.translate(image[start:j])[0]))
-                start = None
-            address = extras.setdefault(row.tobytes(), len(writer.features)+len(extras))
-            addresses.append(address)
-        if start is not None:
-            hints.extend(writer.addresses(self.dictionary.translate(image[start:])[0]))
+        for row, idx in zip(image, known, strict=True):
+            if idx is None:
+                idx = extras.setdefault(row.tobytes(), len(writer.features)+len(extras))
+            addresses.append(idx)
+        hints = self.phrase_cells(image)
         tiles = np.frombuffer(b''.join(extras),dtype=np.uint8).reshape(-1,128)
         optical = torch.as_tensor(observations({'tiles':tiles},'ink'),device=writer.device)
         if hide_unfamiliar:

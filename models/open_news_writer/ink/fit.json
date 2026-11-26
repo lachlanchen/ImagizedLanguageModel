@@ -1,0 +1,77 @@
+{
+  "arm": "ink",
+  "weights": "269768977e606207469b19f7e3954fd49ad9c1b7c631f9d058c85fd277c06b17",
+  "bindings": {
+    "scripts/train_open_news_writer.py": "346292707a20b670a312cadc1352615934b7be30297ea152b7febd3b6a464cdb",
+    "references/open_news_external_training_protocol.md": "da096cffe01aadc35bb6029836a887cfbff052e9a2451e409235cf24be51d9f3",
+    "references/evidence/open_news_external_v1/selection.json": "ded86c6487bb084e24792e156906e516fe197c9942f3f99dd4e4a2dd2ca4e7d0",
+    "references/evidence/open_news_training_v1/selection.json": "27f4cc09ab39722304bd59da4ba8dd5d0f8af0fcf2247a774d194fd94053078e",
+    "models/visual_training_breadth/broad/fit.json": "9af1e538309e1efd465151ed9285bd6b793c64b08e0530c9eb657e534463ebd2",
+    "ilm/visual_lm/open_source_cells.py": "4cba9637dcbc3642b943021756f226005c9e72dedcdae63fe5c65e5361ee5f7d",
+    "ilm/visual_lm/glyph_draft_editor.py": "f3d2858301b7e8023239b2bb546771b7c1ba5df629079d7701d0de19abcfb0d7",
+    "scripts/reserve_open_news_external.py": "d26c1e9504070f2fcb3cf23eb89f53a1a039ba8d6f2cb4d384d47c5e62c7b2d7",
+    "scripts/prepare_open_news_training.py": "10fd5cb78d2f2e344e598956b91edb9d925dfc88c1773a37072db55619d92d6c"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "steps": 86,
+      "positions": 146496,
+      "nll": 0.9740399393570793,
+      "schedule": "b45abd9d9752512d3df6303f8b6b12de172ad66106ee80a1d2a7e717fc05ae94"
+    },
+    {
+      "epoch": 2,
+      "steps": 86,
+      "positions": 146675,
+      "nll": 0.9271545736814492,
+      "schedule": "f8b5689e3990bbd3ea9cf0624b3c18f85f66d888bdefe719a6e597ae496a4be6"
+    },
+    {
+      "epoch": 3,
+      "steps": 86,
+      "positions": 146170,
+      "nll": 0.8802019098254066,
+      "schedule": "7e84440376602adc811d0b415c80a356249efb9108eaaf2daaf8a8d4a6c638c7"
+    },
+    {
+      "epoch": 4,
+      "steps": 86,
+      "positions": 146728,
+      "nll": 0.8554915895145375,
+      "schedule": "fbe09e475468290c55a14170afd1d430df4d8e8a9beb426ce52329f91953f06f"
+    },
+    {
+      "epoch": 5,
+      "steps": 86,
+      "positions": 146327,
+      "nll": 0.8178970891781016,
+      "schedule": "4cd940458fafafa6d59ca8aed95897edc3736b839b036523bfad9992f3890e45"
+    },
+    {
+      "epoch": 6,
+      "steps": 86,
+      "positions": 145773,
+      "nll": 0.8013534994430821,
+      "schedule": "2f5422a4f612e99ea24516921327d8be97fb1820b9543d728b4a3483f8ac606c"
+    },
+    {
+      "epoch": 7,
+      "steps": 86,
+      "positions": 147758,
+      "nll": 0.7955406912982292,
+      "schedule": "d864266bfab886786a610e6d2c008ba0e8120455c8e2714211e1436ec2f63bf8"
+    },
+    {
+      "epoch": 8,
+      "steps": 86,
+      "positions": 147464,
+      "nll": 0.7881381185354985,
+      "schedule": "93241090b2a6d5e00e5580772a5e0e246a6ac1d180b30fc08f65fe3067286e48"
+    }
+  ],
+  "parameters": 1817441,
+  "seconds": 11.13649170473218,
+  "peak_bytes": 453419520,
+  "extra_shapes": 147
+}
