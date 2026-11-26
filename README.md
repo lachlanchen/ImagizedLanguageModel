@@ -2,6 +2,10 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
+Given the earlier page, the frozen visual writer recovered **pillow** on a book passage where its shorter input produced **e**. Across 3,949 eligible passages it wrote the exact final word 109 times with the full page and 56 with the last 96 glyphs. A frequency-based word selector scored 662. The figure includes the first gain and the first loss. [Paper](publication/ilm-nature/manuscript.pdf) · [Raw results and controls](references/book_page_word_memory_result.md)
+
+![Original page-memory answers on a gain and a loss](publication/ilm-nature/figures/Page_word_memory.png)
+
 A 1.82-million-parameter visual writer read the same words from 96 books in intact or shuffled order on one RTX 4090 D. On 16 unseen books, intact order reduced next-glyph loss from 2.166 to 1.973 bits. Both fits earned one complete-meaning credit on 128 new Chinese news translations. The figure pairs these measurements with the first unedited book continuation. [Paper](publication/ilm-nature/manuscript.pdf) · [Trained model and image-input CLI](models/book_order_prior/) · [Evidence](references/book_order_prior_result.md)
 
 ![Held-book prediction and original output pixels](publication/ilm-nature/figures/Book_order_learning.png)

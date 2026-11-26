@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+En 3.949 pasajes, el modelo visual acertó la última palabra en 109 casos al leer todo el pasaje y en 56 con los últimos 96 glifos. Una regla basada en la frecuencia de las palabras acertó en 662 casos. [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 Un modelo visual de 1,82 millones de parámetros se entrenó con 96 libros en una sola RTX 4090 D. Conservar el orden de las palabras redujo de 2,166 a 1,973 bits la pérdida de predicción del siguiente glifo en 16 libros inéditos para el modelo. Al traducir 128 frases nuevas de prensa china al inglés, cada modelo obtuvo crédito por transmitir el sentido completo de una sola frase. La figura muestra la continuación original generada. [Artículo](../publication/ilm-nature/manuscript.pdf) · [Modelo y uso](../models/book_order_prior/)
 
 ![Predicción de glifos y salida original](../publication/ilm-nature/figures/Book_order_learning.png)

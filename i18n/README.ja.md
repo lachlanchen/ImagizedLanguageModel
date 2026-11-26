@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+3,949 件の英文で、視覚モデルが最後の単語を正確に再現したのは全文を読んだ場合に 109 件、末尾の 96 字形だけでは 56 件だった。語の出現頻度を用いた検索では 662 件だった。 [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 182 万パラメータの視覚モデルを RTX 4090 D 1 枚で 96 冊の本により学習させた。語順を保持すると、未知の 16 冊で次の字形を予測する損失は、語順を乱した場合の 2.166 ビットから 1.973 ビットに下がった。新しい中国語ニュース 128 文の英訳では、意味全体を伝えたと評価されたのは両モデルとも 1 文だった。図にはモデルが生成した続きの画像をそのまま示す。 [論文](../publication/ilm-nature/manuscript.pdf) · [モデルと使い方](../models/book_order_prior/)
 
 ![字形予測と生成画像](../publication/ilm-nature/figures/Book_order_learning.png)

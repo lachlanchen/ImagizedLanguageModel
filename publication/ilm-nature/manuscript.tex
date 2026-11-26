@@ -10,9 +10,9 @@
 \newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
 \begin{document}
 \noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
-\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont What a glyph predictor learns from the order of words\par}
+\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Reading word order and recovering words from earlier pages\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\medskip
-\noindent\textbf{A model that reads and writes images can reproduce a printed sentence while losing its meaning. We asked which ability improves when a visual decoder reads English books in their natural order. Two copies of a bilingual writer saw the same words from 96 books. We shuffled the words within each training window for one copy. On 16 unseen books the intact-order model required 1.973 bits to predict the next glyph, compared with 2.166 after shuffling. Across 66,987 English grammatical contrasts the respective models selected the acceptable sentence in 51.0\% and 52.2\% of pairs. After identical bilingual training, each earned one complete-meaning credit on 128 new Chinese news requests. Local predictability of print is learnable on one graphics card. In this experiment its improvement failed to carry over to grammatical choice or reliable translation.}\par
+\noindent\textbf{A model that reads and writes images can reproduce a printed sentence while losing its meaning. We asked which ability improves when a visual decoder reads English books in their natural order. Two copies of a bilingual writer saw the same words from 96 books. We shuffled the words within each training window for one copy. On 16 unseen books the intact-order model required 1.973 bits to predict the next glyph, compared with 2.166 after shuffling. Across 66,987 English grammatical contrasts the respective models selected the acceptable sentence in 51.0\% and 52.2\% of pairs. After identical bilingual training, each earned one complete-meaning credit on 128 new Chinese news requests. On a separate discourse benchmark the frozen decoder recovered 109 of 3,949 final words when allowed to select previously seen page images, against 56 from a shorter input. A corpus-frequency rule recovered 662. On one graphics card, maintaining access to earlier print and selecting a word that fits its meaning pose distinct problems.}\par
 
 \begin{multicols}{2}
 \section*{Holding the ink constant}
@@ -28,6 +28,10 @@ The document-bootstrap interval for the saving from intact order was 0.185--0.20
 \columnbreak
 With bilingual adaptation, the intact and shuffled book losses rose to 2.233 and 2.288 bits. The remaining advantage was 0.049--0.062 bits per glyph across books. Both book-trained priors reached the 32-cell free-generation limit on all 64 sampled continuations. Reading the prefix pixels directly on CPU reproduced every stored output and stop for both conditions before and after adaptation.
 \end{multicols}
+
+\newpage
+\pageheading{Can the same visual decoder use the whole passage?}
+\input{page_word_memory_results}
 
 \newpage
 \pageheading{Does a better book predictor translate a change in meaning?}

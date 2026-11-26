@@ -12,6 +12,15 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The frozen full-page word-memory diagnostic is complete. Read
+`references/book_page_word_memory_result.md`. All 19,745 outputs have an independent
+pixel recount. Full-page memory scored 109/3,949 against 56 with clipped memory,
+zero with exchanged pages, and 662 for a corpus-salience baseline. The complete-word
+boundary recount gives 57 clipped successes. Keep the original outcomes. The
+five-page current manuscript shows the first full-page gain and loss. A new learned
+selector needs to exceed the stronger salience comparator on fresh data. See the
+private handoff before starting another owner.
+
 The matched book-order pretraining, adaptation and free-writing trial is complete.
 Read `references/book_order_prior_result.md`. The intact fit saved 0.193 held
 bits per glyph, earned 1/128 news meanings, lost exact role retention and

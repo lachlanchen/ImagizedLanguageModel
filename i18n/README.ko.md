@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+영어 책의 구절 3,949개에서 시각 모델은 전체 구절을 보면 마지막 단어를 109번, 끝의 96개 글자꼴만 보면 56번 맞혔다. 단어 빈도를 이용한 검색은 662번 맞혔다. [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 182만 매개변수의 시각 모델을 RTX 4090 D 한 장에서 책 96권으로 학습했다. 단어 순서를 보존하자 처음 보는 책 16권에서 다음 글자꼴 예측 손실이 2.166비트에서 1.973비트로 낮아졌다. 새로운 중국어 뉴스 128문장을 영어로 번역했을 때 원문의 뜻을 온전히 전달했다고 평가된 문장은 두 모델 모두 한 문장이었다. 그림은 모델이 이어 쓴 원본 이미지다. [논문](../publication/ilm-nature/manuscript.pdf) · [모델과 실행 방법](../models/book_order_prior/)
 
 ![글자꼴 예측과 실제 출력](../publication/ilm-nature/figures/Book_order_learning.png)

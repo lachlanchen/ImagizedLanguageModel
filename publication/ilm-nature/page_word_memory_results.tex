@@ -1,0 +1,15 @@
+\begin{multicols}{2}
+\section*{Finding a word on the earlier page}
+Many final words in the discourse test had appeared before the writer's input began. We therefore kept the trained visual decoder fixed and gave it an additional route to the earlier page. It extracts distinct runs of alphabetic cells from the pictured passage. It also proposes the first complete word from its own free continuation. None of these proposals uses the reference. When a source span wins, the system emits its bitmap. It returns one word by construction.
+\columnbreak
+\section*{A separate test}
+We reserved the original LAMBADA validation partition for this comparison.\cite{lambada} Of 4,869 passages, nine matched the earlier test after normalization and 911 contained an unsupported shape in the final 32-cell query. The remaining 3,949 retained the original validation spelling and tokenization after typography normalization. The writer could copy the exact case-sensitive target on 3,239 complete pages and on 562 clipped to 96 cells.
+\end{multicols}
+\displayfigure{Page_word_memory.pdf}{One word recovered and one lost on the longer page}{The two examples are the first new success and the first lost success in fixed passage order. The displayed source crop is the final 32 pictured cells shared by both predictions. With the full passage available the writer recovers \emph{pillow}, which appeared earlier. On the second request additional candidates displace the correct \emph{egg} with \emph{head}. The one-cell local answer in the first panel is the actual emitted fragment.}
+\begin{multicols}{2}
+\section*{What page access changes}
+Full-page memory recovered 109/3,949 words (2.76\%), compared with 56 (1.42\%) for the 96-cell memory and zero after exchanging the earlier text with another passage of similar length. Unrestricted greedy generation and copying the most recent word also yielded zero. The full page gained 92 cases and lost 39 relative to the shorter input. The paired interval for its net gain was 0.79--1.92 percentage points. None of its 109 successes required a word absent from the page. Removing incomplete words at the crop boundaries gave 57 clipped successes, zero with exchanged earlier text and the same 109 on full pages.
+\columnbreak
+\section*{A stronger retrieval baseline}
+We ranked word $w$ by $[\log p(w\,\square\mid x)-\log p(w\,\square\mid\square)]/(|w|+1)$, where $x$ is the same local ink in every condition and $\square$ denotes a space. A simpler rule ranks a visible word by its passage frequency weighted by inverse document frequency in the 96 training books. It recovered 662/3,949 final words (16.76\%) on full pages and 152 on clipped pages. This comparison localizes a ranking failure. The relevant word was often available and a corpus statistic selected it much more reliably. \repo{references/book_page_word_memory_result.md}{Outputs, controls and independent recount}.
+\end{multicols}

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Trên 3.949 đoạn sách tiếng Anh, mô hình thị giác đoán đúng từ cuối 109 lần khi thấy cả đoạn và 56 lần khi chỉ thấy 96 ký tự cuối. Quy tắc dựa trên tần suất từ đoán đúng 662 lần. [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 Mô hình thị giác 1,82 triệu tham số học từ 96 cuốn sách trên một GPU RTX 4090 D. Giữ nguyên thứ tự từ giúp giảm độ mất mát khi dự đoán hình dạng ký tự kế tiếp trên 16 cuốn sách chưa từng thấy, từ 2,166 xuống 1,973 bit. Khi dịch 128 câu tin tức mới từ tiếng Trung sang tiếng Anh, mỗi mô hình chỉ có một bản dịch được chấm là truyền đạt trọn nghĩa. Hình bên dưới dùng ảnh do mô hình thực sự viết tiếp. [Bài báo](../publication/ilm-nature/manuscript.pdf) · [Mô hình và cách chạy](../models/book_order_prior/)
 
 ![Dự đoán ký tự và ảnh đầu ra](../publication/ilm-nature/figures/Book_order_learning.png)

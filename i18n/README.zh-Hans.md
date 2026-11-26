@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+在 3,949 段可评测的英文书摘中，同一视觉模型读取整个段落时猜对了 109 个末词，只看到最后 96 个字形时猜对了 56 个。一个基于词频的检索规则猜对了 662 个。 [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 一个 182 万参数的视觉模型在单张 RTX 4090 D 上学习了 96 本书。与打乱词序相比，保留词序使模型在 16 本未见书籍上的下一个字形预测损失从 2.166 降至 1.973 比特。但在 128 个新的中译英新闻句子中，两种模型都只有一条译文获得完整语义评分。图中保留了模型自行续写的原始像素。 [论文](../publication/ilm-nature/manuscript.pdf) · [模型与用法](../models/book_order_prior/)
 
 ![字形预测与原始续写](../publication/ilm-nature/figures/Book_order_learning.png)

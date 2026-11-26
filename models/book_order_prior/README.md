@@ -16,3 +16,11 @@ PYTHONPATH=. python -m ilm.visual_lm.book_ink_inference --translate-to en --text
 ```
 
 Use `--arm scrambled` for the matched shuffled-word fit. For book completion, `--stage adapted` measures what remains after bilingual training. Each checkpoint includes its data bindings, training schedule, elapsed time, peak allocation and SHA-256 digest. The exact training and evaluation entry points are in the [experiment protocol](../../references/book_order_prior_protocol.md). The raw books and intermediate training arrays stay under `data/raw/pg19-optical/` and `artifacts/book_order_prior_v1/` in the training checkout.
+
+## A word from the earlier page
+
+The same frozen decoder can rank visible word images from an entire English passage. The last 32 cells form its local query. The command emits one word and accepts a trailing space before the missing word. This experimental route recovered 109/3,949 exact words on a separate validation set. A simple corpus-frequency rule scored 662. [Full comparison](../../references/book_page_word_memory_result.md)
+
+```bash
+python -m ilm.visual_lm.page_word_memory --image passage.png --cells 306 --output final-word.png
+```

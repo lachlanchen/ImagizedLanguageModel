@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Sur 3 949 passages de livres, le modèle visuel a retrouvé le dernier mot 109 fois avec le passage entier et 56 fois avec les 96 derniers glyphes. Une règle fondée sur la fréquence des mots a donné 662 réponses exactes. [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 Un modèle visuel de 1,82 million de paramètres a été entraîné sur 96 livres avec une seule RTX 4090 D. Sur 16 livres inédits, conserver l’ordre des mots a ramené la perte de prédiction du glyphe suivant de 2,166 à 1,973 bit. Sur 128 nouvelles phrases de presse traduites du chinois vers l’anglais, chaque modèle a obtenu un seul crédit pour le sens complet. La figure montre la suite effectivement écrite par le modèle. [Article](../publication/ilm-nature/manuscript.pdf) · [Modèle et utilisation](../models/book_order_prior/)
 
 ![Prédiction et sortie originale](../publication/ilm-nature/figures/Book_order_learning.png)

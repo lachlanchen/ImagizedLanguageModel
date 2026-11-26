@@ -47,13 +47,19 @@ def main():
     assert news['totals']['news']=={'baseline':1,'intact':1,'scrambled':1,'reference':107,'foil':0} and not news['passed']
     raw_origins=read(EVIDENCE/'pictured_path_translation_v1/origins.json')
     plates=[(x['file'],x['items'],x['file']+'.pptx') for x in charts]
+    memory=EVIDENCE/'book_page_memory_v1'
+    details=read(memory/'figure.json'); outcome=read(memory/'result.json')
+    assert hash_file(ARCHIVES/'book_page_words.zip')==details['archive']==outcome['archive']
+    assert hash_file(ARCHIVES/'book_page_memory_examples.zip')==details['examples']
+    assert read(memory/'audit.json')['output_recounts']==5*outcome['eligible']
+    plates.insert(1,(details['file'],details['items'],details['file']+'.pptx'))
     plates.append(('Pictured_path_origins',[r for r in raw_origins['items'] if r['type']=='strip'],'Pictured_source_paths.pptx'))
     pdf=PAPER/'manuscript.pdf'
     assert hash_file(pdf)==hash_file(PAPER/'visual_language_paper.pdf')
     index=[]
     with fitz.open(pdf) as paper:
-        assert len(paper)==4, len(paper)
-        for page,(filename,items,deck) in zip((0,1,3),plates,strict=True):
+        assert len(paper)==5, len(paper)
+        for page,(filename,items,deck) in zip((0,1,2,4),plates,strict=True):
             expected=Counter()
             for row in items:
                 with ZipFile(ARCHIVES/row['archive']) as original:
@@ -79,11 +85,11 @@ def main():
                     assert all(abs(r[j+1]-series[j][i])<1e-12 for i,r in enumerate(rows) for j in range(2))
             index.append(dict(page=page+1,file=filename+'.pdf',pdf=hash_file(FIG/(filename+'.pdf')),editable=deck,
                               pptx=hash_file(FIG/deck),original_png_instances=sum(expected.values())))
-        assert '66,987' in paper[2].get_text() and '256 pairs' in ' '.join(paper[2].get_text().split())
-    result=dict(paper=hash_file(pdf),pages=4,figures=index,scores={n:hash_file(folder/(n+'.json')) for n in
+        assert '66,987' in paper[3].get_text() and '256 pairs' in ' '.join(paper[3].get_text().split())
+    result=dict(paper=hash_file(pdf),pages=5,figures=index,page_memory=outcome['archive'],scores={n:hash_file(folder/(n+'.json')) for n in
         ('data','prose','generation','meaning','source_interaction','counts','grammar','distant_context','context_clues','discourse','optical_replay','figures')})
     (ARCHIVES/'visual_output_figure_index.json').write_text(json.dumps(result,indent=2)+'\n')
-    print('Verified three figure panels against their output archives and the editable book-prediction chart.')
+    print('Verified four figure panels against their output archives and the editable book-prediction chart.')
 
 
 if __name__=='__main__':

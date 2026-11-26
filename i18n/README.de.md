@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+In 3.949 Buchpassagen schrieb das visuelle Modell das richtige Schlusswort 109-mal bei vollständiger Passage und 56-mal mit den letzten 96 Glyphen. Eine Regel auf Basis der Worthäufigkeit traf 662-mal. [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 Ein visuelles Modell mit 1,82 Millionen Parametern wurde auf einer RTX 4090 D mit 96 Büchern trainiert. Bei 16 ungesehenen Büchern sank der Vorhersageverlust für die nächste Glyphe von 2,166 auf 1,973 Bit, wenn die Wortreihenfolge erhalten blieb. Bei 128 neuen chinesischen Nachrichtensätzen erhielt jedes Modell für eine einzige englische Übersetzung die volle Bedeutungswertung. Die Abbildung zeigt die tatsächlich erzeugte Fortsetzung. [Artikel](../publication/ilm-nature/manuscript.pdf) · [Modell und Anwendung](../models/book_order_prior/)
 
 ![Vorhersage und ursprüngliche Ausgabe](../publication/ilm-nature/figures/Book_order_learning.png)

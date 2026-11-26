@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+На 3 949 книжных отрывках зрительная модель правильно восстановила последнее слово 109 раз при доступе ко всему отрывку и 56 раз по последним 96 глифам. Правило на основе частоты слов дало 662 точных ответа. [PDF](../publication/ilm-nature/manuscript.pdf)
+
+![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
+
 Зрительную модель с 1,82 млн параметров обучили на 96 книгах на одной RTX 4090 D. Сохранение порядка слов снизило потери при предсказании следующего глифа с 2,166 до 1,973 бита на 16 новых книгах. Из 128 новых китайских новостных предложений каждая модель получила зачёт за полную передачу смысла по-английски лишь в одном случае. На рисунке показано исходное изображение продолжения, созданного моделью. [Статья](../publication/ilm-nature/manuscript.pdf) · [Модель и запуск](../models/book_order_prior/)
 
 ![Предсказание глифа и исходное продолжение](../publication/ilm-nature/figures/Book_order_learning.png)
