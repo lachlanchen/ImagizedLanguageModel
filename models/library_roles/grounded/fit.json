@@ -1,0 +1,82 @@
+{
+  "arm": "grounded",
+  "weights": "e7baf7d5af8c5653d2ff6b4234c5b6dae159ff9e62a9110bb14d0570750e2213",
+  "history": [
+    {
+      "epoch": 1,
+      "positions": 2188369,
+      "eligible": 773703,
+      "role_supervised": 773703,
+      "updates": 692,
+      "stops": 66412,
+      "nll": 1.5777749782785397,
+      "role_nll": 1.812911446454993,
+      "seconds": 9.138451511971653,
+      "peak_bytes": 857331200,
+      "development": {
+        "moon-and-sixpence": 0.34928467753118153,
+        "don-quixote": 0.30815118573767486
+      }
+    },
+    {
+      "epoch": 2,
+      "positions": 2188369,
+      "eligible": 773703,
+      "role_supervised": 773703,
+      "updates": 692,
+      "stops": 66412,
+      "nll": 1.5319025085318607,
+      "role_nll": 1.7530525959283647,
+      "seconds": 10.486580927856266,
+      "peak_bytes": 857331200,
+      "development": {
+        "moon-and-sixpence": 0.3507994891771616,
+        "don-quixote": 0.30661230431492803
+      }
+    },
+    {
+      "epoch": 3,
+      "positions": 2188369,
+      "eligible": 773703,
+      "role_supervised": 773703,
+      "updates": 692,
+      "stops": 66412,
+      "nll": 1.4924525040723375,
+      "role_nll": 1.733529551523855,
+      "seconds": 10.156274946406484,
+      "peak_bytes": 857331200,
+      "development": {
+        "moon-and-sixpence": 0.34287008657049817,
+        "don-quixote": 0.3149728795270749
+      }
+    },
+    {
+      "epoch": 4,
+      "positions": 2188369,
+      "eligible": 773703,
+      "role_supervised": 773703,
+      "updates": 692,
+      "stops": 66412,
+      "nll": 1.4596517046808837,
+      "role_nll": 1.7240740665397023,
+      "seconds": 9.937201316468418,
+      "peak_bytes": 857331200,
+      "development": {
+        "moon-and-sixpence": 0.34469390084642565,
+        "don-quixote": 0.3099123634821868
+      }
+    }
+  ],
+  "binding": {
+    "scripts/train_role_grounding.py": "e9fb9108a4c5366acda6905b7905867aefa74b0b69ca554eaf49bc5e7a5c0ac5",
+    "references/evidence/visual_library_v1.json": "84f4d0ce955ba164c9ba1f88c6776c47a5d0b879c46dbc63f76e8a8067720595",
+    "references/evidence/library_roles_v1/alignment.json": "25469e5a5a99b6191f92a1f8b76ed45e6b5ecabf02786ff64bed92af70522b02",
+    "references/evidence/library_roles_v1/unseen-books.json": "c8bf036622f15168a8dbd1ef9535d5832dd15555dab6484ec9ed8d57e9b14e38",
+    "references/library_role_grounding_protocol.md": "bcbf7fe1ffdc95805aff5f67555bcd210469e46bd5fa415cc2a0d59f5b5c0cad",
+    "models/library_diversity/broad/weights.safetensors": "eaa4523166ca3b5718869786795b8ecacc41a3dfe877dcfe9ee4ebab0d85ded4",
+    "ilm/visual_lm/role_attention.py": "b08918f6a9cbac789b2ad45ae1adcf1c2320d4baf159a923fe964f8ddb41baa8",
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "ordered_training_ink": "c8c9ad2d0a2d199aa1e9266deae8aaae78f743363a9b65a3b747d59e1d13865e",
+    "shuffled_labels": "b276ebb6fe6352b86b8711d64a21169fc32a8284b0a115a1a379c701bacc0769"
+  }
+}

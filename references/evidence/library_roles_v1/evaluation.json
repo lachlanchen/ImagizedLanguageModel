@@ -1,0 +1,7376 @@
+{
+  "binding": {
+    "scripts/evaluate_role_grounding.py": "d749ad6efb94e87c4ce3b4aca46fdf66b08e4df445b36da109ab6ecb713aa3b6",
+    "references/evidence/library_roles_v1/training.json": "6d1955266b6c62681dc9f1a3ca5e651b91f13a29ce2fda125ed960f400ac1804",
+    "references/evidence/library_roles_v1/unseen-books.json": "c8bf036622f15168a8dbd1ef9535d5832dd15555dab6484ec9ed8d57e9b14e38",
+    "scripts/evaluate_proposition_translation.py": "22a0cec65f2c65495967960cadbe3f52137197597c82b1bc42e6427812a8433b",
+    "scripts/evaluate_visual_library.py": "497c14c3b3c1f03d0d59d8df3e06f613ad0bb298dbbb3519ad60e9c9960ccbd6",
+    "scripts/write_ordered_translation.py": "190828d39cd02120687f437a3e7550f6a7dba65d532c043cba9255e1ca6d0d58"
+  },
+  "files": {
+    "generated.json": "9cbaf7199c7bedd42d249722e9fa40dd032724f7c7b00810e4653827c65ecebd",
+    "reference.json": "4c2538703dbb0a1a3bcb60fdb184de9c28051480427fa4da211914579a545dd0",
+    "source.json": "45c8338e97929bd94e6ea6a17b60c6600d24116944926c883dfe8affdf8ae76f"
+  },
+  "optical": {
+    "start": {
+      "n": 384,
+      "exact": 1,
+      "stops": 384,
+      "similarity": 0.2814298963649691,
+      "families": 108
+    },
+    "likelihood": {
+      "n": 384,
+      "exact": 1,
+      "stops": 384,
+      "similarity": 0.281670410596678,
+      "families": 111
+    },
+    "shuffled": {
+      "n": 384,
+      "exact": 1,
+      "stops": 384,
+      "similarity": 0.27846016603229995,
+      "families": 110
+    },
+    "grounded": {
+      "n": 384,
+      "exact": 1,
+      "stops": 384,
+      "similarity": 0.277432373550758,
+      "families": 110
+    }
+  },
+  "development": {
+    "start": {
+      "total": {
+        "positions": 8249,
+        "observed": 0.2565285055357215,
+        "expected": 0.20652415924151785,
+        "excess": 0.050004346294203646
+      },
+      "en": {
+        "positions": 5960,
+        "observed": 0.2323528480441695,
+        "expected": 0.18895438326563335,
+        "excess": 0.04339846477853615
+      },
+      "en/subject": {
+        "positions": 1363,
+        "observed": 0.12681814950131612,
+        "expected": 0.10031731703447797,
+        "excess": 0.026500832466838146
+      },
+      "moon-and-sixpence": {
+        "positions": 3948,
+        "observed": 0.2528094862262643,
+        "expected": 0.19778693171528006,
+        "excess": 0.05502255451098423
+      },
+      "en/predicate": {
+        "positions": 1841,
+        "observed": 0.08526936579802642,
+        "expected": 0.07095218744859431,
+        "excess": 0.014317178349432106
+      },
+      "en/object": {
+        "positions": 2756,
+        "observed": 0.38279714591392955,
+        "expected": 0.31161561830635676,
+        "excess": 0.07118152760757276
+      },
+      "don-quixote": {
+        "positions": 4301,
+        "observed": 0.25994229029129856,
+        "expected": 0.214544288112382,
+        "excess": 0.04539800217891657
+      },
+      "zh": {
+        "positions": 2289,
+        "observed": 0.31947604535645097,
+        "expected": 0.2522715881695526,
+        "excess": 0.0672044571868984
+      },
+      "zh/subject": {
+        "positions": 437,
+        "observed": 0.30485851456623236,
+        "expected": 0.18335099762424964,
+        "excess": 0.12150751694198271
+      },
+      "zh/predicate": {
+        "positions": 337,
+        "observed": 0.2308408934336283,
+        "expected": 0.20509160153888364,
+        "excess": 0.02574929189474463
+      },
+      "zh/object": {
+        "positions": 1515,
+        "observed": 0.3434086573388383,
+        "expected": 0.28264647500970624,
+        "excess": 0.06076218232913204
+      }
+    },
+    "likelihood": {
+      "total": {
+        "positions": 8249,
+        "observed": 0.2562200614092812,
+        "expected": 0.2064735094508405,
+        "excess": 0.0497465519584407
+      },
+      "en": {
+        "positions": 5960,
+        "observed": 0.23140576930643267,
+        "expected": 0.1883965715845647,
+        "excess": 0.04300919772186799
+      },
+      "en/subject": {
+        "positions": 1363,
+        "observed": 0.12418194042980246,
+        "expected": 0.09928595109262606,
+        "excess": 0.0248959893371764
+      },
+      "moon-and-sixpence": {
+        "positions": 3948,
+        "observed": 0.253532664971622,
+        "expected": 0.1982920634292072,
+        "excess": 0.05524060154241482
+      },
+      "en/predicate": {
+        "positions": 1841,
+        "observed": 0.08464673147892984,
+        "expected": 0.07058768308560108,
+        "excess": 0.01405904839332877
+      },
+      "en/object": {
+        "positions": 2756,
+        "observed": 0.3824687110333121,
+        "expected": 0.31116287762850675,
+        "excess": 0.07130583340480534
+      },
+      "don-quixote": {
+        "positions": 4301,
+        "observed": 0.25868689264291955,
+        "expected": 0.21398347199290244,
+        "excess": 0.04470342065001711
+      },
+      "zh": {
+        "positions": 2289,
+        "observed": 0.32083045063294974,
+        "expected": 0.25354146475141015,
+        "excess": 0.06728898588153957
+      },
+      "zh/subject": {
+        "positions": 437,
+        "observed": 0.3067941350223831,
+        "expected": 0.18433230523407904,
+        "excess": 0.12246182978830408
+      },
+      "zh/predicate": {
+        "positions": 337,
+        "observed": 0.23226164359439064,
+        "expected": 0.20576973197268714,
+        "excess": 0.026491911621703505
+      },
+      "zh/object": {
+        "positions": 1515,
+        "observed": 0.3445806538631887,
+        "expected": 0.28413121831939914,
+        "excess": 0.06044943554378952
+      }
+    },
+    "shuffled": {
+      "total": {
+        "positions": 8249,
+        "observed": 0.2926557295726669,
+        "expected": 0.2394068484019975,
+        "excess": 0.05324888117066937
+      },
+      "en": {
+        "positions": 5960,
+        "observed": 0.27926042283679786,
+        "expected": 0.23079590082587362,
+        "excess": 0.04846452201092426
+      },
+      "en/subject": {
+        "positions": 1363,
+        "observed": 0.14082629743802283,
+        "expected": 0.11887951728478566,
+        "excess": 0.021946780153237165
+      },
+      "moon-and-sixpence": {
+        "positions": 3948,
+        "observed": 0.29649332629675007,
+        "expected": 0.23666438570514078,
+        "excess": 0.05982894059160928
+      },
+      "en/predicate": {
+        "positions": 1841,
+        "observed": 0.10759629945945812,
+        "expected": 0.09011532625488002,
+        "excess": 0.0174809732045781
+      },
+      "en/object": {
+        "positions": 2756,
+        "observed": 0.4623951703172815,
+        "expected": 0.38011918404492373,
+        "excess": 0.08227598627235778
+      },
+      "don-quixote": {
+        "positions": 4301,
+        "observed": 0.28913309951763766,
+        "expected": 0.24192422639018402,
+        "excess": 0.04720887312745367
+      },
+      "zh": {
+        "positions": 2289,
+        "observed": 0.3275338545817447,
+        "expected": 0.26182766428391024,
+        "excess": 0.06570619029783446
+      },
+      "zh/subject": {
+        "positions": 437,
+        "observed": 0.30943968839910374,
+        "expected": 0.18780746029847614,
+        "excess": 0.12163222810062761
+      },
+      "zh/predicate": {
+        "positions": 337,
+        "observed": 0.2430700110848468,
+        "expected": 0.21250943984222828,
+        "excess": 0.03056057124261852
+      },
+      "zh/object": {
+        "positions": 1515,
+        "observed": 0.3515414228195458,
+        "expected": 0.29414916314759443,
+        "excess": 0.0573922596719514
+      }
+    },
+    "grounded": {
+      "total": {
+        "positions": 8249,
+        "observed": 0.2977512905062896,
+        "expected": 0.2386839244833819,
+        "excess": 0.05906736602290769
+      },
+      "en": {
+        "positions": 5960,
+        "observed": 0.2848102237487689,
+        "expected": 0.23026933648386008,
+        "excess": 0.05454088726490886
+      },
+      "en/subject": {
+        "positions": 1363,
+        "observed": 0.17413325366784702,
+        "expected": 0.12145659269017502,
+        "excess": 0.052676660977672
+      },
+      "moon-and-sixpence": {
+        "positions": 3948,
+        "observed": 0.30153718762764503,
+        "expected": 0.23573706836428818,
+        "excess": 0.06580011926335684
+      },
+      "en/predicate": {
+        "positions": 1841,
+        "observed": 0.1135868349790827,
+        "expected": 0.09031574910386207,
+        "excess": 0.023271085875220636
+      },
+      "en/object": {
+        "positions": 2756,
+        "observed": 0.45392305718319886,
+        "expected": 0.377572066584502,
+        "excess": 0.0763509905986969
+      },
+      "don-quixote": {
+        "positions": 4301,
+        "observed": 0.29427611686408756,
+        "expected": 0.2413889205210899,
+        "excess": 0.05288719634299763
+      },
+      "zh": {
+        "positions": 2289,
+        "observed": 0.33144668494701623,
+        "expected": 0.2605934677237271,
+        "excess": 0.0708532172232891
+      },
+      "zh/subject": {
+        "positions": 437,
+        "observed": 0.32357371342022107,
+        "expected": 0.18756521224668696,
+        "excess": 0.1360085011735341
+      },
+      "zh/predicate": {
+        "positions": 337,
+        "observed": 0.2419170384870107,
+        "expected": 0.2115330059849588,
+        "excess": 0.030384032502051895
+      },
+      "zh/object": {
+        "positions": 1515,
+        "observed": 0.3536328099729115,
+        "expected": 0.29257150287186673,
+        "excess": 0.06106130710104481
+      }
+    }
+  },
+  "source_only": {
+    "total": {
+      "start": 10,
+      "likelihood": 10,
+      "shuffled": 9,
+      "grounded": 10,
+      "qwen": 315,
+      "reference": 219,
+      "n": 384
+    },
+    "works": {
+      "great-gatsby": {
+        "start": 3,
+        "likelihood": 2,
+        "shuffled": 2,
+        "grounded": 2,
+        "qwen": 85,
+        "reference": 65,
+        "foil": 0,
+        "n": 96
+      },
+      "plato-republic": {
+        "start": 6,
+        "likelihood": 7,
+        "shuffled": 6,
+        "grounded": 7,
+        "qwen": 81,
+        "reference": 42,
+        "foil": 0,
+        "n": 96
+      },
+      "water-margin-120": {
+        "start": 1,
+        "likelihood": 1,
+        "shuffled": 1,
+        "grounded": 1,
+        "qwen": 72,
+        "reference": 47,
+        "foil": 0,
+        "n": 96
+      },
+      "bible": {
+        "start": 0,
+        "likelihood": 0,
+        "shuffled": 0,
+        "grounded": 0,
+        "qwen": 77,
+        "reference": 65,
+        "foil": 0,
+        "n": 96
+      }
+    },
+    "records": [
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": false,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      }
+    ],
+    "paired_95pct": {
+      "likelihood": [
+        0.0,
+        0.0
+      ],
+      "shuffled": [
+        0.0,
+        0.0078125
+      ],
+      "start": [
+        -0.0078125,
+        0.0078125
+      ]
+    }
+  },
+  "reference_informed": {
+    "total": {
+      "start": 5,
+      "likelihood": 7,
+      "shuffled": 6,
+      "grounded": 7,
+      "qwen": 198,
+      "reference": 383,
+      "n": 384
+    },
+    "works": {
+      "great-gatsby": {
+        "start": 1,
+        "likelihood": 1,
+        "shuffled": 1,
+        "grounded": 1,
+        "qwen": 55,
+        "reference": 95,
+        "foil": 0,
+        "n": 96
+      },
+      "plato-republic": {
+        "start": 3,
+        "likelihood": 5,
+        "shuffled": 4,
+        "grounded": 5,
+        "qwen": 43,
+        "reference": 96,
+        "foil": 0,
+        "n": 96
+      },
+      "water-margin-120": {
+        "start": 1,
+        "likelihood": 1,
+        "shuffled": 1,
+        "grounded": 1,
+        "qwen": 40,
+        "reference": 96,
+        "foil": 0,
+        "n": 96
+      },
+      "bible": {
+        "start": 0,
+        "likelihood": 0,
+        "shuffled": 0,
+        "grounded": 0,
+        "qwen": 60,
+        "reference": 96,
+        "foil": 0,
+        "n": 96
+      }
+    },
+    "records": [
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": false,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": false,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": true,
+        "likelihood": true,
+        "shuffled": true,
+        "grounded": true,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": false,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      },
+      {
+        "start": false,
+        "likelihood": false,
+        "shuffled": false,
+        "grounded": false,
+        "qwen": true,
+        "reference": true,
+        "foil": false
+      }
+    ],
+    "paired_95pct": {
+      "likelihood": [
+        0.0,
+        0.0
+      ],
+      "shuffled": [
+        0.0,
+        0.0078125
+      ],
+      "start": [
+        0.0,
+        0.015625
+      ]
+    }
+  },
+  "qualification": {
+    "intervals": false,
+    "corroboration": false,
+    "families": true,
+    "stops": true
+  },
+  "passed": false
+}

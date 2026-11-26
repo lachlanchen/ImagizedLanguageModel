@@ -29,6 +29,9 @@ def restore(stride, device):
         "teacher-distilled",
         "library-repeat",
         "library-broad",
+        "role-likelihood",
+        "role-shuffled",
+        "role-grounded",
         "paired-likelihood",
         "paired-assignment",
         "paraphrase-canonical",
@@ -46,6 +49,7 @@ def restore(stride, device):
                 "prefix": "visual_prefix",
                 "teacher": "teacher_translation",
                 "library": "library_diversity",
+                "role": "library_roles",
             }[family]
         )
         path = base / objective
@@ -189,6 +193,9 @@ if __name__ == "__main__":
             "teacher-distilled",
             "library-repeat",
             "library-broad",
+            "role-likelihood",
+            "role-shuffled",
+            "role-grounded",
             "wide",
             "paired-likelihood",
             "paired-assignment",

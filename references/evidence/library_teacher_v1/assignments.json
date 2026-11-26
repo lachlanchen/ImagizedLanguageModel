@@ -1,0 +1,151 @@
+{
+  "program": "38295ea0ae2a3d5d6862f63a6d085f7c0f9661ec950e9f95eace275de39534e4",
+  "protocol": "127642e40a54f245cf96a8269509970b1f1bd283c125bfef12398c6da24e5622",
+  "library": "84f4d0ce955ba164c9ba1f88c6776c47a5d0b879c46dbc63f76e8a8067720595",
+  "writer": "eaa4523166ca3b5718869786795b8ecacc41a3dfe877dcfe9ee4ebab0d85ded4",
+  "pairs_sha256": "e64eac4312737bb39bc9b54a7699ed8bfc64c50ea2ff9ab758b3d1a18e2ae31c",
+  "scores_sha256": "5dde6fd82c4d1e82f90de8140b47a10ead69948e5e18ed3793bd21ea7a7a0554",
+  "directions": {
+    "en": {
+      "teacher": {
+        "model": "Helsinki-NLP/opus-mt-zh-en",
+        "revision": "cf109095479db38d6df799875e34039d4938aaa6",
+        "parameters": 77943296,
+        "unique_sequences": 8168,
+        "files": {
+          "README.md": "7f4b7f90672cd55b85b213bbe21f4b2d0c92327e885734b7e86b019feb145a6b",
+          "pytorch_model.bin": "9d8ceb91d103ef89400c9d9d62328b4858743cf8924878aee3b8afc594242ce0",
+          "generation_config.json": "81f06422302b9f4666f20c6f20f43b904e38ccce9326a208f82ff97c2c9699e5",
+          "config.json": "d84104da12fa90da59acf5f0ed30428e43cc92574ad4b9dfa88f29eeeb2b0eb0",
+          "vocab.json": "c0f79ee4c413ccb24cd808a0c727eec85b2130f23c82802cc1caeb07b5f0d458",
+          "target.spm": "6a881f4717cd7265f53fea54fd3dc689c767c05338fac7a4590f3088cb2d7855",
+          "tokenizer_config.json": "53cc7a6f05224f287476af4798d96b1b85da2edae60257e58633f092c7b5b823",
+          "source.spm": "e27a3a1b539f4959ec72ea60e453f49156289f95d4e6000b29332efc45616203"
+        }
+      },
+      "result": {
+        "natural": {
+          "n": 1334,
+          "teacher_correct": 1334,
+          "student_correct": 1333,
+          "teacher_ties": 0,
+          "student_ties": 0,
+          "teacher_only": 1,
+          "student_only": 0,
+          "all_comparisons_correct": {
+            "teacher": 21,
+            "student": 20
+          },
+          "groups": 21,
+          "median_teacher_margin": 62.88096575811505,
+          "median_student_margin": 53.589170932769775
+        },
+        "polarity": {
+          "n": 472,
+          "teacher_correct": 472,
+          "student_correct": 472,
+          "teacher_ties": 0,
+          "student_ties": 0,
+          "teacher_only": 0,
+          "student_only": 0,
+          "all_comparisons_correct": {
+            "teacher": 118,
+            "student": 118
+          },
+          "groups": 118,
+          "median_teacher_margin": 15.75271576270461,
+          "median_student_margin": 26.88681098818779
+        },
+        "exchange": {
+          "n": 472,
+          "teacher_correct": 320,
+          "student_correct": 451,
+          "teacher_ties": 0,
+          "student_ties": 0,
+          "teacher_only": 12,
+          "student_only": 143,
+          "all_comparisons_correct": {
+            "teacher": 31,
+            "student": 106
+          },
+          "groups": 118,
+          "median_teacher_margin": 11.761252772063017,
+          "median_student_margin": 20.184281945228577
+        }
+      },
+      "seconds": 8.174449052661657,
+      "peak_bytes": 894371840
+    },
+    "zh": {
+      "teacher": {
+        "model": "Helsinki-NLP/opus-mt-en-zh",
+        "revision": "408d9bc410a388e1d9aef112a2daba955b945255",
+        "parameters": 77943296,
+        "unique_sequences": 8168,
+        "files": {
+          "README.md": "83eee2a6598751f746a057e10d5c9dfd71d6b0cf0146f9e6c1bb3ebd6e90959b",
+          "pytorch_model.bin": "69a1d6ec829cee349360b3b677ac0aa99a7d88822d1a6578370029efffdca3f5",
+          "generation_config.json": "837839ed0534a27084f9b980fc33f47729052dd89cb26cca7ac830765ed30e49",
+          "config.json": "bcae8ed74fed77fb51c58462b62397fee6b1a1a34aece79183a0dd02ad329e71",
+          "vocab.json": "f1832ca38f7aa158b9a944ff583e4901e6b37d9d4ad9241f03838e636e9cfb03",
+          "target.spm": "81dc94efa84e4025ef38d25d5d07429fe41e3eb29d44003f1db6fe98487b0052",
+          "tokenizer_config.json": "5df181fba586b7cb37d429c13c4f96cb43fb11de7bb6489733d9eded32418179",
+          "source.spm": "5775ddc9e3ff2fae91554da56468ad35ff56edaba870fea74447bc7234bfdaa8"
+        }
+      },
+      "result": {
+        "natural": {
+          "n": 1334,
+          "teacher_correct": 1334,
+          "student_correct": 1333,
+          "teacher_ties": 0,
+          "student_ties": 0,
+          "teacher_only": 1,
+          "student_only": 0,
+          "all_comparisons_correct": {
+            "teacher": 21,
+            "student": 20
+          },
+          "groups": 21,
+          "median_teacher_margin": 66.04900976642966,
+          "median_student_margin": 50.313820362091064
+        },
+        "polarity": {
+          "n": 472,
+          "teacher_correct": 472,
+          "student_correct": 472,
+          "teacher_ties": 0,
+          "student_ties": 0,
+          "teacher_only": 0,
+          "student_only": 0,
+          "all_comparisons_correct": {
+            "teacher": 118,
+            "student": 118
+          },
+          "groups": 118,
+          "median_teacher_margin": 17.903897035866976,
+          "median_student_margin": 23.30908677354455
+        },
+        "exchange": {
+          "n": 472,
+          "teacher_correct": 453,
+          "student_correct": 472,
+          "teacher_ties": 0,
+          "student_ties": 0,
+          "teacher_only": 0,
+          "student_only": 19,
+          "all_comparisons_correct": {
+            "teacher": 103,
+            "student": 118
+          },
+          "groups": 118,
+          "median_teacher_margin": 18.438708931207657,
+          "median_student_margin": 51.67443000525236
+        }
+      },
+      "seconds": 7.565181573852897,
+      "peak_bytes": 1025412608
+    }
+  },
+  "qualified": false
+}

@@ -1,0 +1,93 @@
+{
+  "panels": [
+    {
+      "title": "a    Predicting contextual source states",
+      "labels": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "unit": "Held normalized mean squared error",
+      "upper": 1,
+      "kind": "line",
+      "series": {
+        "Chinese source": [
+          0.73576,
+          0.60163,
+          0.5276,
+          0.47875,
+          0.45155,
+          0.43005,
+          0.41694,
+          0.40587,
+          0.39573,
+          0.39172,
+          0.38915,
+          0.38689
+        ],
+        "English source": [
+          0.7864,
+          0.65764,
+          0.57949,
+          0.5299,
+          0.49782,
+          0.47549,
+          0.45869,
+          0.44521,
+          0.43607,
+          0.4299,
+          0.42729,
+          0.42488
+        ]
+      }
+    },
+    {
+      "title": "b    Reading the source through a fixed decoder",
+      "labels": [
+        "Exchanged",
+        "Learned",
+        "Native",
+        "ILM",
+        "Qwen"
+      ],
+      "unit": "Faithful translations out of 48 per direction",
+      "upper": 50,
+      "kind": "bar",
+      "series": {
+        "English output": [
+          0,
+          2,
+          18,
+          0,
+          33
+        ],
+        "Chinese output": [
+          0,
+          1,
+          17,
+          2,
+          43
+        ]
+      }
+    }
+  ],
+  "colors": {
+    "Replicated": "#91a2a4",
+    "Mass corrected": "#087c69",
+    "Teacher": "#a97741",
+    "Visual writer": "#466785",
+    "Chinese source": "#0c7769",
+    "English source": "#8e643f",
+    "English output": "#53748b",
+    "Chinese output": "#087969"
+  }
+}

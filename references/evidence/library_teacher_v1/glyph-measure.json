@@ -1,0 +1,68 @@
+{
+  "binding": {
+    "scripts/check_glyph_measure.py": "ec63711106f2d269a4e9d4f86e8916e5b81f9bf0ea319f4e56916a5718bf4246",
+    "ilm/visual_lm/glyph_measure.py": "09dff54dd97ed96d38d7410f07657b21cc6882b7449d1bde36fb3086e7de39e5",
+    "formal/span_list/GlyphAttentionMeasure.lean": "eb6f31d9001f75ae186292bc9b5e8c65114ca6c14da73c79247a43abddb97b5e",
+    "references/glyph_attention_measure_protocol.md": "dee9aede3995090afc504a69c587d1f7a1e36c2e86376a2b3beecd607fc39153",
+    "references/evidence/visual_library_v1.json": "84f4d0ce955ba164c9ba1f88c6776c47a5d0b879c46dbc63f76e8a8067720595"
+  },
+  "raw": "2ebb12bde84066aa864e77be684fa54997c8c60d6339b504bca8fc66744a4340",
+  "results": {
+    "en": {
+      "model": "zh-en",
+      "revision": "cf109095479db38d6df799875e34039d4938aaa6",
+      "requests": 240,
+      "unrepresentable": 0,
+      "native_stops": 239,
+      "conditions": {
+        "copies": {
+          "positions": 3191,
+          "absolute_sum": 544.3620295559522,
+          "maximum": 2.9098141193389893,
+          "mode_changes": 219,
+          "equal_free": 115,
+          "stopped": 240,
+          "mean_absolute": 0.17059292684298094
+        },
+        "corrected": {
+          "positions": 3191,
+          "absolute_sum": 0.0046555642038583755,
+          "maximum": 1.33514404296875e-05,
+          "mode_changes": 0,
+          "equal_free": 240,
+          "stopped": 239,
+          "mean_absolute": 1.4589671588399797e-06
+        }
+      },
+      "seconds": 6.138544348999858
+    },
+    "zh": {
+      "model": "en-zh",
+      "revision": "408d9bc410a388e1d9aef112a2daba955b945255",
+      "requests": 240,
+      "unrepresentable": 0,
+      "native_stops": 240,
+      "conditions": {
+        "copies": {
+          "positions": 3197,
+          "absolute_sum": 1570.8642257982865,
+          "maximum": 7.016063690185547,
+          "mode_changes": 710,
+          "equal_free": 31,
+          "stopped": 239,
+          "mean_absolute": 0.4913557165462266
+        },
+        "corrected": {
+          "positions": 3197,
+          "absolute_sum": 0.006312107667326927,
+          "maximum": 1.52587890625e-05,
+          "mode_changes": 0,
+          "equal_free": 240,
+          "stopped": 240,
+          "mean_absolute": 1.9743846316318196e-06
+        }
+      },
+      "seconds": 5.942855627276003
+    }
+  }
+}

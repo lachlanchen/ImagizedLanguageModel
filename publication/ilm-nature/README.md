@@ -2,6 +2,8 @@
 
 [Read the paper](visual_language_paper.pdf) · [Cumulative manuscript](manuscript.pdf) · [Historical PDFs](versions/README.md)
 
+Pages 63–66 show all three matched grammatical-role fits, their original bitmap answers, an exact attention-mass control, the two learned optical readers and the field-versus-weight intervention. The readers' pretrained text-piece readout is identified separately. [Raw output archive](evidence/role_translation_outputs.zip) · [Role figures](figures/Writing_with_grammatical_roles.pptx) · [Visual state figures](figures/Glyph_attention_and_reading.pptx)
+
 Pages 59–62 compare 28,342 distinct bilingual book pairs with a length-matched repetition control. They show actual translations, source-contrast calibration and recall from 1.84 million observed optical states. [Editable figures](figures/Bilingual_writing_on_unseen_books.pptx) · [Complete results, mathematics and limits](../../references/visual_library_writing_result.md)
 
 Pages 56–58 show every independently written translation credited in the masked source-only review, two failures from the first reserved literary passage, and where the writer learned to prefer its training targets. All illustrated answers reproduce the saved pixels. [Editable figures](figures/Teaching_a_visual_translator.pptx) · [Model and inference](../../models/teacher_translation) · [Scores from both reviews](../../references/complete_teacher_translation_result.md)

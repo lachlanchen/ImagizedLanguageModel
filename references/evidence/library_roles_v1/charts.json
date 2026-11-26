@@ -1,0 +1,60 @@
+{
+  "panels": [
+    {
+      "title": "a    Attention to the matching role",
+      "unit": "Mean probability (%)",
+      "labels": [
+        "Starting writer",
+        "Likelihood",
+        "Shuffled roles",
+        "True roles"
+      ],
+      "series": {
+        "Observed": [
+          25.65,
+          25.62,
+          29.27,
+          29.78
+        ],
+        "Permuted expectation": [
+          20.65,
+          20.65,
+          23.94,
+          23.87
+        ]
+      },
+      "upper": 39.0
+    },
+    {
+      "title": "b    Faithful translations",
+      "unit": "Complete meanings out of 384",
+      "labels": [
+        "Starting writer",
+        "Likelihood",
+        "Shuffled roles",
+        "True roles"
+      ],
+      "series": {
+        "Source only": [
+          10,
+          10,
+          9,
+          10
+        ],
+        "With reference": [
+          5,
+          7,
+          6,
+          7
+        ]
+      },
+      "upper": 13.0
+    }
+  ],
+  "colors": {
+    "Observed": "#07796c",
+    "Permuted expectation": "#a8b9b7",
+    "Source only": "#07796c",
+    "With reference": "#ad7842"
+  }
+}
