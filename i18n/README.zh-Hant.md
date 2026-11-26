@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-讓模型看英文句子 *It was Mary who helped Tom*，並標出動詞，它寫出了 **玛丽帮助了汤姆。** 在同一個中文生成模型下，訓練閱讀模型辨認關係代詞所指的人，使 236 個主語強調句中與參考答案完全一致的輸出從 0 個增加到 180 個。另一語料庫的 8 個自然分句中，模型仍未完整表達任何一個事件。 [實驗與原始輸出](../references/visual_referent_learning_result.md)
+給模型看一段譯文的影像，讓它從 48 張候選原文影像中找出對應的一張。這個在單張 RTX 4090 D 上訓練的中英視覺詞典在 96 次檢索中找對了 **93 次**。在 236 組僅肯定、否定不同的受控句子中，書寫模型有 195 組的兩句中文都寫對了。但讓它自行翻譯書摘，兩輪各 96 次，都只有一次完整傳達原意。下圖保留模型輸出的原始像素，包括把「沒錯」改成「然而」的例子。 [實驗與原始影像](../references/full_image_roles_result.md) · [執行書摘檢索](../models/optical_lexicon/README.md)
 
-![實驗結果](../publication/ilm-nature/figures/Visual_referent_answers.png)
+![實驗結果](../publication/ilm-nature/figures/Full_image_role_writing.png)
 
 在一張 RTX 4090 D 上訓練的模型可以閱讀原文圖像，從兩張候選譯文圖像中選擇。校正它對某些譯文措辭的偏好後，兩段書摘都選對的組數從 **21/96 提高到 77/96**。讓模型自行寫譯文更難。預測原文所支持的字形片段後，受控測試中寫出指定謂語的答案從 17/336 增至 43/336，但在 192 個書摘翻譯請求中，只有 1 個完整傳達原意。下圖是另一組 OPUS 測試中首個獲認可的模型輸出。 [實驗結果](../references/source_supported_writing_result.md) · [執行生成或選擇模型](../models/source_supported_writing/README.md)
 

@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-동사에 표시한 영문 *It was Mary who helped Tom*의 이미지를 읽고 모델은 **玛丽帮助了汤姆。** 라고 썼다. 중국어 생성기를 고정하고 관계대명사의 선행사를 찾도록 읽기 모델을 학습시키자 주어 강조문 236개에서 참조 이미지와 정확히 일치한 답이 0개에서 180개로 늘었다. 외부 말뭉치의 실제 절 8개에서는 사건의 의미를 온전히 전달한 답이 없었다. [실험 및 원본 출력](../references/visual_referent_learning_result.md)
+RTX 4090 D 한 장으로 학습한 영중 시각 사전은 번역문 이미지를 보고 원문 이미지 48개 중 하나를 고르는 검색에서 **96번 중 93번** 정답을 찾았다. 쓰기 모델은 긍정문과 부정문으로 이루어진 236쌍 중 195쌍에서 두 중국어 문장을 모두 정확히 썼다. 책의 구절을 자유롭게 번역한 두 평가에서는 각각 96개 중 하나만 원문의 뜻을 온전히 전달했다. 그림은 모델이 실제로 출력한 픽셀을 보여 준다. [실험 및 원본 출력](../references/full_image_roles_result.md) · [구절 검색 실행](../models/optical_lexicon/README.md)
 
-![실험 결과](../publication/ilm-nature/figures/Visual_referent_answers.png)
+![실험 결과](../publication/ilm-nature/figures/Full_image_role_writing.png)
 
 RTX 4090 D 한 장으로 학습한 모델에 원문 이미지와 번역 후보 이미지 두 장을 제시했다. 특정 번역 표현을 선호하는 경향을 보정하자 두 원문에서 모두 정답을 고른 쌍이 **21/96에서 77/96**으로 늘었다. 자유 생성에서는 원문으로부터 글자 조각을 예측해 요청한 서술어를 쓴 답이 17/336에서 43/336으로 늘었지만, 책 원문의 뜻을 온전히 전달한 번역은 192건 중 1건이었다. 아래는 별도의 OPUS 시험에서 처음으로 정답 판정을 받은 출력이다. [실험 결과](../references/source_supported_writing_result.md) · [모델 실행](../models/source_supported_writing/README.md)
 

@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-動詞に印を付けた英文 *It was Mary who helped Tom* の画像から、モデルは **玛丽帮助了汤姆。** と出力した。中国語の生成器を固定し、関係代名詞の先行詞を読み取るように学習させると、主語を強調した236文のうち中国語の出力が参照画像と完全に一致した件数は0件から180件に増えた。一方、外部コーパスから取った実例8件では、出来事の意味を完全に伝えた回答はなかった。 [実験と出力画像](../references/visual_referent_learning_result.md)
+RTX 4090 D 1 枚で学習した英中の視覚辞書は、訳文の画像から原文を探す課題で、48 枚の候補から **96 問中 93 問**で正しい画像を選んだ。書き手は、肯定文と否定文を対にした 236 組のうち 195 組で両方の中国語訳を正確に生成した。一方、書籍の一節を自由に訳す試験では、各 96 問の 2 回とも意味を完全に伝えたのは 1 問だった。図には実際の出力画像を示す。 [実験と出力画像](../references/full_image_roles_result.md) · [書籍の一節を検索](../models/optical_lexicon/README.md)
 
-![実験結果](../publication/ilm-nature/figures/Visual_referent_answers.png)
+![実験結果](../publication/ilm-nature/figures/Full_image_role_writing.png)
 
 RTX 4090 D 1枚で学習したモデルに、原文画像と二つの訳文画像を与えた。特定の訳文を好む傾向を補正すると、二つの原文について両方とも正しく選べた組数は **21/96から77/96** に増えた。自由生成では、原文から字形列を予測することで指定の述語を含む回答が17/336から43/336に増えたが、書籍の意味を完全に伝えたのは192件中1件だった。図は別のOPUSテストで最初に正答と判定された出力。 [実験結果](../references/source_supported_writing_result.md) · [モデルの実行](../models/source_supported_writing/README.md)
 

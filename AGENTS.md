@@ -12,15 +12,12 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
-Current reader-and-writer evidence is in
-`references/visual_referent_learning_result.md`. The two matched referent
-fits, natural tests, controlled Chinese writing, independent pixel replay and
-polarity collision audit are complete. Preserve the weights, scores and raw
-images. The supervised change recovered 69/126 linked official cases and 9/27
-external cases, with a loss on ordinary external clauses. The frozen writer
-gave 180/236 exact controlled subject-cleft answers and no complete event on
-eight external sentences. Follow the current engineering goal for the next
-full-source conditioning comparison. The private handoff records ownership.
+The full-source reader/writer and optical lexicon studies are complete. See
+`references/full_image_roles_result.md` for the matched generation tests,
+93/96 bilingual passage retrieval, raw output archives and independent CPU
+replays. Preserve the weights, original images, assessments and earlier
+referent study. The engineering goal records the next ordered alignment
+comparison. Complete book translation and matched-quality efficiency remain open.
 
 
 The latest completed language experiments are the free strip restoration comparison and the marked/open English participant readers. Read `references/visual_strip_restoration_result.md` and `references/natural_pictured_roles_result.md` before starting a successor. The open reader gets 901/1,196 exact official participant pairs with only the predicate marked and 347/478 on third-treebank active clauses. The subject-cleft failure is specific: 84/84 actor outputs select the relative pronoun instead of its named antecedent. Preserve the trained writers, raw PNG archives and official splits. The next intervention and controls are in the engineering goal. All training and evaluation owners for these comparisons exited.
