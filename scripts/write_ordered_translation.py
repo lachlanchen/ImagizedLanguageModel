@@ -20,6 +20,8 @@ def restore(stride, device):
         "proposition-contrast",
         "bilingual-likelihood",
         "bilingual-aligned",
+        "paired-likelihood",
+        "paired-assignment",
         "paraphrase-canonical",
         "paraphrase-varied",
     ):
@@ -30,6 +32,7 @@ def restore(stride, device):
                 "proposition": "proposition_translation",
                 "bilingual": "bilingual_ink",
                 "paraphrase": "translation_paraphrases",
+                "paired": "paired_ink",
             }[family]
         )
         path = base / objective
@@ -76,12 +79,21 @@ def infer(model, raw, direction, device, decode="greedy"):
         {"tiles": np.frombuffer(b"".join(tiles), np.uint8).reshape(-1, 128)}, "ink"
     )
     inventory = torch.tensor(read(MODEL / "inventories.json")[direction], device=device)
-    sequence = model.generate(
-        torch.tensor(features, device=device),
-        torch.tensor([ids], device=device),
-        inventory,
-        direction,
-    )[0]
+    feature_bank = torch.tensor(features, device=device)
+    source = torch.tensor([ids], device=device)
+    if decode == "order":
+        from ilm.visual_lm.order_decoding import bitmap_ranks, write_with_order
+
+        sequence = write_with_order(
+            model,
+            feature_bank,
+            source,
+            inventory,
+            direction,
+            bitmap_ranks(tiles, device),
+        )[0]
+    else:
+        sequence = model.generate(feature_bank, source, inventory, direction)[0]
     out, stop = stopped(sequence)
     if decode in ("forward", "roundtrip"):
         from ilm.visual_lm.reverse_translation import rerank
@@ -98,7 +110,7 @@ def infer(model, raw, direction, device, decode="greedy"):
             [(out, stop)],
         )
         out, stop = alternatives[0][decode], True
-    elif decode != "greedy":
+    elif decode not in ("greedy", "order"):
         raise ValueError("Unknown decoder")
     return b"".join(tiles[i] for i in out), stop
 
@@ -125,6 +137,8 @@ if __name__ == "__main__":
             "proposition-contrast",
             "bilingual-likelihood",
             "bilingual-aligned",
+            "paired-likelihood",
+            "paired-assignment",
             "paraphrase-canonical",
             "paraphrase-varied",
         ),
@@ -136,15 +150,15 @@ if __name__ == "__main__":
         help="Carry unfamiliar image cells as opaque named specimens, using the pointer writer",
     )
     ap.add_argument(
-        "--decode", choices=("greedy", "forward", "roundtrip"), default="greedy"
+        "--decode",
+        choices=("greedy", "forward", "roundtrip", "order"),
+        default="greedy",
     )
     ap.add_argument("--output", type=Path, required=True)
     ap.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     a = ap.parse_args()
     if a.decode != "greedy" and (a.preserve_specimens or a.stride == "specimen"):
-        ap.error(
-            "The bidirectional beam scorer requires an ordinary translation writer"
-        )
+        ap.error("The selected decoder requires an ordinary translation writer")
     if a.device == "cuda":
         configure_cuda_cli()
     torch.set_num_threads(2)

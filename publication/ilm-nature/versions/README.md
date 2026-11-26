@@ -4,6 +4,7 @@ Published reading editions are listed newest first. Each snapshot preserves the 
 
 | Date | Revision | Reading edition | Cumulative manuscript |
 |---|---|---|---|
+| 2026-11-25 | [75b114f2](https://github.com/lachlanchen/ImagizedLanguageModel/commit/75b114f211f6ede6abdeb49da4231b05fadca2e3) | [44 pages](2026-11-25-75b114f2/reading.pdf) | [PDF at release](https://github.com/lachlanchen/ImagizedLanguageModel/blob/75b114f211f6ede6abdeb49da4231b05fadca2e3/publication/ilm-nature/manuscript.pdf) |
 | 2026-11-25 | [4b386602](https://github.com/lachlanchen/ImagizedLanguageModel/commit/4b38660233865a956ecc1aaadb013d075ad5ea13) | [44 pages](2026-11-25-4b386602/reading.pdf) | [293 pages](2026-11-25-4b386602/cumulative.pdf) |
 | 2026-11-25 | [0e746802](https://github.com/lachlanchen/ImagizedLanguageModel/commit/0e74680228cd2ea1e70d67b8229ba72cf33370e5) | [41 pages](2026-11-25-0e746802/reading.pdf) | [PDF at release](https://github.com/lachlanchen/ImagizedLanguageModel/blob/0e74680228cd2ea1e70d67b8229ba72cf33370e5/publication/ilm-nature/manuscript.pdf) |
 | 2026-11-25 | [c73994b8](https://github.com/lachlanchen/ImagizedLanguageModel/commit/c73994b8f4639273216bf39acd24d3d207b004fd) | [38 pages](2026-11-25-c73994b8/reading.pdf) | [PDF at release](https://github.com/lachlanchen/ImagizedLanguageModel/blob/c73994b8f4639273216bf39acd24d3d207b004fd/publication/ilm-nature/manuscript.pdf) |

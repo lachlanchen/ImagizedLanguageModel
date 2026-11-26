@@ -10,15 +10,22 @@
 \noindent{\sffamily\bfseries\fontsize{22}{26}\selectfont \ILMPaperTitle\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\vspace{8pt}
 \noindent{\bfseries\fontsize{10.5}{12.6}\selectfont
-Historical specimens preserve visual distinctions that a transcription can lose. Can a compact model read a pictured question and answer in the same medium? We trained a reader and writer on one RTX 4090 D using human questions, complete responses and attested Chinese forms. Balancing question language and page order enabled the 1.18-million-parameter system to draw the requested specimen under all 16 interventions in 63 of 64 held families. Two controls passed none. On 64 additional families, familiar prompts gave 512 of 512 exact forms, whereas new paraphrases gave 261 of 512. An untrained printed-label matcher solved all 512 paraphrases. Free reading exposed a larger gap. On new English and Chinese passages the whole-page writer matched one human answer of 64 per language, and it supplied a single mark when asked to explain the history of a character. A 1.69-million-parameter translator trained on source paraphrases drew 422 of 472 unseen passive translations exactly, compared with zero under canonical training. Cross-script alignment retrieved 109 of 128 Chinese translations, yet free writing preserved only two of 64 OPUS meanings. Assigning unseen specimens reusable visual slots preserved both their pixels and the surrounding output on 56 of 70 swaps, up from five using identical weights.\par}
+Historical specimens preserve visual distinctions that a transcription can lose. Can a compact model read a pictured question and answer in the same medium? We trained a reader and writer on one RTX 4090 D using human questions, complete responses and attested Chinese forms. Balancing question language and page order enabled the 1.18-million-parameter system to draw the requested specimen under all 16 interventions in 63 of 64 held families. Two controls passed none. On 64 additional families, familiar prompts gave 512 of 512 exact forms, whereas new paraphrases gave 261 of 512. An untrained printed-label matcher solved all 512 paraphrases. Free reading exposed a larger gap. On new English and Chinese passages the whole-page writer matched one human answer of 64 per language, and it supplied a single mark when asked to explain the history of a character. A 1.69-million-parameter translator trained on source paraphrases drew 422 of 472 unseen passive translations exactly, compared with zero under canonical training. Cross-script alignment retrieved 109 of 128 Chinese translations, yet free writing preserved only two of 64 OPUS meanings. With 48 new bilingual families, the writer paired 75 of 96 supplied translations correctly but preserved none of 192 freely written meanings. Eleven pairs contained identical glyphs in a different order. All eleven were resolved in reading order.\par}
 \vspace{4pt}
-\platehere{Figure_150_optical_reading_and_writing}{Following a name through the reader and writer}{The two reader stages are shown above a held SQuAD question. The second source row substitutes a fictitious name as a test. The identical pictured question goes to both. Each fact and sentence is the actual emitted ink, reproduced on CPU. Panel b shows a separately authored page on which the reader finds the date and the writer drops it. Intercell spacing is reduced for print throughout.}
+\platehere{Figure_150_optical_reading_and_writing}{Following a name through the reader and writer}{The two reader stages are shown above a held SQuAD question. The second source row substitutes a fictitious name as a test. The identical pictured question goes to both. Each fact and sentence is the actual emitted ink, reproduced on CPU. Panel b shows a separately authored page on which the reader finds the date and the writer drops it. Intercell spacing in this panel is reduced for print.}
 \begin{multicols}{2}
 \section*{What changes when the page changes?}
 The original railway page mentions Trevithick, Murray and Stephenson. The question asks who designed Salamanca. The answer joins a name from the page to a predicate from the question and stops. Changing only the name in the page changes the subject of the reply (Fig.~1a). Another page asks who wrote about bronze inscriptions. Replacing Lena with Mira changes the entire answer appropriately in both cases.
 \section*{Where the same mechanism fails}
 On a school page the system correctly reads 1635. Replacing it with 1735 changes the intermediate image, yet the writer produces exactly the same defective sentence on both pages (Fig.~1b). On a fossil page the model follows the change from Niger to Nepal and omits the English preposition both times. Legible letters, selection of a fact and expression of the relation can be tested separately.
 \end{multicols}
+\noindent{\sffamily\bfseries Raw ILM translation}\par\vspace{3pt}
+\noindent\begin{minipage}[t]{.69\linewidth}{\small\sffamily Pictured English input}\par
+\includegraphics[width=.96\linewidth]{../figures/raw_ilm/role-54-input.png}\end{minipage}\hfill
+\begin{minipage}[t]{.29\linewidth}{\small\sffamily Emitted Chinese image}\par
+\includegraphics[width=.57\linewidth]{../figures/raw_ilm/role-54-output.png}\end{minipage}\par
+\noindent{\small The ILM reads a passive clause and draws an active Chinese sentence meaning \emph{The nurse invited the doctor}. Both grids retain their original cell spacing. Full raw outputs for a reversal and a failed scientific translation appear on p.~\pageref{page:raw-ilm}.}
+
 \newpage
 \spread{Which fact does the question ask for?}
 \noindent Two Chinese questions on the same page distinguish reading the ink from identifying the requested relation. Each column below shows what a trained writer produced.\par
@@ -298,4 +305,5 @@ Additional reading corpora include CoQA, CMRC 2018 and DRCD. For external readin
 \input{catalogue_and_stories.tex}
 \input{ordered_translation.tex}
 \input{proposition_translation.tex}
+\input{raw_ilm.tex}
 \end{document}
