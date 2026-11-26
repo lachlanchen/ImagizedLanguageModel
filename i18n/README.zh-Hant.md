@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+在 864 本書上訓練後，視覺模型在 3,949 段 LAMBADA 書摘中寫對了 590 個末詞，舊模型寫對 109 個，詞頻規則寫對 662 個。用模型自己的輸出繼續寫，402 個可評測的三詞片段沒有一個完全吻合原文。圖中保留了實際輸出的像素。 [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 在 3,949 段可評測的英文書摘中，同一視覺模型讀取整段時猜對了 109 個末詞，只看到最後 96 個字形時猜對了 56 個。基於詞頻的檢索規則猜對了 662 個。 [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

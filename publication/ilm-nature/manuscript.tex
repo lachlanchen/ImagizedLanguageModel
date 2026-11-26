@@ -10,10 +10,11 @@
 \newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
 \begin{document}
 \noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
-\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Reading word order and recovering words from earlier pages\par}
-\vspace{5pt}\noindent Imagized Language Model Project\par\medskip
-\noindent\textbf{A model that reads and writes images can reproduce a printed sentence while losing its meaning. We asked which ability improves when a visual decoder reads English books in their natural order. Two copies of a bilingual writer saw the same words from 96 books. We shuffled the words within each training window for one copy. On 16 unseen books the intact-order model required 1.973 bits to predict the next glyph, compared with 2.166 after shuffling. Across 66,987 English grammatical contrasts the respective models selected the acceptable sentence in 51.0\% and 52.2\% of pairs. After identical bilingual training, each earned one complete-meaning credit on 128 new Chinese news requests. On a separate discourse benchmark the frozen decoder recovered 109 of 3,949 final words when allowed to select previously seen page images, against 56 from a shorter input. A corpus-frequency rule recovered 662. On one graphics card, maintaining access to earlier print and selecting a word that fits its meaning pose distinct problems.}\par
-
+\input{learned_passage_lead}
+\newpage
+\input{learned_passage_methods}
+\newpage
+\pageheading{Learning glyph order before bilingual adaptation}
 \begin{multicols}{2}
 \section*{Holding the ink constant}
 Written language carries information in both the shape of a mark and its neighbours. Pixel-based language models have learned representations from rendered text and predicted subsequent image patches.\cite{rust,tai,chai} Here each $32\times32$ cell supplies 256 measured ink densities. A causal decoder compares its next state with prototypes derived from the pictured output shapes. Chosen glyphs form the answer image. The output repertoire comprises 78 English print shapes and a separate stop decision.
@@ -28,10 +29,6 @@ The document-bootstrap interval for the saving from intact order was 0.185--0.20
 \columnbreak
 With bilingual adaptation, the intact and shuffled book losses rose to 2.233 and 2.288 bits. The remaining advantage was 0.049--0.062 bits per glyph across books. Both book-trained priors reached the 32-cell free-generation limit on all 64 sampled continuations. Reading the prefix pixels directly on CPU reproduced every stored output and stop for both conditions before and after adaptation.
 \end{multicols}
-
-\newpage
-\pageheading{Can the same visual decoder use the whole passage?}
-\input{page_word_memory_results}
 
 \newpage
 \pageheading{Does a better book predictor translate a change in meaning?}
@@ -96,12 +93,13 @@ The match-aware reader returned all four answers for each of 152 held entries in
 \displayfigure{Pictured_path_origins.pdf}{The specimen itself can appear in a reply}{First held dictionary request and first failure after rephrasing. The latter example shows the question, requested answer and actual model response. The earlier selector copied the chosen region of the supplied page. A copied historical form and an English word selected by the book predictor have different origins. Each image here is traced to its original output archive.}
 \begin{multicols}{2}
 \section*{Limits of the present system}
-The book writer receives aligned cells. Its optical input can accept a new shape, but its finite print motor cannot invent an unseen target glyph. A separate translation system that retained pretrained textual translation layers earned 45/192 whole meanings on a held four-book panel, compared with 5/192 for an independent visual writer and 167/192 for quantized Qwen. These scores concern different books and models from the new news comparison.
+The earlier bilingual book writer receives aligned cells. Its optical input can accept a new shape, but its finite print motor cannot invent an unseen target glyph. A separate translation system that retained pretrained textual translation layers earned 45/192 whole meanings on a held four-book panel, compared with 5/192 for an independent visual writer and 167/192 for quantized Qwen. These scores concern different books and models from the new news comparison.
 \columnbreak
 \section*{Data and code availability}
-\raggedright The repository provides the \repo{references/book_order_prior_result.md}{experiment report}, \repo{models/book_order_prior}{weights and inference commands}, \repo{formal/span_list/BookOrderPrior.lean}{formal derivation}, \repo{references/evidence/book_order_prior_v1}{complete scores}, and the \repo{publication/ilm-nature/evidence}{original free outputs}. The \repo{publication/ilm-nature/versions}{archived articles} retain earlier visual experiments. Book and news splits, source checksums and all exclusions are available with the training code.
+\raggedright The repository provides the \repo{references/optical_passage_selector_result.md}{passage prediction results}, \repo{models/optical_passage_selector}{standalone word predictor}, \repo{formal/span_list/VisualPassageSelection.lean}{copy and spelling derivation}, \repo{references/book_order_prior_result.md}{book-order study}, \repo{models/book_order_prior}{weights and inference commands}, \repo{formal/span_list/BookOrderPrior.lean}{formal derivation}, \repo{references/evidence/book_order_prior_v1}{complete scores}, and the \repo{publication/ilm-nature/evidence}{original free outputs}. The \repo{publication/ilm-nature/versions}{archived articles} retain earlier visual experiments. Book and news splits, source checksums and all exclusions are available with the training code.
 \end{multicols}
 {\fontsize{8.2}{9.2}\selectfont\begin{thebibliography}{9}\setlength{\itemsep}{0pt}
+\bibitem{pointer} See, A., Liu, P. J. \& Manning, C. D. \href{https://aclanthology.org/P17-1099/}{Get to the point: Summarization with pointer-generator networks}. \textit{ACL}, 1073--1083 (2017).
 \bibitem{rust} Rust, P. et al. \href{https://arxiv.org/abs/2207.06991}{Language modelling with pixels}. \textit{ICLR} (2023).
 \bibitem{tai} Tai, Y. et al. \href{https://aclanthology.org/2024.findings-acl.874/}{PIXAR: Auto-regressive language modeling in pixel space}. \textit{Findings of ACL} (2024).
 \bibitem{chai} Chai, Y. et al. \href{https://aclanthology.org/2024.emnlp-main.182/}{Autoregressive pre-training on pixels and texts}. \textit{EMNLP} (2024).

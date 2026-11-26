@@ -1,0 +1,73 @@
+{
+  "arm": "shuffled",
+  "initial": "81a0087c51476830714c05da0dc26ba6493357bb6d0d975bc6adf43979f81cfe",
+  "epochs": [
+    {
+      "epoch": 1,
+      "rows": 245760,
+      "steps": 1920,
+      "rate": 0.0008,
+      "objective": 8.816917754461368,
+      "present": 61571,
+      "absent": 184189,
+      "present_nll": 4.166663456020444,
+      "absent_nll": 12.976880406778584,
+      "schedule": "7d46c451218d5e4ebd84b79dc4c9ebd5669738d6bbb1f7fbac3ab022acec1388",
+      "elapsed": 24.349954347126186
+    },
+    {
+      "epoch": 2,
+      "rows": 245760,
+      "steps": 1920,
+      "rate": 0.0005,
+      "objective": 7.502466574559609,
+      "present": 61571,
+      "absent": 184189,
+      "present_nll": 3.5198955051082415,
+      "absent_nll": 11.022202708576199,
+      "schedule": "3cea183e605816352345f13639997b8073f2160ba4e67cce2a395162e7cc0789",
+      "elapsed": 51.40587810333818
+    },
+    {
+      "epoch": 3,
+      "rows": 245760,
+      "steps": 1920,
+      "rate": 0.0003,
+      "objective": 7.1583789800604185,
+      "present": 61571,
+      "absent": 184189,
+      "present_nll": 3.3027903694102894,
+      "absent_nll": 10.567795962010639,
+      "schedule": "c030894df469d4215a89388568e34d6ea3fb48e80fa62b25386ce0fa0c97fcc1",
+      "elapsed": 77.02318813838065
+    },
+    {
+      "epoch": 4,
+      "rows": 245760,
+      "steps": 1920,
+      "rate": 0.00015,
+      "objective": 6.967727246632179,
+      "present": 61571,
+      "absent": 184189,
+      "present_nll": 3.1619195627245764,
+      "absent_nll": 10.338745166893364,
+      "schedule": "be1f97b6335b0cc5f4e7227c258e0e6c45a5d5dd4216a083d7078ea80a3e6a70",
+      "elapsed": 99.41670870780945
+    }
+  ],
+  "bindings": {
+    "references/optical_passage_selector_protocol.md": "5b0420d4a1622b53b83fb8ac1190cbd19eabd2062de7f43e025e17febf165721",
+    "references/evidence/passage_selector_v1/data.json": "8f8e949b7fc51eda505491bf3a30fec24741d8971286034638340c607b591383",
+    "models/optical_passage_selector/document_frequency.json": "512cb57a6072be3c66199f441a2ac818f261cfe466d14fb2233926d3ec539641",
+    "scripts/train_passage_selector.py": "af70ce2ca740e582a3657a2e8fdbefa235b5b7226ea663af9eba342148e9799d",
+    "scripts/prepare_passage_selector.py": "3212e7154f9b050fe37c3ba35ee77270f0c820a9a6fa04b8f7d765b02683004f",
+    "ilm/visual_lm/passage_selector.py": "0253dfd121872be3a7021193bfa3078e94e840e6992f809e6c031510d91472a8",
+    "ilm/visual_lm/ordered_translation.py": "66d7215d875cee13f47c154ea04d445ebbe1032e71a518ba5ed1afe73864b4e0",
+    "ilm/visual_lm/portable_writer.py": "0fed19393b08eb0f14f8950689dffa182949836b8841dd16a939b727943bf8f9"
+  },
+  "weights": "4ad5ee2dc20223c5b96580abb4f28da6b2233db9a13d12a2fdf00d162cc8bcd5",
+  "device": "NVIDIA GeForce RTX 4090 D",
+  "peak_bytes": 584607232,
+  "seconds": 99.42750834673643,
+  "parameters": 759351
+}

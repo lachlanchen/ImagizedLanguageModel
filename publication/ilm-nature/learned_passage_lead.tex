@@ -1,0 +1,15 @@
+\noindent{\sffamily\fontsize{14}{17}\selectfont Choosing what to write from pictured English passages\par}
+\vspace{5pt}\noindent Imagized Language Model Project\par\medskip
+\noindent\textbf{Can a small visual predictor use earlier print to write a word that fits a passage? We trained a 759,351-parameter model on 245,760 passages from 864 books. It can copy a visible word or spell an answer from individual printed letters. On unseen fiction it recovered 820 of 9,216 published words. Replacing the distant passage while retaining the last six words reduced this to 639. On 24 further books the corresponding counts were 187 and 110 of 2,304. A local count model beat the visual predictor on fiction and lost on the second cohort. On 3,949 LAMBADA passages the predictor recovered 590 endings, compared with 109 for the previous visual ranker and 662 for a frequency rule. It recovered no complete three-word continuation. The results establish sensitivity to earlier print on one graphics card and localize a failure to assign high probability to the author's continuation.}\par
+\begin{multicols}{2}
+\section*{Reading a passage}
+A page can supply both the shape of an unfamiliar word and clues to its use. Prior work trained language models on pixels\cite{rust,tai,chai} and combined pointing with generation in text.\cite{pointer} Here the model reads up to 96 alphabetic runs from aligned $32\times32$ print cells. Relative position and the separator following each run accompany its measured ink features. Intervening punctuation separates runs, so some targets are parts of contractions.
+\columnbreak
+\section*{Choosing a whole word}
+Three attention layers compute location probabilities $a_i$ and a copy weight $g$. A recurrent writer gives a spelling probability $S(w)$, including its final stop. Indistinguishable image sequences share probability:
+\[
+P(w\mid x)=g\!\sum_{i:\,x_i=w}\!a_i+(1-g)S(w).
+\]
+We score each distinct visible spelling and the best completion of a four-path spelling search. The emitted image comprises copied or selected canonical print cells.
+\end{multicols}
+\displayfigure{Learned_passage_words.pdf}{Learning the first word and losing its continuation}{\textbf{a}, Exact published word as a percentage of all eligible passages. Local counts use up to three preceding runs. \textbf{b}, First correct fiction answer absent from its input. The model spells the contraction fragment \emph{re}. \textbf{c}, First two consecutive correct words with the model's own output fed back. The third word changes \emph{talk} to \emph{her}. The crops show the final 32 cells from the original normalized book passages. Model and reference strips preserve the archived output pixels.}

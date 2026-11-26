@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+تدرّب النموذج البصري على 864 كتابًا، وتنبأ بالكلمة الأخيرة الصحيحة في 590 من 3,949 مقطعًا من LAMBADA، مقابل 109 للنموذج السابق و662 لقاعدة تعتمد على التكرار. وفي اختبار المتابعة لم يُكمل أيًا من المقاطع المؤهّلة ذات الكلمات الثلاث إكمالًا مطابقًا للنص الأصلي. يعرض الشكل خرج النموذج الفعلي. [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 استعاد النموذج البصري الكلمة الأخيرة في 109 من أصل 3,949 مقطعًا عندما أتيح له المقطع كاملًا، وفي 56 حالة عند إتاحة آخر 96 رسمًا كتابيًا فقط. واستعادت قاعدة تعتمد على تواتر الكلمات 662 كلمة صحيحة. [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

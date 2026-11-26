@@ -1,0 +1,28 @@
+\pageheading{What does the earlier passage contribute?}
+\begin{multicols}{2}
+\section*{Matched training and held books}
+We sampled 768 fiction and 96 PG-19 training books.\cite{rae,lambada} Each cohort contributed ordinary positions and sentence-final positions in equal numbers. Models received the kind of position as input. Whole books and repeated 17-run target windows were held out. Four AdamW passes took 101 and 99 seconds on one RTX 4090 D, excluding data preparation. Peak allocated storage during fitting was below 0.55 GiB per fit. The second model shuffled earlier words and their separators, retaining the same last six words, target and initial weights. Accuracy differences between fits included zero on all panels.
+\columnbreak
+\section*{Which comparator wins?}
+The mean intact gain over exchanging earlier text was 1.96 percentage points on 96 fiction books (paired 95\% book-bootstrap interval 1.38--2.53) and 3.34 points on 24 PG-19 books (2.43--4.25). On the 994 fiction positions where both passages contained the target, the counts were 377 and 352. Replacing the passage can also remove the opportunity to copy. An additional backoff count baseline trained on the same targets earned 1,037 and 147 correct words, respectively. It exposes a local prediction weakness on fiction.
+\end{multicols}
+\begin{center}\small
+\begin{tabular}{@{}lrrr@{}}\toprule
+Exact output pixels & Fiction & PG-19 & LAMBADA \\ \midrule
+Test passages & 9,216 & 2,304 & 3,949 \\
+Intact training & 820 & 187 & 590 \\
+Shuffled distant context during training & 819 & 181 & 585 \\
+True target present in the input & 708/2,264 & 182/567 & 590/3,237 \\
+True target absent from the input & 112/6,952 & 5/1,737 & 0/712 \\
+Always choose a page word & 635 & 177 & 605 \\
+Always spell & 783 & 129 & 0 \\
+\bottomrule\end{tabular}\end{center}
+\begin{multicols}{2}
+\section*{Why wider search cannot repair these errors}
+We evaluated the probability of the full published bitmap against the emitted one under the frozen network. The reference ranked below the emission on all 8,396 fiction, 2,117 PG-19 and 3,359 LAMBADA misses. Median log-probability gaps were 5.45, 6.37 and 2.36 nats. A more exhaustive maximum-probability search under these weights cannot select a lower-scoring reference. Lean verifies the exact additive margin needed for copy evidence to overcome a contrary spelling preference under a common probability denominator. Other words can also fit a passage.
+\columnbreak
+\section*{Sustaining an answer}
+We fed each prediction back as ink on four ordinary prefixes per held book. Of 441 prefixes with at least two reference words before the sentence boundary, one matched both. None of the 402 eligible three-word prefixes matched all three. No generated stop coincided with a reference stop inside this horizon. The current motor covers 52 aligned letter shapes. A frequency prior estimated on 96 books, an exact canonical shape matcher and run segmentation are part of the system. These results do not establish a compute saving at matched text-model quality.
+\end{multicols}
+
+\displayfigure{Page_word_memory.pdf}{What changed from the earlier visual decoder?}{The previous model ranked available page words with a frozen short-context decoder. The two crops show the first gained and first lost exact word when it received the full passage. On the same 3,949 LAMBADA cases, extending memory raised that decoder from 56 to 109 exact endings. The newly trained model reaches 590, including zero answers absent from its input. The original full-page frequency rule reaches 662.}

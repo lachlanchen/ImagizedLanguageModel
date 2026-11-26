@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+864冊の本で学習した視覚モデルは、LAMBADAの3,949件のうち590件で末尾の語を正しく出力しました。旧モデルは109件、頻度に基づく規則は662件でした。自分の出力を次の入力に用いた場合、評価対象の402例で3語すべてが原文と一致した例はありませんでした。図にはモデルが出力した画素を掲載しています。 [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 3,949 件の英文で、視覚モデルが最後の単語を正確に再現したのは全文を読んだ場合に 109 件、末尾の 96 字形だけでは 56 件だった。語の出現頻度を用いた検索では 662 件だった。 [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

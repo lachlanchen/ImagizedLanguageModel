@@ -2,6 +2,10 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
+A visual writer trained on 864 books completed **590 of 3,949** LAMBADA passages with the published final word, up from 109 for the previous writer. A frequency rule scored 662. On fresh fiction, the new writer recovered 820/9,216 words and a local count model recovered 1,037. In the three-word test it began **her to talk** correctly and then wrote **her to her**. The figure shows the original pixels. [Paper](publication/ilm-nature/manuscript.pdf) · [Model and image-input CLI](models/optical_passage_selector/) · [Raw results](references/optical_passage_selector_result.md)
+
+![Exact book-word predictions and original three-word model output](publication/ilm-nature/figures/Learned_passage_words.png)
+
 Given the earlier page, the frozen visual writer recovered **pillow** on a book passage where its shorter input produced **e**. Across 3,949 eligible passages it wrote the exact final word 109 times with the full page and 56 with the last 96 glyphs. A frequency-based word selector scored 662. The figure includes the first gain and the first loss. [Paper](publication/ilm-nature/manuscript.pdf) · [Raw results and controls](references/book_page_word_memory_result.md)
 
 ![Original page-memory answers on a gain and a loss](publication/ilm-nature/figures/Page_word_memory.png)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Sau khi học từ 864 cuốn sách, mô hình thị giác dự đoán đúng từ cuối trong 590 trên 3.949 đoạn LAMBADA. Mô hình trước đạt 109 và quy tắc dựa trên tần suất đạt 662. Khi dùng chính đầu ra để viết tiếp, mô hình không khớp đủ ba từ trong cả 402 trường hợp đủ điều kiện. Hình minh họa giữ nguyên các điểm ảnh do mô hình xuất ra. [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 Trên 3.949 đoạn sách tiếng Anh, mô hình thị giác đoán đúng từ cuối 109 lần khi thấy cả đoạn và 56 lần khi chỉ thấy 96 ký tự cuối. Quy tắc dựa trên tần suất từ đoán đúng 662 lần. [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

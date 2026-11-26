@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Tras entrenarse con 864 libros, el predictor visual acertó la palabra final en 590 de 3.949 pasajes de LAMBADA. El modelo anterior acertó 109 y una regla de frecuencia, 662. En la prueba de continuación, ninguna de las 402 secuencias de tres palabras coincidió por completo con el libro. La figura muestra los píxeles emitidos por el modelo. [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 En 3.949 pasajes, el modelo visual acertó la última palabra en 109 casos al leer todo el pasaje y en 56 con los últimos 96 glifos. Una regla basada en la frecuencia de las palabras acertó en 662 casos. [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

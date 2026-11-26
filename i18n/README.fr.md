@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Entraîné sur 864 livres, le modèle visuel a retrouvé le dernier mot de 590 des 3 949 passages de LAMBADA. Le modèle précédent en retrouvait 109 et une règle de fréquence, 662. Aucune des 402 suites de trois mots ne correspond entièrement au texte publié. La figure montre les pixels produits par le modèle. [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 Sur 3 949 passages de livres, le modèle visuel a retrouvé le dernier mot 109 fois avec le passage entier et 56 fois avec les 96 derniers glyphes. Une règle fondée sur la fréquence des mots a donné 662 réponses exactes. [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

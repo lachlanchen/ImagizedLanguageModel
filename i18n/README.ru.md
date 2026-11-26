@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+После обучения на 864 книгах зрительная модель правильно восстановила последнее слово в 590 из 3 949 отрывков LAMBADA. Предыдущая модель дала 109 верных ответов, правило на основе частоты — 662. При последовательной генерации ни одно из 402 продолжений длиной в три слова не совпало с оригиналом целиком. На рисунке показаны пиксели, выданные моделью. [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 На 3 949 книжных отрывках зрительная модель правильно восстановила последнее слово 109 раз при доступе ко всему отрывку и 56 раз по последним 96 глифам. Правило на основе частоты слов дало 662 точных ответа. [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

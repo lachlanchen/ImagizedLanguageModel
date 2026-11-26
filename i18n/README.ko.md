@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+책 864권으로 학습한 시각 모델은 LAMBADA 지문 3,949개 중 590개에서 마지막 단어를 맞혔습니다. 이전 모델은 109개, 빈도 규칙은 662개를 맞혔습니다. 자신의 출력을 다시 입력한 실험에서는 평가 대상 402개 중 세 단어가 모두 원문과 일치한 사례가 없었습니다. 그림에는 모델이 출력한 픽셀을 실었습니다. [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 영어 책의 구절 3,949개에서 시각 모델은 전체 구절을 보면 마지막 단어를 109번, 끝의 96개 글자꼴만 보면 56번 맞혔다. 단어 빈도를 이용한 검색은 662번 맞혔다. [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)

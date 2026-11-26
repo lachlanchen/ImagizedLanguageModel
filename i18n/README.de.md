@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Nach dem Training mit 864 Büchern traf das visuelle Modell bei 590 von 3.949 LAMBADA-Passagen das veröffentlichte Schlusswort. Das Vorgängermodell traf 109, eine Häufigkeitsregel 662. Bei der Fortsetzung mit den eigenen Ausgaben stimmte keine der 402 geprüften Dreiwortfolgen vollständig mit dem Buch überein. Die Abbildung zeigt die ausgegebenen Pixel. [PDF](../publication/ilm-nature/manuscript.pdf) · [CLI](../models/optical_passage_selector/)
+
+![ILM](../publication/ilm-nature/figures/Learned_passage_words.png)
+
 In 3.949 Buchpassagen schrieb das visuelle Modell das richtige Schlusswort 109-mal bei vollständiger Passage und 56-mal mit den letzten 96 Glyphen. Eine Regel auf Basis der Worthäufigkeit traf 662-mal. [PDF](../publication/ilm-nature/manuscript.pdf)
 
 ![ILM](../publication/ilm-nature/figures/Page_word_memory.png)
