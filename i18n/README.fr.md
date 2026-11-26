@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Lorsque le destinataire a changé dans la phrase chinoise en image, le modèle a remplacé « Mom » par « Harry » dans sa réponse anglaise. Il a aussi traduit un cauchemar par « a nice dream ». Dans les deux sens de traduction, il a restitué la différence de sens pour 3 des 77 paires tirées du corpus d’entraînement et 46 des 51 paires construites à partir de patrons.
+
+![Images originales des réponses](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 Devant l’image de la phrase « 我理解你的痛苦。 » tirée d’un livre inédit pour lui, le modèle visuel indépendant a écrit « I understand your pain. ». À budget égal sur une RTX 4090 D, il a obtenu 6 traductions jugées complètes sur 96 après apprentissage sur 147 456 paires distinctes, contre 4 avec 24 576 paires répétées et 5 avant entraînement. Le modèle textuel quantifié Qwen3-8B en a obtenu 88. Les intervalles de différence estimés par livre incluent zéro. [Expérience et poids](../references/visual_training_breadth_result.md)
 
 ![Images originales](../publication/ilm-nature/figures/Visual_training_breadth.png)

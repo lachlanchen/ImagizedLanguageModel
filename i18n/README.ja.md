@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+中国語の画像で呼びかける相手を変えると、モデルの英語出力も “Mom” から “Harry” に変わった。一方、「悪夢」を “a nice dream” と書いた例もある。二つの文の意味の違いを英中・中英の両方向で書き分けられたのは、訓練コーパスから採った77組のうち3組、構文に沿って作った51組のうち46組だった。
+
+![モデルが出力した原画像](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 独立型の視覚モデルは、未見の本にある「我理解你的痛苦。」の画像から「I understand your pain.」と書いた。RTX 4090 D 1枚で訓練量を揃え、異なる対訳147,456組で学習すると、新しい本の96問中6問で意味を伝えられた。24,576組を繰り返した場合は4問、訓練前は5問、量子化テキストモデル Qwen3-8B は88問だった。書籍単位で推定した差の区間にはゼロが含まれる。 [実験と重み](../references/visual_training_breadth_result.md)
 
 ![出力画像](../publication/ilm-nature/figures/Visual_training_breadth.png)

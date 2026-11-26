@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+同一個視覺模型會隨中文原圖中的稱呼，把答案裡的 “Mom” 改為 “Harry”，也曾把「噩夢」寫成 “a nice dream”。每組有兩種原句，兩個翻譯方向都須保留語意的變化。訓練語料中的句子有 3/77 組通過，依樣板構造的句子則有 46/51 組通過。
+
+![模型產生的原始影像](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 面對未見書籍中的句子圖像「我理解你的痛苦。」，獨立視覺模型寫出了「I understand your pain.」。在單張 RTX 4090 D 上，以相同的訓練預算學習 147,456 組不同的雙語句子後，96 道新書翻譯題有 6 道完整達意；反覆學習 24,576 組的對照模型為 4 道，訓練前為 5 道。量化文字模型 Qwen3-8B 為 88 道。按書估計的差值區間包含零。 [實驗與權重](../references/visual_training_breadth_result.md)
 
 ![原始輸出](../publication/ilm-nature/figures/Visual_training_breadth.png)

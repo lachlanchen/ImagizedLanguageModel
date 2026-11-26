@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Wenn sich die angesprochene Person im chinesischen Satzbild änderte, wechselte das Modell in seiner englischen Antwort von „Mom“ zu „Harry“. Einen Albtraum übersetzte es dagegen als „a nice dream“. In beiden Übersetzungsrichtungen gab es den Bedeutungsunterschied bei 3 von 77 Satzpaaren aus dem Trainingskorpus und bei 46 von 51 nach Vorlagen gebildeten Paaren wieder.
+
+![Originalbilder der Antworten](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 Für das Satzbild „我理解你的痛苦。“ aus einem bisher ungesehenen Buch schrieb das eigenständige visuelle Modell „I understand your pain.“. Bei gleichem Trainingsbudget auf einer RTX 4090 D gelangen mit 147.456 unterschiedlichen Satzpaaren 6 von 96 vollständigen Übersetzungen, mit 24.576 wiederholten Paaren 4 und vor dem Training 5. Das quantisierte Textmodell Qwen3-8B erreichte 88. Die über Bücher geschätzten Intervalle der Differenzen schließen null ein. [Versuch und Gewichte](../references/visual_training_breadth_result.md)
 
 ![Originalausgaben](../publication/ilm-nature/figures/Visual_training_breadth.png)

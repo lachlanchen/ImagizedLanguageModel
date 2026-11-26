@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+중국어 문장 이미지에서 부르는 상대가 바뀌자 영어 출력도 “Mom”에서 “Harry”로 바뀌었다. 반면 악몽을 “a nice dream”으로 쓴 사례도 있었다. 두 문장의 의미 차이를 양방향 번역에서 모두 보존한 경우는 학습 말뭉치에서 뽑은 77쌍 중 3쌍, 정해진 문형으로 만든 51쌍 중 46쌍이었다.
+
+![모델이 출력한 원본 이미지](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 독립 시각 모델은 처음 접한 책 속 문장 이미지 “我理解你的痛苦。”를 보고 “I understand your pain.”이라고 썼다. RTX 4090 D 한 장에서 같은 학습량으로 서로 다른 번역 쌍 147,456개를 학습한 결과, 새 책의 번역 96개 중 6개가 의미를 온전히 전달했다. 24,576쌍을 반복한 모델은 4개, 학습 전 모델은 5개, 양자화 텍스트 모델 Qwen3-8B는 88개였다. 책 단위로 계산한 차이의 구간은 0을 포함한다. [실험과 가중치](../references/visual_training_breadth_result.md)
 
 ![원본 출력](../publication/ilm-nature/figures/Visual_training_breadth.png)

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Al cambiar el destinatario en la imagen de una frase china, el modelo cambió «Mom» por «Harry» en su respuesta en inglés. También tradujo una pesadilla como «a nice dream». Conservó la diferencia de significado en ambos sentidos de traducción en 3 de 77 pares extraídos del corpus de entrenamiento y en 46 de 51 pares construidos con plantillas.
+
+![Imágenes originales de las respuestas](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 Ante la imagen de la frase «我理解你的痛苦。» de un libro nuevo, el modelo visual independiente escribió «I understand your pain.». Con el mismo presupuesto en una RTX 4090 D, obtuvo 6 traducciones completas de 96 al aprender de 147.456 pares distintos, frente a 4 al repetir 24.576 pares y 5 antes del entrenamiento. El modelo de texto cuantizado Qwen3-8B obtuvo 88. Los intervalos de la diferencia estimados por libro incluyen cero. [Experimento y pesos](../references/visual_training_breadth_result.md)
 
 ![Imágenes originales](../publication/ilm-nature/figures/Visual_training_breadth.png)

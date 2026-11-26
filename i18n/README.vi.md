@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Khi người được gọi trong ảnh câu tiếng Trung thay đổi, mô hình đổi “Mom” thành “Harry” trong ảnh trả lời bằng tiếng Anh. Nhưng nó cũng viết “a nice dream” khi gặp từ chỉ cơn ác mộng. Mô hình giữ được sự khác biệt về nghĩa ở cả hai chiều dịch cho 3 trong 77 cặp câu từ ngữ liệu huấn luyện và 46 trong 51 cặp câu tạo theo mẫu.
+
+![Ảnh đầu ra gốc](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 Với ảnh chụp câu “我理解你的痛苦。” từ một cuốn sách chưa dùng khi huấn luyện, mô hình thị giác độc lập viết “I understand your pain.”. Trên một RTX 4090 D, với cùng ngân sách huấn luyện, 147.456 cặp câu khác nhau cho 6/96 bản dịch đủ nghĩa; lặp lại 24.576 cặp cho 4/96 và mô hình ban đầu đạt 5/96. Mô hình văn bản lượng tử hóa Qwen3-8B đạt 88/96. Khoảng ước lượng chênh lệch theo sách bao gồm 0. [Thí nghiệm và trọng số](../references/visual_training_breadth_result.md)
 
 ![Ảnh đầu ra](../publication/ilm-nature/figures/Visual_training_breadth.png)

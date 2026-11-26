@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+عندما تغيّر المخاطَب في صورة الجملة الصينية، غيّر النموذج «Mom» إلى «Harry» في جوابه الإنجليزي. لكنه ترجم الكابوس في مثال آخر إلى «a nice dream». حافظ على اختلاف المعنى في اتجاهَي الترجمة في ٣ من ٧٧ زوجًا مأخوذًا من نصوص التدريب، وفي ٤٦ من ٥١ زوجًا صيغت جمله وفق قوالب.
+
+![صور الإجابات الأصلية](../publication/ilm-nature/figures/Paired_visual_answers.png)
+
 قرأ النموذج البصري المستقل صورة الجملة الصينية «我理解你的痛苦。» من كتاب جديد وكتب «I understand your pain.». على بطاقة RTX 4090 D واحدة وبميزانية تدريب متساوية، نقل النموذج المعنى كاملا في 6 من 96 ترجمة بعد التدريب على 147,456 زوجا مختلفا، مقابل 4 عند تكرار 24,576 زوجا و5 قبل التدريب. حصل نموذج النص الكمي Qwen3-8B على 88 من 96. يشمل نطاق تقدير الفرق بين الكتب الصفر. [التجربة والأوزان](../references/visual_training_breadth_result.md)
 
 ![صور المخرجات](../publication/ilm-nature/figures/Visual_training_breadth.png)
