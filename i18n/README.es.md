@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+El modelo independiente, entrenado en una sola RTX 4090 D, emparejó correctamente dos fragmentos de libros en imagen con sus traducciones en 93 de 96 casos. Al traducir por sí solo a partir de la imagen de origen, conservó todo el significado en 1 de 192 solicitudes. La versión cuantizada de Qwen3-8B acertó en 166 al leer los mismos fragmentos como texto. La figura 1 reproduce las imágenes generadas. [Resultados](../references/independent_optical_actions_result.md) · [Ejecutar el modelo](../models/independent_optical_actions/README.md)
+
+![Fragmentos de libros y traducciones generadas en imagen](../publication/ilm-nature/figures/Independent_optical_actions.png)
+
 Dos preguntas sobre la misma página del diccionario piden la glosa y la forma histórica en órdenes opuestos. El lector acertó ambas en 332 de 608 pares, frente a 138 antes del cambio. En una prueba aparte de traducción libre, el modelo visual independiente conservó todo el significado en 1 de 192 casos, frente a 154 de Qwen3-8B con entrada de texto. [Artículo de seis páginas](../publication/ilm-nature/manuscript.pdf) · [Ejemplo etimológico](../models/origin_instructions/README.md)
 
 ### Experimentos anteriores

@@ -1,0 +1,5 @@
+# Manuscript revision for independent visual writing actions
+
+Lead the current reading article with the matched bilingual fits, complete held-book meanings, equal-source-length assignment and measured training costs. Replace the previous opening about reverse draft supervision with the new question and keep its observed results as a diagnostic in the article. Include exact emitted glyphs from the first pair of the first two reserved books in the leading figure, translating to English for the first and Chinese for the second. Include the other two works in the editable supplement with the same alternating rule. Preserve earlier figures and the previous complete edition. Validate the actual image bytes against the raw ZIP, the embedded PDF instances and the editable PowerPoint. Inspect the final pages at reading size before copying the one current manuscript PDF to Nutstore.
+
+After scoring, include the sole credited strip answer as an explicitly outcome-selected third example. Preserve the original two fixed cases. Check that common sentence against both corpora after removing punctuation and spaces, and disclose the counts.

@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+RTX 4090 D 한 장으로 학습한 독립 모델은 책에서 뽑은 두 문장 이미지에 주어진 번역을 짝짓는 과제에서 96쌍 중 93쌍을 맞혔다. 원문 이미지만 보고 번역을 직접 썼을 때는 192건 중 1건에서 뜻을 온전히 전달했다. 같은 원문을 텍스트로 읽은 양자화 Qwen3-8B는 166건을 맞혔다. 그림 1은 모델이 실제로 그린 결과다. [실험 결과](../references/independent_optical_actions_result.md) · [모델 실행](../models/independent_optical_actions/README.md)
+
+![책의 원문과 모델이 생성한 번역 이미지](../publication/ilm-nature/figures/Independent_optical_actions.png)
+
 같은 사전 페이지에서 뜻풀이와 옛 글자꼴을 정반대 순서로 요청했습니다. 두 요청을 모두 맞힌 경우가 608쌍 중 138쌍에서 332쌍으로 늘었습니다. 별도 자유 번역 평가에서는 독립 이미지 모델이 192개 중 1개, 텍스트를 입력받은 Qwen3-8B가 154개의 의미를 온전히 전달했습니다. [논문 6쪽](../publication/ilm-nature/manuscript.pdf) · [자원 사전 실행 예제](../models/origin_instructions/README.md)
 
 ### 이전 실험

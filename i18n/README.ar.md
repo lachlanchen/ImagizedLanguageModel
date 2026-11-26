@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+دُرّب النموذج المستقل على بطاقة RTX 4090 D واحدة. وعندما عُرضت عليه صورتا مقطعين من كتاب وترجمتاهما، طابقهما بصورة صحيحة في 93 من 96 زوجًا. وعندما كتب الترجمة من صورة المصدر وحدها، نقل المعنى كاملًا في طلب واحد من أصل 192. ونجحت النسخة المكمّمة من Qwen3-8B في 166 طلبًا عند قراءة المصادر نفسها نصيًا. يعرض الشكل الأول الصور التي أنتجها النموذج. [النتائج](../references/independent_optical_actions_result.md) · [تشغيل النموذج](../models/independent_optical_actions/README.md)
+
+![صور المقاطع وترجماتها التي رسمها النموذج](../publication/ilm-nature/figures/Independent_optical_actions.png)
+
 طلبنا من النموذج عرض معنى الحرف وصورته التاريخية بترتيبين متعاكسين من صفحة المعجم نفسها. ارتفع عدد الأزواج التي نجح فيها الطلبان معًا من 138 إلى 332 من أصل 608. وفي اختبار منفصل للترجمة الحرة، نقل نموذج الصور المستقل المعنى كاملًا في حالة واحدة من أصل 192، مقابل 154 حالة لنموذج Qwen3-8B مع مدخل نصي. [البحث في ست صفحات](../publication/ilm-nature/manuscript.pdf) · [تشغيل مثال المعجم](../models/origin_instructions/README.md)
 
 ### تجارب سابقة

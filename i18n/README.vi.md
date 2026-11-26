@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Mô hình độc lập được huấn luyện trên một RTX 4090 D đã ghép đúng bản dịch cho 93/96 cặp đoạn trích dưới dạng ảnh. Khi chỉ nhận ảnh nguồn và phải tự viết bản dịch, mô hình truyền đạt trọn nghĩa ở 1/192 yêu cầu. Qwen3-8B lượng tử hóa đọc cùng nội dung dưới dạng văn bản và đạt 166/192. Hình 1 cho thấy ảnh đầu ra thực tế. [Kết quả](../references/independent_optical_actions_result.md) · [Chạy mô hình](../models/independent_optical_actions/README.md)
+
+![Ảnh đoạn trích và bản dịch do mô hình tạo](../publication/ilm-nature/figures/Independent_optical_actions.png)
+
 Trên cùng một trang từ điển, hai câu hỏi yêu cầu nghĩa gốc và dạng chữ cổ theo hai thứ tự ngược nhau. Số cặp được trả lời đúng cả hai lần tăng từ 138 lên 332 trong 608 cặp. Trong phép thử dịch tự do riêng biệt, mô hình ảnh độc lập truyền đạt trọn nghĩa 1/192 câu, so với 154/192 khi Qwen3-8B đọc văn bản. [Bài báo sáu trang](../publication/ilm-nature/manuscript.pdf) · [Chạy ví dụ từ nguyên](../models/origin_instructions/README.md)
 
 ### Các thí nghiệm trước

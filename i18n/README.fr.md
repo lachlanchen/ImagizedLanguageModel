@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Entraîné sur une seule RTX 4090 D, le modèle indépendant a correctement associé deux extraits de livre en image à leurs traductions dans 93 cas sur 96. Lorsqu’il devait rédiger la traduction à partir de la seule image source, il a restitué le sens complet dans 1 cas sur 192. La version quantifiée de Qwen3-8B, qui lisait les mêmes sources en texte, a réussi 166 cas. La figure 1 reproduit les images produites par le modèle. [Résultats](../references/independent_optical_actions_result.md) · [Exécuter le modèle](../models/independent_optical_actions/README.md)
+
+![Extraits de livres et traductions produites en image](../publication/ilm-nature/figures/Independent_optical_actions.png)
+
 Sur une même page de dictionnaire, deux demandes présentent la glose et la forme ancienne dans des ordres opposés. Le lecteur a réussi les deux demandes dans 332 paires sur 608, contre 138 auparavant. Dans un test distinct de traduction libre, le modèle visuel indépendant a restitué le sens complet dans 1 cas sur 192, contre 154 pour Qwen3-8B avec une entrée texte. [Article de six pages](../publication/ilm-nature/manuscript.pdf) · [Exemple étymologique](../models/origin_instructions/README.md)
 
 ### Expériences antérieures

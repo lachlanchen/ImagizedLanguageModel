@@ -2,7 +2,11 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
-An independent reader followed two opposite pictured questions about the same dictionary page on **332/608** pairs, up from **138/608** with the original field ordering. Each answer had to include the exact gloss and the actual historical specimen. On a separate free-translation test, a 10.48M-parameter image writer earned **1/192** complete meanings, its matched control **2/192**, and a quantized Qwen3-8B given text **154/192**. [Current paper](publication/ilm-nature/manuscript.pdf) · [Run the historical reader](models/origin_instructions/README.md) · [Inspect the translation outputs](references/sentence_reconstruction_result.md) · [Editable figures](publication/ilm-nature/figures/Sentence_reconstruction.pptx)
+An independent writer trained on one RTX 4090 D matched 93/96 pairs of pictured book passages to their supplied translations. Asked to write freely, it preserved the complete meaning on 1/192 requests. The quantized Qwen3-8B text comparator scored 166/192 on the same sources. Figure 1 shows the actual output, including the Chinese translation of “She is my wife.” [Results](references/independent_optical_actions_result.md) · [Run the writer](models/independent_optical_actions/README.md)
+
+![Book translation from glyph images](publication/ilm-nature/figures/Independent_optical_actions.png)
+
+An independent reader followed two opposite pictured questions about the same dictionary page on **332/608** pairs, up from **138/608** with the original field ordering. Each answer had to include the exact gloss and the actual historical specimen. On a separate free-translation test, a 10.48M-parameter image writer earned **1/192** complete meanings, its matched control **2/192**, and a quantized Qwen3-8B given text **154/192**. [Current paper](publication/ilm-nature/manuscript.pdf) · [Run the historical reader](models/origin_instructions/README.md) · [Inspect the translation outputs](references/sentence_reconstruction_result.md) · [Editable figures](publication/ilm-nature/figures/Independent_optical_actions.pptx)
 
 ![The two pictured questions about 遘 and the actual answers from both readers](publication/ilm-nature/figures/Origin_instruction_order.png)
 

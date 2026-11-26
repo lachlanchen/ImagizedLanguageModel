@@ -1,5 +1,9 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
+Das auf einer einzelnen RTX 4090 D trainierte Modell ordnete in 93 von 96 Fällen zwei abgebildeten Buchpassagen die vorgegebenen Übersetzungen korrekt zu. Sollte es die Übersetzung allein anhand des Bildes schreiben, gab es die vollständige Bedeutung in einem von 192 Fällen wieder. Ein quantisiertes Qwen3-8B erreichte mit denselben Quellen als Text 166 von 192. Abbildung 1 zeigt die tatsächlichen Ausgabebilder. [Ergebnisse](../references/independent_optical_actions_result.md) · [Modell ausführen](../models/independent_optical_actions/README.md)
+
+![Buchpassagen und vom Modell erzeugte Übersetzungen](../publication/ilm-nature/figures/Independent_optical_actions.png)
+
 Zwei Fragen zur selben Wörterbuchseite verlangen die Bedeutung und die historische Zeichenform in entgegengesetzter Reihenfolge. Der Leser erfüllte beide Aufträge bei 332 von 608 Paaren, zuvor bei 138. In einem separaten Übersetzungstest gab das unabhängige Bildmodell bei einem von 192 Beispielen die vollständige Bedeutung wieder, Qwen3-8B mit Texteingabe bei 154. [Sechsseitiger Artikel](../publication/ilm-nature/manuscript.pdf) · [Wörterbuchbeispiel](../models/origin_instructions/README.md)
 
 ### Frühere Experimente

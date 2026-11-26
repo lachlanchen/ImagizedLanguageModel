@@ -31,7 +31,12 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const draftEdition = edition === 'drafts';
+const actionsEdition = edition === 'actions';
+const draftEdition = edition === 'drafts' || actionsEdition;
+if(actionsEdition) {
+ await plate('../independent_optical_actions_v1/plate.json','Free writing with single glyphs or learned strips',
+   'First pair of the first two held books and the first credited strip response, selected after scoring. All images are the original archived bitmaps.','independent_optical_actions');
+}
 if(draftEdition) {
  await plate('../emitted_history_v1/plate.json','Can a writer recover meaning from its own translation drafts?',
    'Raw source and output bitmaps from the held book panel. The control and draft-supervised writer share the same starting weights and training exposures. Selection is fixed by corpus order.',
@@ -54,11 +59,13 @@ await plate('origins.json','Can a small reader answer from a historical dictiona
 if(draftEdition) await plate('../visual_order_v1/plate.json','How does the requested order change a historical answer?',
  'Both pictured questions refer to the same labelled entries. The two models share the same selected values and stop. All four answers preserve the original source pixels.',
  'visual_order');
+if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.json','Free writing in the other two held books',
+ 'Same preselected first-pair rule. Images reproduce the exact raster answers from the physical motor.','independent_optical_actions');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
-await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:draftEdition?6:4,
- materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[draftEdition?3:2],verifyArtifactToolImport:true,
+await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:actionsEdition?8:draftEdition?6:4,
+ materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,
  integrityValidatorPath:path.join(skill,'container_tools/inspect_presentation_package_integrity.py'),
  layoutValidatorPath:path.join(skill,'container_tools/inspect_presentation_layout_geometry.py'),
  layoutArgs:['--expected-slide-size-emu','12192000,6858000'],receiptPath:path.join(stage,'presentation_validation.json')});
