@@ -27,6 +27,8 @@ def restore(stride, device):
         "prefix-recovery",
         "teacher-corpus",
         "teacher-distilled",
+        "library-repeat",
+        "library-broad",
         "paired-likelihood",
         "paired-assignment",
         "paraphrase-canonical",
@@ -43,6 +45,7 @@ def restore(stride, device):
                 "book": "book_breadth",
                 "prefix": "visual_prefix",
                 "teacher": "teacher_translation",
+                "library": "library_diversity",
             }[family]
         )
         path = base / objective
@@ -97,7 +100,31 @@ def infer(model, raw, direction, device, decode="greedy"):
     inventory = torch.tensor(read(MODEL / "inventories.json")[direction], device=device)
     feature_bank = torch.tensor(features, device=device)
     source = torch.tensor([ids], device=device)
-    if decode == "order":
+    if decode == "associative":
+        from ilm.visual_lm.glyph_association import GlyphMemory, generate
+
+        root = MODEL.parents[1]
+        config = read(root / "references/evidence/library_memory_v1/calibration.json")
+        archive_path = root / "artifacts/library_memory_v1" / f"memory-{direction}.npz"
+        if not archive_path.exists():
+            raise FileNotFoundError("Build the optical memory with python -m scripts.build_library_memory")
+        if sha(archive_path) != config["files"][archive_path.name]:
+            raise ValueError("Optical memory differs from the measured archive")
+        with np.load(archive_path) as archive:
+            memory = GlyphMemory(archive, device)
+        choice = config["selected"]
+        sequence = generate(model, feature_bank, source, inventory, direction, memory,
+                            choice["temperature"], choice["mix"])[0]
+    elif decode == "background-half":
+        from ilm.visual_lm.background_contrast import write
+
+        background_path = MODEL.parent / "library_diversity/broad/backgrounds.npy"
+        config = read(background_path.with_name("contrast.json"))
+        if sha(background_path) != config["binding"]["backgrounds"]:
+            raise ValueError("Background images differ from the measured set")
+        table = torch.as_tensor(np.load(background_path)[direction], dtype=torch.long, device=device)
+        sequence = write(model, feature_bank, source, inventory, direction, table, 0.5)[0]
+    elif decode == "order":
         from ilm.visual_lm.order_decoding import bitmap_ranks, write_with_order
 
         sequence = write_with_order(
@@ -126,7 +153,7 @@ def infer(model, raw, direction, device, decode="greedy"):
             [(out, stop)],
         )
         out, stop = alternatives[0][decode], True
-    elif decode not in ("greedy", "order"):
+    elif decode not in ("greedy", "order", "background-half", "associative"):
         raise ValueError("Unknown decoder")
     return b"".join(tiles[i] for i in out), stop
 
@@ -160,6 +187,8 @@ if __name__ == "__main__":
             "prefix-recovery",
             "teacher-corpus",
             "teacher-distilled",
+            "library-repeat",
+            "library-broad",
             "wide",
             "paired-likelihood",
             "paired-assignment",
@@ -175,7 +204,7 @@ if __name__ == "__main__":
     )
     ap.add_argument(
         "--decode",
-        choices=("greedy", "forward", "roundtrip", "order"),
+        choices=("greedy", "forward", "roundtrip", "order", "background-half", "associative"),
         default="greedy",
     )
     ap.add_argument("--output", type=Path, required=True)
@@ -191,6 +220,8 @@ if __name__ == "__main__":
         help="Apply the trained optical adapter before reading a glyph grid",
     )
     a = ap.parse_args()
+    if a.decode in ("background-half", "associative") and a.stride != "library-broad":
+        ap.error(f"--decode {a.decode} requires --model library-broad")
     if a.typeface_reader and (a.preserve_specimens or a.guard_ink):
         ap.error("Select one input treatment")
     if a.guard_ink and a.preserve_specimens:

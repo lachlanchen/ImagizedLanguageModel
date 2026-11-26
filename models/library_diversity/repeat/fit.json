@@ -1,0 +1,69 @@
+{
+  "weights": "e0831b22df16921df1b5f6711aacac8e409f833d80b22f3edb4175e277f770c3",
+  "binding": {
+    "scripts/train_visual_library.py": "534eef5fbce1095d7fa9641b11aba04cb4528cc1024be4e6ff2f20d852c79dfa",
+    "scripts/sample_visual_library.py": "083fe2656f0b7a1265e96f6c552533091090230083b4b6e19094d8614fc698d3",
+    "references/evidence/visual_library_v1.json": "84f4d0ce955ba164c9ba1f88c6776c47a5d0b879c46dbc63f76e8a8067720595",
+    "references/evidence/library_diversity_v1/sampling.json": "1cd020e70b3a5f1f10184ace1ff604a88fb631695a5e931ff40d38a7cb9db2d5",
+    "references/visual_library_diversity_protocol.md": "744ce6bc3cc8fba2f107e20beaf8f7842208583667ce4f8b48c15fd2290a401f",
+    "models/visual_prefix/recovery/weights.safetensors": "876bcfd641c8e3e7b5b736dfdaea9e3e4c4edbb3c0ac624565ec14ff62bfbb4c"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "nll": 1.590000205653908,
+      "development": {
+        "moon-and-sixpence": 0.3301612375889736,
+        "don-quixote": 0.2920667814960451
+      },
+      "stops": 66412,
+      "target_positions": 2188369,
+      "source_glyphs": 2121957,
+      "updates": 692,
+      "seconds": 10.301477230153978,
+      "peak_bytes": 812281856
+    },
+    {
+      "epoch": 2,
+      "nll": 1.282821098412492,
+      "development": {
+        "moon-and-sixpence": 0.31977227954182863,
+        "don-quixote": 0.281511875584804
+      },
+      "stops": 66412,
+      "target_positions": 2188369,
+      "source_glyphs": 2121957,
+      "updates": 692,
+      "seconds": 11.00280652847141,
+      "peak_bytes": 812281856
+    },
+    {
+      "epoch": 3,
+      "nll": 1.0867950627848497,
+      "development": {
+        "moon-and-sixpence": 0.30795528068649475,
+        "don-quixote": 0.2744218774250723
+      },
+      "stops": 66412,
+      "target_positions": 2188369,
+      "source_glyphs": 2121957,
+      "updates": 692,
+      "seconds": 10.847713594324887,
+      "peak_bytes": 812281856
+    },
+    {
+      "epoch": 4,
+      "nll": 0.9621126464455968,
+      "development": {
+        "moon-and-sixpence": 0.29976175955920475,
+        "don-quixote": 0.2584638371803497
+      },
+      "stops": 66412,
+      "target_positions": 2188369,
+      "source_glyphs": 2121957,
+      "updates": 692,
+      "seconds": 10.201553546823561,
+      "peak_bytes": 812281856
+    }
+  ]
+}

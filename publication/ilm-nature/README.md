@@ -2,6 +2,8 @@
 
 [Read the paper](visual_language_paper.pdf) · [Cumulative manuscript](manuscript.pdf) · [Historical PDFs](versions/README.md)
 
+Pages 59–62 compare 28,342 distinct bilingual book pairs with a length-matched repetition control. They show actual translations, source-contrast calibration and recall from 1.84 million observed optical states. [Editable figures](figures/Bilingual_writing_on_unseen_books.pptx) · [Complete results, mathematics and limits](../../references/visual_library_writing_result.md)
+
 Pages 56–58 show every independently written translation credited in the masked source-only review, two failures from the first reserved literary passage, and where the writer learned to prefer its training targets. All illustrated answers reproduce the saved pixels. [Editable figures](figures/Teaching_a_visual_translator.pptx) · [Model and inference](../../models/teacher_translation) · [Scores from both reviews](../../references/complete_teacher_translation_result.md)
 
 Pages 53–55 compare free English–Chinese writing after a mistaken draft and after increasing the model width. The figures show the original *Emma*, grandfather and blizzard outputs and a correct passive construction. [Editable charts and raw image panels](figures/Learning_from_visual_drafts.pptx) · [Prefix comparison](../../references/visual_prefix_recovery_result.md) · [Capacity comparison](../../references/visual_writer_width_result.md)

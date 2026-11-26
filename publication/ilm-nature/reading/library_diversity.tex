@@ -1,0 +1,49 @@
+\newpage
+\spread{How much does a new book teach the writer?}
+\noindent A visual translator can recognize a familiar exchange and lose the action in the next sentence. We trained on 28,342 new English--Chinese sentence pairs from 21 literary works. Two other works supplied development passages and four supplied a work-disjoint test.
+\platehere{Figure_207_writing_from_more_books}{A question about a person and a sentence about movement}{\textbf{a}, The broad writer draws the question \emph{But who is he?} in response to a pictured Chinese sentence from Proust. The repeated-passage writer omits the conjunction and the starting writer repeats a pronoun. \textbf{b}, The first reserved sentence from Kafka describes the many movements needed to cover the distance of one of the father's steps. The writer repeats \emph{father} and loses the comparison. Images are the actual source and autonomous outputs.}
+\begin{multicols}{2}
+\section*{Varying the number of propositions}
+One writer saw each pair once per pass in each direction. Another saw 4,896 distinct pairs, repeated up to eight times. Within each work the number of sentences at every English and Chinese length was exactly the same in both arms. We also matched the target length at every training slot. Both students started from the same checkpoint. Four passes with identical rehearsal gave each 2,768 updates, 265,648 stops and 8,753,476 supervised positions. Fits took 42.4 and 43.7 seconds on one RTX 4090 D.
+\section*{What transferred to a new work?}
+The broad writer reproduced six complete reference images in 960 requests, including the Chinese question in panel a in its English translation. The repeated-passage writer reproduced two. All three writers stopped on all 960 requests. On a separate meaning assessment of 96 of these requests the starting, repeated-passage and broad writers each earned one credit. With only four independent test works, the trial has limited power to detect transfer.
+\end{multicols}
+\newpage
+\spread{Matching the amount of written supervision}
+\noindent Repeating short passages gives a writer a different training budget from reading longer ones. We represented each sentence pair as an edge between its English and Chinese lengths. Each book has a separate graph. Changing the exposure of a passage changes an edge weight.
+\platehere{Figure_208_training_and_free_meaning}{Training diversity, source contrast and associative recall}{\textbf{a}, Complete families require all eight role, polarity or voice variants. Each bar for meaning counts a whole stopped translation accepted in both orders of a source-only model reading. \textbf{b}, Each intervention has a distinct assessment of 96 pictured requests from the same four reserved books. The controls are the repeated-passage writer for the first panel and the ordinary broad writer for the other two. Qwen3-8B Q4 received the same sentences as text.}
+\begin{multicols}{2}
+\section*{An unbiased change in exposure}
+Starting with unit weights, alternately add and subtract an integer along an even cycle. Each vertex meets one increase and one decrease. Its total stays fixed. If the available forward and backward moves are $u$ and $d$, choose the forward move with probability $d/(u+d)$. Its mean signed displacement is zero. Thus any fixed linear statistic of exposures, including a loss at fixed parameters, is preserved in expectation. An implementation audit checks both length marginals. Lean verifies the local cancellation, the weighted-score identity and the mean-preserving choice. These identities leave optimizer trajectories free to diverge.
+\section*{What the controls reveal}
+Across 15,871 cycle updates, the empirical entropy of sampling a pair changed from 10.25 to 8.37 nats. The broad model preserved all eight grammatical realizations in 108/118 families, compared with 69 for the repetition control and 111 for the starting writer. On the first natural panel the text comparator received 82/96 complete meanings in source-only assessment and 55/96 with an identified corpus reference. The supplied references themselves earned 62 and 96. Different readings of the same source contribute substantial uncertainty to the scores.
+\end{multicols}
+\newpage
+\spread{Does stronger source evidence help a glyph?}
+\noindent To isolate the effect of the pictured source, we computed the writer's distribution with the actual sentence and with four training sentences of similar length from different works. Each comparison saw precisely the same emerging answer.
+\platehere{Figure_209_writing_with_source_contrast}{A correction to one article and a failure on a different passage}{\textbf{a}, The ordinary writer inserts \emph{a} before \emph{money}. A fixed contrast adjustment removes it. \textbf{b}, The first request in the separate contrast panel, with both complete model outputs. The adjustment was evaluated as a prespecified diagnostic after development selected zero gain.}
+\begin{multicols}{2}
+\section*{A bounded change to the energy}
+Write $p_i$ for the actual probability of glyph $i$ and $b_i$ for its probability averaged over backgrounds. Clip $\log(p_i/b_i)$ to $[-\log 4,\log 4]$ to obtain $h_i$. The adjusted distribution has Gibbs weights $p_i\exp(a h_i)$, including the stop. The normalizer cancels in pairwise odds. No new winner can overcome an original log-score gap greater than $2a\log 4$. Lean checks the score-margin bound at fixed-point precision. Divisive responses in primate visual cortex and context-aware decoding motivated the comparison. The Gibbs form describes this numerical distribution.
+\section*{A test of the sign}
+For a true next glyph $y$, the derivative of negative log probability is $\mathbb{E}_{a}[h]-h_y$ and the second derivative is $\mathrm{Var}_{a}(h)$. On 16,166 development positions, the mean derivative at zero was $+0.06565$. All four positive gains increased the observed loss. At the diagnostic gain $0.5$, 4/96 fresh answers earned source-only credit, against three from ordinary decoding. With an identified reference the counts were three and two. Both paired 95\% intervals include zero. One of the 960 full diagnostic outputs failed to stop.
+\end{multicols}
+\newpage
+\spread{An associative memory retrieves a word}
+\noindent We stored 1,835,814 decoder states from the 21 training works together with the glyph or stop that actually followed. At inference the pictured source retrieves 32 nearby training sentences. Each successive writing state retrieves its 16 closest states within those sentences.
+\platehere{Figure_210_writing_from_nearby_states}{What the retrieved glyph contributes to the answer}{\textbf{a}, The first changed answer on the separate memory panel. The source says that no one mentioned beer again. Ordinary decoding writes \emph{wine}. Associative recall supplies \emph{beer} inside a repeated phrase and loses the proposition. \textbf{b}, The reverse translation of the same passage. Both panels retain the original emitted pixels.}
+\begin{multicols}{2}
+\section*{Probability from a remembered context}
+A neighbor with cosine similarity $s_j$ receives weight proportional to $\exp(s_j/T)$. Summing weights for the same next image gives a conditional distribution over glyphs. Development selected $T=0.05$ and a memory contribution of 10\%. The true next glyph occurred among the 16 neighbors at 12,196 of 16,166 development positions. Mean negative log likelihood changed from 1.76148 to 1.75957 nats. Shuffling the next glyph among positions with the same preceding glyph preserved bigram counts and raised the loss to 1.80352 at the same settings.
+\section*{A word can be right in a wrong sentence}
+On a third disjoint panel of 96 translations, ordinary decoding, real memory and shuffled memory each earned three source-only credits. None earned a reference-informed credit. Qwen earned 84 and 56 respectively. The real memory increased exact role families from 108 to 109 of 118. Its two direction-specific archives require 613.4 MB in addition to the neural weights. The small gain in next-image prediction did not improve the number of faithfully translated sentences.
+\end{multicols}
+\noindent{\small\sffamily\textbf{Could the retrieved state continue the whole phrase?}}\par\smallskip
+\noindent{\small\sffamily\begin{tabular*}{\linewidth}{@{}l@{\extracolsep{\fill}}rrrrr@{}}\toprule
+Development target & Positions & 16 states & 32 passages & Entire library & One or two pieces\\ \midrule
+English word, at least three letters & 1,719 & 515 & 924 & 1,613 & 1,697\\
+Four consecutive Han glyphs & 2,348 & 27 & 32 & 368 & 1,560\\ \bottomrule
+\end{tabular*}}\par\smallskip
+\noindent{\small Each successive column relaxes the search. The first uses the actual retrieved states under the correct history. The last allows two fragments of at least two glyphs anywhere in the 21 training works. These are counts with the answer supplied. English words start at a word boundary; Chinese spans can overlap. Availability alone does not identify the correct meaning.}\par\medskip
+
+\noindent{\footnotesize\sffamily Related experiments include \href{https://www.cns.nyu.edu/heegerlab/content/publications/Carandini-science94.pdf}{Carandini \& Heeger, summation and division in visual cortex}, \href{https://aclanthology.org/2024.naacl-short.69/}{Shi et al., context-aware decoding}, \href{https://arxiv.org/abs/2010.00710}{Khandelwal et al., nearest-neighbor translation} and \href{https://aclanthology.org/2023.acl-long.10/}{Deguchi et al., subset retrieval}.}

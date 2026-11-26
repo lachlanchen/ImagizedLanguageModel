@@ -1,0 +1,98 @@
+{
+  "labels": {
+    "subject": 1,
+    "predicate": 2,
+    "object": 3
+  },
+  "splits": {
+    "train": {
+      "rows": 28342,
+      "alignments": {
+        "en_exact_alignment": 28342,
+        "zh_exact_alignment": 28342
+      },
+      "eligible_target": {
+        "en": {
+          "positions": 569414,
+          "sentences": 26303,
+          "roles": {
+            "subject": 138269,
+            "predicate": 214856,
+            "object": 216289
+          }
+        },
+        "zh": {
+          "positions": 204289,
+          "sentences": 26303,
+          "roles": {
+            "subject": 43101,
+            "predicate": 59552,
+            "object": 101636
+          }
+        }
+      }
+    },
+    "dev": {
+      "rows": 240,
+      "alignments": {
+        "en_exact_alignment": 240,
+        "zh_exact_alignment": 240
+      },
+      "eligible_target": {
+        "en": {
+          "positions": 5960,
+          "sentences": 239,
+          "roles": {
+            "subject": 1363,
+            "predicate": 1841,
+            "object": 2756
+          }
+        },
+        "zh": {
+          "positions": 2289,
+          "sentences": 239,
+          "roles": {
+            "subject": 437,
+            "predicate": 337,
+            "object": 1515
+          }
+        }
+      }
+    },
+    "test": {
+      "rows": 480,
+      "alignments": {
+        "en_exact_alignment": 480,
+        "zh_exact_alignment": 480
+      },
+      "eligible_target": {
+        "en": {
+          "positions": 10732,
+          "sentences": 447,
+          "roles": {
+            "subject": 2300,
+            "predicate": 4716,
+            "object": 3716
+          }
+        },
+        "zh": {
+          "positions": 4340,
+          "sentences": 447,
+          "roles": {
+            "subject": 908,
+            "predicate": 1414,
+            "object": 2018
+          }
+        }
+      }
+    }
+  },
+  "files": {
+    "train.npy": "4945bf552f26626ae2a47cdca86451f1e69cfcf15825aa919930b45570819ae3",
+    "dev.npy": "ac0017d8ee795ffaf07e8541974e0c08cfcc5719b42a28060f2efc7fbc5b9440",
+    "test.npy": "66c0e6eef9955c13d44eac16d90673ea6862f888fd75389f1c7e406d1cecb933"
+  },
+  "corpus": "84f4d0ce955ba164c9ba1f88c6776c47a5d0b879c46dbc63f76e8a8067720595",
+  "program": "7cda5bf49a799fe61847e4d53e5ca88dfd35b2192aa25b55fb93f412d87e0b8f",
+  "scope": "Supplied grammatical annotations, no independent linguistic validation. Exact character alignment only. Zero marks unsupported, unknown or non-alphanumeric glyphs. Evaluation roles are diagnostic only."
+}

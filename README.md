@@ -2,6 +2,10 @@
 
 [English](README.md) · [العربية](i18n/README.ar.md) · [Español](i18n/README.es.md) · [Français](i18n/README.fr.md) · [日本語](i18n/README.ja.md) · [한국어](i18n/README.ko.md) · [Tiếng Việt](i18n/README.vi.md) · [中文 (简体)](i18n/README.zh-Hans.md) · [中文（繁體）](i18n/README.zh-Hant.md) · [Deutsch](i18n/README.de.md) · [Русский](i18n/README.ru.md)
 
+**Writing from a new book.** From the pictured Chinese question “可他是谁呢？” the 1.69-million-parameter writer drew **“But who is he?”** Training on 21 works preserved 108/118 controlled grammatical families, but only one of 96 literary translations earned source-only meaning credit. The same paper shows a failure on Kafka and a memory-aided reply that recovers “beer” inside a broken sentence. [Raw images and results](references/visual_library_writing_result.md) · [Run the models](models/library_diversity) · [Paper, pp. 59–62](publication/ilm-nature/visual_language_paper.pdf#page=59)
+
+![Actual source and written answers on Proust and Kafka](publication/ilm-nature/figures/Figure_207_writing_from_more_books.png)
+
 **What can the model actually write?** Given the pictured sentence 她看了他一眼，却什么也没说。, the distilled writer drew “She looked at him and said nothing.” A masked bilingual model reading credited **3/96** fresh translations, compared with **2/96** from the starting writer and **88/96** from the quantized text teacher. The image below shows every credited distilled answer in that review alongside the comparison outputs. [Run the checkpoint](models/teacher_translation) · [Results and scoring limits](references/complete_teacher_translation_result.md) · [Paper, pp. 56–58](publication/ilm-nature/visual_language_paper.pdf#page=56)
 
 ![Actual source and answer bitmaps for three new translation requests](publication/ilm-nature/figures/Figure_204_translating_from_the_ink.png)
