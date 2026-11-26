@@ -31,9 +31,13 @@ async function plate(name,title,notes,assetFolder="pictured_path"){
  }
  s.speakerNotes.textFrame.setText(notes);
 }
-const fullImageEdition = edition === 'full-image';
+const alignmentEdition = edition === 'alignment';
+const fullImageEdition = edition === 'full-image' || alignmentEdition;
+if (alignmentEdition) {
+ await plate('../ordered_alignment_v1/plate.json','What source order changes in visual translation','Original evaluation images. Top: the first object cleft made exact by source movement. Bottom: the first fresh English-to-Chinese book answer changed by movement. Both conditions use the same physical repertoire.', 'ordered_alignment');
+}
 const referentEdition = edition === 'referents' || fullImageEdition;
-if (fullImageEdition) {
+if (fullImageEdition && !alignmentEdition) {
  await plate('../full_image_roles_v1/plate.json','Writing from a complete pictured sentence',
    'Controlled polarity contrast and an untrained book passage. Every pictured source and response is an original evaluation image. The language writer chose its own output length.', 'full_image_roles');
 }
@@ -91,7 +95,7 @@ if(actionsEdition) await plate('../independent_optical_actions_v1/other-works.js
 if(supportEdition) await plate('../source_supported_writing_v1/opus-plate.json','Free translation within the OPUS test domain',
  'First credited aligned response in fixed order if available, otherwise the first request. Compare the unchanged parent and guided output.','source_supported');
 for(const name of ['draft','output']) await fs.mkdir(path.join(stage,name),{recursive:true});
-const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
+const candidatePath=path.join(stage,'draft/figures.pptx'),finalPath=path.join(stage,'output',alignmentEdition?'Ordered_glyph_alignment.pptx':fullImageEdition?'Full_image_role_writing.pptx':referentEdition?'Visual_referent_answers.pptx':roleEdition?'Visual_role_reading.pptx':restorationEdition?'Visual_strip_restoration.pptx':supportEdition?'Source_supported_writing.pptx':actionsEdition?'Independent_optical_actions.pptx':draftEdition?'Sentence_reconstruction.pptx':'Pictured_source_paths.pptx');
 await(await PresentationFile.exportPptx(deck)).save(candidatePath);
 await finalizePresentation({workspaceDir:stage,candidatePath,finalPath,pythonExecutable:python,explicitTotalSlideCount:roleEdition?13:restorationEdition?12:supportEdition?10:actionsEdition?8:draftEdition?6:4,
  materializeLiteralChartWorkbooks:true,requiredNativeChartOwnerSlides:[roleEdition?8:restorationEdition?7:supportEdition?5:actionsEdition?4:draftEdition?3:2],verifyArtifactToolImport:true,

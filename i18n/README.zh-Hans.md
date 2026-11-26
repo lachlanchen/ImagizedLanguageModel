@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-给模型看一段译文的图像，让它从 48 张候选原文图像中找出对应的一张。这个在单张 RTX 4090 D 上训练的中英视觉词典在 96 次检索中找对了 **93 次**。在 236 组仅肯定、否定不同的受控句子中，写入模型有 195 组的两句中文都写对了。但让它自己翻译书摘，两轮各 96 次，都只有一次完整传达原意。下图保留模型输出的原始像素，包括把“没错”改成“然而”的例子。 [实验与原始图像](../references/full_image_roles_result.md) · [运行书摘检索](../models/optical_lexicon/README.md)
+在四本未参与过评估的新书上，视觉模型从 48 张原文图像中寻找译文的出处，**96 次检索找对了 91 次**。学会按顺序读原文后，检索分数持平。让模型自行写出整段译文时，自动评审给出的完整达意分为 **0/96**，读取文字的量化 Qwen3-8B 得到 81/96。下图保留模型输出的原始像素。在《跳房子》的例子里，它译出了“冷”，却丢掉了说话人的名字。 [实验与原始图像](../references/ordered_alignment_result.md) · [运行书写模型](../models/ordered_alignment/README.md)
 
-![实验结果](../publication/ilm-nature/figures/Full_image_role_writing.png)
+![实验结果](../publication/ilm-nature/figures/Ordered_glyph_alignment.png)
 
 在一张 RTX 4090 D 上训练的模型可以看原文图像，从两张候选译文图像中选择。校正它对某些译文措辞的偏好后，两段书摘都选对的组数从 **21/96 提高到 77/96**。让模型自行写译文更难。预测原文所支持的字形片段后，受控测试中写出指定谓语的答案从 17/336 增至 43/336，但在 192 个书摘翻译请求中，只有 1 个完整传达了原意。下图是另一组 OPUS 测试中首个获认可的模型输出。 [实验结果](../references/source_supported_writing_result.md) · [运行生成或选择模型](../models/source_supported_writing/README.md)
 

@@ -1,8 +1,8 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-RTX 4090 D 1 枚で学習した英中の視覚辞書は、訳文の画像から原文を探す課題で、48 枚の候補から **96 問中 93 問**で正しい画像を選んだ。書き手は、肯定文と否定文を対にした 236 組のうち 195 組で両方の中国語訳を正確に生成した。一方、書籍の一節を自由に訳す試験では、各 96 問の 2 回とも意味を完全に伝えたのは 1 問だった。図には実際の出力画像を示す。 [実験と出力画像](../references/full_image_roles_result.md) · [書籍の一節を検索](../models/optical_lexicon/README.md)
+新たな書籍4冊の訳文画像を与えると、モデルは48枚の候補から **96問中91問**で正しい原文を見つけた。原文をたどる順序を学習しても、この検索成績は同じだった。訳文を自由に生成した場合、意味を完全に伝えたと自動評価されたのは **0/96**。テキスト入力の量子化 Qwen3-8B は 81/96 だった。図には実際の出力を示す。 [結果と出力画像](../references/ordered_alignment_result.md) · [モデルを実行](../models/ordered_alignment/README.md)
 
-![実験結果](../publication/ilm-nature/figures/Full_image_role_writing.png)
+![実験結果](../publication/ilm-nature/figures/Ordered_glyph_alignment.png)
 
 RTX 4090 D 1枚で学習したモデルに、原文画像と二つの訳文画像を与えた。特定の訳文を好む傾向を補正すると、二つの原文について両方とも正しく選べた組数は **21/96から77/96** に増えた。自由生成では、原文から字形列を予測することで指定の述語を含む回答が17/336から43/336に増えたが、書籍の意味を完全に伝えたのは192件中1件だった。図は別のOPUSテストで最初に正答と判定された出力。 [実験結果](../references/source_supported_writing_result.md) · [モデルの実行](../models/source_supported_writing/README.md)
 

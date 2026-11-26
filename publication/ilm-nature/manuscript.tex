@@ -10,9 +10,9 @@
 \newcommand{\repo}[2]{\href{https://github.com/lachlanchen/ImagizedLanguageModel/blob/main/#1}{\underline{#2}}}
 \begin{document}
 \noindent{\sffamily\bfseries\fontsize{20.5}{24}\selectfont\ILMPaperTitle\par}
-\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Recognizing a translation and writing it from pictured language\par}
+\vspace{4pt}\noindent{\sffamily\fontsize{14}{17}\selectfont Following source order in visual translation\par}
 \vspace{5pt}\noindent Imagized Language Model Project\par\medskip
-\input{full_image_roles_opening}
+\input{ordered_alignment_opening}
 \newpage
 \pageheading{Writing a translation from the source image alone}
 \input{strip_restoration_opening}
@@ -127,7 +127,7 @@ On a further four unseen formulations the unchanged selector completed 138/608 p
 \end{multicols}
 \small\noindent\textbf{Data and code.} \repo{references/source_supported_writing_result.md}{Source-content experiments}, \repo{publication/ilm-nature/evidence/source_supported_writing.zip}{book outputs}, \repo{scripts/select_visual_translation.py}{single-image candidate reader}, \repo{models/independent_optical_actions}{Independent writers}, \repo{publication/ilm-nature/evidence/independent_optical_actions.zip}{held-book PNGs}, \repo{references/independent_optical_actions_result.md}{matched evidence}, \repo{references/sentence_reconstruction_result.md}{Independent writing}, \repo{publication/ilm-nature/evidence/sentence_reconstruction_answers.zip}{all independent translation images}, \repo{references/visual_order_result.md}{order experiments}, \repo{publication/ilm-nature/evidence/visual_order_answers.zip}{original order-pair images}, \repo{formal/span_list/VisualFieldOrder.lean}{order bound}. \repo{publication/ilm-nature/evidence/pictured_path_answers.zip}{Original book answers}, \repo{publication/ilm-nature/evidence/pictured_path_serif.zip}{changed-face outputs}, \repo{references/evidence/pictured_path_translation_v1}{case decisions}, \repo{formal/span_list/SourcePathRepair.lean}{proof} and \repo{scripts/write_optical_span.py}{translation writer}, \repo{models/origin_value_reader}{independent reader} and \repo{publication/ilm-nature/evidence/grounded_origin_answers.zip}{dictionary outputs}.\par
 {\footnotesize
-\begin{thebibliography}{8}\setlength{\itemsep}{0pt}
+\begin{thebibliography}{10}\setlength{\itemsep}{0pt}
 \bibitem{ma} Ma, S., Sun, X., Wang, Y. \& Lin, J. \href{https://aclanthology.org/P18-2053/}{Bag-of-words as target for neural machine translation}. \textit{ACL}, 332--338 (2018).
 \bibitem{sennrich} Sennrich, R., Haddow, B. \& Birch, A. \href{https://aclanthology.org/P16-1162/}{Neural machine translation of rare words with subword units}. \textit{ACL}, 1715--1725 (2016).
 \bibitem{rust} Rust, P. et al. \href{https://arxiv.org/abs/2207.06991}{Language modelling with pixels}. \textit{ICLR} (2023).
@@ -136,6 +136,7 @@ On a further four unseen formulations the unchanged selector completed 138/608 p
 \bibitem{opus} Tiedemann, J. \& Thottingal, S. \href{https://aclanthology.org/2020.eamt-1.61/}{OPUS-MT -- Building open translation services for the world}. \textit{EAMT} (2020).
 \bibitem{mini} MiniMind contributors. \href{https://github.com/jingyaogong/minimind/tree/858008eb98da4428f78053a1cc4d3a3bd5973629}{MiniMind, pretrained models and training code}.
 \bibitem{brown} Brown, P. F. et al. \href{https://aclanthology.org/J93-2003/}{The mathematics of statistical machine translation: parameter estimation}. \textit{Computational Linguistics} \textbf{19}, 263--311 (1993).
+\bibitem{vogel} Vogel, S., Ney, H. \& Tillmann, C. \href{https://aclanthology.org/C96-2141/}{HMM-based word alignment in statistical translation}. \textit{COLING}, 836--841 (1996).
 \bibitem{eye} Inhoff, A. W. \& Liu, W. \href{https://pubmed.ncbi.nlm.nih.gov/9483822/}{The perceptual span and oculomotor activity during the reading of Chinese sentences}. \textit{J. Exp. Psychol. Hum. Percept. Perform.} \textbf{24}, 20--34 (1998).
 \end{thebibliography}}
 \end{document}

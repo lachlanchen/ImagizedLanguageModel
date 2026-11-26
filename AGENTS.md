@@ -12,6 +12,13 @@ Maintain the main paper as a standalone research article about the current evide
 
 ## Model-work priority
 
+The ordered glyph-alignment fit, new-book free generation, source-only
+assessment, two search panels, repetition diagnostic and original-PNG replay
+are complete. Read `references/ordered_alignment_result.md` for the 91/96
+new-panel search and 0/96 book-writing result. The next bounded learning
+comparison is bilingual phrase emission with explicit source coverage.
+Preserve the recorded outputs and all three controls.
+
 The full-source reader/writer and optical lexicon studies are complete. See
 `references/full_image_roles_result.md` for the matched generation tests,
 93/96 bilingual passage retrieval, raw output archives and independent CPU
