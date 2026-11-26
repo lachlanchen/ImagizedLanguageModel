@@ -25,7 +25,9 @@ def main():
         help="Predict ordinary prose until a learned stop or N words",
     )
     cli.add_argument("--output", type=Path, required=True)
-    cli.add_argument("--arm", choices=["intact", "shuffled"], default="intact")
+    cli.add_argument(
+        "--arm", choices=["intact", "shuffled", "dense", "endpoint"], default="intact"
+    )
     args = cli.parse_args()
     if args.cells is not None and args.image is None:
         cli.error("--cells requires --image")
@@ -37,7 +39,13 @@ def main():
         if args.image
         else read_text(args.text, DEFAULT_FONT)
     )
-    cells, end = PassageWriter(args.arm).write(
+    if args.arm in ("dense", "endpoint"):
+        from ilm.visual_lm.causal_book_words import CausalBookWriter
+
+        writer = CausalBookWriter(args.arm)
+    else:
+        writer = PassageWriter(args.arm)
+    cells, end = writer.write(
         src, args.continue_words is None, args.continue_words or 1
     )
     save_grid(cells.tobytes(), args.output)
